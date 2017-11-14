@@ -11,6 +11,7 @@ class Forespørgsel{
 - String tagType
 - Int hældning
 - String kommentar
+- String ansatKommentar
 - Date tidshorisontForØnsketLevering
 - String status
 }
@@ -25,11 +26,6 @@ class Vare {
 -Int pris
 }
 
-class Tilbud {
-- Stykliste
-- String kommentar
-}
-
 class Kunde {
 - kunde info
 }
@@ -40,7 +36,6 @@ class Ansat {
 Kunde "1"--"*" Forespørgsel
 Forespørgsel "1"--"1" Stykliste
 Stykliste "1"--"*" Vare
-Tilbud "1"---"1" Stykliste
 
 
 @enduml
