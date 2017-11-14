@@ -1,0 +1,46 @@
+@startuml
+
+title Domain Model - Fog Diagram
+
+class Forespørgsel{
+- Int carportHøjde
+- Int carportBredde
+- Int carportLængde
+- Int redskabsrumBredde
+- Int redskabsrumLængde
+- String tagType
+- Int hældning
+- String kommentar
+- Date tidshorisontForØnsketLevering
+- String status
+}
+
+class Stykliste {
+-Int samletPris
+}
+
+class Vare {
+-String kategori
+-String navn
+-Int pris
+}
+
+class Tilbud {
+- Stykliste
+- String kommentar
+}
+
+class Kunde {
+- kunde info
+}
+
+class Ansat {
+}
+
+Kunde "1"--"*" Forespørgsel
+Forespørgsel "1"--"1" Stykliste
+Stykliste "1"--"*" Vare
+Tilbud "1"---"1" Stykliste
+
+
+@enduml
