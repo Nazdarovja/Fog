@@ -18,7 +18,8 @@ public abstract class Command {
 
     private static void initCommands() {
         commands = new HashMap<>();
-        commands.put( "login", null);
+        commands.put( "login", new Login());
+        commands.put( "QuickBuild", new QuickBuild());
     }
 
     static Command from( HttpServletRequest request ) {
