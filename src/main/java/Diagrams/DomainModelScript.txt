@@ -13,11 +13,16 @@ class Forespørgsel{
 - String kommentar
 - String ansatKommentar
 - Date tidshorisontForØnsketLevering
+- Int samletPris
+- String ansat
 - String status
 }
 
 class Stykliste {
--Int samletPris
+}
+
+class Ordrelinje {
+- int antal
 }
 
 class Vare {
@@ -26,16 +31,14 @@ class Vare {
 -Int pris
 }
 
-class Kunde {
-- kunde info
+class Bruger {
+- String navn
 }
 
-class Ansat {
-}
-
-Kunde "1"--"*" Forespørgsel
+Bruger "1"--"*" Forespørgsel
 Forespørgsel "1"--"1" Stykliste
-Stykliste "1"--"*" Vare
+Ordrelinje "1" -- "1" Vare
+Stykliste "1" -- "*" Ordrelinje
 
 
 @enduml
