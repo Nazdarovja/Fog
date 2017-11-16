@@ -24,10 +24,10 @@ public class BillOfMaterials {
         this.materials.add(o);
     }
 
-    public int getTotalPrice() {
-        int totalPrice = 0;
+    public long getTotalPrice() {
+        long totalPrice = 0;
         for (OrderLine o : materials) {
-            totalPrice += o.getProduct().getPrice();
+            totalPrice += o.getProduct().getPricePrM();
         }
         return totalPrice;
     }

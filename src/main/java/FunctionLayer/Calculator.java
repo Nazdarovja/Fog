@@ -25,7 +25,12 @@ public class Calculator {
         stolpeAntal = length /310;
         // Ganger med to så der er stolper til begge sider
         stolpeAntal *=  2;
-        bom.addOrderLine(new OrderLine(stolper.get(0), stolpeAntal));
+        
+        // Tilføjer den rigtige længde til stolpen til udregning af samlet meter pris.
+        Product p = stolper.get(0);
+        p.setLength(270);
+        
+        bom.addOrderLine(new OrderLine(p, stolpeAntal));
         return bom;
     }
 }

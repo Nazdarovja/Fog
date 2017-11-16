@@ -10,17 +10,37 @@ package FunctionLayer;
  * @author Stanislav
  */
 public class Product {
+
     private int id;
     private String name;
     private String category;
-    private long price;
+    private long pricePrM;
     private int length;
     private int width;
     private int height;
 
+    public Product(int id, String name, String category, long pricePrM, int length, int width, int height) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.pricePrM = pricePrM;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * Calculates the price for the entire length and returns it.
+     *
+     * @return total price for length
+     */
+    public long getCalculatedPrice() {
+        return (this.pricePrM * (length / 100));
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", category=" + category + ", price=" + price + ", length=" + length + ", width=" + width + ", height=" + height + '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", category=" + category + ", price=" + pricePrM + ", length=" + length + ", width=" + width + ", height=" + height + '}';
     }
 
     public int getId() {
@@ -47,12 +67,12 @@ public class Product {
         this.category = category;
     }
 
-    public long getPrice() {
-        return price;
+    public long getPricePrM() {
+        return pricePrM;
     }
 
-    public void setPrice(long price) {
-        this.price = price;
+    public void setPricePrM(long pricePrM) {
+        this.pricePrM = pricePrM;
     }
 
     public int getLength() {
@@ -79,14 +99,4 @@ public class Product {
         this.height = height;
     }
 
-    public Product(int id, String name, String category, long price, int length, int width, int height) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.price = price;
-        this.length = length;
-        this.width = width;
-        this.height = height;
-    }
-    
 }
