@@ -4,10 +4,7 @@
     Author     : Orchi
 --%>
 
-<<<<<<< HEAD
 <%@page import="FunctionLayer.Customer"%>
-=======
->>>>>>> a3a142ae154c6c46c404c31121d44d12070211a4
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,16 +15,18 @@
     </head>
     <body>
         <h1 style="text-align: center">Hejsa, vælg dine mål til din kommende carport!</h1>
-        <div id="measurements" class="col-md-6 col-md-offset-4">
-<<<<<<< HEAD
-                <% Customer customer = null;
+        <% Customer customer = null;
                     if((customer = (Customer) request.getSession().getAttribute("customer")) != null ) { %>
-                    <p>Hello <%= customer.getName() %>, start buying!!! </p>
+                        <div class="col-sm-1" style="background: green; color: white;">
+                            <p>Hello <%= customer.getName() %>, start buying!!! </p>
+                        </div>
                 <% } else {%>
-                    <p>click <a href="FrontController?command=login">here</a> to log in!</p>
+                        <div class="col-sm-1" style="background: beige;">
+                            <p>click <a href="FrontController?command=login">here</a> to log in!</p>
+                        </div>
                 <% } %>
-=======
->>>>>>> a3a142ae154c6c46c404c31121d44d12070211a4
+        <div id="measurements" class="col-md-6 col-md-offset-3">
+                
             <form name="order" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="measurements">
                     <div class="col-sm-2">
