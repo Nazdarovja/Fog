@@ -11,10 +11,6 @@ import java.sql.ResultSet;
  */
 public class CustomerMapper {
 
-    public static void main(String[] args) throws Exception {
-        System.out.println(login("test1@test.dk", "hansen1"));
-    }
-
     public static Customer login(String email, String password) throws Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;

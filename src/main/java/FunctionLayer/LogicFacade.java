@@ -5,10 +5,17 @@
  */
 package FunctionLayer;
 
+import DataLayer.CustomerMapper;
+
 /**
  *
  * @author Orchi
  */
 public class LogicFacade {
-    
+
+    //USER 
+    public static Customer login(String email, String password) throws Exception{
+        return CustomerMapper.login(email, password);
+    }
+
 }
