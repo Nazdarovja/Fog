@@ -17,7 +17,7 @@ public class CustomerMapper {
         Connection conn = null;
         try {
             conn = DBConnector.getConnection();
-            String SQL = "SELECT * from Customer JOIN Zipcode ON Customer.zipcode = Zipcode.zipcode WHERE email=? AND password=?;";
+            String SQL = "SELECT * from Customer INNER JOIN Zipcode ON Customer.zipcode = Zipcode.zipcode WHERE email=? AND password=?;";
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -36,7 +36,7 @@ public class CustomerMapper {
                 
 
 //            String city = //methode til at hente fra anden table
-                Customer customer = new Customer(email, name, surname, phonenumber, address, zipcode, pass, city);
+                Customer customer = new Customer(mail, name, surname, phonenumber, address, zipcode, pass, city);
                 return customer;
             } else {
                 throw new Exception("could not validate user");
