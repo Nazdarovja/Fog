@@ -21,6 +21,13 @@ public class LogicFacade {
     }
     
     //PRODUCT
+    
+    /**
+     * Gets a category name parameter and returns a list from the database with Product objects.
+     * @param category
+     * @return
+     * @throws Exception 
+     */
     public static List<Product> getCategory(String category) throws Exception {
         return ProductMapper.getCategory(category);
     }
