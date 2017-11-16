@@ -20,9 +20,9 @@ import java.util.List;
 public class ProductMapper {
 
     /**
-     * 
+     * Input a category name to recieve a list from the database with Product objects.
      * @param category
-     * @return
+     * @return List of Product objects form the chosen category
      * @throws java.sql.SQLException
      */
     public static List<Product> getCategory(String category) throws SQLException, Exception {
