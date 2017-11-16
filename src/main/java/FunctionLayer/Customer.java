@@ -18,17 +18,21 @@ public class Customer {
     private int phonenumber;
     private String address;
     private int zipcode;
+    private String password; 
     private String city;
 
-    public Customer(String email, String navn, String efternavn, int tenefonnummer, String adresse, int postnummer, String by) {
+    public Customer(String email, String name, String surname, int phonenumber, String address, int zipcode, String password, String city) {
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.phonenumber = phonenumber;
         this.address = address;
         this.zipcode = zipcode;
+        this.password = password;
         this.city = city;
     }
+
+
 
     public String getEmail() {
         return email;
@@ -84,6 +88,19 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "email=" + email + ", name=" + name + ", surname=" + surname + ", phonenumber=" + phonenumber + ", address=" + address + ", zipcode=" + zipcode + ", password=" + password + ", city=" + city + '}';
     }
 
     
