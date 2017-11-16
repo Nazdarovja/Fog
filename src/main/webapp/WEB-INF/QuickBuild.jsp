@@ -4,6 +4,7 @@
     Author     : Orchi
 --%>
 
+<%@page import="FunctionLayer.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,18 @@
     </head>
     <body>
         <h1 style="text-align: center">Hejsa, vælg dine mål til din kommende carport!</h1>
-        <div id="measurements" class="col-md-6 col-md-offset-4">
+        <% Customer customer = null;
+                    if((customer = (Customer) request.getSession().getAttribute("customer")) != null ) { %>
+                        <div class="col-sm-1" style="background: green; color: white;">
+                            <p>Hello <%= customer.getName() %>, start buying!!! </p>
+                        </div>
+                <% } else {%>
+                        <div class="col-sm-1" style="background: beige;">
+                            <p>click <a href="FrontController?command=login">here</a> to log in!</p>
+                        </div>
+                <% } %>
+        <div id="measurements" class="col-md-6 col-md-offset-3">
+                
             <form name="order" action="FrontController" method="POST">
                     <input type="hidden" name="command" value="measurements">
                     <div class="col-sm-2">

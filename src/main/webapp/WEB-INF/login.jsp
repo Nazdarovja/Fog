@@ -19,7 +19,7 @@
             <tr><td>Login</td>
                 <td>
                     <form name="login" action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="login">
+                        <input type="hidden" name="command" value="QuickBuild">
                         Email:<br>
                         <input type="text" name="email">
                         <br>

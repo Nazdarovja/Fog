@@ -5,6 +5,8 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.Customer;
+import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,7 +21,7 @@ public class Login extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        throw new UnsupportedOperationException("login logic (in Login.java) not implemented yet"); //To change body of generated methods, choose Tools | Templates.
+        return "login";
     }
 
 //        @Override
