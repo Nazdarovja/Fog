@@ -121,14 +121,14 @@ public class CustomerMapper {
             
             if (!isCustomerRegistered(c)) {
                 con = DBConnector.getConnection();
-                String SQL = "INSERT INTO Customer (email, password, name, surname, phonenumber, address, zipcode) VALUES (?, ?, ?, ?, ?, ?)";
+                String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 ps = con.prepareStatement( SQL );
                 ps.setString( 1, c.getEmail() );
-                ps.setString( 2, c.getPassword() );
-                ps.setString( 3, c.getName() );
-                ps.setString( 4, c.getSurname() );
-                ps.setString( 5, Integer.toString(c.getPhonenumber()) );
-                ps.setString( 6, c.getAddress() );
+                ps.setString( 2, c.getName() );
+                ps.setString( 3, c.getSurname() );
+                ps.setString( 4, Integer.toString(c.getPhonenumber()) );
+                ps.setString( 5, c.getAddress() );
+                ps.setString( 6, c.getPassword() );
                 ps.setString( 7, Integer.toString(c.getZipcode()) );
                 ps.executeUpdate();
 
