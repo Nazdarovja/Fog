@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm') NOT NULL,
-  `price` INT NOT NULL,
+  `price` LONG NOT NULL,
   `length` INT NULL,
   `width` INT NULL,
   `height` INT NULL,
@@ -149,14 +149,11 @@ VALUES
 INSERT INTO
 Product (name,category,price,length,width,height)
 VALUES
-('stolpe 97x97 240cm','stolpe',71,240,97,97),
-('stolpe 97x97 270cm','stolpe',80,270,97,97),
-('stolpe 97x97 300cm','stolpe',83,300,97,97),
-('stolpe 97x97 360cm','stolpe',100,360,97,97),
-('rem','rem',50,100,20,20),
+('97x97 TRYKIMPR.','stolpe',29.95,100,97,97),
+('45x195 SPÆRTRÆ UBH.','rem',19.95,100,45,195),
+('spær','spær',500,200,10,50),
 ('bræt','bræt',5,100,50,35),
 ('skrue','skrue',1.5,2,0.5,3),
-('spær','spær',500,200,10,50),
 ('søm','søm',0.5,2,0.5,3),
 ('hammer','værktøj',240,20,5,7);
 

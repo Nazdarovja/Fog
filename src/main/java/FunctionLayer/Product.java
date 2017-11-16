@@ -13,7 +13,7 @@ public class Product {
     private int id;
     private String name;
     private String category;
-    private int price;
+    private long price;
     private int length;
     private int width;
     private int height;
@@ -47,11 +47,11 @@ public class Product {
         this.category = category;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -79,7 +79,7 @@ public class Product {
         this.height = height;
     }
 
-    public Product(int id, String name, String category, int price, int length, int width, int height) {
+    public Product(int id, String name, String category, long price, int length, int width, int height) {
         this.id = id;
         this.name = name;
         this.category = category;

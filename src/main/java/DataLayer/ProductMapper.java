@@ -42,7 +42,7 @@ public class ProductMapper {
             int id = rs.getInt("id");
             String name = rs.getString("name");
             String cat = rs.getString("category");
-            int price = rs.getInt("price");
+            long price = rs.getLong("price");
             int length = rs.getInt("length");
             int width = rs.getInt("width");
             int height = rs.getInt("height");

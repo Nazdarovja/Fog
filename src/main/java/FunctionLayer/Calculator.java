@@ -5,14 +5,27 @@
  */
 package FunctionLayer;
 
+import java.util.List;
+
 /**
  *
  * @author Orchi
  */
 public class Calculator {
     
-    public BillOfMaterials getPrice(int height, int length, int width) {
-        return null;
+    public BillOfMaterials getBillOfMaterials(int height, int length, int width, String type) throws Exception {
+        List<Product> stolper = LogicFacade.getCategory("stolpe");
+        BillOfMaterials bom = new BillOfMaterials();
+        
+        int stolpeAntal = 1;
+        //UDHÆNG TIL FRONTEN OG BAGENDEN AF SKURET (INGEN STOLPE)
+        length += -130;
+
+        // Placerer en stolpe pr. 3,10m  
+        stolpeAntal = length /310;
+        // Ganger med to så der er stolper til begge sider
+        stolpeAntal *=  2;
+        bom.addOrderLine(new OrderLine(stolper.get(0), stolpeAntal));
+        return bom;
     }
-    
 }
