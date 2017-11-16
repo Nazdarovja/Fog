@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema fog
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `fog` ;
 
 -- -----------------------------------------------------
 -- Schema fog
@@ -15,94 +16,149 @@ CREATE SCHEMA IF NOT EXISTS `fog` DEFAULT CHARACTER SET utf8 ;
 USE `fog` ;
 
 -- -----------------------------------------------------
--- Table `fog`.`Postnumre`
+-- Table `fog`.`Zipcode`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Postnumre` (
-  `postnummer` INT NOT NULL,
-  `bynavn` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`postnummer`))
+CREATE TABLE IF NOT EXISTS `fog`.`Zipcode` (
+  `zipcode` INT NOT NULL,
+  `city` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`zipcode`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `fog`.`Kunde`
+-- Table `fog`.`Customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Kunde` (
+CREATE TABLE IF NOT EXISTS `fog`.`Customer` (
   `email` VARCHAR(45) NOT NULL,
-  `navn` VARCHAR(45) NOT NULL,
-  `efternavn` VARCHAR(45) NOT NULL,
-  `telefonNummer` INT NOT NULL,
-  `adresse` VARCHAR(45) NOT NULL,
-  `postnummer` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `surname` VARCHAR(45) NOT NULL,
+  `phonenumber` INT NOT NULL,
+  `address` VARCHAR(45) NOT NULL,
+  `zipcode` INT NOT NULL,
+  `password` VARCHAR(45) NULL,
   PRIMARY KEY (`email`),
-  INDEX `postnummer_idx` (`postnummer` ASC),
-  CONSTRAINT `postnummer`
-    FOREIGN KEY (`postnummer`)
-    REFERENCES `fog`.`Postnumre` (`postnummer`)
+  INDEX `postnummer_idx` (`zipcode` ASC),
+  CONSTRAINT `zipcode`
+    FOREIGN KEY (`zipcode`)
+    REFERENCES `fog`.`Zipcode` (`zipcode`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `fog`.`Ansat`
+-- Table `fog`.`Employee`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Ansat` (
+CREATE TABLE IF NOT EXISTS `fog`.`Employee` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `navn` VARCHAR(30) NOT NULL,
-  `efternavn` VARCHAR(30) NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `surname` VARCHAR(30) NOT NULL,
+  `password` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `fog`.`Forespørgsel`
+-- Table `fog`.`Inquiry`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Forespørgsel` (
-  `id` INT NOT NULL,
-  `carportHøjde` INT NOT NULL,
-  `carportLængde` INT NOT NULL,
-  `carportBredde` INT NOT NULL,
-  `redskabsRumBredde` INT NULL,
-  `redskabsRumLængde` INT NULL,
-  `tagType` ENUM('fladt', 'rejsning') NOT NULL,
-  `hældning` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
-  `kommentarKunde` VARCHAR(2000) NULL,
-  `kommentarAnsat` VARCHAR(2000) NULL,
-  `tidsHorisont` DATE NULL,
+CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `carportHeight` INT NOT NULL,
+  `carportLength` INT NOT NULL,
+  `carportWidth` INT NOT NULL,
+  `shackWidth` INT NULL,
+  `shackLength` INT NULL,
+  `roofType` ENUM('fladt', 'rejsning') NOT NULL,
+  `angle` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
+  `commentCustomer` VARCHAR(2000) NULL,
+  `commentEmployee` VARCHAR(2000) NULL,
+  `period` DATE NULL,
   `status` ENUM('ny', 'behandles', 'behandlet') NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `id_ansat` INT NULL,
+  `id_employee` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `email_idx` (`email` ASC),
-  INDEX `id_ansat_idx` (`id_ansat` ASC),
+  INDEX `id_ansat_idx` (`id_employee` ASC),
   CONSTRAINT `email`
     FOREIGN KEY (`email`)
-    REFERENCES `fog`.`Kunde` (`email`)
+    REFERENCES `fog`.`Customer` (`email`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `id_ansat`
-    FOREIGN KEY (`id_ansat`)
-    REFERENCES `fog`.`Ansat` (`id`)
+  CONSTRAINT `id_employee`
+    FOREIGN KEY (`id_employee`)
+    REFERENCES `fog`.`Employee` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `fog`.`Vare`
+-- Table `fog`.`Product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Vare` (
-  `varenummer` INT NOT NULL AUTO_INCREMENT,
-  `navn` VARCHAR(45) NOT NULL,
-  `kategori` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm') NOT NULL,
-  `pris` INT NOT NULL,
-  `længde` INT NULL,
-  `bredde` INT NULL,
-  `højde` INT NULL,
-  PRIMARY KEY (`varenummer`))
+CREATE TABLE IF NOT EXISTS `fog`.`Product` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm') NOT NULL,
+  `price` INT NOT NULL,
+  `length` INT NULL,
+  `width` INT NULL,
+  `height` INT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+
+
+-- -----------------------------------------------------
+-- DUMMYDATA 
+-- -----------------------------------------------------
+
+INSERT INTO 
+Zipcode (zipcode, city)
+VALUES
+(2750,'Ballerup'),
+(2000,'Frederiksberg'),
+(2800, 'Kongens Lyngby');
+
+INSERT INTO 
+Customer (email, name, surname, phonenumber, address, zipcode)
+VALUES 
+('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750),
+('test2@test.dk','Tom','Tomsen',44332211,'Sildevej 2',2000),
+('test3@test.dk','Hanne','Hannesen',11112233,'Makrelvej 3',2800),
+('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800);
+
+INSERT INTO
+Employee (name, surname)
+VALUES
+('Martin', 'Fogmaster'),
+('Johannes', 'Fog'),
+('Frodo', 'Baggings');
+
+
+INSERT INTO
+Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email)
+VALUES
+(320,420,320,320,120,'fladt',null,null,null,null,'ny','test1@test.dk'),
+(320,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
+(320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'fladt',null,null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
+
+-- --------------------------------------------------------------------------
+-- CATEGORIES = 'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm' 
+-- --------------------------------------------------------------------------
+INSERT INTO
+Product (name,category,price,length,width,height)
+VALUES
+('stolpe 97x97 240cm','stolpe',71,240,97,97),
+('stolpe 97x97 270cm','stolpe',80,270,97,97),
+('stolpe 97x97 300cm','stolpe',83,300,97,97),
+('stolpe 97x97 360cm','stolpe',100,360,97,97),
+('rem','rem',50,100,20,20),
+('bræt','bræt',5,100,50,35),
+('skrue','skrue',1.5,2,0.5,3),
+('spær','spær',500,200,10,50),
+('søm','søm',0.5,2,0.5,3),
+('hammer','værktøj',240,20,5,7);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

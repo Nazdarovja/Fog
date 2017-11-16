@@ -1,4 +1,4 @@
-USE mydb;
+USE fog;
 
 INSERT INTO 
 Zipcode (zipcode, city)

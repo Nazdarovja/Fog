@@ -11,5 +11,8 @@ package FunctionLayer;
  */
 public class Calculator {
     
+    public BillOfMaterials getPrice(int height, int length, int width) {
+        return null;
+    }
     
 }
