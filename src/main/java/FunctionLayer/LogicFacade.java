@@ -6,6 +6,8 @@
 package FunctionLayer;
 
 import DataLayer.CustomerMapper;
+import DataLayer.ProductMapper;
+import java.util.List;
 
 /**
  *
@@ -16,6 +18,18 @@ public class LogicFacade {
     //USER 
     public static Customer login(String email, String password) throws Exception{
         return CustomerMapper.login(email, password);
+    }
+    
+    //PRODUCT
+    
+    /**
+     * Gets a category name parameter and returns a list from the database with Product objects.
+     * @param category
+     * @return
+     * @throws Exception 
+     */
+    public static List<Product> getCategory(String category) throws Exception {
+        return ProductMapper.getCategory(category);
     }
 
 }
