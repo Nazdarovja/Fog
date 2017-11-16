@@ -5,6 +5,8 @@
  */
 package test;
 
+import FunctionLayer.Customer;
+import FunctionLayer.LogicFacade;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,4 +44,25 @@ public class JUnit {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void testLoginCustomer() throws Exception {
+        String email = "test1@test.dk";
+        String password = "hansen1";
+        Customer customer = LogicFacade.login(email, password);
+        assertTrue(email.equals(customer.getEmail()));
+        assertTrue(password.equals(customer.getPassword()));
+    }
+    
+    @Test
+    public void testLoginNotExistingCustomer() throws Exception {
+        try {
+            String email = "harrypotter@hogwarts.com";
+            String password = "sectumsembra";
+            Customer customer = LogicFacade.login(email, password);
+        }
+        catch(Exception ex) {
+            assertTrue(ex.getMessage().equals("could not validate user"));
+        }
+    }
 }
