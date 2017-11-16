@@ -23,6 +23,12 @@ public class Calculator {
 
         // Placerer en stolpe pr. 3,10m  
         stolpeAntal = length /310;
+        
+        //Placerer en ekstra stolpe hvis der er over eller præcis 1m tilovers.
+        if(length % 310 >= 100){
+            stolpeAntal += 1;
+        }
+        
         // Ganger med to så der er stolper til begge sider
         stolpeAntal *=  2;
         
