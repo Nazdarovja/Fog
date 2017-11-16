@@ -7,34 +7,39 @@ package test;
 
 import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Product;
+import java.util.List;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 /**
  *
  * @author Orchi
  */
 public class JUnit {
-    
+
     public JUnit() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -44,7 +49,6 @@ public class JUnit {
     //
     // @Test
     // public void hello() {}
-    
     @Test
     public void testLoginCustomer() throws Exception {
         String email = "test1@test.dk";
@@ -53,16 +57,26 @@ public class JUnit {
         assertTrue(email.equals(customer.getEmail()));
         assertTrue(password.equals(customer.getPassword()));
     }
-    
+
     @Test
     public void testLoginNotExistingCustomer() throws Exception {
         try {
             String email = "harrypotter@hogwarts.com";
             String password = "sectumsembra";
             Customer customer = LogicFacade.login(email, password);
-        }
-        catch(Exception ex) {
+        } catch (Exception ex) {
             assertTrue(ex.getMessage().equals("could not validate user"));
         }
     }
+
+    @Test
+    public void testGetCategory() throws Exception {
+        String categoryToBeFound = "søm";
+        String categoryNotToBeFound = "Hammer";
+        List<Product> product = LogicFacade.getCategory(categoryToBeFound);
+        assertTrue(categoryToBeFound.equals(product.get(0).getName()));
+        assertFalse(categoryNotToBeFound.equals(product.get(0).getName()));
+        
+    }
+
 }
