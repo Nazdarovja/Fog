@@ -20,6 +20,10 @@ public class LogicFacade {
         return CustomerMapper.login(email, password);
     }
     
+    public static Customer createCostumer(Customer c) throws Exception{
+        return CustomerMapper.createCustomer(c);
+    }
+    
     //PRODUCT
     
     /**

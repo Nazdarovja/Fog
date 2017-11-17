@@ -24,6 +24,8 @@
                         <div class="col-sm-1" style="background: beige;">
                             <p>click <a href="FrontController?command=login">here</a> to log in!</p>
                             
+                            <p>click <a href="FrontController?command=toregister">here</a> to register!</p>
+
                         </div>
                 <% } %>
         <div id="measurements" class="col-md-6 col-md-offset-3">
@@ -78,14 +80,6 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
-                    Vælg højde<br>
-                        <select class="form-control" name="height">
-                            <option value=210>210</option>
-                            <option value=240>240</option>
-                            <option value=270>270</option>
-                            <option value=300>300</option>
-                            <option value=330>330</option>
-                        </select>
                     </div>
             </form>
         </div>

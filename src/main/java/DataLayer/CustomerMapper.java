@@ -4,6 +4,8 @@ import FunctionLayer.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -51,6 +53,105 @@ public class CustomerMapper {
             }
             if (conn != null) {
                 conn.close();
+            }
+        }
+    }
+
+
+    public static boolean isCustomerRegistered(Customer c) throws Exception {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * from Customer WHERE email=?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString(1, c.getEmail());
+            rs = ps.executeQuery();
+
+            return rs.next();
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new Exception( ex.getMessage() );
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static String getCity(int zipcode) throws Exception {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT city from Zipcode WHERE zipcode=?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString(1, Integer.toString(zipcode));
+            rs = ps.executeQuery();
+
+            if (rs.next()){
+                return rs.getString(1);
+            } else {
+                throw new Exception(" no city with specified zipcode ");
+            }
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new Exception( ex.getMessage() );
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    
+    // Exception til LoginException??
+    public static Customer createCustomer(Customer c) throws Exception {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            
+            if (!isCustomerRegistered(c)) {
+                con = DBConnector.getConnection();
+                String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                ps = con.prepareStatement( SQL );
+                ps.setString( 1, c.getEmail() );
+                ps.setString( 2, c.getName() );
+                ps.setString( 3, c.getSurname() );
+                ps.setString( 4, Integer.toString(c.getPhonenumber()) );
+                ps.setString( 5, c.getAddress() );
+                ps.setString( 6, c.getPassword() );
+                ps.setString( 7, Integer.toString(c.getZipcode()) );
+                ps.executeUpdate();
+
+                String email = c.getEmail();
+                String passwd = c.getPassword();
+                String name = c.getName();
+                String surname = c.getSurname();
+                int phonenumber = c.getPhonenumber();
+                String address = c.getAddress();
+                int zipcode = c.getZipcode();
+                String city = getCity(zipcode);
+
+                return new Customer(email,name,surname,phonenumber,address,zipcode,passwd,city);
+            }else {
+                throw new Exception(" Specified email already exists ");
+            }
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new Exception( ex.getMessage() );
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (con != null) {
+                con.close();
             }
         }
     }
