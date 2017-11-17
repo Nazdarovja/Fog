@@ -1,4 +1,5 @@
-    <%-- 
+    <%@page import="FunctionLayer.BillOfMaterials"%>
+<%-- 
     Document   : QuickBuild
     Created on : 14-11-2017, 12:40:08
     Author     : Orchi
@@ -31,7 +32,7 @@
         <div id="measurements" class="col-md-6 col-md-offset-3">
                 
             <form name="order" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="measurements">
+                    <input type="hidden" name="command" value="calculate">
                     <div class="col-sm-2">
                     Vælg længde<br>
                     <select class="form-control" name="length">
@@ -80,7 +81,16 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
+                        <% if(request.getSession().getAttribute("bom") != null){ %>
+                        <% BillOfMaterials bom = (BillOfMaterials)request.getSession().getAttribute("bom"); %>
+                        TOTAL PRIS FOR STOLPER : <br>
+                        <%= bom.getTotalPrice() %>
+                        ANTAL STOLPER : <br>
+                        <%= bom.getMaterials().get(0).getQuantity() %>
+                        <%}%>
+
                     </div>
+                    <input type="submit" value="Calculate"/>
             </form>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

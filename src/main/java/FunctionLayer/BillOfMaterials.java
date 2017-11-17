@@ -31,4 +31,10 @@ public class BillOfMaterials {
         }
         return totalPrice;
     }
+
+    public List<OrderLine> getMaterials() {
+        return materials;
+    }
+    
+    
 }
