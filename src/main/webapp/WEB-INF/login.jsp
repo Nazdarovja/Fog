@@ -10,14 +10,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="../Style/main.css" rel="stylesheet" type="text/css"/>
         <title>Login Page</title>
     </head>
     <body>
-        <h1>Carport QuickByg Login</h1>  
-        
+        <h1 style="text-align: center;">Carport QuickByg Login</h1>  
+        <div class="col-sm-8 col-md-offset-5">
         <table>
-            <tr><td>Login</td>
-                <td>
+            <tr>
+                <td class="col-sm-4">
+                    <p>Login</p>
                     <form name="login" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="QuickBuild">
                         Email:<br>
@@ -47,11 +49,17 @@
                 </td>-->
             </tr>
         </table>
+    </div>
         <% String error = (String) request.getAttribute("error");
             if (error != null) {%>
         <H2>Error!!</h2>
         <p><%= error%>
             <% }
             %>
+            
+            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>
