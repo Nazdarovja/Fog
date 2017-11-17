@@ -23,6 +23,7 @@
                 <% } else {%>
                         <div class="col-sm-1" style="background: beige;">
                             <p>click <a href="FrontController?command=login">here</a> to log in!</p>
+                            
                         </div>
                 <% } %>
         <div id="measurements" class="col-md-6 col-md-offset-3">
