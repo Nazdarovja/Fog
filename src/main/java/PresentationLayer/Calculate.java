@@ -22,10 +22,8 @@ public class Calculate extends Command{
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        String length1 = (String) request.getAttribute("length");
-        int length = Integer.parseInt(length1);
-        String width1 = (String) request.getAttribute("width");
-        int width = Integer.parseInt(width1);
+        int length = Integer.parseInt(request.getParameter("length"));
+        int width = Integer.parseInt(request.getParameter("width"));
         
         List<Product> stolper = LogicFacade.getCategory("stolpe");
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(length, width, stolper);

@@ -80,13 +80,12 @@
                             <option value=780>780</option>
                         </select>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <% if(request.getSession().getAttribute("bom") != null){ %>
                         <% BillOfMaterials bom = (BillOfMaterials)request.getSession().getAttribute("bom"); %>
                         TOTAL PRIS FOR STOLPER : <br>
                         <%= bom.getTotalPrice() %>
-                        ANTAL STOLPER : <br>
-                        <%= bom.getMaterials().get(0).getQuantity() %>
+                        <Br>
                         <%}%>
 
                     </div>

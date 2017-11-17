@@ -16,12 +16,12 @@ public class Calculator {
     public static BillOfMaterials getBillOfMaterials(int length, int width, List<Product> stolper) throws Exception {
         BillOfMaterials bom = new BillOfMaterials();
         
-        int stolpeAntal = 1;
+        int stolpeAntal = 2;
         //UDHÆNG TIL FRONTEN OG BAGENDEN AF SKURET (INGEN STOLPE)
         length += -130;
 
         // Placerer en stolpe pr. 3,10m  
-        stolpeAntal = length / 310;
+        stolpeAntal += length / 310;
         
         //Placerer en ekstra stolpe hvis der er over eller præcis 1m tilovers.
         if(length % 310 >= 100){
@@ -29,6 +29,9 @@ public class Calculator {
         }
         
         // Ganger med to så der er stolper til begge sider
+        if (stolpeAntal < 2)
+            stolpeAntal += 1;
+        
         stolpeAntal *=  2;
         
         // Tilføjer den rigtige længde til stolpen til udregning af samlet meter pris.
