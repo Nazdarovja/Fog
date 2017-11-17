@@ -9,15 +9,12 @@ import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
 import java.util.List;
-import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
 /**
  *
@@ -52,7 +49,7 @@ public class JUnit {
     @Test
     public void testLoginCustomer() throws Exception {
         String email = "test1@test.dk";
-        String password = "hansen1";
+        String password = "Hansen1";
         Customer customer = LogicFacade.login(email, password);
         assertTrue(email.equals(customer.getEmail()));
         assertTrue(password.equals(customer.getPassword()));
@@ -78,5 +75,14 @@ public class JUnit {
         assertFalse(categoryNotToBeFound.equals(product.get(0).getName()));
         
     }
+    
+    @Test
+    public void testCreateCustomer() throws Exception {
+        Customer newCustomer = new Customer("test@test.dk", "test", "tester", 12345678, "streetname 6", 2750, "password", "Ballerup");
+        Customer ExpectedCustomer = LogicFacade.createCostumer(newCustomer);
+        assertNotNull(ExpectedCustomer);
+//        assertNotEquals(newCustomer, ExpectedCustomer);
+//        LogicFacade;
+    }    
 
 }
