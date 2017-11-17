@@ -120,12 +120,12 @@ VALUES
 (2800, 'Kongens Lyngby');
 
 INSERT INTO 
-Customer (email, name, surname, phonenumber, address, zipcode)
+Customer (email, name, surname, phonenumber, address, zipcode, password)
 VALUES 
-('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750),
-('test2@test.dk','Tom','Tomsen',44332211,'Sildevej 2',2000),
-('test3@test.dk','Hanne','Hannesen',11112233,'Makrelvej 3',2800),
-('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800);
+('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750, 'Hansen1'),
+('test2@test.dk','Tom','Tomsen',44332211,'Sildevej 2',2000, 'Tomsen1'),
+('test3@test.dk','Hanne','Hannesen',11112233,'Makrelvej 3',2800, 'Hannesen'),
+('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800, 'Pernillesen');
 
 INSERT INTO
 Employee (name, surname)

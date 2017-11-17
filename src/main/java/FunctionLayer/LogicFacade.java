@@ -31,5 +31,9 @@ public class LogicFacade {
     public static List<Product> getCategory(String category) throws Exception {
         return ProductMapper.getCategory(category);
     }
-
+    
+    // CALCULATE
+    public static BillOfMaterials calculateBillofMaterials(int length, int width, List<Product> stolper) throws Exception{
+        return Calculator.getBillOfMaterials(length, width, stolper);
+    }
 }

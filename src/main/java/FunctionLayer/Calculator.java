@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class Calculator {
     
-    public BillOfMaterials getBillOfMaterials(int height, int length, int width, String type) throws Exception {
-        List<Product> stolper = LogicFacade.getCategory("stolpe");
+    public static BillOfMaterials getBillOfMaterials(int length, int width, List<Product> stolper) throws Exception {
         BillOfMaterials bom = new BillOfMaterials();
         
         int stolpeAntal = 1;
@@ -39,4 +38,5 @@ public class Calculator {
         bom.addOrderLine(new OrderLine(p, stolpeAntal));
         return bom;
     }
+
 }
