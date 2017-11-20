@@ -27,7 +27,7 @@ public class BillOfMaterials {
     public long getTotalPrice() {
         long totalPrice = 0;
         for (OrderLine o : materials) {
-            totalPrice += (o.getProduct().getPricePrM() * o.getQuantity());
+            totalPrice += o.getOrderLinePrice();
         }
         return totalPrice;
     }

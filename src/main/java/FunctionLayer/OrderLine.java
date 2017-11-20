@@ -10,12 +10,17 @@ package FunctionLayer;
  * @author Orchi
  */
 public class OrderLine {
+
     Product product;
     int quantity;
 
     public OrderLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public long getOrderLinePrice() {
+        return (this.product.getPrice() * quantity);
     }
 
     public Product getProduct() {
@@ -38,5 +43,5 @@ public class OrderLine {
     public String toString() {
         return "OrderLine{" + "product=" + product + ", quantity=" + quantity + '}';
     }
-    
+
 }

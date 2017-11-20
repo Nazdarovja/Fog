@@ -16,28 +16,29 @@ import java.util.List;
 public class LogicFacade {
 
     //USER 
-    public static Customer login(String email, String password) throws Exception{
+    public static Customer login(String email, String password) throws Exception {
         return CustomerMapper.login(email, password);
     }
-    
-    public static Customer createCostumer(Customer c) throws Exception{
+
+    public static Customer createCostumer(Customer c) throws Exception {
         return CustomerMapper.createCustomer(c);
     }
-    
+
     //PRODUCT
-    
     /**
-     * Gets a category name parameter and returns a list from the database with Product objects.
+     * Gets a category name parameter and returns a list from the database with
+     * ProductMPrice objects.
+     *
      * @param category
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public static List<Product> getCategory(String category) throws Exception {
         return ProductMapper.getCategory(category);
     }
-    
+
     // CALCULATE
-    public static BillOfMaterials calculateBillofMaterials(int length, int width, List<Product> stolper) throws Exception{
+    public static BillOfMaterials calculateBillofMaterials(int length, int width, List<Product> stolper) throws Exception {
         return Calculator.getBillOfMaterials(length, width, stolper);
     }
 }

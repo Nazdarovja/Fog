@@ -17,21 +17,21 @@ import javax.servlet.http.HttpSession;
  *
  * @author Stanislav
  */
-public class Calculate extends Command{
+public class Calculate extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
-        
+
         List<Product> stolper = LogicFacade.getCategory("stolpe");
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(length, width, stolper);
-        
+
         session.setAttribute("length", length);
         session.setAttribute("width", width);
         session.setAttribute("bom", bom);
         return "QuickBuild";
     }
-    
+
 }

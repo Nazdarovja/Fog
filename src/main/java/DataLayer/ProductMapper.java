@@ -6,6 +6,8 @@
 package DataLayer;
 
 import FunctionLayer.Product;
+import FunctionLayer.ProductPerMeterPrice;
+import FunctionLayer.ProductPerPrice;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,9 +22,11 @@ import java.util.List;
 public class ProductMapper {
 
     /**
-     * Input a category name to recieve a list from the database with Product objects.
+     * Input a category name to recieve a list from the database with
+ ProductPerMeterPrice objects.
+     *
      * @param category
-     * @return List of Product objects form the chosen category
+     * @return List of ProductPerMeterPrice objects form the chosen category
      * @throws java.sql.SQLException
      */
     public static List<Product> getCategory(String category) throws SQLException, Exception {
@@ -39,16 +43,21 @@ public class ProductMapper {
             rs = pstmt.executeQuery();
             productList = new ArrayList<>();
             while (rs.next()) {
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String cat = rs.getString("category");
-            long price = rs.getLong("price");
-            int length = rs.getInt("length");
-            int width = rs.getInt("width");
-            int height = rs.getInt("height");
-            productList.add(new Product(id,name,cat,price,length,width,height));
-            }
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String cat = rs.getString("category");
+                long price = rs.getLong("price");
 
+                if (cat.equals("værktøj")) {
+                    productList.add(new ProductPerPrice(id, name, cat, price));
+                } else {
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    productList.add(new ProductPerMeterPrice(id, name, category, price, length, width, height));
+                }
+
+            }
         } finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool

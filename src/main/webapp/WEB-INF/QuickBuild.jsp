@@ -80,7 +80,7 @@
                             <option value=780>780</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 well">
                         <% if(request.getSession().getAttribute("bom") != null){ %>
                         <% BillOfMaterials bom = (BillOfMaterials)request.getSession().getAttribute("bom"); %>
                         TOTAL PRIS FOR STOLPER : <br>
@@ -88,8 +88,8 @@
                         <Br>
                         <%}%>
 
+                    <input class="btn btn-default" type="submit" value="Calculate"/>
                     </div>
-                    <input type="submit" value="Calculate"/>
             </form>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

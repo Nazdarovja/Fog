@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Calculator {
     
-    public static BillOfMaterials getBillOfMaterials(int length, int width, List<Product> stolper) throws Exception {
+    public static BillOfMaterials getBillOfMaterials(int length, int width, List<Product> stolper) {
         BillOfMaterials bom = new BillOfMaterials();
         
         int stolpeAntal = 2;
