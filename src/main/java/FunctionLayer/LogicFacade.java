@@ -7,6 +7,7 @@ package FunctionLayer;
 
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
+import DataLayer.InquiryMapper;
 import java.util.List;
 
 /**
@@ -39,5 +40,9 @@ public class LogicFacade {
     // CALCULATE
     public static BillOfMaterials calculateBillofMaterials(int length, int width, List<Product> stolper) throws Exception{
         return Calculator.getBillOfMaterials(length, width, stolper);
+    }
+
+    public static void SendInquiry(Inquiry inquiry) throws Exception {
+        InquiryMapper.registerInitialInquiry(inquiry);
     }
 }
