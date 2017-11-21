@@ -93,16 +93,22 @@
             </form>
         </div>
 
-                    <!--if user is logged in and has made a calculation-->
+        <!--if user is logged in and has made a calculation-->
         <%if (customer != null && request.getSession().getAttribute("length") != null) {%>  
         <p>Send forespørgsel til Fog?</p>
 
         <form name="sendinquiry" action="FrontController" method="POST">
             <input type="hidden" name="command" value="sendinquiry">
-            <input type="submit" value="Send forespørgsel"/>
+            <input onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
         </form>
 
         <% }%>
+
+        <script>
+            function confirmFunction() {
+                alert("Forespørgsel er nu sendt til Fog. Tak for din henvendelse");
+            }
+        </script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
