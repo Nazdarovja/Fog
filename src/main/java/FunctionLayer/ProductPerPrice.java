@@ -50,7 +50,7 @@ public class ProductPerPrice implements Product {
     }
 
     public void setPrice(long price) {
-        this.price = price;
+        this.price = (price /100);
     }
 
     @Override

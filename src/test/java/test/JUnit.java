@@ -8,7 +8,6 @@ package test;
 import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
-import FunctionLayer.ProductPerMeterPrice;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
