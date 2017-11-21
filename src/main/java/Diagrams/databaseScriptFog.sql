@@ -98,7 +98,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `fog`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm') NOT NULL,
+  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte') NOT NULL,
   `price` LONG NOT NULL,
   `length` INT NULL,
   `width` INT NULL,
@@ -149,13 +149,14 @@ VALUES
 INSERT INTO
 Product (name,category,price,length,width,height)
 VALUES
-('97x97 TRYKIMPR.','stolpe',29.95,100,97,97),
-('45x195 SPÆRTRÆ UBH.','rem',19.95,100,45,195),
+('97x97 TRYKIMPR.','stolpe',2995,1000,97,97),
+('45x195 SPÆRTRÆ UBH.','rem',1995,1000,45,195),
 ('spær','spær',500,200,10,50),
 ('bræt','bræt',5,100,50,35),
 ('skrue','skrue',1.5,2,0.5,3),
 ('søm','søm',0.5,2,0.5,3),
-('hammer','værktøj',240,20,5,7);
+('hammer','værktøj',240,20,5,7),
+('38x73 taglægte T1', 'lægte', 50, 1000, 38, 73);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
