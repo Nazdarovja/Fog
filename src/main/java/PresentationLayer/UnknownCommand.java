@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginException;
+import FunctionLayer.FogException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +14,6 @@ public class UnknownCommand extends Command {
     @Override
     String execute( HttpServletRequest request, HttpServletResponse response ) throws Exception {
         String msg = "Unknown command. Contact IT";
-        throw new LoginException( msg );
+        throw new FogException( msg );
     }
 }

@@ -5,12 +5,16 @@
  */
 package DataLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.List;
 
 /**
  *
@@ -74,5 +78,49 @@ public class InquiryMapper {
 
         }
         return inquiry;
+    }
+    
+    public static List<Inquiry> allInquiries() throws Exception{
+        List<Inquiry> inquiries = new ArrayList<>();
+        Inquiry i;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * from Inquiry";
+            ps = conn.prepareStatement(SQL);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                i = new Inquiry(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getDate(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14));
+                inquiries.add(i);
+            }
+            return inquiries;
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+
     }
 }

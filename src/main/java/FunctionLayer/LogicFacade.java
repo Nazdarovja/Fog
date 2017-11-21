@@ -46,4 +46,8 @@ public class LogicFacade {
     public static void SendInquiry(Inquiry inquiry) throws Exception {
         InquiryMapper.registerInitialInquiry(inquiry);
     }
+    
+    public static List<Inquiry> viewInquiries() throws Exception{
+        return InquiryMapper.allInquiries();
+    }
 }

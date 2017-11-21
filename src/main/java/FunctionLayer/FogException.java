@@ -4,9 +4,9 @@ package FunctionLayer;
  * The purpose of LoginSampleException is to...
  * @author kasper
  */
-public class LoginException extends Exception {
+public class FogException extends Exception {
 
-    public LoginException(String msg) {
+    public FogException(String msg) {
         super(msg);
     }
 }
