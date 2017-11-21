@@ -15,6 +15,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <script src="../Scripts/QuickBuildJS.js"></script>
+        
         <h1 style="text-align: center">Hejsa, vælg dine mål til din kommende carport!</h1>
         <% Customer customer = null;
             if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
@@ -104,14 +107,10 @@
 
         <% }%>
 
-        <script>
-            function confirmFunction() {
-                alert("Forespørgsel er nu sendt til Fog. Tak for din henvendelse");
-            }
-        </script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script src="Scripts/QuickBuildJS.js" type="text/javascript"></script>
     </body>
 </html>
