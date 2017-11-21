@@ -23,6 +23,7 @@ public abstract class Command {
         commands.put( "toregister", new ToRegister() );
         commands.put( "QuickBuild", new QuickBuild());
         commands.put( "calculate", new Calculate());
+        commands.put( "sendinquiry", new SendInquiry());
     }
 
     static Command from( HttpServletRequest request ) {
