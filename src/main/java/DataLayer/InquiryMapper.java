@@ -8,7 +8,9 @@ package DataLayer;
 import FunctionLayer.Inquiry;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -16,14 +18,16 @@ import java.sql.SQLException;
  */
 public class InquiryMapper {
 
-    public static void registerInitialInquiry(Inquiry i) throws SQLException, Exception {
+    public static Inquiry registerInitialInquiry(Inquiry i) throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Inquiry inquiry = null;
 
         try {
             conn = DBConnector.getConnection();
             String SQL = "INSERT INTO Inquiry (id, carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            pstmt = conn.prepareStatement(SQL);
+            pstmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, i.getId());
             pstmt.setInt(2, i.getCarportHeight());
             pstmt.setInt(3, i.getCarportLength());
@@ -37,13 +41,29 @@ public class InquiryMapper {
             pstmt.setDate(11, i.getPeriod());
             pstmt.setString(12, i.getStatus());
             pstmt.setString(13, i.getEmail());
-            pstmt.executeUpdate();
-            
+            conn.setAutoCommit(false);
+            int res = pstmt.executeUpdate();
+            int id = -1;  //dummy
+
+            if (res == 1) {
+                rs = pstmt.getGeneratedKeys();
+                rs.next();
+                id = rs.getInt(1);
+
+                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee());
+
+                conn.commit();
+            } else {
+                conn.rollback();
+                throw new Exception("Error creating Inquiry in database.");
+            }
 
         } finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
 
+            if (rs != null) {
+                rs.close();
             }
             if (pstmt != null) {
                 pstmt.close();
@@ -51,7 +71,8 @@ public class InquiryMapper {
             if (conn != null) {
                 conn.close();
             }
+
         }
+        return inquiry;
     }
-
-
+}
