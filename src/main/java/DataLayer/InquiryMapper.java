@@ -6,13 +6,9 @@
 package DataLayer;
 
 import FunctionLayer.Inquiry;
-import FunctionLayer.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -26,7 +22,7 @@ public class InquiryMapper {
 
         try {
             conn = DBConnector.getConnection();
-            String SQL = "INSERT INTO Inquiry (id, carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email, id_employee) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String SQL = "INSERT INTO Inquiry (id, carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, i.getId());
             pstmt.setInt(2, i.getCarportHeight());
@@ -41,7 +37,6 @@ public class InquiryMapper {
             pstmt.setDate(11, i.getPeriod());
             pstmt.setString(12, i.getStatus());
             pstmt.setString(13, i.getEmail());
-            pstmt.setInt(14, i.getId_employee());
             pstmt.executeUpdate();
             
 
