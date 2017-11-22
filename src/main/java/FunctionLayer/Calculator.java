@@ -5,7 +5,8 @@
  */
 package FunctionLayer;
 
-import java.util.List;
+import java.util.HashMap;
+
 
 /**
  *
@@ -13,32 +14,8 @@ import java.util.List;
  */
 public class Calculator {
     
-    public static BillOfMaterials getBillOfMaterials(int length, int width, List<Product> stolper) {
+    public static BillOfMaterials getBillOfMaterials(int length, int width, HashMap<String,Product> products) {
         BillOfMaterials bom = new BillOfMaterials();
-        
-        int stolpeAntal = 2;
-        //UDHÆNG TIL FRONTEN OG BAGENDEN AF SKURET (INGEN STOLPE)
-        length += -130;
-
-        // Placerer en stolpe pr. 3,10m  
-        stolpeAntal += length / 310;
-        
-        //Placerer en ekstra stolpe hvis der er over eller præcis 1m tilovers.
-        if(length % 310 >= 100){
-            stolpeAntal += 1;
-        }
-        
-        // Ganger med to så der er stolper til begge sider
-        if (stolpeAntal < 2)
-            stolpeAntal += 1;
-        
-        stolpeAntal *=  2;
-        
-        // Tilføjer den rigtige længde til stolpen til udregning af samlet meter pris.
-        Product p = stolper.get(0);
-        p.setLength(270);
-        
-        bom.addOrderLine(new OrderLine(p, stolpeAntal));
         return bom;
     }
 

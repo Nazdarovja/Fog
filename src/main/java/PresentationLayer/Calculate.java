@@ -8,7 +8,7 @@ package PresentationLayer;
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
-import java.util.List;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,10 +24,12 @@ public class Calculate extends Command {
         HttpSession session = request.getSession();
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
-
-        List<Product> stolper = LogicFacade.getCategory("stolpe");
-        BillOfMaterials bom = LogicFacade.calculateBillofMaterials(length, width, stolper);
-
+        
+        HashMap<String, Product> products = new HashMap<>(); 
+        Product stolper = LogicFacade.getSingleProduct("stolpe", "97x97 TRYKIMPR.");
+        
+        BillOfMaterials bom = LogicFacade.calculateBillofMaterials(length, width, products);
+        
         session.setAttribute("length", length);
         session.setAttribute("width", width);
         session.setAttribute("bom", bom);

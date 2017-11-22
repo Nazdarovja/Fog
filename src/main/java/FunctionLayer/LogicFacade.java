@@ -8,6 +8,7 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,10 +38,13 @@ public class LogicFacade {
     public static List<Product> getCategory(String category) throws Exception {
         return ProductMapper.getCategory(category);
     }
+    public static Product getSingleProduct(String category, String name) throws Exception {
+        return ProductMapper.getSingleProduct(category, name);
+    }
 
     // CALCULATE
-    public static BillOfMaterials calculateBillofMaterials(int length, int width, List<Product> stolper) throws Exception {
-        return Calculator.getBillOfMaterials(length, width, stolper);
+    public static BillOfMaterials calculateBillofMaterials(int length, int width, HashMap<String, Product> products) throws Exception {
+        return Calculator.getBillOfMaterials(length, width, products);
     }
 
     public static void SendInquiry(Inquiry inquiry) throws Exception {
