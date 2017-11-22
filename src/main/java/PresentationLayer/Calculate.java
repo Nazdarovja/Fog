@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
  * @author Stanislav
  */
 public class Calculate extends Command {
@@ -33,5 +32,4 @@ public class Calculate extends Command {
         session.setAttribute("bom", bom);
         return "QuickBuild";
     }
-
 }
