@@ -10,41 +10,94 @@ package FunctionLayer;
  */
 public class PostCalc {
 
-    public static OrderLine getPosts(int length, int width, Product post, String roofType) {
-        //SET POST LENGTH TO STANDARD POST LENGTH
-        post.setLength(270);
-
-        //ADD ONE POST FOR EACH CORNER
-        int quantity = 4;
-        int roofEaves = 0;
-        int roofSideEves = 0;
-
-        //ROOF EAVES FRONT AND BACK (NO POLES UNDER EAVES) FLATROOF = 1000mm PITCHED ROOF = 800mm
-        if (roofType.equals("fladt")) {
-            //FLAT ROOF
-            roofEaves = 1300;
-            roofSideEves = 700;
-        } else {
-            //PITCHED ROOF
-            roofEaves = 1100;
-            roofSideEves = 400;
-        }
+    public static OrderLine getPostsFlatRoof(int length, int width, int height, String postName, String roofType) {
+        Product post = ProductMapper.getSingleProduct(postName);
         
+        //QUANTITY OF END POST FOR ONE ROW
+        int quantity = 2;
+        int rowsOfPoles = 2;
+
+        //ROOF EAVES FRONT AND BACK (NO POLES UNDER EAVES) FLATROOF = 1000mm
+        int roofEaves = 130;
+        int roofSideEves = 70;
+
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
-        length += -roofEaves;
-        width += -roofSideEves;
+        length -= roofEaves;
+        width -= roofSideEves;
 
-        // PLACE POLE IN MIDDLE OF EXISTING POLES IF MORE THAN 6M LONG CARPORT 
-        if (length >= 6000) {
-            quantity += 2;
+        // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
+        if (width >= 600) {
+            rowsOfPoles += (width / 300) - 1;
         }
-        
-        // PLACE POLE IN MIDDLE IF WIDTH IS MORE THAN 6M
-        
-        if (width >= 6000) {
-            quantity += +2;
+        // HOW MANY POLES PR. ROW 
+        if (length >= 620) {
+            // Counts how many there can be between the existing ones and removes one.
+            quantity += (length / 310) - 1;
         }
 
-        return new OrderLine(post, quantity);
+        // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
+        quantity *= rowsOfPoles;
+        
+        // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
+        height += 90;
+        
+        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
+    } 
+
+    public static OrderLine getPostsPitchedRoof(int length, int width, int height, String postName, String roofType) {
+        Product post = ProductMapper.getSingleProduct(postName);
+        
+        //QUANTITY OF END POST FOR ONE ROW
+        int quantity = 2;
+        int rowsOfPoles = 2;
+
+        //ROOF EAVES FRONT AND BACK (NO POLES UNDER EAVES) FLATROOF = 1000mm
+        int roofEaves = 110;
+        int roofSideEves = 40;
+
+        //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
+        length -= roofEaves;
+        width -= roofSideEves;
+
+        // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
+        if (width >= 600) {
+            rowsOfPoles += (width / 300) - 1;
+        }
+        // HOW MANY POLES PR. ROW 
+        if (length >= 550) {
+            // Counts how many there can be between the existing ones and removes one.
+            quantity += (length / 275) - 1;
+        }
+
+        // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
+        quantity *= rowsOfPoles;
+        
+        // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
+        height += 90;
+        
+        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
+    }
+        
+    public static void main(String[] args) {
+        int quantity = 2;
+        int rowsOfPoles = 2;
+        int length = 1200;
+        int width = 930;
+
+        if (width >= 620) {
+            rowsOfPoles += (width / 310) - 1;
+        }
+        System.out.println(rowsOfPoles);
+
+        //HOW MANY POLES PR. ROW
+        System.out.println((length / 300) - 1);
+
+        if (length >= 600) {
+            quantity += (length / 300) - 1;
+        }
+
+        quantity *= rowsOfPoles;
+
+        System.out.println(quantity);
     }
 }
