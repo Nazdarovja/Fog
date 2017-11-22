@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import java.util.List;
@@ -21,8 +22,14 @@ public class ViewInquiries extends Command
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-        List<Inquiry> iList = LogicFacade.viewInquiries();
+        //List<Inquiry> iList = LogicFacade.viewInquiries();
+        List[] list = LogicFacade.viewCustomersAndInquiries();
+        
+        List<Inquiry> iList = list[0];
+        List<Customer> cList = list[1];
+        
         request.setAttribute("inquiries", iList);
+        request.setAttribute("customers", cList);
         
         return "inquiries";
     }

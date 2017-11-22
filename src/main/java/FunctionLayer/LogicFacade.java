@@ -50,4 +50,13 @@ public class LogicFacade {
     public static List<Inquiry> viewInquiries() throws Exception{
         return InquiryMapper.allInquiries();
     }
+    
+    public static List[] viewCustomersAndInquiries() throws Exception{
+        List[] list = new List[2];
+        
+        list[0] = InquiryMapper.allInquiries();
+        list[1] = CustomerMapper.customersForInquiries();
+        
+        return list;
+    }
 }
