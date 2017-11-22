@@ -11,11 +11,10 @@ package FunctionLayer;
  */
 public class CalcTarPaper {  //milimeter
 
-    public static OrderLine calcTarPaper(double length, double width, Product tarPaper) {
+    public static OrderLine calcTarPaper(double length, double width, Product tarPaper, String roofType) {
 
         int tarPaperCounter = 0;
         double productLength = tarPaper.getLength();
-
         double tarPaperLenNeeded = length * ((width) / 10000);  //pr meter width 
 
         //tarPaper rolls needed
@@ -23,6 +22,12 @@ public class CalcTarPaper {  //milimeter
             tarPaperLenNeeded -= productLength;
             tarPaperCounter++;
         }
+        
+        //Pitched roof
+        if (roofType.equals("fladt")) {
+            tarPaperCounter = tarPaperCounter * 2;
+        }
+
         return new OrderLine(tarPaper, tarPaperCounter);
     }
 
@@ -30,7 +35,7 @@ public class CalcTarPaper {  //milimeter
         double length = 2500;
         double width = 4000;
         Product tagpap = new ProductPerMeterPrice(0, "ICOPAL SELVKLÆBER TOP SORT 1X5", "tagpap", 13980, 500, 100, 0);  //meterpris i Øre = 69900
-        OrderLine result = calcTarPaper(length, width, tagpap);
+        OrderLine result = calcTarPaper(length, width, tagpap, "fladt");
         System.out.println(result.quantity);
     }
 
