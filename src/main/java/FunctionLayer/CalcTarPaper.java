@@ -9,45 +9,54 @@ package FunctionLayer;
  *
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
-public class CalcTarPaper {  //milimeter
 
-    public static OrderLine calcTarPaper(double length, double width, Product tarPaper, String roofType) {
-        
-        double overlay = 100;
-        int tarPaperCounter = 0;
-        double productLength = tarPaper.getLength();
-        double productWidth = tarPaper.getWidth();
-        
-        //
-        double widthRollsNeeded = width / ((productWidth*10)-overlay);  
-        System.out.println("rolls needed (width): "+widthRollsNeeded);
-        
-        double tarPaperLenNeeded = length * (width / 10000);  //pr meter width 
-        System.out.println("DEBUG - tarPaperLenNeeded: "+tarPaperLenNeeded);
-        
-        double rowLengt = length / (productLength*10);
-        double res = widthRollsNeeded * rowLengt;
-        
-        //tarPaper rolls needed
-        while (tarPaperLenNeeded > 0) {
-            tarPaperLenNeeded -= productLength;
-            tarPaperCounter++;
-        }
-        
-        //Pitched roof
-        if (roofType.equals("rejsning")) {
-            res = res * 2;
-        }
 
-        return new OrderLine(tarPaper, tarPaperCounter);
+public class CalcTarPaper {
+
+    /**
+     * Calculate tar paper needed for a specific flat roof area.
+     * @param length 
+     * @param width 
+     * @param tarPaper Product
+     * @return Orderline with Product & quantity needed.
+     */
+    public static OrderLine flat(double length, double width, Product tarPaper) {
+
+        double tarPaperOverlay = 100;
+
+        //(number of) rows of rolls needed
+        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+
+        //number of rolls needed for all rows
+        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+
+        //rounding up
+        int result = (int) Math.ceil(rollsForAllRows);
+
+        return new OrderLine(tarPaper, result);
     }
+    
+    /**
+     * Calculate tar paper needed for a specific pitched roof area.
+     * @param length 
+     * @param width 
+     * @param tarPaper Product
+     * @return Orderline with Product & quantity needed.
+     */
+    public static OrderLine pitched(double length, double width, Product tarPaper) {
 
-    public static void main(String[] args) {
-        double length = 5000;
-        double width = 4000;
-        Product tagpap = new ProductPerMeterPrice(0, "ICOPAL SELVKLÆBER TOP SORT 1X5", "tagpap", 13980, 500, 100, 0);  //meterpris i Øre = 69900
-        OrderLine result = calcTarPaper(length, width, tagpap, "fladt");
-        System.out.println(result.quantity);
+        double tarPaperOverlay = 100;
+
+        //(number of) rows of rolls needed
+        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+
+        //number of rolls needed for all rows
+        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+
+        //rounding up
+        int result = (int) Math.ceil(rollsForAllRows) * 2;
+
+        return new OrderLine(tarPaper, result);
     }
 
 }
