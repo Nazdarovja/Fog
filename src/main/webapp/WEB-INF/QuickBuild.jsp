@@ -16,9 +16,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
+
         <script src="../Scripts/QuickBuildJS.js"></script>
-        
+
         <h1 style="text-align: center">Hejsa, vælg dine mål til din kommende carport!</h1>
         <% Customer customer = null;
             if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
@@ -84,6 +84,16 @@
                         <option value=780>780</option>
                     </select>
                 </div>
+
+                <div class="col-sm-2">
+                    Vælg højde<br><br>
+                    <select class="form-control" name="height">
+                        <option value=210>210</option>
+                        <option value=240>240</option>
+                        <option value=270>270</option>
+                    </select>
+                </div>
+
                 <div class="col-sm-3 well">
                     <% if (request.getSession().getAttribute("inquiry") != null) { %>
                     <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
@@ -98,7 +108,7 @@
         </div>
 
         <!--if user is logged in and has made a calculation-->
-        <%if (customer != null && request.getSession().getAttribute("length") != null) {%>  
+        <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
         <p>Send forespørgsel til Fog?</p>
 
         <form name="sendinquiry" action="FrontController" method="POST">
@@ -111,7 +121,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
         <script src="Scripts/QuickBuildJS.js" type="text/javascript"></script>
     </body>
 </html>

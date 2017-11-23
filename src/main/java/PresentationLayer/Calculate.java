@@ -22,16 +22,18 @@ public class Calculate extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
+        int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         
-        Inquiry inquiry = new Inquiry(0, 0, length, width, 0, 0, "input rooftype variable", " input angle variable", null, null, null, "ny", null, 1);
+        Inquiry inquiry = new Inquiry(0,height, length, width, 0, 0, "input rooftype variable", " input angle variable", null, null, null, "ny", null, 1);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
+        session.setAttribute("height", height);
         session.setAttribute("length", length);
         session.setAttribute("width", width);
-        session.setAttribute("inquriy", inquiry);
+        session.setAttribute("inquiry", inquiry);
         return "QuickBuild";
     }
 }
