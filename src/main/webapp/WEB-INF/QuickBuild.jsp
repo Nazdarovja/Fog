@@ -108,7 +108,7 @@
         </div>
 
         <!--if user is logged in and has made a calculation-->
-        <%if (customer != null && request.getSession().getAttribute("length") != null) {%>  
+        <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
         <p>Send forespørgsel til Fog?</p>
 
         <form name="sendinquiry" action="FrontController" method="POST">
