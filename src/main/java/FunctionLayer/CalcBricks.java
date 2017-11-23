@@ -11,9 +11,9 @@ package FunctionLayer;
  */
 public class CalcBricks {
     
-    public static OrderLine calculateAmountOfBricks(int length, int width, Product lath) {
-        int newWidth = lath.getWidth() - 20;
-        int newLength = lath.getLength() - 100;
+    public static OrderLine calculateAmountOfBricks(int length, int width, Product brick) {
+        int newWidth = brick.getWidth() - 20;
+        int newLength = brick.getLength() - 100;
         
         int rows = width / newLength;
         rows++;
@@ -23,15 +23,14 @@ public class CalcBricks {
         
         int quantity = rows * columns;
         
-        return new OrderLine(lath, length, quantity, "stk", "Monteres på taglægter fordelt på hver side af taget");
+        return new OrderLine(brick, 0, quantity, "stk", "Monteres på taglægter fordelt på hver side af taget");
     }
     
-    public static OrderLine calculateAmountOfTopBricks(int length, int width, Product lath) {
-        int lengthMinusOverlap = lath.getLength() - 50;
+    public static OrderLine calculateAmountOfTopBricks(int length, int width, Product brick) {
+        int lengthMinusOverlap = brick.getLength() - 50;
         int quantity = length / lengthMinusOverlap;
         quantity++;
-        
-        return new OrderLine(lath, length, quantity, "stk", "monteres på toplægte med medfølgende beslag se " +
+        return new OrderLine(brick, 0, quantity, "stk", "monteres på toplægte med medfølgende beslag se " +
                                                             "tagstens vejledning");
     }
 }
