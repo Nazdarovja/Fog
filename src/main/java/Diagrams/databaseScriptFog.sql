@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
   `status` ENUM('ny', 'behandles', 'behandlet') NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `id_employee` INT NULL,
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `email_idx` (`email` ASC),
   INDEX `id_ansat_idx` (`id_employee` ASC),
