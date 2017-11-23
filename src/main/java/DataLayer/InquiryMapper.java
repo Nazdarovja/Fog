@@ -8,6 +8,7 @@ package DataLayer;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +43,7 @@ public class InquiryMapper {
             pstmt.setString(8, i.getAngle());
             pstmt.setString(9, i.getCommentCustomer());
             pstmt.setString(10, i.getCommentEmployee());
-            pstmt.setDate(11, i.getPeriod());
+            pstmt.setDate(11, i.getPeriod());  //
             pstmt.setString(12, i.getStatus());
             pstmt.setString(13, i.getEmail());
             conn.setAutoCommit(false);

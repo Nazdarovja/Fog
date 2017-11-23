@@ -67,13 +67,10 @@ public class JUnit {
     }
 
     @Test
-    public void testGetCategory() throws Exception {
-        String categoryToBeFound = "søm";
-        String categoryNotToBeFound = "Hammer";
-        List<Product> product = LogicFacade.getCategory(categoryToBeFound);
-        assertTrue(categoryToBeFound.equals(product.get(0).getName()));
-        assertFalse(categoryNotToBeFound.equals(product.get(0).getName()));
-        
+    public void testGetProducts() throws Exception {
+        List<Product> product = LogicFacade.getProducts();
+        assertNotNull(product);
+        assertTrue(product.size() > 1);
     }
     
     @Test

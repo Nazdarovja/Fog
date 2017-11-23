@@ -1,3 +1,4 @@
+<%@page import="FunctionLayer.Inquiry"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%-- 
     Document   : QuickBuild
@@ -84,10 +85,10 @@
                     </select>
                 </div>
                 <div class="col-sm-3 well">
-                    <% if (request.getSession().getAttribute("bom") != null) { %>
-                    <% BillOfMaterials bom = (BillOfMaterials) request.getSession().getAttribute("bom");%>
+                    <% if (request.getSession().getAttribute("inquiry") != null) { %>
+                    <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
                     TOTAL PRIS FOR STOLPER : <br>
-                    <%= bom.getTotalPrice()%>
+                    <%= inquiry.getBom().getTotalPrice()%>
                     <Br>
                     <%}%>
 

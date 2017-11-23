@@ -12,12 +12,13 @@ package FunctionLayer;
 public class OrderLine {
 
     Product product;
+    int length;
     int quantity;
+    // piece, roll, pack
+    String amountType;
+    String usabilityComment;
 
-    public OrderLine(Product product, int quantity) {
-        this.product = product;
-        this.quantity = quantity;
-    }
+
 
     public long getOrderLinePrice() {
         return (this.product.getPrice() * quantity);
@@ -31,6 +32,14 @@ public class OrderLine {
         this.product = product;
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -39,9 +48,28 @@ public class OrderLine {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "OrderLine{" + "product=" + product + ", quantity=" + quantity + '}';
+    public String getAmountType() {
+        return amountType;
+    }
+
+    public void setAmountType(String amountType) {
+        this.amountType = amountType;
+    }
+
+    public String getUsabilityComment() {
+        return usabilityComment;
+    }
+
+    public void setUsabilityComment(String usabilityComment) {
+        this.usabilityComment = usabilityComment;
+    }
+
+    public OrderLine(Product product, int length, int quantity, String amountType, String usabilityComment) {
+        this.product = product;
+        this.length = length;
+        this.quantity = quantity;
+        this.amountType = amountType;
+        this.usabilityComment = usabilityComment;
     }
 
 }
