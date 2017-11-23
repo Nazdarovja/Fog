@@ -27,6 +27,7 @@ public class Inquiry {
     private String status;      //enum
     private String email;
     private int id_employee;
+    private BillOfMaterials bom;
 
     public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee) {
         this.id = id;
@@ -51,6 +52,14 @@ public class Inquiry {
 
     public int getCarportHeight() {
         return carportHeight;
+    }
+
+    public BillOfMaterials getBom() {
+        return bom;
+    }
+
+    public void setBom(BillOfMaterials bom) {
+        this.bom = bom;
     }
 
     public int getCarportLength() {

@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
+import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
 import java.util.HashMap;
@@ -24,14 +25,13 @@ public class Calculate extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         
-        HashMap<String, Product> products = new HashMap<>(); 
-        Product stolper = LogicFacade.getSingleProduct("stolpe", "97x97 TRYKIMPR.");
-        
-        BillOfMaterials bom = LogicFacade.calculateBillofMaterials(length, width, products);
+        Inquiry inquiry = new Inquiry(0, 0, length, width, 0, 0, "input rooftype variable", " input angle variable", null, null, null, "ny", null, 1);
+        BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
+        inquiry.setBom(bom);
         
         session.setAttribute("length", length);
         session.setAttribute("width", width);
-        session.setAttribute("bom", bom);
+        session.setAttribute("inquriy", inquiry);
         return "QuickBuild";
     }
 }

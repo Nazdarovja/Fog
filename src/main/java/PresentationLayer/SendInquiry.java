@@ -32,7 +32,6 @@ public class SendInquiry extends Command {
         //remove stuff from session
         request.getSession().removeAttribute("length");
         request.getSession().removeAttribute("width");
-        request.getSession().removeAttribute("bom");
         
         return "QuickBuild";
     }

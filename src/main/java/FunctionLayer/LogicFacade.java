@@ -35,16 +35,13 @@ public class LogicFacade {
      * @return
      * @throws Exception
      */
-    public static List<Product> getCategory(String category) throws Exception {
-        return ProductMapper.getCategory(category);
-    }
-    public static Product getSingleProduct(String category, String name) throws Exception {
-        return ProductMapper.getSingleProduct(category, name);
+    public static List<Product> getProducts() throws Exception {
+        return ProductMapper.getProducts();
     }
 
     // CALCULATE
-    public static BillOfMaterials calculateBillofMaterials(int length, int width, HashMap<String, Product> products) throws Exception {
-        return Calculator.getBillOfMaterials(length, width, products);
+    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws Exception {
+        return Calculator.getBillOfMaterials(inquiry);
     }
 
     public static void SendInquiry(Inquiry inquiry) throws Exception {

@@ -5,14 +5,21 @@
  */
 package FunctionLayer;
 
+import java.util.List;
+
 /**
  * @author Stanislav
  */
 public class PostCalc {
 
-    public static OrderLine getPostsFlatRoof(int length, int width, int height, String postName, String roofType) {
-        Product post = ProductMapper.getSingleProduct(postName);
-        
+    public static OrderLine getPostsFlatRoof(int length, int width, int height, String postName, List<Product> products) throws Exception {
+        Product post = null;
+        for (Product p : products) {
+            if (p.getName().equals(postName)) {
+                post = p;
+            }
+        }
+
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
         int rowsOfPoles = 2;
@@ -37,16 +44,20 @@ public class PostCalc {
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
         quantity *= rowsOfPoles;
-        
+
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         height += 90;
-        
-        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
-    } 
 
-    public static OrderLine getPostsPitchedRoof(int length, int width, int height, String postName, String roofType) {
-        Product post = ProductMapper.getSingleProduct(postName);
-        
+        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
+    }
+
+    public static OrderLine getPostsPitchedRoof(int length, int width, int height, String postName, List<Product> products) throws Exception {
+        Product post = null;
+        for (Product p : products) {
+            if (p.getName().equals(postName)) {
+                post = p;
+            }
+        }
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
         int rowsOfPoles = 2;
@@ -71,13 +82,13 @@ public class PostCalc {
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
         quantity *= rowsOfPoles;
-        
+
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         height += 90;
-        
+
         return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
-        
+
     public static void main(String[] args) {
         int quantity = 2;
         int rowsOfPoles = 2;
