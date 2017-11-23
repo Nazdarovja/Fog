@@ -9,34 +9,42 @@ package FunctionLayer;
  *
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
-public class CalcTarPaper {  //milimeter
 
-    public static OrderLine calcTarPaper(double length, double width, Product tarPaper, String roofType) {
 
-        int tarPaperCounter = 0;
-        double productLength = tarPaper.getLength();
-        double tarPaperLenNeeded = length * ((width) / 10000);  //pr meter width 
+public class CalcTarPaper {
 
-        //tarPaper rolls needed
-        while (tarPaperLenNeeded > 0) {
-            tarPaperLenNeeded -= productLength;
-            tarPaperCounter++;
-        }
-        
-        //Pitched roof
-        if (roofType.equals("fladt")) {
-            tarPaperCounter = tarPaperCounter * 2;
-        }
+    public static OrderLine getTarPaperFlatRoof(double length, double width, Product tarPaper) {
 
-        return new OrderLine(tarPaper, tarPaperCounter);
+        double tarPaperOverlay = 100;
+
+        //(number of) rows of rolls needed
+        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+
+        //number of rolls needed for all rows
+        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+
+        //rounding up
+        int result = (int) Math.ceil(rollsForAllRows);
+
+        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
-    public static void main(String[] args) {
-        double length = 2500;
-        double width = 4000;
-        Product tagpap = new ProductPerMeterPrice(0, "ICOPAL SELVKLÆBER TOP SORT 1X5", "tagpap", 13980, 500, 100, 0);  //meterpris i Øre = 69900
-        OrderLine result = calcTarPaper(length, width, tagpap, "fladt");
-        System.out.println(result.quantity);
+    
+    
+    public static OrderLine getTarPaperPitchedRoof(double length, double width, Product tarPaper) {
+
+        double tarPaperOverlay = 100;
+
+        //(number of) rows of rolls needed
+        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+
+        //number of rolls needed for all rows
+        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+
+        //rounding up
+        int result = (int) Math.ceil(rollsForAllRows) * 2;
+
+        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
 }
