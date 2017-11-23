@@ -34,7 +34,7 @@ public class ProductMapper {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        if (productList != null) {
+        if (productList == null) {
 
             try {
                 conn = DBConnector.getConnection();
