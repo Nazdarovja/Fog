@@ -31,7 +31,7 @@ public class Calculate extends Command {
         
         session.setAttribute("length", length);
         session.setAttribute("width", width);
-        session.setAttribute("inquriy", inquiry);
+        session.setAttribute("inquiry", inquiry);
         return "QuickBuild";
     }
 }
