@@ -1,3 +1,4 @@
+<%@page import="FunctionLayer.Inquiry"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%-- 
     Document   : QuickBuild
@@ -15,6 +16,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <script src="../Scripts/QuickBuildJS.js"></script>
+        
         <h1 style="text-align: center">Hejsa, vælg dine mål til din kommende carport!</h1>
         <% Customer customer = null;
             if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
@@ -81,10 +85,10 @@
                     </select>
                 </div>
                 <div class="col-sm-3 well">
-                    <% if (request.getSession().getAttribute("bom") != null) { %>
-                    <% BillOfMaterials bom = (BillOfMaterials) request.getSession().getAttribute("bom");%>
+                    <% if (request.getSession().getAttribute("inquiry") != null) { %>
+                    <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
                     TOTAL PRIS FOR STOLPER : <br>
-                    <%= bom.getTotalPrice()%>
+                    <%= inquiry.getBom().getTotalPrice()%>
                     <Br>
                     <%}%>
 
@@ -104,14 +108,10 @@
 
         <% }%>
 
-        <script>
-            function confirmFunction() {
-                alert("Forespørgsel er nu sendt til Fog. Tak for din henvendelse");
-            }
-        </script>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script src="Scripts/QuickBuildJS.js" type="text/javascript"></script>
     </body>
 </html>

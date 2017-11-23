@@ -24,6 +24,7 @@ public abstract class Command {
         commands.put( "QuickBuild", new QuickBuild());
         commands.put( "calculate", new Calculate());
         commands.put( "sendinquiry", new SendInquiry());
+        commands.put( "viewinquiries", new ViewInquiries() );
     }
 
     static Command from( HttpServletRequest request ) {

@@ -1,11 +1,14 @@
 package DataLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +16,7 @@ import java.sql.Statement;
  */
 public class CustomerMapper {
 
-    public static Customer login(String email, String password) throws Exception {
+    public static Customer login(String email, String password) throws FogException, SQLException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         Connection conn = null;
@@ -41,9 +44,9 @@ public class CustomerMapper {
                 Customer customer = new Customer(mail, name, surname, phonenumber, address, zipcode, pass, city);
                 return customer;
             } else {
-                throw new Exception("could not validate user");
+                throw new FogException("could not validate user");
             }
-
+        
         } finally {
             if (rs != null) {
                 rs.close();
@@ -154,6 +157,44 @@ public class CustomerMapper {
                 con.close();
             }
         }
+    }
+    
+    public static List<Customer> customersForInquiries() throws Exception{
+        List<Customer> customers = new ArrayList<>();
+        Customer c;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * FROM Customer c INNER JOIN Inquiry i ON c.email = i.email INNER JOIN Zipcode z ON c.zipcode = z.zipcode";
+            ps = conn.prepareStatement(SQL);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                c = new Customer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(23));
+                customers.add(c);
+            }
+            return customers;
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+
     }
 }
 
