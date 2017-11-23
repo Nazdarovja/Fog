@@ -36,7 +36,7 @@ public class ProductPerMeterPrice implements Product {
      */
     @Override
     public long getPrice() {
-        return (this.price * (length / 100));
+        return this.price * (length / 1000);
     }
 
     @Override
