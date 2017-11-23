@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Inquiry {
     private String status;      //enum
     private String email;
     private int id_employee;
+    private Timestamp date;
 
     public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee) {
         this.id = id;
@@ -100,7 +102,10 @@ public class Inquiry {
     public int getId_employee() {
         return id_employee;
     }
-    
-    
+
+    public Timestamp getDate() {
+        return date;
+    }
+
 
 }
