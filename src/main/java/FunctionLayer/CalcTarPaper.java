@@ -13,13 +13,6 @@ package FunctionLayer;
 
 public class CalcTarPaper {
 
-    /**
-     * Calculate tar paper needed for a specific flat roof area.
-     * @param length 
-     * @param width 
-     * @param tarPaper Product
-     * @return Orderline with Product & quantity needed.
-     */
     public static OrderLine flat(double length, double width, Product tarPaper) {
 
         double tarPaperOverlay = 100;
@@ -33,16 +26,11 @@ public class CalcTarPaper {
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows);
 
-        return new OrderLine(tarPaper, result);
+        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
+
     
-    /**
-     * Calculate tar paper needed for a specific pitched roof area.
-     * @param length 
-     * @param width 
-     * @param tarPaper Product
-     * @return Orderline with Product & quantity needed.
-     */
+    
     public static OrderLine pitched(double length, double width, Product tarPaper) {
 
         double tarPaperOverlay = 100;
@@ -56,7 +44,7 @@ public class CalcTarPaper {
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows) * 2;
 
-        return new OrderLine(tarPaper, result);
+        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
 }
