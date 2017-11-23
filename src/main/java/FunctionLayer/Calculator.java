@@ -22,13 +22,23 @@ public class Calculator {
 
         // FLAT ROOF ALGORITHM        
         if (inquiry.getRoofType().equals("fladt")) {
-            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), "97x97 TRYKIMPR.", products));
+            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97 TRYKIMPR.", products)));
             // PITCHED ROOF ALHORITHM
         } else {
-            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), "97x97 TRYKIMPR.", products));
+            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97 TRYKIMPR.", products)));
 
         }
 
         return bom;
+    }
+
+    private static Product getChosenProduct(String productName, List<Product> products) {
+        Product product = null;
+        for (Product p : products) {
+            if (p.getName().equals(productName)) {
+                product = p;
+            }
+        }
+        return product;
     }
 }
