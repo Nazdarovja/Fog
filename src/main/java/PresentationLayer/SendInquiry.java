@@ -23,13 +23,15 @@ public class SendInquiry extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Customer customer = (Customer) request.getSession().getAttribute("customer");
+        int height = (Integer) request.getSession().getAttribute("height");
         int length = (Integer) request.getSession().getAttribute("length");
         int width = (Integer) request.getSession().getAttribute("width");
         
-        Inquiry inquiry = new Inquiry(0, 0, length, width, 0, 0, "fladt", "15", null, null, null, "ny", customer.getEmail(), 1);
+        Inquiry inquiry = new Inquiry(0, height, length, width, 0, 0, "fladt", "15", null, null, null, "ny", customer.getEmail(), 1);
         LogicFacade.SendInquiry(inquiry);
         
         //remove stuff from session
+        request.getSession().removeAttribute("height");
         request.getSession().removeAttribute("length");
         request.getSession().removeAttribute("width");
         
