@@ -13,7 +13,7 @@ package FunctionLayer;
 
 public class CalcTarPaper {
 
-    public static OrderLine flat(double length, double width, Product tarPaper) {
+    public static OrderLine getTarPaperFlatRoof(double length, double width, Product tarPaper) {
 
         double tarPaperOverlay = 100;
 
@@ -31,7 +31,7 @@ public class CalcTarPaper {
 
     
     
-    public static OrderLine pitched(double length, double width, Product tarPaper) {
+    public static OrderLine getTarPaperPitchedRoof(double length, double width, Product tarPaper) {
 
         double tarPaperOverlay = 100;
 
