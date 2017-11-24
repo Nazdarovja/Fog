@@ -156,13 +156,12 @@ VALUES
 ('25X150 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',22770,6000,150,25),
 
 -- rem - hardcoded i java
-('45x195mm.	spærtræ	ubh.','rem',59000,7200,45,295),
+('45x195mm. spærtræ ubh.','rem',59000,7200,45,295),
 
 
 -- spær
-('STORT SPÆR','spær',300000,0,0,0),
-('MELLEM SPÆR','spær',200000,0,0,0),
-('LILLE SPÆR','spær',100000,0,0,0),
+('45x195mm.	spærtræ	ubh. til spær','spær',59000,7200,45,295), -- fladt
+('færdigskåret (byg-selv-spær)','spær',50000,0,0,0), -- rejsning
 
 -- værktøj
 ('SKRUEMASKINE','værktøj',99990,0,0,0),
@@ -170,7 +169,7 @@ VALUES
 ('VATERPAS','værktøj',51900,0,0,0),
 
 -- stolpe, hardcoded i java
-('97x97mm.	trykimp. Stolpe','stolpe',13420,4800,97,97),
+('97x97mm. trykimp. Stolpe','stolpe',13420,4800,97,97),
 
 
 -- skrue
@@ -184,7 +183,7 @@ VALUES
 ('NKT FIRKANT SØM 1,6X25MM VARMFORZINKET','søm',3600,0,0,0),
 
 -- lægte
-('38x73mm.	Lægte	ubh.', 'lægte', 69930, 5400, 38, 73),
+('38x73mm. Lægte ubh.', 'lægte', 69930, 5400, 38, 73),
 
 -- tagpap
 ('ICOPAL BASE 411 P 1X8M', 'tagpap', 84900, 8000, 1000, 0),
