@@ -12,8 +12,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <div style="width: 100%; text-align: center;">
         <h1>Hejsa, her kan du bygge din egen sindsyge carport!</h1>
         <a href="FrontController?command=QuickBuild">
-            <img src="http://www.gartenhausportal.com/wp-content/uploads/2012/06/gartenhaus-mit-carport.jpg"></a>
+            <img src="http://www.gartenhausportal.com/wp-content/uploads/2012/06/gartenhaus-mit-carport.jpg" width="75%" height="600px" ></a>
+        </div>
     </body>
 </html>

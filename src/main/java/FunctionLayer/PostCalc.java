@@ -40,7 +40,7 @@ public class PostCalc {
 
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         height += 90;
-
+        post.setLength(height);
         return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
@@ -73,7 +73,7 @@ public class PostCalc {
 
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         height += 90;
-
+        post.setLength(height);
         return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
