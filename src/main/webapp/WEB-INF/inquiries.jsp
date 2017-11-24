@@ -22,21 +22,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1 style="padding-left: 42%">All Inquiries</h1>
+        <h1>All Inquiries</h1>
         
         <% List<Inquiry> inquiries = (List<Inquiry>)request.getAttribute("inquiries"); %>
         <% List<Customer> customers = (List<Customer>)request.getAttribute("customers"); %>
         <% int j = 0; %>
-        <div class="container" style="background-color: grey; margin-bottom: 40px">
-            <input type="text" name="searchword1" style="margin: 10px">
-            <input type="text" name="searchword2" style="margin: 10px">
-            
-            <select name="sortby" size="1">
-                <option>status</option>
-                <option>customer</option>
-                <option>employee</option>
-            </select>
-        </div>
         
         <div class="container">
             <div class="col-lg-6">
@@ -48,48 +38,36 @@
                           <th>CommentEmployee</th>
                           <th>Period</th>
                           <th>Status</th>
-                          <th>Customer phone</th>
+                          <th>Customer Email</th>
+                          <th>Customer Phone</th>
                           <th>Id_employee</th>
+                          <th>Stykliste</th>
                         </tr>
                     </thead>
                     <% for (Inquiry i : inquiries) { %>
                     <tr>
-                        <td> <%= i.getId() %> </td>
-                        <td> <%= i.getCommentCustomer() %> </td>
-                        <td> <%= i.getCommentEmployee() %> </td>
-                        <td> <%= i.getPeriod() %> </td>
-                        <td> <%= i.getStatus() %> </td>
-                        <td> <%= customers.get(j).getPhonenumber() %> </td>
-                        <td> <%= i.getId_employee() %> </td>
+                        <form name="bom" action="FrontController" method="POST">
+                            <input type="hidden" name="command" value="viewbom">
+                            <input type="hidden" name="id" value="<%= i.getId() %>">
+                            
+                            <td> <%= i.getId() %> </td>
+                            <td> <%= i.getCommentCustomer() %> </td>
+                            <td> <%= i.getCommentEmployee() %> </td>
+                            <td> <%= i.getPeriod() %> </td>
+                            <td> <%= i.getStatus() %> </td>
+                            <td> <%= i.getEmail() %> </td>
+                            <td> <%= customers.get(j).getPhonenumber() %> </td>
+                            <td> <%= i.getId_employee() %> </td>
+                            
+                            <td> <input type="submit" value="View" />
+                        </form>
                     </tr>
                     <% j++; %>
                     <% } %>
                 </table>
             </div>
-            <div class="col-lg-4" style="margin-left: 150px">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                          <th>Info</th>
-                          <th>Updates</th>
-                          <th>When</th>
-                          <th>A</th>
-                        </tr>
-                    </thead>
-                    <tr>
-                        <td> row </td>
-                        <td> in </td>
-                        <td> the </td>
-                        <td> tabel </td>
-                    </tr>
-                    <tr>
-                        <td> to </td>
-                        <td> the </td>
-                        <td> left is clicked, </td>
-                        <td> with js </td>
-                    </tr>
-                </table>
-                <input type="submit" value="Se stykliste" name="inquiry" />
+            <div class="col-lg-6">
+                
             </div>
         </div>
     </body>

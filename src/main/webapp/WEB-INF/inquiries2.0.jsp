@@ -4,6 +4,7 @@
     Author     : ML
 --%>
 
+<%@page import="FunctionLayer.Customer"%>
 <%@page import="java.util.List"%>
 <%@page import="FunctionLayer.Inquiry"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,10 +22,21 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1>All Inquiries</h1>
+        <h1 style="padding-left: 42%">All Inquiries</h1>
         
         <% List<Inquiry> inquiries = (List<Inquiry>)request.getAttribute("inquiries"); %>
-        
+        <% List<Customer> customers = (List<Customer>)request.getAttribute("customers"); %>
+        <% int j = 0; %>
+        <div class="container" style="background-color: grey; margin-bottom: 40px">
+            <input type="text" name="searchword1" style="margin: 10px">
+            <input type="text" name="searchword2" style="margin: 10px">
+            
+            <select name="sortby" size="1">
+                <option>status</option>
+                <option>customer</option>
+                <option>employee</option>
+            </select>
+        </div>
         
         <div class="container">
             <div class="col-lg-6">
@@ -32,43 +44,52 @@
                     <thead>
                         <tr>
                           <th>ID</th>
-                          <th>CarportHeight</th>
-                          <th>CarportLength</th> 
-                          <th>CarportWidth</th>
-                          <th>ShackWidth</th>
-                          <th>ShackLength</th>
-                          <th>RoofType</th>
-                          <th>Angle</th>
                           <th>CommentCustomer</th>
                           <th>CommentEmployee</th>
                           <th>Period</th>
                           <th>Status</th>
-                          <th>Email</th>
+                          <th>Customer phone</th>
                           <th>Id_employee</th>
                         </tr>
                     </thead>
                     <% for (Inquiry i : inquiries) { %>
                     <tr>
                         <td> <%= i.getId() %> </td>
-                        <td> <%= i.getCarportHeight() %> </td>
-                        <td> <%= i.getCarportLength() %> </td>
-                        <td> <%= i.getCarportWidth() %> </td>
-                        <td> <%= i.getShackWidth() %> </td>
-                        <td> <%= i.getShackLength() %> </td>
-                        <td> <%= i.getRoofType() %> </td>
-                        <td> <%= i.getAngle() %> </td>
                         <td> <%= i.getCommentCustomer() %> </td>
                         <td> <%= i.getCommentEmployee() %> </td>
                         <td> <%= i.getPeriod() %> </td>
                         <td> <%= i.getStatus() %> </td>
-                        <td> <%= i.getEmail() %> </td>
+                        <td> <%= customers.get(j).getPhonenumber() %> </td>
                         <td> <%= i.getId_employee() %> </td>
                     </tr>
+                    <% j++; %>
                     <% } %>
                 </table>
             </div>
-            <div class="col-lg-6">
-                
+            <div class="col-lg-4" style="margin-left: 150px">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                          <th>Info</th>
+                          <th>Updates</th>
+                          <th>When</th>
+                          <th>A</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td> row </td>
+                        <td> in </td>
+                        <td> the </td>
+                        <td> tabel </td>
+                    </tr>
+                    <tr>
+                        <td> to </td>
+                        <td> the </td>
+                        <td> left is clicked, </td>
+                        <td> with js </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Se stykliste" name="inquiry" />
             </div>
         </div>
     </body>
