@@ -32,8 +32,11 @@ public class Calculator {
 
         }
 
+        
+        
         return bom;
     }
+
 
     private static Product getChosenProduct(String productName, List<Product> products) {
         Product product = null;
@@ -43,5 +46,22 @@ public class Calculator {
             }
         }
         return product;
+
     }
+    
+    private static double calcRoofWidth(int carportWidth, int angle){
+        double halfWidth = carportWidth / 2;
+        double radiantAngle = Math.toRadians(angle);
+        double carportHeight =  halfWidth / Math.cos(radiantAngle);
+        
+        return calcHypotenuse(carportWidth,carportHeight);
+    }
+    
+    private static double calcHypotenuse(double a, double b){
+        double aPow = Math.pow(a, 2);
+        double bPow = Math.pow(b, 2);
+        return Math.sqrt(aPow+bPow);
+    }
+    
+
 }
