@@ -21,6 +21,7 @@ public class viewBoM extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         int id = Integer.parseInt(request.getParameter("id"));
+        
         Inquiry inquiry = LogicFacade.viewInquiry(id);
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
         

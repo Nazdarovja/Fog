@@ -41,13 +41,31 @@
                     </tr>
                 </thead>
                 <% for (OrderLine i : bom.getMaterials()) { %>
-                <tr>
-                    <td> name </td>
-                    <td> <%= i.getProduct().getName() %> </td>
+                    <td> 
+                        <% if (i.getProduct() != null) { %>
+                        <%= i.getProductName() %>
+                        <% } else {%>
+                        product
+                        <% } %>
+                    </td>
+                    <td> 
+                    <% if (i.getProduct() != null) { %>
+                        <%= i.getProductCategory() %>
+                        <% } else {%>
+                        category
+                        <% } %>
+                    </td>
                     <td> <%= i.getQuantity() %> </td>
                     <td> <%= i.getAmountType() %> </td>
-                    <td> price </td>
+                    <td> 
+                    <% if (i.getProduct() != null) { %>
+                        <%= i.getOrderLinePrice() %> 
+                        <% } else {%>
+                        order line price
+                        <% } %>
+                    </td>
                     <td> <%= i.getUsabilityComment() %> </td>
+                    
                 </tr>  
                 <% } %>
             </table>
