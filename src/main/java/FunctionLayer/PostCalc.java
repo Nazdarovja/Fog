@@ -5,20 +5,13 @@
  */
 package FunctionLayer;
 
-import java.util.List;
 
 /**
  * @author Stanislav
  */
 public class PostCalc {
 
-    public static OrderLine getPostsFlatRoof(int length, int width, int height, String postName, List<Product> products) throws Exception {
-        Product post = null;
-        for (Product p : products) {
-            if (p.getName().equals(postName)) {
-                post = p;
-            }
-        }
+    public static OrderLine getPostsFlatRoof(int length, int width, int height, Product post) throws Exception {
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
@@ -51,13 +44,8 @@ public class PostCalc {
         return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
-    public static OrderLine getPostsPitchedRoof(int length, int width, int height, String postName, List<Product> products) throws Exception {
-        Product post = null;
-        for (Product p : products) {
-            if (p.getName().equals(postName)) {
-                post = p;
-            }
-        }
+    public static OrderLine getPostsPitchedRoof(int length, int width, int height, Product post) throws Exception {
+
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
         int rowsOfPoles = 2;

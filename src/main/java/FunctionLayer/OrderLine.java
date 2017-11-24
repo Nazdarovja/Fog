@@ -14,7 +14,7 @@ public class OrderLine {
     Product product;
     int length;
     int quantity;
-    // piece, roll, pack
+    // piece, roll, pack, set (stk, rulle, pakke, sæt)
     String amountType;
     String usabilityComment;
 

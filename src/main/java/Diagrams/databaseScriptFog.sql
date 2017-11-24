@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
   `status` ENUM('ny', 'behandles', 'behandlet') NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `id_employee` INT NULL,
+  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `email_idx` (`email` ASC),
   INDEX `id_ansat_idx` (`id_employee` ASC),
@@ -97,8 +98,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fog`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte') NOT NULL,
+  `name` VARCHAR(200) NOT NULL,
+  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade') NOT NULL,
   `price` LONG NOT NULL,
   `length` INT NULL,
   `width` INT NULL,
@@ -144,19 +145,75 @@ VALUES
 (320,570,410,null,null,'fladt',null,null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
 
 -- --------------------------------------------------------------------------
--- CATEGORIES = 'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm' 
+-- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade'
 -- --------------------------------------------------------------------------
 INSERT INTO
 Product (name,category,price,length,width,height)
 VALUES
-('97x97 TRYKIMPR.','stolpe',2995,1000,97,97),
-('45x195 SPÆRTRÆ UBH.','rem',1995,1000,45,195),
-('spær','spær',500,200,10,50),
-('bræt','bræt',5,100,50,35),
-('skrue','skrue',1.5,2,0.5,3),
-('søm','søm',0.5,2,0.5,3),
-('hammer','værktøj',240,20,5,7),
-('38x73 taglægte T1', 'lægte', 50, 1000, 38, 73);
+-- bræt
+('25X200 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',29970,6000,200,25),
+('25X175 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',26370,6000,175,25),
+('25X150 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',22770,6000,150,25),
+
+-- rem - hardcoded i java
+('45x195mm. spærtræ ubh.','rem',59000,7200,45,295),
+
+
+-- spær
+('45x195mm.	spærtræ	ubh. til spær','spær',59000,7200,45,295), -- fladt
+('færdigskåret (byg-selv-spær)','spær',50000,0,0,0), -- rejsning
+
+-- værktøj
+('SKRUEMASKINE','værktøj',99990,0,0,0),
+('HÅNDSAV','værktøj',15900,0,0,0),
+('VATERPAS','værktøj',51900,0,0,0),
+
+-- stolpe, hardcoded i java
+('97x97mm. trykimp. Stolpe','stolpe',13420,4800,97,97),
+
+
+-- skrue
+('NKT SPUN+ SKRUE UHJ 3X25MM TORX ELFORZINKET','skrue',360,0,0,0),
+('NKT FRANSK SKRUE 8X120MM VFZ 50 STK/PK','skrue',2990,0,0,0),
+('NKT SPUN+ SKRUE UHJ 3,5X30MM TORX ELFORZINKET','skrue',3600,0,0,0),
+
+-- søm
+('NKT FIRKANT SØM 1,2X20MM BLANKE','søm',2700,0,0,0),
+('NKT FIRKANT SØM 1,6X25MM BLANKE','søm',2700,0,0,0),
+('NKT FIRKANT SØM 1,6X25MM VARMFORZINKET','søm',3600,0,0,0),
+
+-- lægte
+('38x73mm. Lægte ubh.', 'lægte', 69930, 5400, 38, 73),
+
+-- tagpap
+('ICOPAL BASE 411 P 1X8M', 'tagpap', 84900, 8000, 1000, 0),
+('ICOPAL TOP 310 G SORT 0,6X7,5M SKURPAP', 'tagpap', 29900, 7500, 600, 0),
+('ICOPAL TOP 500P SORT 1X5M', 'tagpap', 59900, 5000, 1000, 0),
+
+-- stern
+('25X125 MM STERN OVERBRÆDT TRYKIMP. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
+('25X125 MM STERN MELLEMBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
+('25X125 MM STERN UNDERBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
+
+-- vindskede
+('22X195 VINDSKEDE M/RU FREMSIDE GRAN US/VTA NTR-GRAN IMPR. - 540 CM','vindskede', 23193, 5400, 195, 22),
+('22X195 VINDSKEDE M/RU FREMSIDE GRAN US/VTA NTR-GRAN IMPR. - 480 CM','vindskede', 20616, 4800, 195, 22),
+('22X195 VINDSKEDE M/RU FREMSIDE GRAN US/VTA NTR-GRAN IMPR. - 420 CM','vindskede', 18039, 4200, 195, 22),
+
+-- beklædning
+('19X100 MM VTA TRYKIMPR. NTR/AB 480 CM','beklædning', 8136, 4800, 100, 19),
+('19X100 MM VTA TRYKIMPR. NTR/AB 420 CM','beklædning', 7119, 4200, 100, 19),
+('19X100 MM VTA TRYKIMPR. NTR/AB 360 CM','beklædning', 6103, 3600, 100, 19),
+
+-- tagsten
+('RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
+('RØDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM','tagsten', 8995, 0, 0, 0),  -- ingen mål defineret
+
+-- tagplade
+('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','tagplade', 24900, 1100, 610, 1),
+('FASTLOCK UNI KLAR 6,0M','tagplade', 233970, 60000, 300, 1),  -- ingen width mål defineret
+('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

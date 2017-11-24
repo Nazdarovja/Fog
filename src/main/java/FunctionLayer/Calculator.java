@@ -20,15 +20,67 @@ public class Calculator {
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
 
+//        stolpe, rem,  spær, lægte,             algortime til hypotenuse, tagpap/tagsten
         // FLAT ROOF ALGORITHM        
         if (inquiry.getRoofType().equals("fladt")) {
-            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), "97x97 TRYKIMPR.", products));
-            // PITCHED ROOF ALHORITHM
+            System.out.println("FLAT");
+            //post / stolpe
+            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97mm. trykimp. Stolpe", products)));
+            //topplate / rem
+            bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
+            //raft / spær
+            bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh. til spær", products)));
+            //tarPaper / tagpap
+            bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenProduct("ICOPAL BASE 411 P 1X8M", products)));
+            
+        // PITCHED ROOF ALHORITHM
         } else {
-            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), "97x97 TRYKIMPR.", products));
-
+            //post / stolpe
+            System.out.println("PITCHED");
+            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97mm. trykimp. Stolpe", products)));
+            //topplate / rem
+            bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
+            //raft / spær
+            bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenProduct("færdigskåret (byg-selv-spær)", products)));
+            //lath / lægte
+            bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())), getChosenProduct("38x73mm. Lægte ubh.", products)));
+            bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenProduct("38x73mm. Lægte ubh.", products)));
+            //tarPaper / tagpap
+            
+            //Bricks/rooftiles /tagsten
+            bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())),getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
         }
 
+        
+        
         return bom;
     }
+
+
+    private static Product getChosenProduct(String productName, List<Product> products) {
+        Product product = null;
+        for (Product p : products) {
+            if (p.getName().equalsIgnoreCase(productName)) {
+                product = p;
+            }
+        }
+        return product;
+
+    }
+    
+    private static double calcRoofWidth(int carportWidth, int angle){
+        double halfWidth = carportWidth / 2;
+        double radiantAngle = Math.toRadians(angle);
+        double carportHeight =  halfWidth / Math.cos(radiantAngle);
+        
+        return calcHypotenuse(carportWidth,carportHeight);
+    }
+    
+    private static double calcHypotenuse(double a, double b){
+        double aPow = Math.pow(a, 2);
+        double bPow = Math.pow(b, 2);
+        return Math.sqrt(aPow+bPow);
+    }
+    
+
 }

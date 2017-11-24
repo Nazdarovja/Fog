@@ -18,10 +18,10 @@ public class CalcTarPaper {
         double tarPaperOverlay = 100;
 
         //(number of) rows of rolls needed
-        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+        double widthRollsNeeded = width / (tarPaper.getWidth() - tarPaperOverlay);
 
         //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+        double rollsForAllRows = widthRollsNeeded * (length / tarPaper.getLength());
 
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows);
@@ -36,10 +36,10 @@ public class CalcTarPaper {
         double tarPaperOverlay = 100;
 
         //(number of) rows of rolls needed
-        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
+        double widthRollsNeeded = width / (tarPaper.getWidth() - tarPaperOverlay);
 
         //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
+        double rollsForAllRows = widthRollsNeeded * (length / tarPaper.getLength());
 
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows) * 2;
