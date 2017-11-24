@@ -22,13 +22,13 @@ public class Calculator {
 
         // FLAT ROOF ALGORITHM        
         if (inquiry.getRoofType().equals("fladt")) {
-            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97 TRYKIMPR.", products)));
-            bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenProduct("45x195 SPÆRTRÆ UBH.", products)));
+            bom.addOrderLine(PostCalc.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97mm. trykimp. Stolpe", products)));
+            bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
             
             // PITCHED ROOF ALHORITHM
         } else {
-            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97 TRYKIMPR.", products)));
-            bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenProduct("45x195 SPÆRTRÆ UBH.", products)));
+            bom.addOrderLine(PostCalc.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), getChosenProduct("97x97mm. trykimp. Stolpe", products)));
+            bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
 
         }
 
