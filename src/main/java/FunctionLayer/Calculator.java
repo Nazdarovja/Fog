@@ -29,6 +29,26 @@ public class Calculator {
 
         }
 
+        
+        
         return bom;
+    }
+    
+    private static double calcRoofWidth(int carportWidth, int angle){
+        double halfWidth = carportWidth / 2;
+        double radiantAngle = Math.toRadians(angle);
+        double carportHeight =  halfWidth / Math.cos(radiantAngle);
+        
+        return calcHypotenuse(carportWidth,carportHeight);
+    }
+    
+    private static double calcHypotenuse(double a, double b){
+        double aPow = Math.pow(a, 2);
+        double bPow = Math.pow(b, 2);
+        return Math.sqrt(aPow+bPow);
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(calcRoofWidth(600,45));
     }
 }
