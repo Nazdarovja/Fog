@@ -14,14 +14,14 @@ public class OrderLine {
     Product product;
     int length;
     int quantity;
-    // piece, roll, pack
+    // piece, roll, pack, set (stk, rulle, pakke, sæt)
     String amountType;
     String usabilityComment;
 
 
 
     public long getOrderLinePrice() {
-        return (this.product.getPrice() * quantity);
+        return ((this.product.getPrice() * quantity)/100);
     }
 
     public Product getProduct() {
