@@ -29,16 +29,13 @@
                       <th>Usability Comment</th>
                     </tr>
                 </thead>
-                <% for (OrderLine i : bom.getMaterials()) { %>
                 <tr>
-                    <td> <%= i.getProduct().getName() %> </td>
-                    <td> <%= i.getProduct().getCategory() %> </td>
-                    <td> <%= i.getQuantity() %> </td>
-                    <td> <%= i.getAmountType() %> </td>
-                    <td> <%= i.getOrderLinePrice() %> </td>
-                    <td> <%= i.getUsabilityComment() %> </td>
+                    
+                    <td> <%= bom.getMaterials().get(0).getQuantity() %> </td>
+                    <td> <%= bom.getMaterials().get(0).getAmountType() %> </td>
+                    <td> <%= bom.getMaterials().get(0).getOrderLinePrice() %> </td>
+                    <td> <%= bom.getMaterials().get(0).getUsabilityComment() %> </td>
                 </tr>
-                <% } %>
             </table>
     </body>
 </html>

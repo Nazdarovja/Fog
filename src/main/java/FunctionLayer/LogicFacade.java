@@ -60,4 +60,8 @@ public class LogicFacade {
         
         return list;
     }
+    
+    public static Inquiry viewInquiry(int id) throws Exception{
+        return InquiryMapper.inquiryById(id);
+    }
 }

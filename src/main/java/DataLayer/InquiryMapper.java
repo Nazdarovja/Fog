@@ -125,5 +125,50 @@ public class InquiryMapper {
 
     }
     
+    public static Inquiry inquiryById(int id) throws Exception{
+        Inquiry i;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * from Inquiry WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                i = new Inquiry(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getInt(4),
+                        rs.getInt(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getDate(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getInt(14));
+                return i;
+            } else {
+                throw new Exception(" no inquiry with specified id ");
+            }
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+
+    }
+    
     
 }
