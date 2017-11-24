@@ -10,38 +10,21 @@ package FunctionLayer;
  * @author Mellem
  */
 public class CalcRafter {
-    public static OrderLine getRafterFlatRoof(double length, double width, Product tarPaper) {
+    public static OrderLine getRafterFlatRoof(double length, double width, Product raft) {
+        int quantity = 1;
+        quantity = (int) (length/ 55);
 
-        double tarPaperOverlay = 100;
-
-        //(number of) rows of rolls needed
-        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
-
-        //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
-
-        //rounding up
-        int result = (int) Math.ceil(rollsForAllRows);
-
-        return new OrderLine(tarPaper, 0, result, "stk.", "rafter comment text");
+        return new OrderLine(raft, 0, quantity, "stk.", "Spær");
     }
 
 
     
-    public static OrderLine getRafterPitchedRoof(double length, double width, Product tarPaper) {
+    public static OrderLine getRafterPitchedRoof(double length, double width, Product raft) {
 
-        double tarPaperOverlay = 100;
+        int quantity = 1;
+        quantity = (int) (length/ 89);
 
-        //(number of) rows of rolls needed
-        double widthRollsNeeded = width / ((tarPaper.getWidth() * 10) - tarPaperOverlay);
-
-        //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (length / (tarPaper.getLength() * 10));
-
-        //rounding up
-        int result = (int) Math.ceil(rollsForAllRows) * 2;
-
-        return new OrderLine(tarPaper, 0, result, "sæt", "rafter comment text");
+        return new OrderLine(raft, 0, quantity, "stk.", "Spær");
     }
     
     
