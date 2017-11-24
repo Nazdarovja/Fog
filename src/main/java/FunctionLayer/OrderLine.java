@@ -71,5 +71,13 @@ public class OrderLine {
         this.amountType = amountType;
         this.usabilityComment = usabilityComment;
     }
+    
+    public String getProductName(){
+        return product.getName();
+    }
+    
+    public String getProductCategory(){
+        return product.getCategory();
+    }
 
 }
