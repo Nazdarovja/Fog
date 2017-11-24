@@ -13,7 +13,8 @@
         <title>Register Page</title>
     </head>
     <body>
-        <h1 class="col-sm-12" style="text-align: center">Register</h1>
+        <h1 class="row" style="text-align: center">Register</h1>
+        <div class="row">
         <div class="col-sm-5"></div>
         <div class="col-sm-2">
         <form class="form-group" name="register" action="FrontController" method="POST">
@@ -46,6 +47,7 @@
         </form>
             </div>
         <div class="col-sm-5"></div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

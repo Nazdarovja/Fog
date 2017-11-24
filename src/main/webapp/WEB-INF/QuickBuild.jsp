@@ -33,95 +33,121 @@
 
         </div>
         <% } %>
-        <div id="measurements" class="col-md-6 col-md-offset-3">
 
-            <form name="order" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="calculate">
-                <div class="col-sm-2">
-                    Vælg længde<br>
-                    <select class="form-control" name="length">
-                        <option value=240>240</option>
-                        <option value=270>270</option>
-                        <option value=300>300</option>
-                        <option value=330>330</option>
-                        <option value=360>360</option>
-                        <option value=390>390</option>
-                        <option value=420>420</option>
-                        <option value=450>450</option>
-                        <option value=480>480</option>
-                        <option value=510>510</option>
-                        <option value=540>540</option>
-                        <option value=570>570</option>
-                        <option value=600>600</option>
-                        <option value=630>630</option>
-                        <option value=660>660</option>
-                        <option value=690>690</option>
-                        <option value=720>720</option>
-                        <option value=750>750</option>
+        <div id="measurements" >
+            <div class="row">
+
+                <form name="order" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="calculate">
+                    <div class="col-sm-2 col-md-offset-2">
+                        Vælg længde<br>
+                        <select class="form-control" name="length">
+                            <option value=240>240</option>
+                            <option value=270>270</option>
+                            <option value=300>300</option>
+                            <option value=330>330</option>
+                            <option value=360>360</option>
+                            <option value=390>390</option>
+                            <option value=420>420</option>
+                            <option value=450>450</option>
+                            <option value=480>480</option>
+                            <option value=510>510</option>
+                            <option value=540>540</option>
+                            <option value=570>570</option>
+                            <option value=600>600</option>
+                            <option value=630>630</option>
+                            <option value=660>660</option>
+                            <option value=690>690</option>
+                            <option value=720>720</option>
+                            <option value=750>750</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        Vælg bredde<br>
+                        <select class="form-control" name="width">
+                            <option value=240>240</option>
+                            <option value=270>270</option>
+                            <option value=300>300</option>
+                            <option value=330>330</option>
+                            <option value=360>360</option>
+                            <option value=390>390</option>
+                            <option value=420>420</option>
+                            <option value=450>450</option>
+                            <option value=480>480</option>
+                            <option value=510>510</option>
+                            <option value=540>540</option>
+                            <option value=570>570</option>
+                            <option value=600>600</option>
+                            <option value=630>630</option>
+                            <option value=660>660</option>
+                            <option value=690>690</option>
+                            <option value=720>720</option>
+                            <option value=750>750</option>
+                            <option value=780>780</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-2">
+                        Vælg højde<br>
+                        <select class="form-control" name="height">
+                            <option value=210>210</option>
+                            <option value=240>240</option>
+                            <option value=270>270</option>
+                        </select>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2 col-md-offset-3">
+                    Vælg tagtype<br>
+                    <select class="form-control" name="roofType">
+                        <option value="rejsning">rejsning</option>
+                        <option value="fladt">fladt</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    Vælg bredde<br>
-                    <select class="form-control" name="width">
-                        <option value=240>240</option>
-                        <option value=270>270</option>
-                        <option value=300>300</option>
-                        <option value=330>330</option>
-                        <option value=360>360</option>
-                        <option value=390>390</option>
-                        <option value=420>420</option>
-                        <option value=450>450</option>
-                        <option value=480>480</option>
-                        <option value=510>510</option>
-                        <option value=540>540</option>
-                        <option value=570>570</option>
-                        <option value=600>600</option>
-                        <option value=630>630</option>
-                        <option value=660>660</option>
-                        <option value=690>690</option>
-                        <option value=720>720</option>
-                        <option value=750>750</option>
-                        <option value=780>780</option>
+                    Vælg hældning<br>
+                    <select class="form-control" name="angle">
+                        <option value=0>0°</option>
+                        <option value=15>15°</option>
+                        <option value=20>20°</option>
+                        <option value=25>25°</option>
+                        <option value=30>30°</option>
+                        <option value=35>35°</option>
+                        <option value=40>40°</option>
+                        <option value=45>45°</option>
                     </select>
                 </div>
 
-                <div class="col-sm-2">
-                    Vælg højde<br><br>
-                    <select class="form-control" name="height">
-                        <option value=210>210</option>
-                        <option value=240>240</option>
-                        <option value=270>270</option>
-                    </select>
-                </div>
-
-                <div class="col-sm-3 well">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2 well">
                     <% if (request.getSession().getAttribute("inquiry") != null) { %>
                     <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
-                    TOTAL PRIS FOR STOLPER : <br>
+                    TOTAL PRIS: <br>
                     <%= inquiry.getBom().getTotalPrice()%>
                     <Br>
                     <%}%>
 
                     <input class="btn btn-default" type="submit" value="Calculate"/>
                 </div>
+                </form>
+            </div>
+
+            <!--if user is logged in and has made a calculation-->
+            <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
+            <p>Send forespørgsel til Fog?</p>
+
+            <form name="sendinquiry" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="sendinquiry">
+                <input onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
             </form>
-        </div>
 
-        <!--if user is logged in and has made a calculation-->
-        <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
-        <p>Send forespørgsel til Fog?</p>
+            <% }%>
 
-        <form name="sendinquiry" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="sendinquiry">
-            <input onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
-        </form>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-        <% }%>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <script src="Scripts/QuickBuildJS.js" type="text/javascript"></script>
+            <script src="Scripts/QuickBuildJS.js" type="text/javascript"></script>
     </body>
 </html>
