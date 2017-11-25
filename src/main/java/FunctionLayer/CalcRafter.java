@@ -10,20 +10,22 @@ package FunctionLayer;
  * @author Mellem
  */
 public class CalcRafter {
-    public static OrderLine getRafterFlatRoof(double length, double width, Product raft) {
+    public static OrderLine getRafterFlatRoof(int length, int width, Product raft) {
         int quantity = 1;
-        quantity = (int) (length/ 55);
+        quantity += length/ 55;
 
+        raft.setLength(width);
         return new OrderLine(raft, 0, quantity, "stk.", "Spær");
     }
 
 
     
-    public static OrderLine getRafterPitchedRoof(double length, double width, Product raft) {
+    public static OrderLine getRafterPitchedRoof(int length, int width, Product raft) {
 
         int quantity = 1;
-        quantity = (int) (length/ 89);
+        quantity += length/ 89;
 
+        raft.setLength(width);
         return new OrderLine(raft, 0, quantity, "stk.", "Spær");
     }
     
