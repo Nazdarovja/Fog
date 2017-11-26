@@ -38,11 +38,11 @@ public class CalcTarPaperTest {
     }
 
     @Test
-    public void testGetTarPaperFlatRoof() {
-        double length = 5000;
-        double width = 4000;
+    public void testGetTarPaperFlatRoof() throws Exception {
+        double length = 500;
+        double width = 400;
         int expFlatQty = 5;  //4 rows, full fill, minus overlay (+1 extra).
-        Product tagpap = new ProductPerMeterPrice(0, "ICOPAL SELVKLÆBER TOP SORT 1X5", "tagpap", 69900, 5000, 1000, 0);
+        Product tagpap = DataLayer.ProductMapper.getSingleProduct("tagpap", "ICOPAL TOP 500P SORT 1X5M");
         OrderLine flatResult = CalcTarPaper.getTarPaperFlatRoof(length, width, tagpap);
         assertNotNull(flatResult);
         assertEquals(expFlatQty, flatResult.quantity);
@@ -51,11 +51,11 @@ public class CalcTarPaperTest {
     }
 
     @Test
-    public void testGetTarPaperPitchedRoof() {
-        double length = 5000;
-        double width = 4000;
+    public void testGetTarPaperPitchedRoof() throws Exception {
+        double length = 500;
+        double width = 400;
         int expPitchedQty = 10;  //4 rows, full fill, minus overlay (+1 extra) * 2 roof halves
-        Product tagpap = new ProductPerMeterPrice(0, "ICOPAL SELVKLÆBER TOP SORT 1X5", "tagpap", 69900, 5000, 1000, 0);
+        Product tagpap = DataLayer.ProductMapper.getSingleProduct("tagpap", "ICOPAL TOP 500P SORT 1X5M");
         OrderLine pitchedResult = CalcTarPaper.getTarPaperPitchedRoof(length, width, tagpap);
         assertNotNull(pitchedResult);
         assertEquals(expPitchedQty, pitchedResult.quantity);
