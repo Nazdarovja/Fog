@@ -5,13 +5,21 @@
  */
 package FunctionLayer;
 
+import DataLayer.ProductMapper;
+import java.util.List;
 
 /**
  * @author Stanislav
  */
-public class PostCalc {
+public class CalcPost {
 
-    public static OrderLine getPostsFlatRoof(int length, int width, int height, Product post) throws Exception {
+    public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) throws Exception {
+        // +90cm to burry the post
+        height += 90;
+        //TO MM TO MATCH DB MESURAMENTS
+        height *= 10;
+
+        Product post = getCorrectLengthProduct(height, posts);
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
@@ -39,12 +47,17 @@ public class PostCalc {
         quantity *= rowsOfPoles;
 
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
-        height += 90;
-        post.setLength(height);
-        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
+        return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
-    public static OrderLine getPostsPitchedRoof(int length, int width, int height, Product post) throws Exception {
+    public static OrderLine getPostsPitchedRoof(int length, int width, int height, List<Product> posts) throws Exception {
+
+        // +90cm to burry the post
+        height += 90;
+        //TO MM TO MATCH DB MESURAMENTS
+        height *= 10;
+
+        Product post = getCorrectLengthProduct(height, posts);
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
@@ -71,32 +84,21 @@ public class PostCalc {
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
         quantity *= rowsOfPoles;
 
-        // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
-        height += 90;
-        post.setLength(height);
-        return new OrderLine(post, height, quantity, "stk", "Stolper nedgraves 90 cm. i jord");
+        return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
-    public static void main(String[] args) {
-        int quantity = 2;
-        int rowsOfPoles = 2;
-        int length = 1200;
-        int width = 930;
+    private static Product getCorrectLengthProduct(int height, List<Product> products) {
+        Product matchingLengthProduct = null;
 
-        if (width >= 620) {
-            rowsOfPoles += (width / 310) - 1;
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            // if the products is longer than product available, the product is set to the largest in stock
+            // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
+            // in regular cases it will chose the appropriate size product for the length
+            if (height % p.getLength() >= 1 || i == products.size()) {
+                matchingLengthProduct = products.get(i);
+            }
         }
-        System.out.println(rowsOfPoles);
-
-        //HOW MANY POLES PR. ROW
-        System.out.println((length / 300) - 1);
-
-        if (length >= 600) {
-            quantity += (length / 300) - 1;
-        }
-
-        quantity *= rowsOfPoles;
-
-        System.out.println(quantity);
+        return matchingLengthProduct;
     }
 }

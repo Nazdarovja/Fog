@@ -27,7 +27,7 @@ public class CalcTopPlateTest {
         System.out.println("getTopPlates");
         int length = 240;
         int width = 750;
-        Product p = new ProductPerMeterPrice(1, "45x195 SPÆRTRÆ UBH.", "rem", 1995, 1000, 45, 195);
+        Product p = new Product(1, "45x195 SPÆRTRÆ UBH.", "rem", 1995, 1000, 45, 195);
         int expResult = 3;
         OrderLine result = CalcTopPlate.getTopPlatesFlatRoof(length, width, p);
         assertTrue(expResult == result.quantity);

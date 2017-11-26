@@ -6,9 +6,6 @@
 package DataLayer;
 
 import FunctionLayer.Product;
-import FunctionLayer.ProductPerMeterPrice;
-import FunctionLayer.ProductPerPiece;
-import FunctionLayer.ProductPerPrice;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,21 +45,12 @@ public class ProductMapper {
                     String name = rs.getString("name");
                     String cat = rs.getString("category");
                     long price = rs.getLong("price");
-
-                    if (cat.equals("værktøj")) {
-                        productList.add(new ProductPerPrice(id, name, cat, price));
-                    if (cat.equals("spær") || cat.equals("lægte")){
-                        productList.add(new ProductPerPiece(name, cat, price, 0, 0, 0));
-                    }
-                            
-                    } else {
-                        int length = rs.getInt("length");
-                        int width = rs.getInt("width");
-                        int height = rs.getInt("height");
-                        productList.add(new ProductPerMeterPrice(id, name, cat, price, length, width, height));
-                    }
-
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    productList.add(new Product(id, name, cat, price, length, width, height));
                 }
+
             } finally {
                 // Always make sure result sets and statements are closed,
                 // and the connection is returned to the pool
@@ -100,17 +88,11 @@ public class ProductMapper {
                 String name = rs.getString("name");
                 String cat = rs.getString("category");
                 long price = rs.getLong("price");
-
-                if (cat.equals("værktøj")) {
-                    product = new ProductPerPrice(id, name, cat, price);
-                } else {
-                    int length = rs.getInt("length");
-                    int width = rs.getInt("width");
-                    int height = rs.getInt("height");
-                    product = new ProductPerMeterPrice(id, name, category, price, length, width, height);
-                }
+                int length = rs.getInt("length");
+                int width = rs.getInt("width");
+                int height = rs.getInt("height");
+                product = new Product(id, name, cat, price, length, width, height);
             }
-
         } finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
