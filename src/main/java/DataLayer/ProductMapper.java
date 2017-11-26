@@ -7,6 +7,7 @@ package DataLayer;
 
 import FunctionLayer.Product;
 import FunctionLayer.ProductPerMeterPrice;
+import FunctionLayer.ProductPerPiece;
 import FunctionLayer.ProductPerPrice;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,6 +51,10 @@ public class ProductMapper {
 
                     if (cat.equals("værktøj")) {
                         productList.add(new ProductPerPrice(id, name, cat, price));
+                    if (cat.equals("spær") || cat.equals("lægte")){
+                        productList.add(new ProductPerPiece(name, cat, price, 0, 0, 0));
+                    }
+                            
                     } else {
                         int length = rs.getInt("length");
                         int width = rs.getInt("width");

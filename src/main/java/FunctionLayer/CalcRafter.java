@@ -10,21 +10,24 @@ package FunctionLayer;
  * @author Mellem
  */
 public class CalcRafter {
-    public static OrderLine getRafterFlatRoof(double length, double width, Product raft) {
-        int quantity = 1;
-        quantity = (int) (length/ 55);
-
-        return new OrderLine(raft, 0, quantity, "stk.", "Spær");
+    public static OrderLine getRafterFlatRoof(int length, int width, Product raft) {
+        
+        int qty = length / 60;
+        if (qty % 60 != 0) qty++;
+        raft.setLength(width);
+        
+        return new OrderLine(raft, length, qty, "stk.", "Spærtræ");
     }
 
 
     
-    public static OrderLine getRafterPitchedRoof(double length, double width, Product raft) {
+    public static OrderLine getRafterPitchedRoof(int length, int width, Product raft) {
 
-        int quantity = 1;
-        quantity = (int) (length/ 89);
-
-        return new OrderLine(raft, 0, quantity, "stk.", "Spær");
+        int qty = length / 60;
+        if (qty % 60 != 0) qty++;
+        raft.setLength(width);
+        
+        return new OrderLine(raft, length, qty, "stk.", "Spær sæt");
     }
     
     
@@ -40,23 +43,4 @@ public class CalcRafter {
         
     }
     
-    
-    //    <option value=240>240</option>
-//                        <option value=270>270</option>
-//                        <option value=300>300</option>
-//                        <option value=330>330</option>
-//                        <option value=360>360</option>
-//                        <option value=390>390</option>
-//                        <option value=420>420</option>
-//                        <option value=450>450</option>
-//                        <option value=480>480</option>
-//                        <option value=510>510</option>
-//                        <option value=540>540</option>
-//                        <option value=570>570</option>
-//                        <option value=600>600</option>
-//                        <option value=630>630</option>
-//                        <option value=660>660</option>
-//                        <option value=690>690</option>
-//                        <option value=720>720</option>
-//                        <option value=750>750</option>
 }

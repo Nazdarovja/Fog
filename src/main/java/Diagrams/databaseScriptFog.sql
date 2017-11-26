@@ -160,7 +160,7 @@ VALUES
 
 
 -- spær
-('45x195mm.	spærtræ	ubh. til spær','spær',59000,7200,45,295), -- fladt
+('45x195mm. spærtræ ubh. til spær','spær',59000,7200,45,295), -- fladt
 ('færdigskåret (byg-selv-spær)','spær',50000,0,0,0), -- rejsning
 
 -- værktøj
