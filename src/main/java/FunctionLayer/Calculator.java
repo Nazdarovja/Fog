@@ -29,7 +29,7 @@ public class Calculator {
             //topplate / rem
             bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
             //raft / spær
-            bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh. til spær", products)));
+            bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenProduct("45x195mm.	spærtræ	ubh. til spær", products)));
             //tarPaper / tagpap
             bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenProduct("ICOPAL BASE 411 P 1X8M", products)));
             

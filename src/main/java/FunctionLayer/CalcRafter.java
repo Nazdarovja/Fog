@@ -15,7 +15,7 @@ public class CalcRafter {
         int qty = length / 60;
         if (qty % 60 != 0) qty++;
         raft.setLength(width);
-        
+
         return new OrderLine(raft, length, qty, "stk.", "Spærtræ");
     }
 

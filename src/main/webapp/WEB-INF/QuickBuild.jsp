@@ -30,7 +30,6 @@
             <p>click <a href="FrontController?command=login">here</a> to log in!</p>
 
             <p>click <a href="FrontController?command=toregister">here</a> to register!</p>
-
         </div>
         <% } %>
 

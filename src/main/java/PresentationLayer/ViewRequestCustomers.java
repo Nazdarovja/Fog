@@ -5,10 +5,9 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.BillOfMaterials;
-import FunctionLayer.Calculator;
-import FunctionLayer.Inquiry;
+import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,18 +15,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class viewBoM extends Command {
+public class ViewRequestCustomers extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int id = Integer.parseInt(request.getParameter("id"));
         
-        Inquiry inquiry = LogicFacade.viewInquiry(id);
-        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        List<Customer> c = LogicFacade.viewCustomersByInquiryStatus("ny");
         
-        request.setAttribute("bom", bom);
+        request.setAttribute("customers", c);
         
-        return "billofmaterials";
+        return "inquiries";
+
     }
     
 }

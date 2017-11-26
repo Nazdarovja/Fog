@@ -13,8 +13,8 @@
     </head>
     <body>
         <h1>Til forespørgelsesoversigten!</h1>
-        <form name="viewinquiries" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="viewinquiries">
+        <form name="viewrequestcustomers" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="viewrequestcustomers">
             <input type="submit" value="Submit">
         </form>
     </body>

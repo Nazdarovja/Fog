@@ -64,4 +64,19 @@ public class LogicFacade {
     public static Inquiry viewInquiry(int id) throws Exception{
         return InquiryMapper.inquiryById(id);
     }
+    
+    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws Exception{
+        return InquiryMapper.LatestInquiryByCustomer(customerEmail);
+    }
+    
+    public static List<Customer> viewCustomersByInquiryStatus(String status) throws Exception{
+        switch(status){
+            case "ny":
+            case "behandles":
+            case "behandlet":
+                return CustomerMapper.customersByInquiryStatus(status);
+            default:
+                throw new Exception(" unknown inquiry status ");
+        }
+    }
 }
