@@ -47,6 +47,7 @@ public class CalcTarPaperTest {
         assertNotNull(flatResult);
         assertEquals(expFlatQty, flatResult.quantity);
         assertEquals(tagpap.getName(), flatResult.product.getName());
+        System.out.println(flatResult.product.getPrice());
 
     }
 

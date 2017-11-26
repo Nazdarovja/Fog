@@ -15,14 +15,11 @@ public class CalcTarPaper {
 
         double lengthInMM = length * 10;
         double widthInMM = width * 10;
-        System.out.println(lengthInMM);
-        System.out.println(widthInMM);
 
         double tarPaperOverlay = 100;
 
         //(number of) rows of rolls needed
         double widthRollsNeeded = widthInMM / (tarPaper.getWidth() - tarPaperOverlay);
-        System.out.println(widthRollsNeeded);
 
         //number of rolls needed for all rows
         double rollsForAllRows = widthRollsNeeded * (lengthInMM / tarPaper.getLength());
@@ -37,8 +34,6 @@ public class CalcTarPaper {
 
         double lengthInMM = length * 10;
         double widthInMM = width * 10;
-        System.out.println(lengthInMM);
-        System.out.println(widthInMM);
         
         double tarPaperOverlay = 100;
 
