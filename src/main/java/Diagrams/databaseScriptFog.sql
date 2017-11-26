@@ -142,7 +142,7 @@ VALUES
 (320,420,320,320,120,'fladt',null,null,null,null,'ny','test1@test.dk'),
 (320,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
 (320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
-(320,570,410,null,null,'fladt',null,null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
+(320,570,410,null,null,'rejsning','25',null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
 
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade'
@@ -156,24 +156,36 @@ VALUES
 ('25X150 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',22770,6000,150,25),
 
 -- rem - hardcoded i java
-('45x195mm. spærtræ ubh.','rem',59000,7200,45,295),
+('45x195mm. spærtræ ubh.','rem',6145,7500,45,295),
+('45x195mm. spærtræ ubh.','rem',5900,7200,45,295),
+('45x195mm. spærtræ ubh.','rem',5654,6900,45,295),
+('45x195mm. spærtræ ubh.','rem',5408,6600,45,295),
+('45x195mm. spærtræ ubh.','rem',5162,6300,45,295),
+('45x195mm. spærtræ ubh.','rem',4916,6000,45,295),
+('45x195mm. spærtræ ubh.','rem',4670,5700,45,295),
+('45x195mm. spærtræ ubh.','rem',4425,5400,45,295),
+('45x195mm. spærtræ ubh.','rem',4719,5100,45,295),
+('45x195mm. spærtræ ubh.','rem',3933,4800,45,295),
 
 
 -- spær
 ('45x195mm. spærtræ ubh. til spær','spær',59000,7200,45,295), -- fladt
-('færdigskåret (byg-selv-spær)','spær',50000,0,0,0), -- rejsning
+('færdigskåret (byg-selv-spær)','spær',70000,0,0,0), -- rejsning
 
 -- værktøj
-('SKRUEMASKINE','værktøj',99990,0,0,0),
-('HÅNDSAV','værktøj',15900,0,0,0),
-('VATERPAS','værktøj',51900,0,0,0),
+('SKRUEMASKINE','værktøj',9999,0,0,0),
+('HÅNDSAV','værktøj',1590,0,0,0),
+('VATERPAS','værktøj',5190,0,0,0),
 
--- stolpe, hardcoded i java
-('97x97mm. trykimp. Stolpe','stolpe',13420,4800,97,97),
+-- stolpe
+('97x97mm. trykimp. Stolpe','stolpe',10905,3900,97,97),
+('97x97mm. trykimp. Stolpe','stolpe',10065,3600,97,97),
+('97x97mm. trykimp. Stolpe','stolpe',9223,3300,97,97),
+('97x97mm. trykimp. Stolpe','stolpe',8385,3000,97,97),
 
 
 -- skrue
-('NKT SPUN+ SKRUE UHJ 3X25MM TORX ELFORZINKET','skrue',360,0,0,0),
+('NKT SPUN+ SKRUE UHJ 3X25MM TORX ELFORZINKET','skrue',3600,0,0,0),
 ('NKT FRANSK SKRUE 8X120MM VFZ 50 STK/PK','skrue',2990,0,0,0),
 ('NKT SPUN+ SKRUE UHJ 3,5X30MM TORX ELFORZINKET','skrue',3600,0,0,0),
 
@@ -183,7 +195,7 @@ VALUES
 ('NKT FIRKANT SØM 1,6X25MM VARMFORZINKET','søm',3600,0,0,0),
 
 -- lægte
-('38x73mm. Lægte ubh.', 'lægte', 69930, 5400, 38, 73),
+('38x73mm. Lægte ubh.', 'lægte', 6993, 5400, 38, 73),
 
 -- tagpap
 ('ICOPAL BASE 411 P 1X8M', 'tagpap', 84900, 8000, 1000, 0),
@@ -191,9 +203,9 @@ VALUES
 ('ICOPAL TOP 500P SORT 1X5M', 'tagpap', 59900, 5000, 1000, 0),
 
 -- stern
-('25X125 MM STERN OVERBRÆDT TRYKIMP. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
-('25X125 MM STERN MELLEMBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
-('25X125 MM STERN UNDERBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 12930, 5400, 125, 25),
+('25X125 MM STERN OVERBRÆDT TRYKIMP. FYR NTR/AB - 540 CM', 'stern', 1293, 5400, 125, 25),
+('25X125 MM STERN MELLEMBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 1293, 5400, 125, 25),
+('25X125 MM STERN UNDERBRÆDT TRYKIMPR. FYR NTR/AB - 540 CM', 'stern', 1293, 5400, 125, 25),
 
 -- vindskede
 ('22X195 VINDSKEDE M/RU FREMSIDE GRAN US/VTA NTR-GRAN IMPR. - 540 CM','vindskede', 23193, 5400, 195, 22),
@@ -211,7 +223,7 @@ VALUES
 
 -- tagplade
 ('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','tagplade', 24900, 1100, 610, 1),
-('FASTLOCK UNI KLAR 6,0M','tagplade', 233970, 60000, 300, 1),  -- ingen width mål defineret
+('FASTLOCK UNI KLAR 6,0M','tagplade', 23397, 60000, 300, 1),  -- ingen width mål defineret
 ('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1);
 
 

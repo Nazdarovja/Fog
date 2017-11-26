@@ -93,6 +93,8 @@
                             <option value=210>210</option>
                             <option value=240>240</option>
                             <option value=270>270</option>
+                            <option value=300>300</option>
+                            <option value=400>400</option>
                         </select>
                     </div>
             </div>
@@ -124,7 +126,7 @@
                     <% if (request.getSession().getAttribute("inquiry") != null) { %>
                     <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
                     TOTAL PRIS: <br>
-                    <%= inquiry.getBom().getTotalPrice()%>
+                    <%= inquiry.getBom().getTotalPrice()%>,-
                     <Br>
                     <%}%>
 

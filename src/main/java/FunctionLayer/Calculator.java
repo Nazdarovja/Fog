@@ -28,7 +28,7 @@ public class Calculator {
             //post / stolpe
             bom.addOrderLine(CalcPost.getPostsFlatRoof(length, width, inquiry.getCarportHeight(),getChosenCategory("stolpe", products)));
             //topplate / rem
-//            bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
+            bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenCategory("rem", products)));
             //raft / spær
     //        bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh. til spær", products)));
             //tarPaper / tagpap
@@ -36,11 +36,11 @@ public class Calculator {
             
         // PITCHED ROOF ALHORITHM
         } else {
-            //post / stolpe
             System.out.println("PITCHED");
+            //post / stolpe
             bom.addOrderLine(CalcPost.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(),getChosenCategory("stolpe", products)));
             //topplate / rem
-        //    bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh.", products)));
+            bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenCategory("rem", products)));
             //raft / spær
           //  bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenProduct("færdigskåret (byg-selv-spær)", products)));
             //lath / lægte
@@ -52,8 +52,9 @@ public class Calculator {
            // bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())),getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
         }
 
-        
-        
+        for(OrderLine o : bom.getMaterials()){
+            System.out.println(o.getProduct().toString());
+        }
         return bom;
     }
 
