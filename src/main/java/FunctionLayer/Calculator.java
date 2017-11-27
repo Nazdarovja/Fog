@@ -68,7 +68,7 @@ public class Calculator {
         }
         return product;
     }
-    public static List<Product> getChosenCategory(String category, List<Product> products){
+    private static List<Product> getChosenCategory(String category, List<Product> products){
         List<Product> chosenCategoryList = new ArrayList<>();
         for (Product p : products){
             if(p.getCategory().equalsIgnoreCase(category)){
