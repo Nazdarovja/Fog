@@ -5,24 +5,24 @@
  */
 package FunctionLayer;
 
+import java.util.List;
+
 /**
  *
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
 public class CalcTarPaper {
 
-    public static OrderLine getTarPaperFlatRoof(double length, double width, Product tarPaper) {
-
-        double lengthInMM = length * 10;
-        double widthInMM = width * 10;
+    public static OrderLine getTarPaperFlatRoof(double length, double width, List<Product> tarPaperList) {
 
         double tarPaperOverlay = 100;
-
+        Product tarPaper = getLargesQuadrametertProduct(tarPaperList);
+        
         //(number of) rows of rolls needed
-        double widthRollsNeeded = widthInMM / (tarPaper.getWidth() - tarPaperOverlay);
+        double widthRollsNeeded = width / (tarPaper.getWidth() - tarPaperOverlay);
 
         //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (lengthInMM / tarPaper.getLength());
+        double rollsForAllRows = widthRollsNeeded * (length / tarPaper.getLength());
 
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows);
@@ -30,18 +30,17 @@ public class CalcTarPaper {
         return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
-    public static OrderLine getTarPaperPitchedRoof(double length, double width, Product tarPaper) {
+    public static OrderLine getTarPaperPitchedRoof(double length, double width, List<Product> tarPaperList) {
 
-        double lengthInMM = length * 10;
-        double widthInMM = width * 10;
         
         double tarPaperOverlay = 100;
-
+        Product tarPaper = getLargesQuadrametertProduct(tarPaperList);
+        
         //(number of) rows of rolls needed
-        double widthRollsNeeded = widthInMM / (tarPaper.getWidth() - tarPaperOverlay);
+        double widthRollsNeeded = width / (tarPaper.getWidth() - tarPaperOverlay);
 
         //number of rolls needed for all rows
-        double rollsForAllRows = widthRollsNeeded * (lengthInMM / tarPaper.getLength());
+        double rollsForAllRows = widthRollsNeeded * (length / tarPaper.getLength());
 
         //rounding up
         int result = (int) Math.ceil(rollsForAllRows) * 2;
@@ -49,4 +48,20 @@ public class CalcTarPaper {
         return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
+    private static Product getLargesQuadrametertProduct(List<Product> tarPaper) {
+
+        Product largestTarPaper = tarPaper.get(0);
+        double largestTarPaerQuadrameter = largestTarPaper.getLength() * largestTarPaper.getWidth();
+
+        for (int i = 0; i < tarPaper.size(); i++) {
+            Product p = tarPaper.get(i);
+            double productQuadratmeter = p.getLength() * p.getWidth();
+            if (productQuadratmeter > largestTarPaerQuadrameter) {
+                largestTarPaper = p;
+                largestTarPaerQuadrameter = p.getLength() * p.getWidth();
+            }
+        }
+        return largestTarPaper;
+    }
+    
 }
