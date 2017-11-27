@@ -5,8 +5,6 @@
  */
 package FunctionLayer;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -76,6 +74,7 @@ public class CalcTopPlate {
 //////////            }
 //////////            numberOfExtraTopPlates-rowsOfPoles;
 //////////        }
+
         return new OrderLine(p, p.getLength(), rowsOfPoles, "stk", "Remme i sider, sadles ned i stolper");
     }
 

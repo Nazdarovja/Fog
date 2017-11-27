@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Quick Byg</title>
     </head>
     <body>
         <div style="width: 100%; text-align: center;">

@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <title>JSP Page</title>
+        <title>Quick Byg</title>
     </head>
     <body>
 
@@ -94,7 +94,6 @@
                             <option value=240>240</option>
                             <option value=270>270</option>
                             <option value=300>300</option>
-                            <option value=400>400</option>
                         </select>
                     </div>
             </div>
