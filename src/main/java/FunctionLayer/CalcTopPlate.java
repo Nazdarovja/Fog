@@ -99,7 +99,6 @@ public class CalcTopPlate {
         Collections.reverse(products);
 
         for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i).toString());
             Product p = products.get(i);
             // if the products is longer than product available, the product is set to the largest in stock
             // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
