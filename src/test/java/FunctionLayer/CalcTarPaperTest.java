@@ -44,8 +44,8 @@ public class CalcTarPaperTest {
     @Test
     public void testGetTarPaperFlatRoof() throws Exception {
         System.out.println("getTarPaperFlatRoof");
-        double length = 8000;
-        double width = 1000;
+        int length = 8000;
+        int width = 1000;
         List<Product> tarPaperList = Calculator.getChosenCategory("tagpap", DataLayer.ProductMapper.getProducts());
         String expResultName = "ICOPAL BASE 411 P 1X8M";
         int expQty = 2;  //1 to cover, 1 extra cause of overlay
@@ -61,8 +61,8 @@ public class CalcTarPaperTest {
     @Test
     public void testGetTarPaperPitchedRoof() throws Exception {
         System.out.println("getTarPaperPitchedRoof");
-        double length = 8000;
-        double width = 1000;
+        int length = 8000;
+        int width = 1000;
         List<Product> tarPaperList = Calculator.getChosenCategory("tagpap", DataLayer.ProductMapper.getProducts());
         String expResultName = "ICOPAL BASE 411 P 1X8M";
         int expQty = 3;  //1 to cover each side, 1 extra cause of overlay

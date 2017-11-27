@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CalcTarPaper {
 
-    public static OrderLine getTarPaperFlatRoof(double length, double width, List<Product> tarPaperList) {
+    public static OrderLine getTarPaperFlatRoof(int length, int width, List<Product> tarPaperList) {
 
         double tarPaperOverlay = 100;
         Product tarPaper = getLargesQuadrametertProduct(tarPaperList);
@@ -30,7 +30,7 @@ public class CalcTarPaper {
         return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
-    public static OrderLine getTarPaperPitchedRoof(double length, double width, List<Product> tarPaperList) {
+    public static OrderLine getTarPaperPitchedRoof(int length, int width, List<Product> tarPaperList) {
 
         
         double tarPaperOverlay = 100;
