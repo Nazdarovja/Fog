@@ -155,7 +155,7 @@ VALUES
 ('25X175 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',26370,6000,175,25),
 ('25X150 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',22770,6000,150,25),
 
--- rem - hardcoded i java
+-- rem - 
 ('45x195mm. spærtræ ubh.','rem',6145,7500,45,295),
 ('45x195mm. spærtræ ubh.','rem',5900,7200,45,295),
 ('45x195mm. spærtræ ubh.','rem',5654,6900,45,295),
