@@ -5,6 +5,8 @@
  */
 package FunctionLayer;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -37,7 +39,7 @@ public class CalcTopPlate {
         if (width >= whenToAddRowSize) {
             rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
-        
+
         //IF LONGER THEN AVAILABLE PIECES
         if (length % p.getLength() > 0) {
             // finds the full length of the remaining pieces, and then how many of the product there is need for to cover that length
@@ -91,10 +93,13 @@ public class CalcTopPlate {
     }
 
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
+        // Sorts list on product.getLength() attribute.
+        products.sort(Comparator.comparing(Product::getLength));
+        // We need the list in descending order, so we reverse order it, so we start with the longest length.
+        Collections.reverse(products);
 
-        ///// ISSUE NEEDS TO SORT THE PRODUCTLIST IN DESC LENGTH ORDER!!!!
-        ///// OR RECIEVE THE DATA SORTED FROM THE DATABASE LIST
         for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i).toString());
             Product p = products.get(i);
             // if the products is longer than product available, the product is set to the largest in stock
             // else if the product is shorter than the shortest available product, the product is set as the smallest in stock

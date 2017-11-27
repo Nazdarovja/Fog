@@ -5,6 +5,8 @@
  */
 package FunctionLayer;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -20,7 +22,6 @@ public class CalcPost {
         int intervalToPlaceRowsForWidth = 300; // How often to place a row of poles
         int whenToAddExtraPostSize = 620; // Length of carport before adding an extra post to a row
         int intervalToPlacePostsForLength = 310; // how often to place a pole in a row
-        
 
         // +90cm to burry the post
         height += 90;
@@ -32,7 +33,6 @@ public class CalcPost {
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
         int rowsOfPosts = 2;
-        
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         length -= roofFrontBackEaves;
@@ -63,7 +63,7 @@ public class CalcPost {
         int intervalToPlaceRowsForWidth = 300; // How often to place a row of poles
         int whenToAddExtraPostSize = 550; // Length of carport before adding an extra post to a row
         int intervalToPlacePostsForLength = 275; // how often to place a pole in a row
-        
+
         // +90cm to burry the post
         height += 90;
         //TO MM TO MATCH DB MESURAMENTS
@@ -96,15 +96,17 @@ public class CalcPost {
     }
 
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
-        
-        ///// ISSUE NEEDS TO SORT THE PRODUCTLIST IN DESC LENGTH ORDER!!!!
-        ///// OR RECIEVE THE DATA SORTED FROM THE DATABASE LIST
+        // Sorts list on product.getLength() attribute.
+        products.sort(Comparator.comparing(Product::getLength));
+        // We need the list in descending order, so we reverse order it, so we start with the longest length.
+        Collections.reverse(products);
+
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
             // if the products is longer than product available, the product is set to the largest in stock
             // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
             // in regular cases it will chose the appropriate size product for the length
-            if (height / p.getLength() >= 1 || i == products.size()-1 ) {
+            if (height / p.getLength() >= 1 || i == products.size() - 1) {
                 return p;
             }
         }

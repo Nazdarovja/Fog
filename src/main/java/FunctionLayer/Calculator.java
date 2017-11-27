@@ -52,9 +52,9 @@ public class Calculator {
            // bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())),getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
         }
 
-        for(OrderLine o : bom.getMaterials()){
-            System.out.println(o.getProduct().toString());
-        }
+//        for(OrderLine o : bom.getMaterials()){
+//            System.out.println(o.getProduct().toString());
+//        }
         return bom;
     }
 
