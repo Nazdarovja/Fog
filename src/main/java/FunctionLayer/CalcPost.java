@@ -31,7 +31,7 @@ public class CalcPost {
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
-        int rowsOfPoles = 2;
+        int rowsOfPosts = 2;
         
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
@@ -40,7 +40,7 @@ public class CalcPost {
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
         // HOW MANY POLES PR. ROW 
         if (length >= whenToAddExtraPostSize) {
@@ -49,7 +49,7 @@ public class CalcPost {
         }
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
-        quantity *= rowsOfPoles;
+        quantity *= rowsOfPosts;
 
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
@@ -73,7 +73,7 @@ public class CalcPost {
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
-        int rowsOfPoles = 2;
+        int rowsOfPosts = 2;
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         length -= roofFrontBackEaves;
@@ -81,7 +81,7 @@ public class CalcPost {
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
         // HOW MANY POLES PR. ROW 
         if (length >= whenToAddExtraPostSize) {
@@ -90,7 +90,7 @@ public class CalcPost {
         }
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
-        quantity *= rowsOfPoles;
+        quantity *= rowsOfPosts;
 
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }

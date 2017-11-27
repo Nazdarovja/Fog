@@ -28,17 +28,28 @@ public class CalcTopPlate {
         // GET right length product
         Product p = getCorrectLengthProduct(length, products);
 
-        int rowsOfPoles = 2;
+        int rowsOfPosts = 2;
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         width -= roofSideEaves;
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
+        }
+        
+        //IF LONGER THEN AVAILABLE PIECES
+        if (length % p.getLength() > 0) {
+            // finds the full length of the remaining pieces, and then how many of the product there is need for to cover that length
+            int extraPostsIfInsuficcientLength = ((length % p.getLength()) * rowsOfPosts) / p.getLength();
+            // checks if there still is a piece remaining after, and adds one additional product
+            if (((length % p.getLength()) * rowsOfPosts) % p.getLength() > 0) {
+                extraPostsIfInsuficcientLength++;
+            }
+            rowsOfPosts += extraPostsIfInsuficcientLength;
         }
 
-        return new OrderLine(p, p.getLength(), rowsOfPoles, "stk", "Remme i sider, sadles ned i stolper");
+        return new OrderLine(p, p.getLength(), rowsOfPosts, "stk", "Remme i sider, sadles ned i stolper");
     }
 
     public static OrderLine getTopPlatesPitchedRoof(int length, int width, List<Product> products) {
@@ -55,27 +66,28 @@ public class CalcTopPlate {
         // GET right length product
         Product p = getCorrectLengthProduct(length, products);
 
-        int rowsOfPoles = 2;
+        int rowsOfPosts = 2;
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         width -= roofSideEaves;
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
-        
-        // VIRKER IKKE ER IKKE FÆRDIGT!!!
-//////////        // IF INSUFFICEIENT LENGTH ADD EXTRA PIECES
-//////////        if (length % p.getLength() > 0) {
-//////////            int numberOfExtraTopPlates = (length * rowsOfPoles) / p.getLength();
-//////////            if((length* rowsOfPoles) % p.getLength() > 0){
-//////////                numberOfExtraTopPlates++;
-//////////            }
-//////////            numberOfExtraTopPlates-rowsOfPoles;
-//////////        }
 
-        return new OrderLine(p, p.getLength(), rowsOfPoles, "stk", "Remme i sider, sadles ned i stolper");
+        //IF LONGER THEN AVAILABLE PIECES
+        if (length % p.getLength() > 0) {
+            // finds the full length of the remaining pieces, and then how many of the product there is need for to cover that length
+            int extraPostsIfInsuficcientLength = ((length % p.getLength()) * rowsOfPosts) / p.getLength();
+            // checks if there still is a piece remaining after, and adds one additional product
+            if (((length % p.getLength()) * rowsOfPosts) % p.getLength() > 0) {
+                extraPostsIfInsuficcientLength++;
+            }
+            rowsOfPosts += extraPostsIfInsuficcientLength;
+        }
+
+        return new OrderLine(p, p.getLength(), rowsOfPosts, "stk", "Remme i sider, sadles ned i stolper");
     }
 
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
