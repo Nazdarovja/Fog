@@ -40,59 +40,74 @@
                     <input type="hidden" name="command" value="calculate">
                     <div class="col-sm-2 col-md-offset-2">
                         Vælg længde<br>
-                        <select class="form-control" name="length">
-                            <option value=240>240</option>
-                            <option value=270>270</option>
-                            <option value=300>300</option>
-                            <option value=330>330</option>
-                            <option value=360>360</option>
-                            <option value=390>390</option>
-                            <option value=420>420</option>
-                            <option value=450>450</option>
-                            <option value=480>480</option>
-                            <option value=510>510</option>
-                            <option value=540>540</option>
-                            <option value=570>570</option>
-                            <option value=600>600</option>
-                            <option value=630>630</option>
-                            <option value=660>660</option>
-                            <option value=690>690</option>
-                            <option value=720>720</option>
-                            <option value=750>750</option>
+                        <select class="form-control" name="length" onchange="check(this)">
+                            <% int length = 0;
+                                if (request.getSession().getAttribute("length") != null) {
+                                    length = (int) request.getSession().getAttribute("length");
+                                }
+                            %>
+                            <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
+                            <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
+                            <option value=300 <%if (length == 300) { %> selected <%} %>>300</option>
+                            <option value=330 <%if (length == 330) { %> selected <%} %>>330</option>
+                            <option value=360 <%if (length == 360) { %> selected <%} %>>360</option>
+                            <option value=390 <%if (length == 390) { %> selected <%} %>>390</option>
+                            <option value=420 <%if (length == 420) { %> selected <%} %>>420</option>
+                            <option value=450 <%if (length == 450) { %> selected <%} %>>450</option>
+                            <option value=480 <%if (length == 480) { %> selected <%} %>>480</option>
+                            <option value=510 <%if (length == 510) { %> selected <%} %>>510</option>
+                            <option value=540 <%if (length == 540) { %> selected <%} %>>540</option>
+                            <option value=570 <%if (length == 570) { %> selected <%} %>>570</option>
+                            <option value=600 <%if (length == 600) { %> selected <%} %>>600</option>
+                            <option value=630 <%if (length == 630) { %> selected <%} %>>630</option>
+                            <option value=660 <%if (length == 660) { %> selected <%} %>>660</option>
+                            <option value=690 <%if (length == 690) { %> selected <%} %>>690</option>
+                            <option value=720 <%if (length == 720) { %> selected <%} %>>720</option>
+                            <option value=750 <%if (length == 750) { %> selected <%} %>>750</option>
                         </select>
                     </div>
                     <div class="col-sm-2">
                         Vælg bredde<br>
                         <select class="form-control" name="width">
-                            <option value=240>240</option>
-                            <option value=270>270</option>
-                            <option value=300>300</option>
-                            <option value=330>330</option>
-                            <option value=360>360</option>
-                            <option value=390>390</option>
-                            <option value=420>420</option>
-                            <option value=450>450</option>
-                            <option value=480>480</option>
-                            <option value=510>510</option>
-                            <option value=540>540</option>
-                            <option value=570>570</option>
-                            <option value=600>600</option>
-                            <option value=630>630</option>
-                            <option value=660>660</option>
-                            <option value=690>690</option>
-                            <option value=720>720</option>
-                            <option value=750>750</option>
-                            <option value=780>780</option>
+                            <% int width = 0;
+                                if (request.getSession().getAttribute("width") != null) {
+                                    width = (int) request.getSession().getAttribute("width");
+                                }
+                            %>
+                            <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
+                            <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
+                            <option value=300 <%if (width == 300) { %> selected <%} %>>300</option>
+                            <option value=330 <%if (width == 330) { %> selected <%} %>>330</option>
+                            <option value=360 <%if (width == 360) { %> selected <%} %>>360</option>
+                            <option value=390 <%if (width == 390) { %> selected <%} %>>390</option>
+                            <option value=420 <%if (width == 420) { %> selected <%} %>>420</option>
+                            <option value=450 <%if (width == 450) { %> selected <%} %>>450</option>
+                            <option value=480 <%if (width == 480) { %> selected <%} %>>480</option>
+                            <option value=510 <%if (width == 510) { %> selected <%} %>>510</option>
+                            <option value=540 <%if (width == 540) { %> selected <%} %>>540</option>
+                            <option value=570 <%if (width == 570) { %> selected <%} %>>570</option>
+                            <option value=600 <%if (width == 600) { %> selected <%} %>>600</option>
+                            <option value=630 <%if (width == 630) { %> selected <%} %>>630</option>
+                            <option value=660 <%if (width == 660) { %> selected <%} %>>660</option>
+                            <option value=690 <%if (width == 690) { %> selected <%} %>>690</option>
+                            <option value=720 <%if (width == 720) { %> selected <%} %>>720</option>
+                            <option value=750 <%if (width == 750) { %> selected <%} %>>750</option>
+                            <option value=780 <%if (width == 780) { %> selected <%} %>>780</option>
                         </select>
                     </div>
 
                     <div class="col-sm-2">
                         Vælg højde<br>
                         <select class="form-control" name="height">
-                            <option value=210>210</option>
-                            <option value=240>240</option>
-                            <option value=270>270</option>
-                            <option value=300>300</option>
+                            <% int height = 0;
+                                if (request.getSession().getAttribute("height") != null) {
+                                    height = (int) request.getSession().getAttribute("height");
+                                }
+                            %>
+                            <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
+                            <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
+                            <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
+                            <option value=300 <%if (height == 300) { %> selected <%} %>>300</option>
                         </select>
                     </div>
             </div>
@@ -101,21 +116,31 @@
                 <div class="col-sm-2 col-md-offset-3">
                     Vælg tagtype<br>
                     <select class="form-control" name="roofType">
-                        <option value="rejsning">rejsning</option>
-                        <option value="fladt">fladt</option>
+                        <% String roofType = "";
+                            if (request.getSession().getAttribute("roofType") != null) {
+                                roofType = (String) request.getSession().getAttribute("roofType");
+                            }
+                        %>
+                        <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
+                        <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
                     Vælg hældning<br>
                     <select class="form-control" name="angle">
-                        <option value=0>0°</option>
-                        <option value=15>15°</option>
-                        <option value=20>20°</option>
-                        <option value=25>25°</option>
-                        <option value=30>30°</option>
-                        <option value=35>35°</option>
-                        <option value=40>40°</option>
-                        <option value=45>45°</option>
+                        <% int angle = -1;
+                            if (request.getSession().getAttribute("angle") != null) {
+                                angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
+                            }
+                        %>
+                        <option value=0  <%if (angle == 0) { %> selected <%} %>>0°</option>
+                        <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
+                        <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
+                        <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
+                        <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
+                        <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
+                        <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
+                        <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
                     </select>
                 </div>
 
