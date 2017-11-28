@@ -115,6 +115,4 @@ public class Inquiry {
     public Timestamp getDate() {
         return date;
     }
-
-
 }
