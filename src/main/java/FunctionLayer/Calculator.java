@@ -32,7 +32,7 @@ public class Calculator {
             //raft / spær
             bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenCategory("spær", products)));
             //tarPaper / tagpap
-      //      bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenProduct("ICOPAL BASE 411 P 1X8M", products)));
+            bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenCategory("tagpap", products)));
             
         // PITCHED ROOF ALHORITHM
         } else {
@@ -44,12 +44,12 @@ public class Calculator {
             //raft / spær
             bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenCategory("spær", products)));
             //lath / lægte
-            //bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())), getChosenProduct("38x73mm. Lægte ubh.", products)));
-            //bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenProduct("38x73mm. Lægte ubh.", products)));
+            bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())), getChosenProduct("38x73mm. Lægte ubh.", products)));
+            bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenProduct("38x73mm. Lægte ubh.", products)));
             //tarPaper / tagpap
-            
+            bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenCategory("tagpap", products)));
             //Bricks/rooftiles /tagsten
-           // bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())),getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
+            bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())),getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
         }
 
         
@@ -57,7 +57,7 @@ public class Calculator {
         //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG /////// MUHAHAHAHAHAHAHHA
         ///////////////////////////////////////////////////////////////////////////
         for(OrderLine o : bom.getMaterials()){
-            System.out.println(o.getProduct().toString());
+            System.out.println( o.getQuantity()+ " " + o.getProduct().toString());
         }
         /////////////////////////////////////////////////////////////////////////////
         //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG ///////
