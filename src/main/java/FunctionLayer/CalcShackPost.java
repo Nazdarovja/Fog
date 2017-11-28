@@ -15,17 +15,24 @@ import java.util.List;
  */
 public class CalcShackPost {
 //samme logik som calcpost..husk at se samlevejledning igennem...
-    //evt se på MAthiad "tegning" branch logic
-    //skur hæfter på pæle, der skal sidde på [sidelangedelene]... (quickbuild kode)  max skur len = length / 2... min skur len = 1m...  
-    
-    public static OrderLine getPostsShack(int length, int width, int height, List<Product> products) {
-        
+    //evt se på Mathias "tegning" branch logic
+    //skur hæfter på pæle, der skal sidde på [sidelangedelene]...
+    //løsholter = horisontale "murindmad" til alle 4 vægge. 
+
+    public static OrderLine getPostsShackFlatRoof(int carportLength, int carportWidth, int height, int shackLength, int shackWidth, List<Product> products) {
+
         //post to use
-        //løsholter = horisontale "murindmad" til alle 4 vægge. 
         Product post = getCorrectLengthProduct(height, products);
-        
-        
-        
+
+        //shack initially connected to existing carport corner pole, so need 1 more, and one extra for door.
+        int numberOfPost = 2;
+
+        //if shack does not take up full width of carport width; use an extra pole for each corner. 
+        if (carportWidth < shackWidth) {
+            numberOfPost += 2;
+
+            
+        }
     }
 
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
