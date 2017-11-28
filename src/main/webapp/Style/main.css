@@ -18,8 +18,16 @@ h1 {
     
 }
 
-.sortbar {
+thead {
     
-    background-color: grey; 
-    margin-bottom: 40px;
+    background-color: #003152;
+    color: white;
 }
+
+.toolbar {
+    
+    background-color: #003152; 
+    margin-bottom: 40px;
+    border: 2px solid lightgray;
+}
+

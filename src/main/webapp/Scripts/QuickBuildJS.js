@@ -11,10 +11,11 @@ function findInquiries(cosEmail) {
 
 
 function sortTable(idTable, sortIndex) {
-  var table, rows, switching, i, x, y, shouldSwitch;
+  var table, rows, switching, i, x, y, shouldSwitch, ascOrDesc;
   
   table = document.getElementById(idTable);
- 
+  ascOrDesc = document.getElementsByClassName("ascdesc")[sortIndex].value;
+
   switching = true;
   /* Make a loop that will continue until
   no switching has been done: */
@@ -25,18 +26,24 @@ function sortTable(idTable, sortIndex) {
     /* Loop through all table rows (except the
     first, which contains table headers): */
     for (i = 1; i < (rows.length - 1); i++) {
-      // Start by saying there should be no switching:
-      shouldSwitch = false;
-      /* Get the two elements you want to compare,
-      one from current row and one from the next: */
-      x = rows[i].getElementsByTagName("td")[sortIndex];
-      y = rows[i + 1].getElementsByTagName("td")[sortIndex];
-      // Check if the two rows should switch place:
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-        // I so, mark as a switch and break the loop:
-        shouldSwitch= true;
-        break;
-      }
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("td")[sortIndex];
+        y = rows[i + 1].getElementsByTagName("td")[sortIndex];
+        // Check if the two rows should switch place:
+
+
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() && ascOrDesc === "asc") {
+            // I so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+        } else if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase() && ascOrDesc === "desc"){
+            // I so, mark as a switch and break the loop:
+            shouldSwitch= true;
+            break;
+        }
     }
     if (shouldSwitch) {
       /* If a switch has been marked, make the switch
@@ -45,4 +52,7 @@ function sortTable(idTable, sortIndex) {
       switching = true;
     }
   }
+  
+  if (ascOrDesc === "asc") document.getElementsByClassName("ascdesc")[sortIndex].value = "desc";
+  else document.getElementsByClassName("ascdesc")[sortIndex].value = "asc";
 }
