@@ -14,14 +14,14 @@ public class GenerateSVG {
     public static String generateSVGHTML(int length, int width, boolean withShack, int shackLength, int shackWidth) {
         int gap = 40;
         String html = "<SVG width='50%' viewbox='0 0 " + (length+gap) + " " + (width+gap) + "'>";
-        html += generateSVGForLineMeasurements(length, width, shackWidth, gap);
+        html += generateSVGForLineMeasurements(length, width, withShack,shackWidth, gap);
         html += generateSVGForCarportArea(length, width, gap);
         if(withShack)
             html += generateSVGForShack(length, width, shackLength, shackWidth, gap);
         html += generateSVGForEndRafters(length, width, gap);
         html += generateSVGForPost(length, width, gap);
         html += generateSVGForRafters(length, width, gap);
-        html += generateSVGForCross(length, width, gap, shackWidth);
+        html += generateSVGForCross(length, width, gap, withShack, shackWidth);
         
         
 //        html += "<line x1='0' y1='0' x2='"+(length-shackWidth-35)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
@@ -73,29 +73,52 @@ public class GenerateSVG {
     }
     
     private static String generateSVGForRafters(int length, int width, int gap) {
+        
         String html = "";
         boolean oneMoreNeeded = true;
-        int xValue = 55;
+        int xValue = 60;
+        int amountOfRafters;
+        int newXValue = 60; // sets default to 60 if the space between the raftes fits to 60cm.
+        if(length % 60 > 0) {
+            amountOfRafters = length / 60;
+            amountOfRafters++; // amount of rafters needed
+            xValue = length / amountOfRafters;// calculates the space between each raft
+            newXValue = xValue; // Assigns the new xValue to another variable, since the variable xValue 
+            //gets incremented in the loop, and the space between 
+            //each raft gets added to xValue each loop -> therefore xValue += newXValue;
+        }
+        System.out.println(xValue);
+        
         while(oneMoreNeeded) {
-            html += "<rect x='"+(xValue+gap)+"' y='"+(35+gap)+"' height='"+(width-35)+"' width='10' stroke-width='2' stroke='black' fill='#cece9f'/>";
-            xValue += 60;
-            if(xValue >= length-60)
+            html += "<rect x='"+(xValue+gap)+"' y='"+gap+"' height='"+(width-35+gap)+"' width='10' stroke-width='2' stroke='black' fill='#cece9f'/>";
+            xValue += newXValue;
+            if(xValue >= length)
                 oneMoreNeeded = false;
         }
         return html;
     }
     
-    private static String generateSVGForCross(int length, int width, int gap, int shackWidth) {
+    private static String generateSVGForCross(int length, int width, int gap, boolean withShack, int shackWidth) {
         String html = "";
-        html += "<line x1="+(55+gap)+" y1='"+(35+gap)+"' x2='"+(length-shackWidth-30+gap)+"' y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
-        html += "<line x1='"+(length-shackWidth-30+gap)+"' y1='"+(35+gap)+"' x2="+(55+gap)+" y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        if (withShack) {
+            html += "<line x1="+(55+gap)+" y1='"+(35+gap)+"' x2='"+(length-shackWidth-30+gap)+"' y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+            html += "<line x1='"+(length-shackWidth-30+gap)+"' y1='"+(35+gap)+"' x2="+(55+gap)+" y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        } else {
+            html += "<line x1="+(55+gap)+" y1='"+(35+gap)+"' x2='"+(length-30+gap)+"' y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+            html += "<line x1='"+(length-30+gap)+"' y1='"+(35+gap)+"' x2="+(55+gap)+" y2='"+(width-35+gap)+"' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        }
         return html;
     }
     
-    private static String generateSVGForLineMeasurements(int length, int width, int shackWidth, int gap) {
+    private static String generateSVGForLineMeasurements(int length, int width, boolean withShack,int shackWidth, int gap) {
         String html = "";
-        html += "<line x1="+gap+" y1='0' x2='"+(length-shackWidth-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
-        html += "<line x1='"+(length-shackWidth-35+gap)+"' y1='0' x2='"+(length-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        if(withShack) {
+            html += "<line x1="+gap+" y1='0' x2='"+(length-shackWidth-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+            html += "<line x1='"+(length-shackWidth-35+gap)+"' y1='0' x2='"+(length-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        } else {
+            html += "<line x1="+gap+" y1='0' x2='"+(length-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+            html += "<line x1='"+(length-35+gap)+"' y1='0' x2='"+(length-35+gap)+"' y2='0' style='stroke:rgb(255,255,255);stroke-width:5'<path stroke-dasharray='5,5' d='M5 20 1215 0'/>/>";
+        }
         return html;
     }
     
