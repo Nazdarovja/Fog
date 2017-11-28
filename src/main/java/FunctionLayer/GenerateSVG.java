@@ -19,7 +19,8 @@ public class GenerateSVG {
         if(withShack)
             html += generateSVGForShack(length, width, shackLength, shackWidth, gap);
         html += generateSVGForEndRafters(length, width, gap);
-        html += generateSVGForPost(length, width, gap);
+        html += generateSVGForTopPlate(length, width, gap);
+        html += generateSVGForPosts(length, width, withShack, shackLength, shackWidth, gap);
         html += generateSVGForRafters(length, width, gap);
         html += generateSVGForCross(length, width, gap, withShack, shackWidth);
         
@@ -53,7 +54,7 @@ public class GenerateSVG {
         return html;
     }
     
-    private static String generateSVGForPost(int length, int width, int gap) {
+    private static String generateSVGForTopPlate(int length, int width, int gap) {
         String html = "";
         html += "<rect x="+gap+" y='"+(35+gap)+"' height='10' width='"+length+"' stroke-width='2' stroke='black' fill='#cece9f'/>";
         html += "<rect x="+gap+" y='"+(width-35+gap)+"' height='10' width='"+length+"' stroke-width='2' stroke='black' fill='#cece9f'/>";
@@ -122,6 +123,24 @@ public class GenerateSVG {
         return html;
     }
     
+    private static String generateSVGForPosts(int length, int width, boolean withShack, int shackLength, int shackWidth, int gap) {
+        String html = "";
+        html += "<rect x='"+(100+gap)+"' y='"+(32+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        html += "<rect x='"+(100+gap)+"' y='"+(width-38+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        html += "<rect x='"+(length+gap-30-16)+"' y='"+(32+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        html += "<rect x='"+(length+gap-30-16)+"' y='"+(width-38+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        
+        if(length >= 620) {
+            int res = (length - 130);
+            res = res / 2;
+            int xValue = res + gap + 100;
+            System.out.println(xValue);
+            html += "<rect x='"+(xValue-8)+"' y='"+(32+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+            html += "<rect x='"+(xValue-8)+"' y='"+(width-38+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        }
+        
+        return html;
+    }
     
     public static void main(String[] args) {
         System.out.println(GenerateSVG.generateSVGHTML(810, 900, true, 900-60, 210));
