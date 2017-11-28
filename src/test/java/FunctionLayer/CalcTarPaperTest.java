@@ -1,10 +1,11 @@
-package FunctionLayer;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package FunctionLayer;
+
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,32 +37,38 @@ public class CalcTarPaperTest {
     @After
     public void tearDown() {
     }
-//
-//    @Test
-    public void testGetTarPaperFlatRoof() throws Exception {
-        double length = 500;
-        double width = 400;
-        int expFlatQty = 5;  //4 rows, full fill, minus overlay (+1 extra).
-        Product tagpap = DataLayer.ProductMapper.getSingleProduct("tagpap", "ICOPAL TOP 500P SORT 1X5M");
-        OrderLine flatResult = CalcTarPaper.getTarPaperFlatRoof(length, width, tagpap);
-        assertNotNull(flatResult);
-        assertEquals(expFlatQty, flatResult.quantity);
-        assertEquals(tagpap.getName(), flatResult.product.getName());
-        System.out.println(flatResult.product.getPrice());
 
+    /**
+     * Test of getTarPaperFlatRoof method, of class CalcTarPaper.
+     */
+    @Test
+    public void testGetTarPaperFlatRoof() throws Exception {
+        System.out.println("getTarPaperFlatRoof");
+        int length = 8000;
+        int width = 1000;
+        List<Product> tarPaperList = Calculator.getChosenCategory("tagpap", DataLayer.ProductMapper.getProducts());
+        String expResultName = "ICOPAL BASE 411 P 1X8M";
+        int expQty = 2;  //1 to cover, 1 extra cause of overlay
+        OrderLine result = CalcTarPaper.getTarPaperFlatRoof(length, width, tarPaperList);
+        assertEquals(expResultName, result.product.getName());
+        assertEquals(expQty, result.quantity);
+        System.out.println(result.product.getName());
     }
 
-//    @Test
+    /**
+     * Test of getTarPaperPitchedRoof method, of class CalcTarPaper.
+     */
+    @Test
     public void testGetTarPaperPitchedRoof() throws Exception {
-        double length = 500;
-        double width = 400;
-        int expPitchedQty = 10;  //4 rows, full fill, minus overlay (+1 extra) * 2 roof halves
-        Product tagpap = DataLayer.ProductMapper.getSingleProduct("tagpap", "ICOPAL TOP 500P SORT 1X5M");
-        OrderLine pitchedResult = CalcTarPaper.getTarPaperPitchedRoof(length, width, tagpap);
-        assertNotNull(pitchedResult);
-        assertEquals(expPitchedQty, pitchedResult.quantity);
-        assertEquals(tagpap.getName(), pitchedResult.product.getName());
-
+        System.out.println("getTarPaperPitchedRoof");
+        int length = 8000;
+        int width = 1000;
+        List<Product> tarPaperList = Calculator.getChosenCategory("tagpap", DataLayer.ProductMapper.getProducts());
+        String expResultName = "ICOPAL BASE 411 P 1X8M";
+        int expQty = 3;  //1 to cover each side, 1 extra cause of overlay
+        OrderLine result = CalcTarPaper.getTarPaperPitchedRoof(length, width, tarPaperList);
+        assertEquals(expResultName, result.product.getName());
+        assertEquals(expQty, result.quantity);
     }
 
 }

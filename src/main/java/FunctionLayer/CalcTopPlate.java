@@ -79,7 +79,7 @@ public class CalcTopPlate {
         }
 
         //IF LONGER THEN AVAILABLE PIECES
-        if (length % p.getLength() > 0) {
+        if (length % p.getLength() > 0 && length > p.getLength()) {
             // finds the full length of the remaining pieces, and then how many of the product there is need for to cover that length
             int extraPostsIfInsuficcientLength = ((length % p.getLength()) * rowsOfPosts) / p.getLength();
             // checks if there still is a piece remaining after, and adds one additional product
