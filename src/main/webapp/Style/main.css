@@ -11,3 +11,15 @@
 h1 {
     text-align: center;
 }
+
+.sorthead {
+    
+    cursor:pointer;
+    
+}
+
+.sortbar {
+    
+    background-color: grey; 
+    margin-bottom: 40px;
+}
