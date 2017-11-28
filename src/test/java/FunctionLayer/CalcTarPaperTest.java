@@ -41,7 +41,7 @@ public class CalcTarPaperTest {
     /**
      * Test of getTarPaperFlatRoof method, of class CalcTarPaper.
      */
-//    @Test
+    @Test
     public void testGetTarPaperFlatRoof() throws Exception {
         System.out.println("getTarPaperFlatRoof");
         int length = 8000;
@@ -58,7 +58,7 @@ public class CalcTarPaperTest {
     /**
      * Test of getTarPaperPitchedRoof method, of class CalcTarPaper.
      */
-//    @Test
+    @Test
     public void testGetTarPaperPitchedRoof() throws Exception {
         System.out.println("getTarPaperPitchedRoof");
         int length = 8000;
