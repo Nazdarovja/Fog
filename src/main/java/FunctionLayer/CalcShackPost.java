@@ -14,25 +14,39 @@ import java.util.List;
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
 public class CalcShackPost {
-//samme logik som calcpost..husk at se samlevejledning igennem...
-    //evt se på Mathias "tegning" branch logic
-    //skur hæfter på pæle, der skal sidde på [sidelangedelene]...
-    //løsholter = horisontale "murindmad" til alle 4 vægge. 
 
-    public static OrderLine getPostsShackFlatRoof(int carportLength, int carportWidth, int height, int shackLength, int shackWidth, List<Product> products) {
+    /**
+     * Takes carport dimensions and shack dimensions as input, and list of poles. 
+     * If shack width is less than that of carport, add 2 extra posts, else add 1.
+     * @param carportLength
+     * @param carportWidth
+     * @param height
+     * @param shackLength
+     * @param shackWidth
+     * @param poles
+     * @return 
+     */
+    public static OrderLine getPostsShack(int carportLength, int carportWidth, int height, int shackLength, int shackWidth, List<Product> poles) {
+
+        // +90cm to burry the post
+        height += 90;
+        //TO MM TO MATCH DB MESURAMENTS
+        height *= 10;
 
         //post to use
-        Product post = getCorrectLengthProduct(height, products);
+        Product post = getCorrectLengthProduct(height, poles);
 
-        //shack initially connected to existing carport corner pole, so need 1 more, and one extra for door.
+        //shack initially connected to existing carport corner pole (1), so need 1  for corner (2), and one extra for door.
         int numberOfPost = 2;
 
-        //if shack does not take up full width of carport width; use an extra pole for each corner. 
-        if (carportWidth < shackWidth) {
+        //if shack does not take up full width of carport width; use an extra pole for each corner (3,4). 
+        if (carportWidth > shackWidth) {
             numberOfPost += 2;
-
-            
+            //if same width as carport, other corner is existing carport pole (3), and add 1 pole for last corner (4).
+        } else {
+            numberOfPost += 1;
         }
+        return new OrderLine(post, post.getLength(), numberOfPost, "stk", "Stolper nedgraves 90 cm. i jord - til skurbrug");
     }
 
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
