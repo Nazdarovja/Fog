@@ -63,6 +63,11 @@ private int id;
         return width;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", category=" + category + ", price=" + price + ", length=" + length + ", width=" + width + ", height=" + height + '}';
+    }
+
     public void setWidth(int width) {
         this.width = width;
     }

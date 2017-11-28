@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Inquiry;
+import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,16 +16,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class viewBoM extends Command {
+public class ViewBoM extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Inquiry inquiry = (Inquiry)request.getAttribute("inquiry");
-        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
-        
-        request.setAttribute("bom", bom);
-        
-        return "billofmaterials";
+                int id = Integer.parseInt(request.getParameter("id"));
+	        
+	        Inquiry inquiry = LogicFacade.viewInquiry(id);
+	        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+	        // NEEDS CHANGING 
+                
+	        request.setAttribute("bom", bom);
+	        
+	        return "billofmaterials";
     }
     
 }

@@ -5,8 +5,8 @@
  */
 package FunctionLayer;
 
-import DataLayer.ProductMapper;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,12 +17,11 @@ public class CalcPost {
     public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) throws Exception {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 130; // (NO POLES UNDER EAVES) FLATROOF = 1300mm
-        int roofSideEaves = 70; // (NO POLES UNDER EAVES) FLATROOF = 70mm
+        int roofSideEaves = 70; // (NO POLES UNDER EAVES) FLATROOF = 700mm
         int whenToAddRowSize = 600; // WIDTH of carport before adding the first extra row
         int intervalToPlaceRowsForWidth = 300; // How often to place a row of poles
         int whenToAddExtraPostSize = 620; // Length of carport before adding an extra post to a row
         int intervalToPlacePostsForLength = 310; // how often to place a pole in a row
-        
 
         // +90cm to burry the post
         height += 90;
@@ -33,8 +32,7 @@ public class CalcPost {
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
-        int rowsOfPoles = 2;
-        
+        int rowsOfPosts = 2;
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         length -= roofFrontBackEaves;
@@ -42,7 +40,7 @@ public class CalcPost {
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
         // HOW MANY POLES PR. ROW 
         if (length >= whenToAddExtraPostSize) {
@@ -51,7 +49,7 @@ public class CalcPost {
         }
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
-        quantity *= rowsOfPoles;
+        quantity *= rowsOfPosts;
 
         // ADD 90CM TO THE HEIGHT, FOR DIG-IN OF POLE
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
@@ -60,12 +58,12 @@ public class CalcPost {
     public static OrderLine getPostsPitchedRoof(int length, int width, int height, List<Product> posts) throws Exception {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 110; // (NO POLES UNDER EAVES) FLATROOF = 1100mm
-        int roofSideEaves = 40; // (NO POLES UNDER EAVES) FLATROOF = 40mm
+        int roofSideEaves = 40; // (NO POLES UNDER EAVES) FLATROOF = 400mm
         int whenToAddRowSize = 600; // WIDTH of carport before adding the first extra row
         int intervalToPlaceRowsForWidth = 300; // How often to place a row of poles
         int whenToAddExtraPostSize = 550; // Length of carport before adding an extra post to a row
         int intervalToPlacePostsForLength = 275; // how often to place a pole in a row
-        
+
         // +90cm to burry the post
         height += 90;
         //TO MM TO MATCH DB MESURAMENTS
@@ -75,7 +73,7 @@ public class CalcPost {
 
         //QUANTITY OF END POST FOR ONE ROW
         int quantity = 2;
-        int rowsOfPoles = 2;
+        int rowsOfPosts = 2;
 
         //REDUCE THE COMPLETE LENGTHS WITH THE ROOF EVE SIZES
         length -= roofFrontBackEaves;
@@ -83,7 +81,7 @@ public class CalcPost {
 
         // FIND OUT HOW MANY ROWS OF POLES ARE NECESSARY
         if (width >= whenToAddRowSize) {
-            rowsOfPoles += (width / intervalToPlaceRowsForWidth) - 1;
+            rowsOfPosts += (width / intervalToPlaceRowsForWidth) - 1;
         }
         // HOW MANY POLES PR. ROW 
         if (length >= whenToAddExtraPostSize) {
@@ -92,22 +90,26 @@ public class CalcPost {
         }
 
         // TIMES UP THE QUANTITY WITH THE NUMBER OF ROWS
-        quantity *= rowsOfPoles;
+        quantity *= rowsOfPosts;
 
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
-        Product matchingLengthProduct = null;
+        // Sorts list on product.getLength() attribute.
+        products.sort(Comparator.comparing(Product::getLength));
+        // We need the list in descending order, so we reverse order it, so we start with the longest length.
+        Collections.reverse(products);
+
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
             // if the products is longer than product available, the product is set to the largest in stock
             // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
             // in regular cases it will chose the appropriate size product for the length
-            if (height % p.getLength() >= 1 || i == products.size()) {
-                matchingLengthProduct = products.get(i);
+            if (height / p.getLength() >= 1 || i == products.size() - 1) {
+                return p;
             }
         }
-        return matchingLengthProduct;
+        return null;
     }
 }

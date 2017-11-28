@@ -21,7 +21,7 @@ public class OrderLine {
 
 
     public long getOrderLinePrice() {
-        return (product.getPrice() * quantity) /100;
+        return (product.getPrice() /100) * quantity;
     }
 
     public Product getProduct() {
@@ -70,6 +70,14 @@ public class OrderLine {
         this.quantity = quantity;
         this.amountType = amountType;
         this.usabilityComment = usabilityComment;
+    }
+    
+    public String getProductName(){
+        return product.getName();
+    }
+    
+    public String getProductCategory(){
+        return product.getCategory();
     }
 
 }

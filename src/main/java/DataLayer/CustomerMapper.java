@@ -196,8 +196,43 @@ public class CustomerMapper {
         }
 
     }
+    
+    public static List<Customer> customersByInquiryStatus(String status) throws Exception{
+        List<Customer> customers = new ArrayList<>();
+        Customer c;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT DISTINCT(c.email), c.name, c.surname, c.phonenumber, c.address, c.zipcode, c.password, z.city FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode INNER JOIN Inquiry i on c.email = i.email WHERE i.status = ?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString( 1, status );
+            rs = ps.executeQuery();
+            while(rs.next()){
+                c = new Customer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8));
+                customers.add(c);
+            }
+            return customers;
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
 
-//    public static String getCity(int zipcode) throws Exception {
-//
-//    }
