@@ -46,7 +46,7 @@ public class JUnit {
     //
     // @Test
     // public void hello() {}
-    @Test
+//    @Test
     public void testLoginCustomer() throws Exception {
         String email = "test1@test.dk";
         String password = "Hansen1";
