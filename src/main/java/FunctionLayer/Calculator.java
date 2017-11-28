@@ -30,7 +30,7 @@ public class Calculator {
             //topplate / rem
             bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenCategory("rem", products)));
             //raft / spær
-    //        bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenProduct("45x195mm. spærtræ ubh. til spær", products)));
+            bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenCategory("spær", products)));
             //tarPaper / tagpap
       //      bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenProduct("ICOPAL BASE 411 P 1X8M", products)));
             
@@ -42,7 +42,7 @@ public class Calculator {
             //topplate / rem
             bom.addOrderLine(CalcTopPlate.getTopPlatesPitchedRoof(length, width, getChosenCategory("rem", products)));
             //raft / spær
-          //  bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenProduct("færdigskåret (byg-selv-spær)", products)));
+            bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenCategory("spær", products)));
             //lath / lægte
             //bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width,Integer.parseInt(inquiry.getAngle())), getChosenProduct("38x73mm. Lægte ubh.", products)));
             //bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenProduct("38x73mm. Lægte ubh.", products)));
