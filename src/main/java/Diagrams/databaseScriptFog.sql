@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `fog`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
-  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade') NOT NULL,
+  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade','løsholt') NOT NULL,
   `price` LONG NOT NULL,
   `length` INT NULL,
   `width` INT NULL,
@@ -145,7 +145,7 @@ VALUES
 (320,570,410,null,null,'rejsning','25',null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
 
 -- --------------------------------------------------------------------------
--- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade'
+-- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade',','løsholt'
 -- --------------------------------------------------------------------------
 INSERT INTO
 Product (name,category,price,length,width,height)
@@ -213,9 +213,10 @@ VALUES
 ('22X195 VINDSKEDE M/RU FREMSIDE GRAN US/VTA NTR-GRAN IMPR. - 420 CM','vindskede', 18039, 4200, 195, 22),
 
 -- beklædning
-('19X100 MM VTA TRYKIMPR. NTR/AB 480 CM','beklædning', 8136, 4800, 100, 19),
-('19X100 MM VTA TRYKIMPR. NTR/AB 420 CM','beklædning', 7119, 4200, 100, 19),
-('19X100 MM VTA TRYKIMPR. NTR/AB 360 CM','beklædning', 6103, 3600, 100, 19),
+('19x100 mm. trykimp. Brædt','beklædning', 8136, 4800, 100, 19),
+('19x100 mm. trykimp. Brædt','beklædning', 7119, 4200, 100, 19),
+('19x100 mm. trykimp. Brædt','beklædning', 6103, 3600, 100, 19),
+('19x100 mm. trykimp. Brædt','beklædning', 5085, 3000, 100, 19),
 
 -- tagsten
 ('RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
@@ -224,7 +225,21 @@ VALUES
 -- tagplade
 ('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','tagplade', 24900, 1100, 610, 1),
 ('FASTLOCK UNI KLAR 6,0M','tagplade', 23397, 60000, 300, 1),  -- ingen width mål defineret
-('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1);
+('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1),
+
+('45x95 Reglar ubh.','løsholt',7533,5400,95,45),
+('45x95 Reglar ubh.','løsholt',7115,5100,95,45),
+('45x95 Reglar ubh.','løsholt',6696,4800,95,45),
+('45x95 Reglar ubh.','løsholt',6278,4500,95,45),
+('45x95 Reglar ubh.','løsholt',5859,4200,95,45),
+('45x95 Reglar ubh.','løsholt',5440,3900,95,45),
+('45x95 Reglar ubh.','løsholt',5023,3600,95,45),
+('45x95 Reglar ubh.','løsholt',4604,3300,95,45),
+('45x95 Reglar ubh.','løsholt',4185,3000,95,45),
+('45x95 Reglar ubh.','løsholt',3766,2700,95,45),
+('45x95 Reglar ubh.','løsholt',3348,2400,95,45)
+
+;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
