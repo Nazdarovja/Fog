@@ -27,22 +27,38 @@
     <body>
         <h1>All Customers With Pending Inquiry</h1>
         
+        <% String idTable = "customertable"; %>
         <% List<Customer> c = (List<Customer>)request.getAttribute("customers"); %>
         
         <div class="container">
+            <div class="sortbar">
+                <input type="text" name="searchword1" style="margin: 10px">
+                <input type="text" name="searchword2" style="margin: 10px">
+
+                <select id="sortby" size="1">
+                    <option value="0">Email</option>
+                    <option value="4">Address</option>
+                    <option value="5">Zipcode</option>
+                </select>
+                
+                <input type="submit" value="Sort" >
+            </div>
+        </div>
+        
+        <div class="container">
             <div class="col-lg-12">
-                <table class="table table-bordered">
-                    <thead>
+                <table class="table table-bordered" id="customertable">
+                    
                         <tr>
-                          <th>Email</th>
-                          <th>Name</th>
-                          <th>Surname</th>
-                          <th>Phone number</th>
-                          <th>Address</th>
-                          <th>Zipcode</th>
-                          <th>City</th>
+                          <th class="sorthead" onclick="sortTable('customertable',0)">Email</th>
+                          <th class="sorthead" onclick="sortTable('customertable',1)">Name</th>
+                          <th class="sorthead" onclick="sortTable('customertable',2)">Surname</th>
+                          <th class="sorthead" onclick="sortTable('customertable',3)">Phone number</th>
+                          <th class="sorthead" onclick="sortTable('customertable',4)">Address</th>
+                          <th class="sorthead" onclick="sortTable('customertable',5)">Zipcode</th>
+                          <th class="sorthead" onclick="sortTable('customertable',6)">City</th>
                         </tr>
-                    </thead>
+                    
                     <% for (Customer cos : c) { %>
                     <tr id="customer" onclick="findInquiries('<%= cos.getEmail() %>')">
                         <td> <%= cos.getEmail() %> </td>
