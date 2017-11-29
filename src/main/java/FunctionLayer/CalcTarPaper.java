@@ -29,7 +29,7 @@ public class CalcTarPaper {
 
         double newWidth = tarPaper.getWidth() - 100;  //overlay
         double newLength = tarPaper.getLength();
-        double rows = width / newWidth;
+        double rows = (width + 200) / newWidth;   //20cm udhæng
         double columns = length / newLength;
         double res = (rows * columns) *2;
         int result = (int) Math.ceil(res);
