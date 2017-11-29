@@ -18,6 +18,8 @@ public class GenerateSVG {
         html += generateSVGForCarportArea(length, width, gap);
         if(withShack)
             html += generateSVGForShack(length, width, shackLength-70, shackWidth, gap);
+        if(withShack)
+            html += generateSVGForShackPosts(length, width, shackLength, shackWidth, gap);
         html += generateSVGForEndRafters(length, width, gap);
         html += generateSVGForTopPlate(length, width, gap);
         html += generateSVGForPosts(length, width, withShack, shackLength, shackWidth, gap);
@@ -74,6 +76,14 @@ public class GenerateSVG {
     private static String generateSVGForShack(int length, int width, int shackLength, int shackWidth, int gap) {
         String html = "";
         html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(35+gap)+"' height='"+shackLength+"' width='"+shackWidth+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
+        return html;
+    }
+    
+    private static String generateSVGForShackPosts(int length, int width, int shackLength, int shackWidth, int gap) {
+        String html = "";
+        
+        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(35+gap)+"' height='"+16+"' width='"+16+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
+        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(width-38+gap)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
         return html;
     }
     
