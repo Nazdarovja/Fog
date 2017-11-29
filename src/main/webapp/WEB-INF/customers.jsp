@@ -22,45 +22,36 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         
-        
         <link href="${pageContext.request.contextPath}/Style/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>All Customers With Pending Inquiry</h1>
+        
         
         <% String idTable = "customertable"; %>
         <% List<Customer> c = (List<Customer>)request.getAttribute("customers"); %>
         
-        <div class="container">
-            <div class="toolbar">
-                <input type="text" name="searchword1" style="margin: 10px">
-                <input type="text" name="searchword2" style="margin: 10px">
-
-                <select id="sortby" size="1">
-                    <option value="0">Email</option>
-                    <option value="4">Address</option>
-                    <option value="5">Zipcode</option>
-                </select>
-                
-                <input type="submit" value="Sort" >
+        <div class="topbar">
+            <div style="margin: 10px;">
+                <form name="viewinquiries" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="viewinquiries">
+                    <input type="submit" value="view inquiries" />
+                </form>
             </div>
         </div>
         
+        <h1>Customers</h1>
+        
         <div class="container">
             <div class="toolbar">
-                <input type="text" name="searchword1" style="margin: 10px">
-                <input type="text" name="searchword2" style="margin: 10px">
-
-                <select id="sortby" size="1">
-                    <option value="0">Email</option>
-                    <option value="4">Address</option>
-                    <option value="5">Zipcode</option>
-                </select>
-                
-                <input type="submit" value="Sort" >
+                <input type="text" class="searchbar" placeholder="email.." onkeyup="rowSorting('customertable')">
+                <input type="text" class="searchbar" placeholder="name.." onkeyup="rowSorting('customertable')">
+                <input type="text" class="searchbar" placeholder="surname.." onkeyup="rowSorting('customertable')">
+                <input type="text" class="searchbar" placeholder="phonenumber.." onkeyup="rowSorting('customertable')">
+                <input type="text" class="searchbar" placeholder="address.." onkeyup="rowSorting('customertable')">
+                <input type="text" class="searchbar" placeholder="zipcode.." onkeyup="rowSorting('customertable')">
             </div>
         </div>
-        
+
         <div class="container">
             <div class="col-lg-12">
                 <table class="table table-bordered" id="customertable">
@@ -97,7 +88,7 @@
                         </tr>
                     </thead>
                     <% for (Customer cos : c) { %>
-                    <tr id="customer" onclick="findInquiries('<%= cos.getEmail() %>')">
+                    <tr class="clickablerow" onclick="findInquiriesByEmail('<%= cos.getEmail() %>')">
                         <td> <%= cos.getEmail() %> </td>
                         <td> <%= cos.getName() %> </td>
                         <td> <%= cos.getSurname() %> </td>
@@ -114,8 +105,6 @@
             </div>
         </div>
                 
-        <script src="${pageContext.request.contextPath}/Scripts/QuickBuildJS.js" type="text/javascript"></script>
-        
-        
+        <script src="${pageContext.request.contextPath}/Scripts/script.js" type="text/javascript"></script>
     </body>
 </html>

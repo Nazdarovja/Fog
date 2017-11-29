@@ -3,9 +3,10 @@
 
 }
 
-#customer:hover {
-    background-color: darkgray;
-    cursor:pointer;
+.clickablerow:hover {
+    
+    background-color: darkgray !important;
+    cursor:pointer !important;
 }
 
 h1 {
@@ -18,6 +19,11 @@ h1 {
     
 }
 
+.searchbar {
+    margin: 15px;
+    
+}
+
 thead {
     
     background-color: #003152;
@@ -27,7 +33,15 @@ thead {
 .toolbar {
     
     background-color: #003152; 
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     border: 2px solid lightgray;
+}
+
+.topbar {
+    width: 100%;
+    background-color: #003152; 
+    margin-bottom: 25px;
+    overflow:auto;
+    
 }
 

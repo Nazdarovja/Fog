@@ -32,19 +32,6 @@
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
         
         <div class="container">
-            <div class="toolbar">
-                <input type="text" name="searchword1" style="margin: 10px">
-                <input type="text" name="searchword2" style="margin: 10px">
-
-                <select name="sortby" size="1">
-                    <option>status</option>
-                    <option>customer</option>
-                    <option>employee</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="container">
             <div class="col-lg-12">
                 <table class="table table-bordered">
                     <thead>
