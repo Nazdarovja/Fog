@@ -17,7 +17,6 @@
     </head>
     <body>
 
-        <script src="../Scripts/QuickBuildJS.js"></script>
         <div class="row">
             <h1 class="col-sm-6 col-sm-offset-3">Hejsa, vælg dine mål til din kommende carport!</h1>
             <% Customer customer = null;
@@ -40,7 +39,7 @@
                     <input type="hidden" name="command" value="calculate">
                     <div class="col-sm-2 col-sm-offset-2">
                         Vælg længde<br>
-                        <select class="form-control" name="length" onchange="check(this)">
+                        <select class="form-control" name="length" id="length" onchange="check(this)">
                             <% int length = 0;
                                 if (request.getSession().getAttribute("length") != null) {
                                     length = (int) request.getSession().getAttribute("length");
@@ -70,7 +69,7 @@
                     </div>
                     <div class="col-sm-2 col-sm-offset-1">
                         Vælg bredde<br>
-                        <select class="form-control" name="width">
+                        <select class="form-control" id="width" name="width">
                             <% int width = 0;
                                 if (request.getSession().getAttribute("width") != null) {
                                     width = (int) request.getSession().getAttribute("width");
@@ -121,6 +120,7 @@
             <div class="row">
                 <div class="col-sm-2 col-sm-offset-1">
                     Vælg tagtype<br>
+                        <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) { %><%=(String)request.getSession().getAttribute("roofType")%><%}%>">
                     <select class="form-control" name="roofType">
                         <% String roofType = "";
                             if (request.getSession().getAttribute("roofType") != null) {
@@ -159,31 +159,16 @@
                             
                 <div class="col-sm-2">
                     Tilvælg redskabsrum<br>
-                    <input name="shackCheckbox" type="checkbox" name="shack" value="shack" />
+                    <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
+                    <input id="shackCheckboxCheck" type="hidden" value="<% if(request.getSession().getAttribute("shackCheckbox") != null) {%>on<%}%>">
 
                     <div id="shackLength" style="display : none">
                         Redskabsrum Længde<br>
-                        <select class="form-control " name="angle" >
-                            <% int shackLength = -1;
-                                if (request.getSession().getAttribute("shackLength") != null) {
-                                    shackLength = Integer.parseInt((String) request.getSession().getAttribute("shackLength"));
-                                }
-                            %>
-                            <option value=0  <%if (shackLength == 0) { %> selected <%} %>>100</option>
-
-                        </select>
+                        <input id="shackLengthInput" type="number" min="100" max="???" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) { %><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
                     </div>
-                    <div id="shackHeight" style="display : none">
-                        Redskabsrum Højde<br>
-                        <select class="form-control " name="angle" >
-                            <% int shackHeight = -1;
-                                if (request.getSession().getAttribute("shackHeight") != null) {
-                                    shackHeight = Integer.parseInt((String) request.getSession().getAttribute("shackHeight"));
-                                }
-                            %>
-                            <option value=0  <%if (shackHeight == 0) { %> selected <%} %>>100</option>
-
-                        </select>
+                    <div id="shackWidth" style="display : none">
+                        Redskabsrum Bredde<br>
+                        <input id="shackWidthInput" type="number" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) { %><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
                     </div>
                 </div>
             </div>
@@ -212,7 +197,7 @@
         </form>
 
         <% }%>
-
+        <script src="../Scripts/QuickBuildJS.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
