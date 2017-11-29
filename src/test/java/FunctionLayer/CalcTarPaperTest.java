@@ -62,7 +62,7 @@ public class CalcTarPaperTest {
         int length = 8000;
         int width = 1000;
         List<Product> tarPaperList = Calculator.getChosenCategory("tagpap", DataLayer.ProductMapper.getProducts());
-        int expQty = 3;  //1 to cover each side, 1 extra cause of overlay
+        int expQty = 2;  //1 to cover each side, 1 extra cause of overlay
         OrderLine result = CalcTarPaper.getTarPaperFlatRoof(length, width, DataLayer.ProductMapper.getSingleProduct("tagpap", "ICOPAL BASE 411 P 1X8M"));
         assertEquals(expQty, result.quantity);
     }
