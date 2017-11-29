@@ -11,7 +11,6 @@ function findInquiries(cosEmail) {
 // Adds options to jsp after Calculate button
 function check() {
     if ($("#shackCheckboxCheck").val() !== "") {
-        alert("shackCheckbox");
         $("#shackCheckbox").attr("checked", true);
         $("#shackLength").show();
         $("#shackWidth").show();
@@ -22,7 +21,6 @@ function check() {
         restrictWidth();
     }
     if (document.getElementById("roofTypeCheck").value === "rejsning") {
-        alert("roofType");
         $("#angle").show();
     } else {
         $("#angle").hide();
@@ -100,9 +98,7 @@ function restrictLength() {
 };
 
 function widthRules() {
-    alert("check width");
     if ($("#width").val() <= 400){
-        alert("under 300");
         return $("#width").val();
     }else return 100;
 }
