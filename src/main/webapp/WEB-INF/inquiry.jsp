@@ -31,17 +31,6 @@
         <% Inquiry i = (Inquiry)request.getAttribute("inquiry"); %>
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
         
-        <div class="container" style="background-color: grey; margin-bottom: 40px">
-            <input type="text" name="searchword1" style="margin: 10px">
-            <input type="text" name="searchword2" style="margin: 10px">
-            
-            <select name="sortby" size="1">
-                <option>status</option>
-                <option>customer</option>
-                <option>employee</option>
-            </select>
-        </div>
-        
         <div class="container">
             <div class="col-lg-12">
                 <table class="table table-bordered">
