@@ -159,7 +159,7 @@
                 <div class="col-sm-2">
                     Tilvælg redskabsrum<br>
                     <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  value="<% if((String)request.getSession().getAttribute("shackCheckbox") != null) {%>on<%}%>">
+                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  <% if((String)request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
 
                     <div id="shackLength" >
                         Redskabsrum Længde<br>

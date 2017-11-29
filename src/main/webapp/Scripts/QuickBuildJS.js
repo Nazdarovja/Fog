@@ -8,6 +8,34 @@ function findInquiries(cosEmail) {
     window.open("/Fog/FrontController?command=inquiry&customer=" + email, "nameofwindow", "directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
 }
 
+// Adds options to jsp after Calculate button
+function check() {
+    if ($("#shackCheckboxCheck").val() !== "") {
+        alert("shackCheckbox");
+        $("#shackCheckbox").attr("checked", true);
+        $("#shackLength").show();
+        $("#shackWidth").show();
+
+        $("#shackLengthInput").attr("required", true);
+        $("#shackWidthInput").attr("required", true);
+        restrictLength();
+        restrictWidth();
+    }
+    if (document.getElementById("roofTypeCheck").value === "rejsning") {
+        alert("roofType");
+        $("#angle").show();
+    } else {
+        $("#angle").hide();
+    }
+    if (document.getElementById("shackCheckboxCheck").value === "") {
+        $("#shackLength").hide();
+        $("#shackWidth").hide();
+        $("#shackLengthInput").attr("value", null);
+        $("#shackWidthInput").attr("value", null);
+    }
+}
+check();
+
 // Adds angle option, when rejsning is chosen in the dropdown.
 $('select[name=roofType]').on('change', function () {
     if (this.value === "rejsning") {
@@ -17,37 +45,6 @@ $('select[name=roofType]').on('change', function () {
     }
 });
 
-// Adds options to jsp after Calculate button
-function check() {
-    if (document.getElementById("shackCheckboxCheck").value === "on") {
-        $("#shackCheckbox").attr("checked", true);
-        $("#shackLength").show();
-        $("#shackWidth").show();
-
-        $("#shackLengthInput").attr("required", true);
-        $("#shackWidthInput").attr("required", true);
-        $("#shackLengthInput").attr({
-            "max": document.getElementById("length").value / 2,
-            "min": 100
-        });
-        $("#shackWidthInput").attr({
-            "max": document.getElementById("width").value,
-            "min": 100
-        });
-    }
-    if (document.getElementById("roofTypeCheck").value === "rejsning") {
-        $("#angle").show();
-    } else {
-        $("#angle").hide();
-    }
-    if (document.getElementById("shackCheckboxCheck").value !== "on") {
-        $("#shackLength").hide();
-        $("#shackWidth").hide();
-        $("#shackLengthInput").attr("value", null);
-        $("#shackWidthInput").attr("value", null);
-    }
-}
-check();
 
 // Adds Length and Height visibilty to jsp
 $('input[name=shackCheckbox]').on('change', function () {
@@ -56,6 +53,8 @@ $('input[name=shackCheckbox]').on('change', function () {
         $("#shackWidth").show();
         $("#shackLengthInput").attr("required", true);
         $("#shackWidthInput").attr("required", true);
+        restrictLength();
+        restrictWidth();
     } else {
         $("#shackLengthInput").attr("required", false);
         $("#shackWidthInput").attr("required", false);
@@ -69,13 +68,41 @@ $('input[name=shackCheckbox]').on('change', function () {
 
 $('select[name=length]').on('change', function () {
     $("#shackLengthInput").attr({
-        "max": (this.value / 2),
-        "min": 100
+        "max": $("#length").val() / 2,
+        "min": 100,
+        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
     });
 });
+
 $('select[name=width]').on('change', function () {
     $("#shackWidthInput").attr({
-        "max": this.value,
-        "min": 100
+        "max": $("#width").val(),
+        "min": widthRules(),
+        "placeholder": "Tillad bredde fra " +widthRules() + " til " +$("#width").val()
     });
 });
+
+
+function restrictWidth() {
+    $("#shackWidthInput").attr({
+        "max": $("#width").val(),
+        "min": widthRules(),
+        "placeholder": "Tillad bredde fra " +widthRules() + " til " +$("#width").val()
+    });
+};
+
+function restrictLength() {
+    $("#shackLengthInput").attr({
+        "max": $("#length").val() / 2,
+        "min": 100,
+        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
+    });
+};
+
+function widthRules() {
+    alert("check width");
+    if ($("#width").val() <= 400){
+        alert("under 300");
+        return $("#width").val();
+    }else return 100;
+}
