@@ -1,0 +1,74 @@
+package FunctionLayer;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+
+import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ */
+public class CalcShackPostTest {
+    
+    public CalcShackPostTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     * Test of getPostsShack method, of class CalcShackPost.
+     */
+    @Test
+    public void testGetPostsShackSameWidth() throws Exception {
+        System.out.println("getPostsShack - Same Width");
+        int carportLength = 730;
+        int carportWidth = 360;
+        int height = 210;
+        int shackLength = 730;
+        int shackWidth = 360;
+        List<Product> posts = Calculator.getChosenCategory("stolpe", DataLayer.ProductMapper.getProducts());;
+        int expPosts = 3; //2 for length, 1 for door
+        OrderLine result = CalcShackPost.getPostsShack(carportLength, carportWidth, height, shackLength, shackWidth, posts);
+        assertEquals(expPosts, result.quantity);
+    }
+    @Test
+    public void testGetPostsShackLesserWidth() throws Exception {
+        System.out.println("getPostsShack - lasser Width");
+        int carportLength = 730;
+        int carportWidth = 360;
+        int height = 210;
+        int shackLength = 730;
+        int shackWidth = 330;
+        List<Product> posts = Calculator.getChosenCategory("stolpe", DataLayer.ProductMapper.getProducts());;
+        int expPosts = 4; //1 for length, 1 for "length", 1 for width, 1 for door
+        OrderLine result = CalcShackPost.getPostsShack(carportLength, carportWidth, height, shackLength, shackWidth, posts);
+        assertEquals(expPosts, result.quantity);
+    }
+    
+}

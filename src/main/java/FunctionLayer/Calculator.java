@@ -93,6 +93,13 @@ public class Calculator {
         return calcHypotenuse(carportWidth,carportHeight);
     }
     
+    public static double calcRoofHeight(int carportWidth, int angle){
+        carportWidth = carportWidth * 10;   //cm to mm
+        double halfWidth = carportWidth / 2;
+        double radiantAngle = Math.toRadians(angle);
+        return  halfWidth / Math.cos(radiantAngle);
+    }
+    
     private static double calcHypotenuse(double a, double b){
         double aPow = Math.pow(a, 2);
         double bPow = Math.pow(b, 2);
