@@ -218,6 +218,27 @@ VALUES
 ('19x100 mm. trykimp. Brædt','beklædning', 6103, 3600, 100, 19),
 ('19x100 mm. trykimp. Brædt','beklædning', 5085, 3000, 100, 19),
 
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 8073, 5400, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 7625, 5100, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 7176, 4800, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 6728, 4500, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 6279, 4200, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 5830, 3900, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 5383, 3600, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 4934, 3300, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 4485, 3000, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 4036, 2700, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 3588, 2400, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 3140, 2100, 100, 19),
+('19X100 BRÆDDER FYR SAVSKÅRET VTA','beklædning', 2691, 1800, 100, 19),
+
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 6453, 5400, 100, 25),
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 5736, 4800, 100, 25),
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 5019, 4200, 100, 25),
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 4303, 3600, 100, 25),
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 3585, 3000, 100, 25),
+('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 2868, 2400, 100, 25), 
+
 -- tagsten
 ('RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
 ('RØDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM','tagsten', 8995, 0, 0, 0),  -- ingen mål defineret
@@ -227,6 +248,7 @@ VALUES
 ('FASTLOCK UNI KLAR 6,0M','tagplade', 23397, 60000, 300, 1),  -- ingen width mål defineret
 ('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1),
 
+-- løsholt
 ('45x95 Reglar ubh.','løsholt',7533,5400,95,45),
 ('45x95 Reglar ubh.','løsholt',7115,5100,95,45),
 ('45x95 Reglar ubh.','løsholt',6696,4800,95,45),
