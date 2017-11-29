@@ -39,7 +39,7 @@
                     <input type="hidden" name="command" value="calculate">
                     <div class="col-sm-2 col-sm-offset-2">
                         Vælg længde<br>
-                        <select class="form-control" name="length" id="length" onchange="check(this)">
+                        <select class="form-control" name="length" id="length" >
                             <% int length = 0;
                                 if (request.getSession().getAttribute("length") != null) {
                                     length = (int) request.getSession().getAttribute("length");
@@ -132,7 +132,7 @@
                     </select>
 
                     <div >
-                        <div id="angle" style="display : none">
+                        <div id="angle">
                             Vælg hældning<br>
                             <select class="form-control" name="angle" >
                                 <% int angle = -1;
@@ -140,7 +140,6 @@
                                         angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
                                     }
                                 %>
-                                <option value=0  <%if (angle == 0) { %> selected <%} %>>0°</option>
                                 <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
                                 <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
                                 <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
@@ -160,22 +159,22 @@
                 <div class="col-sm-2">
                     Tilvælg redskabsrum<br>
                     <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                    <input id="shackCheckboxCheck" type="hidden" value="<% if(request.getSession().getAttribute("shackCheckbox") != null) {%>on<%}%>">
+                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  value="<% if((String)request.getSession().getAttribute("shackCheckbox") != null) {%>on<%}%>">
 
-                    <div id="shackLength" style="display : none">
+                    <div id="shackLength" >
                         Redskabsrum Længde<br>
-                        <input id="shackLengthInput" type="number" min="100" max="???" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) { %><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) { %><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
                     </div>
-                    <div id="shackWidth" style="display : none">
+                    <div id="shackWidth" >
                         Redskabsrum Bredde<br>
-                        <input id="shackWidthInput" type="number" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) { %><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) { %><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
                     </div>
                 </div>
             </div>
                             
             <div class="row">
                 <div class="col-sm-2 col-sm-offset-9 well">
-                    <% if (request.getSession().getAttribute("inquiry") != null) { %>
+                    <% if (request.getSession().getAttribute("inquiry") != null) {  %>
                     <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
                     TOTAL PRIS: <br>
                     <%= inquiry.getBom().getTotalPrice()%>,-

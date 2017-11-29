@@ -11,18 +11,21 @@ function findInquiries(cosEmail) {
 // Adds angle option, when rejsning is chosen in the dropdown.
 $('select[name=roofType]').on('change', function () {
     if (this.value === "rejsning") {
-        document.getElementById("angle").style.display = "block";
+        $("#angle").show();
     } else {
-        document.getElementById("angle").style.display = "none";
+        $("#angle").hide();
     }
 });
 
 // Adds options to jsp after Calculate button
 function check() {
     if (document.getElementById("shackCheckboxCheck").value === "on") {
-        document.getElementById("shackCheckbox").checked = true;
-        document.getElementById("shackLength").style.display = "block";
-        document.getElementById("shackWidth").style.display = "block";
+        $("#shackCheckbox").attr("checked", true);
+        $("#shackLength").show();
+        $("#shackWidth").show();
+
+        $("#shackLengthInput").attr("required", true);
+        $("#shackWidthInput").attr("required", true);
         $("#shackLengthInput").attr({
             "max": document.getElementById("length").value / 2,
             "min": 100
@@ -33,7 +36,15 @@ function check() {
         });
     }
     if (document.getElementById("roofTypeCheck").value === "rejsning") {
-        document.getElementById("angle").style.display = "block";
+        $("#angle").show();
+    } else {
+        $("#angle").hide();
+    }
+    if (document.getElementById("shackCheckboxCheck").value !== "on") {
+        $("#shackLength").hide();
+        $("#shackWidth").hide();
+        $("#shackLengthInput").attr("value", null);
+        $("#shackWidthInput").attr("value", null);
     }
 }
 check();
@@ -41,23 +52,29 @@ check();
 // Adds Length and Height visibilty to jsp
 $('input[name=shackCheckbox]').on('change', function () {
     if ($(this).is(':checked')) {
-        document.getElementById("shackLength").style.display = "block";
-        document.getElementById("shackWidth").style.display = "block";
-        document.getElementById("shackLength").required = true;
+        $("#shackLength").show();
+        $("#shackWidth").show();
+        $("#shackLengthInput").attr("required", true);
+        $("#shackWidthInput").attr("required", true);
     } else {
-        document.getElementById("shackLength").style.display = "none";
-        document.getElementById("shackWidth").style.display = "none";
+        $("#shackLengthInput").attr("required", false);
+        $("#shackWidthInput").attr("required", false);
+        $("#shackLengthInput").val(null);
+        $("#shackWidthInput").val(null);
+        $("#shackLength").hide();
+        $("#shackWidth").hide();
+        $("#shackCheckbox").attr("value", null);
     }
 });
 
 $('select[name=length]').on('change', function () {
     $("#shackLengthInput").attr({
-        "max": this.value / 2,
+        "max": (this.value / 2),
         "min": 100
     });
 });
 $('select[name=width]').on('change', function () {
-        $("#shackWidthInput").attr({
+    $("#shackWidthInput").attr({
         "max": this.value,
         "min": 100
     });
