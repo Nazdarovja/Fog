@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="icon" href="./img/foglogo.png"/>
+        <title>Quick Byg Ansat</title>
     </head>
     <body>
         <h1>View customers</h1>
