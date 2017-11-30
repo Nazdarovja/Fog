@@ -152,8 +152,13 @@
                     </div>
                 </div>
 
-
-                <div class="col-sm-6 text-center lead" > <br><br><br><br><br>ADD SVG HERE </div>
+                        
+                <div id="svg" class="col-sm-6 text-center lead" >
+                    <% if(request.getSession().getAttribute("svg") != null) { 
+                            String svg = (String) request.getSession().getAttribute("svg"); %>
+                            <%= svg %>
+                    <% } %>
+                </div>
 
 
                 <div class="col-sm-2">
