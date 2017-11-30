@@ -7,6 +7,8 @@ package FunctionLayer;
 
 import DataLayer.ProductMapper;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -44,6 +46,8 @@ public class Calculator {
                 bom.addOrderLine(CalcShackTransom.getTransomsForShackWidth(shackWidth, getChosenCategory("løsholt", products)));
                 //Shack Cladding
                 bom.addOrderLine(CalcShackCladding.getCladdingForShackFlatRoof(shackLength, shackWidth, inquiry.getCarportHeight(), getChosenCategory("beklædning", products)));
+                //Shack Door
+                bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
             // PITCHED ROOF ALHORITHM
         } else {
@@ -55,8 +59,8 @@ public class Calculator {
             //raft / spær
             bom.addOrderLine(CalcRafter.getRafterPitchedRoof(length, width, getChosenCategory("spær", products)));
             //lath / lægte
-            bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenProduct("38x73mm. Lægte ubh.", products)));
-            bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenProduct("38x73mm. Lægte ubh.", products)));
+            bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenCategory("lægte", products)));
+            bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
             //tarPaper / tagpap
             // bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenCategory("tagpap", products)));
             //Bricks/rooftiles /tagsten
@@ -73,6 +77,8 @@ public class Calculator {
                 //Shack Cladding
                 bom.addOrderLine(CalcShackCladding.getCladdingForShackPitchedRoofGable(width, inquiry.getCarportHeight(), shackWidth, Integer.parseInt(inquiry.getAngle()), getChosenCategory("beklædning", products)));
                 bom.addOrderLine(CalcShackCladding.getCladdingForShackPitchedRoofSide(width, inquiry.getCarportHeight(), shackLength, Integer.parseInt(inquiry.getAngle()) , getChosenCategory("beklædning", products)));
+                //Shack Door
+                bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
         }
 
@@ -112,7 +118,7 @@ public class Calculator {
         double halfWidth = carportWidth / 2;
         double radiantAngle = Math.toRadians(angle);
         double carportHeight = halfWidth / Math.cos(radiantAngle);
-
+        carportWidth += 10;
         return calcHypotenuse(carportWidth, carportHeight);
     }
 
@@ -127,6 +133,24 @@ public class Calculator {
         double aPow = Math.pow(a, 2);
         double bPow = Math.pow(b, 2);
         return Math.sqrt(aPow + bPow);
+    }
+    
+    public static Product getCorrectLengthProduct(int length, List<Product> products) {
+        // Sorts list on product.getLength() attribute.
+        products.sort(Comparator.comparing(Product::getLength));
+        // We need the list in descending order, so we reverse order it, so we start with the longest length.
+        Collections.reverse(products);
+
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            // if the products is longer than product available, the product is set to the largest in stock
+            // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
+            // in regular cases it will chose the appropriate size product for the length
+            if (length / p.getLength() >= 1 || i == products.size() - 1) {
+                return p;
+            }
+        }
+        return null;
     }
 
 }

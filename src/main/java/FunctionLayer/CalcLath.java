@@ -5,13 +5,17 @@
  */
 package FunctionLayer;
 
+import PresentationLayer.Calculate;
+import java.util.List;
+
 /**
  *
  * @author Orchi
  */
 public class CalcLath {
     
-    public static OrderLine calculateRegularLath(int length, int width, Product lath) {
+    public static OrderLine calculateRegularLath(int length, int width, List<Product> laths) {
+        Product lath = Calculator.getCorrectLengthProduct(length, laths);
         int quantity = 0;
         
         // bredden skal fodres til denne metode fra en anden algoritme metode.
@@ -34,7 +38,8 @@ public class CalcLath {
         return new OrderLine(lath, length, quantity, "stk", "Til montering på spær");
     }
     
-    public static OrderLine calculateTopLath(int length, int width, Product lath) {
+    public static OrderLine calculateTopLath(int length, int width, List<Product> laths) {
+        Product lath = Calculator.getCorrectLengthProduct(length, laths);
         int quantity = 1;
         // varierer længden alt efter længden på carport???? Eller er toplægten 420 cm som standard??
         // 2 toplægter til hver side af taget på carport
@@ -43,7 +48,8 @@ public class CalcLath {
         return new OrderLine(lath, length, quantity, "stk", "Toplægte til montering af rygsten lægges i toplægteholder");
     }
     
-    public static OrderLine calculateDoorZLath(int length, int width, Product lath) {
+    public static OrderLine calculateDoorZLath(int length, int width, List<Product> laths) {
+        Product lath = Calculator.getCorrectLengthProduct(length, laths);
         int quantity = 1;
         lath.setLength(length);
         // hvis dør, på skur??
