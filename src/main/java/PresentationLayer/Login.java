@@ -5,8 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
-import FunctionLayer.LogicFacade;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
