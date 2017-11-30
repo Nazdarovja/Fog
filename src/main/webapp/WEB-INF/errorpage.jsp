@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" href="./img/foglogo.png"/>
         <title>Error Page</title>
     </head>
     <body>
