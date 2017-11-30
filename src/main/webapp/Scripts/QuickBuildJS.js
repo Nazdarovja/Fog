@@ -142,3 +142,4 @@ function widthRules() {
     } else
         return 100;
 }
+
