@@ -13,22 +13,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="icon" href="./img/foglogo.png"/>
         <title>Quick Byg</title>
     </head>
     <body>
-
         <div class="row">
-            <h1 class="col-sm-6 col-sm-offset-3">Hejsa, vælg dine mål til din kommende carport!</h1>
+        <img class="col-sm-3" style="margin-right: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
+            <h1 class="col-sm-6 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
             <% Customer customer = null;
                 if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
-            <div class="col-sm-1 col-sm-offset-2" style="background: green; color: white;">
-                <p>Hello <%= customer.getName()%>, start buying!!! </p>
+                <h1 class="col-sm-3 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Hello <%= customer.getName()%></h1>
+
             </div>
             <% } else {%>
-            <div class="col-sm-1 col-sm-offset-2" style="background: beige;">
-                <p>click <a href="FrontController?command=login">here</a> to log in!</p>
-
-                <p>click <a href="FrontController?command=toregister">here</a> to register!</p>
+            <div class="col-sm-3 well" style="background:#124989; margin-left: 0px; padding-top: 18px; padding-bottom: 8px;">
+                <p class="text-right" style="margin-right: 42px"><a class="btn btn-sm btn-default" href="FrontController?command=login">  Login  </a></p>
+                <p class="text-right"><a class="btn btn-sm btn-default" href="FrontController?command=toregister">Register here</a></p>
             </div>
             <% } %>
         </div>
@@ -95,8 +95,8 @@
                             <option value=750 <%if (width == 750) { %> selected <%} %>>750</option>
                             <option value=780 <%if (width == 780) { %> selected <%} %>>780</option>
                         </select>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
                     </div>
 
                     <div class="col-sm-2 col-sm-offset-1">
@@ -112,15 +112,15 @@
                             <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
                             <option value=300 <%if (height == 300) { %> selected <%} %>>300</option>
                         </select>
-                    <br>
-                    <br>
+                        <br>
+                        <br>
                     </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-2 col-sm-offset-1">
                     Vælg tagtype<br>
-                        <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) { %><%=(String)request.getSession().getAttribute("roofType")%><%}%>">
+                    <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
                     <select class="form-control" name="roofType">
                         <% String roofType = "";
                             if (request.getSession().getAttribute("roofType") != null) {
@@ -151,29 +151,29 @@
                         </div>
                     </div>
                 </div>
-                            
-                            
-                            <div class="col-sm-6 text-center lead" > <br><br><br><br><br>ADD SVG HERE </div>
-                            
-                            
+
+
+                <div class="col-sm-6 text-center lead" > <br><br><br><br><br>ADD SVG HERE </div>
+
+
                 <div class="col-sm-2">
                     Tilvælg redskabsrum<br>
                     <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  <% if((String)request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
+                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
 
                     <div id="shackLength" >
                         Redskabsrum Længde<br>
-                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) { %><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
                     </div>
                     <div id="shackWidth" >
                         Redskabsrum Bredde<br>
-                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) { %><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
                     </div>
                 </div>
             </div>
-                            
+
             <div class="row">
-                <div class="col-sm-2 col-sm-offset-9 well">
+                <div class="col-sm-2 col-sm-offset-9 well bg-primary text-white" style=" background:#124989">
                     <% if (request.getSession().getAttribute("inquiry") != null) {  %>
                     <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
                     TOTAL PRIS: <br>
@@ -181,7 +181,7 @@
                     <Br>
                     <%}%>
 
-                    <input class="btn btn-default" type="submit" value="Calculate"/>
+                    <input class="btn btn-default"  type="submit" value="Calculate"/>
                 </div>
             </div>
         </form>

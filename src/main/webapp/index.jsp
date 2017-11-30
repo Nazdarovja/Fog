@@ -9,13 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<link rel="icon" href="http://shop.johannesfog.dk/gfx/foglogok.png"/>-->
+        <link rel="icon" href="./img/foglogo.png"/>
         <title>Quick Byg</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <div style="width: 100%; text-align: center;">
-        <h1>Hejsa, her kan du bygge din egen sindsyge carport!</h1>
-        <a href="FrontController?command=QuickBuild">
-            <img src="http://www.gartenhausportal.com/wp-content/uploads/2012/06/gartenhaus-mit-carport.jpg" width="75%" height="600px" ></a>
+        <div class="row">
+            <img class="col-sm-3" style="margin-right: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
+            <h1 class="col-sm-9 well bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
         </div>
-    </body>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <a href="FrontController?command=QuickBuild">
+                    <img src="https://www.johannesfog.dk/globalassets/inriver/resources/33529" ></a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
