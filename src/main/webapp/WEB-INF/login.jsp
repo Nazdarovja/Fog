@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="../Style/main.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" href="./img/foglogo.png"/>
         <title>Login Page</title>
     </head>
     <body>

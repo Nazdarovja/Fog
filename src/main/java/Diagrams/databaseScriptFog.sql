@@ -126,7 +126,10 @@ VALUES
 ('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750, 'Hansen1'),
 ('test2@test.dk','Tom','Tomsen',44332211,'Sildevej 2',2000, 'Tomsen1'),
 ('test3@test.dk','Hanne','Hannesen',11112233,'Makrelvej 3',2800, 'Hannesen'),
-('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800, 'Pernillesen');
+('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800, 'Pernillesen'),
+('test5@test.dk','Dorthe','Larsen',44533322,'Totalvej 2',2800, 'Dorthel'),
+('test8@test.dk','Anders','Andersen',42343322,'Absvej 2',2730, '333aaa'),
+('test6@test.dk','Oliver','Håkonsson',24566333,'Taskestrupvej 42',2000, 'gggg');
 
 INSERT INTO
 Employee (name, surname)
@@ -142,7 +145,10 @@ VALUES
 (320,420,320,320,120,'fladt',null,null,null,null,'ny','test1@test.dk'),
 (320,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
 (320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
-(320,570,410,null,null,'rejsning','25',null,'Kontakt vedr. valg af trætype','2017-07-14','behandlet','test1@test.dk');
+(320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'rejsning','25',null,'Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
+(320,570,410,null,null,'rejsning','25',null,null,'2017-07-15','ny','test8@test.dk'),
+(320,420,320,null,null,'rejsning','15',null,null,null,'ny','test6@test.dk');
 
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade',','løsholt'

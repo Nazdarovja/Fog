@@ -21,15 +21,13 @@ public class ViewInquiries extends Command
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<Inquiry> i = LogicFacade.viewInquiries();
+        String email = request.getParameter("email");
         
-        //List<Inquiry> iList = LogicFacade.viewInquiries();
-        List[] list = LogicFacade.viewCustomersAndInquiries();
+        if (email != null) request.setAttribute("email", email);
+        else request.setAttribute("email", "");
         
-        List<Inquiry> iList = list[0];
-        List<Customer> cList = list[1];
-        
-        request.setAttribute("inquiries", iList);
-        request.setAttribute("customers", cList);
+        request.setAttribute("inquiries", i);
         
         return "inquiries";
     }

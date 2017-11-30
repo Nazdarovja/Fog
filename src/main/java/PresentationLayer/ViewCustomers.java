@@ -15,17 +15,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class ViewRequestCustomers extends Command {
+public class ViewCustomers extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        List<Customer> cl = LogicFacade.viewAllCustomers();
         
-        List<Customer> c = LogicFacade.viewCustomersByInquiryStatus("ny");
+        request.setAttribute("customers", cl);
         
-        request.setAttribute("customers", c);
-        
-        return "inquiries";
-
+        return "customers";
     }
     
 }
