@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="../Style/quickbuild.css" rel="stylesheet" type="text/css"/>
+        <link href="./Style/quickbuild.css" rel="stylesheet" type="text/css"/>
         <link rel="icon" href="./img/foglogo.png"/>
         <title>Quick Byg</title>
     </head>
@@ -205,8 +205,7 @@
         <div class="row">
 
             <!-- Modal Register -->
-            <form action="#" method="post" id="newmember" >
-                <input  type="hidden" name="command" value="register">
+            <form action="FrontController" method="post" id="registration" name="registration" >
                 <div class="modal fade" id="registerUser" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -215,73 +214,71 @@
                                 <h4 class="modal-title" id="myModalLabel">Registrer</h4>
                             </div>
 
-                            <div class="form-group has-feedback">
-                                <label class="control-label" for="emaillabel">* Email adresse</label>
-                                <input type="email" class="form-control" id="emailinput" aria-describedby="emailinput" required="">
-                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                            </div>
-
-                            <div class="form-group has-feedback">
-                                <label class="control-label" for="passwordlabel">* Password</label>
-                                <input type="password" class="form-control" id="passwordinput" aria-describedby="passwordinput" required="">
-                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                            </div>
-
-                            <div class="form-group has-feedback">
-                                <label class="control-label" for="re-enterpasswordlabel">* Valider password</label>
-                                <input type="password" class="form-control" id="re-enterpasswordinput" aria-describedby="re-enterpasswordinput" required="">
-                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                            </div>
-
-                            <div class="form-group has-feedback">
-                                <label class="control-label" for="postcodelabel">Postnummer</label>
-                                <input type="text" class="form-control" id="postcodeinput" aria-describedby="postcodeinput">
-                                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="modal-body form-inline">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="firstnamelabel">* Fornavn</label>
-                                        <input type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">
-                                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="lastnamelabel">* Efternavn</label>
-                                        <input type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
-                                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-                                    
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="phonenumber">* Telefon nummer</label>
-                                        <input type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
-                                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-                                    
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="address">* Adresse</label>
-                                        <input type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
-                                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                </div><br/>
-
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Registrer</button>
+                            <div class="modal-body form-inline">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="emaillabel">* Email adresse</label>
+                                    <input name="email" type="email" class="form-control"  id="emailinput" aria-describedby="emailinput" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
-                            </div>
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="passwordlabel">* Password</label>
+                                    <input name="password1" type="password" class="form-control" id="password1" aria-describedby="passwordinput" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
 
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="re-enterpasswordlabel">* Valider password</label>
+                                    <input name="password2" type="password" class="form-control" id="password2" aria-describedby="re-enterpasswordinput" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="postcodelabel">* Postnummer</label>
+                                    <input name="zipcode" type="number" class="form-control" id="postcodeinput" aria-describedby="postcodeinput">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="firstnamelabel">* Fornavn</label>
+                                    <input name="name" type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="lastnamelabel">* Efternavn</label>
+                                    <input name="surname" type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="phonenumber">* Tlf. nummer</label>
+                                    <input name="phonenumber" type="number" class="form-control" id="phonenumber" aria-describedby="phonenumber" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="address">* Adresse</label>
+                                    <input name="address" type="text" class="form-control" id="address" aria-describedby="address" required="">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <br/>
+
+                                <div class="form-group">
+                                    <input  type="hidden" name="command" value="register">
+                                    <button type="submit" class="btn btn-primary">Registrer</button>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-            </form> 
+            </form>
 
-    <%----------------------------------------------------------------------------------------------%>
+            <%----------------------------------------------------------------------------------------------%>
             <!-- Modal Login form -->
-            <form id="logingform" action="/" method="post">
-                <input type="hidden" name="command" value="QuickBuild">
+            <form id="logingform" action="FrontController" method="post">
                 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -293,17 +290,18 @@
                             <div class="modal-body">
                                 <div class="form-group has-feedback">
                                     <label class="control-label">Email</label>
-                                    <input type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email">
+                                    <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
                                     <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label">Password</label>
-                                    <input type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password">
+                                    <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
                                     <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 </div>
-
-                                <button type="button" class="btn btn-primary">Login</button>
+                                
+                                <input type="hidden" name="command" value="QuickBuild">
+                                <button type="sumbit" class="btn btn-primary">Login</button>
 
                             </div>
 
@@ -322,10 +320,10 @@
         </div>
     </div>
 
-    <script src="/Scripts/QuickBuildJS.js" type="text/javascript"></script>
+
     <!-- Latest compiled JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/Scripts/QuickBuildJS.js" type="text/javascript"></script>
+    <script src="./Scripts/QuickBuildJS.js" type="text/javascript"></script>
 </body>
 </html>

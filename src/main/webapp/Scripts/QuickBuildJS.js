@@ -96,3 +96,25 @@ function widthRules() {
         return 100;
 }
 ;
+$('#registration').submit(function () {
+    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test($('#password1').val())) {
+        alert("Dit password skal minimum indeholde : 8 karakterer, et lille bogstav, et stort bogstav og et tal");
+        return false;
+    } 
+    if ($('#password2').val() !== $('#password1').val()) {
+        alert("Passwords matcher ikke!");
+        return false;
+    } else {
+        alert('Du er hermed registreret, login for at gemme din carport');
+        return true;
+    }
+
+});
+
+//$('input'[]) {
+//    if($("#password2").val() !== $("#password1").val()){
+//        alert("Dine passwords matcher ikke!");
+//        return false;
+//    }
+//   return true;
+//}
