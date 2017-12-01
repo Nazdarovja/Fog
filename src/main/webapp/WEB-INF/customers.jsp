@@ -27,8 +27,10 @@
     <body>
         
         
-        <% String idTable = "customertable"; %>
+        <% String idTable = (String)request.getAttribute("tableTagId"); %>
         <% List<Customer> c = (List<Customer>)request.getAttribute("customers"); %>
+        <% String tableCustomer = (String)request.getAttribute("customertable"); %>
+
         
         <div class="topbar">
             <div style="margin: 10px;">
@@ -54,54 +56,7 @@
 
         <div class="container">
             <div class="col-lg-12">
-                <table class="table table-bordered" id="customertable">
-                    <thead>
-                        <tr>
-                          <th class="sorthead" onclick="sortTable('customertable',0)">
-                              <b>Email</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',1)">
-                              <b>Name</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',2)">
-                              <b>Surname</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',3)">
-                              <b>Phonenumber</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',4)">
-                              <b>Address</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',5)">
-                              <b>Zipcode</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                          <th class="sorthead" onclick="sortTable('customertable',6)">
-                              <b>City</b> <i class="fa fa-fw fa-sort"></i>
-                              <input type="hidden" class="ascdesc" value="asc">
-                          </th>
-                        </tr>
-                    </thead>
-                    <% for (Customer cos : c) { %>
-                    <tr class="clickablerow" onclick="findInquiriesByEmail('<%= cos.getEmail() %>')">
-                        <td> <%= cos.getEmail() %> </td>
-                        <td> <%= cos.getName() %> </td>
-                        <td> <%= cos.getSurname() %> </td>
-                        <td> <%= cos.getPhonenumber() %> </td>
-                        <td> <%= cos.getAddress() %> </td>
-                        <td> <%= cos.getZipcode() %> </td>
-                        <td> <%= cos.getCity() %> </td>
-                    </tr>
-                    <% } %>
-                </table>
-            </div>
-            <div class="col-lg-6">
-                
+                <%= tableCustomer %>
             </div>
         </div>
                 

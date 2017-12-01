@@ -23,11 +23,14 @@ public class ViewInquiries extends Command
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Inquiry> i = LogicFacade.viewInquiries();
         String email = request.getParameter("email");
+        String tableTagId = "inquirytabel";
+        String inquiryTable = JspUtilTable.tableInquiry(tableTagId, i);
         
         if (email != null) request.setAttribute("email", email);
         else request.setAttribute("email", "");
         
-        request.setAttribute("inquiries", i);
+        request.setAttribute("inquirytable", inquiryTable);
+        request.setAttribute("inquiries", i); // not used..
         
         return "inquiries";
     }
