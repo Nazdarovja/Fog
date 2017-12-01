@@ -290,6 +290,6 @@ public class GenerateSVG {
     
     
     public static void main(String[] args) {
-        System.out.println(GenerateSVG.generateSVGHTML(720, 630, true, 400, 210, "rejsning", 30));
+        System.out.println(GenerateSVG.generateSVGHTML(690, 630, true, 345, 210, "rejsning", 30));
     }
 }
