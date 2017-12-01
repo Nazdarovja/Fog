@@ -20,7 +20,7 @@ public class GenerateSVG {
             html += generateSVGForLineMeasurements(length, width, withShack,shackWidth, gap, gapFromEdge);
             html += generateSVGForCarportArea(length, width, gap);
             if(withShack)
-                html += generateSVGForShack(length, width, shackLength-60, shackWidth, gap, gapFromEdge);
+                html += generateSVGForShack(length, width, shackLength, shackWidth, gap, gapFromEdge);
             if(withShack)
                 html += generateSVGForShackPosts(length, width, shackLength, shackWidth, gap, gapFromEdgePosts);
             html += generateSVGForEndRafters(length, width, gap);
@@ -290,6 +290,6 @@ public class GenerateSVG {
     
     
     public static void main(String[] args) {
-        System.out.println(GenerateSVG.generateSVGHTML(690, 630, true, 345, 210, "rejsning", 30));
+        System.out.println(GenerateSVG.generateSVGHTML(690, 630, true, 345, 210, "fladt", 30));
     }
 }
