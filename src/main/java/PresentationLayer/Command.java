@@ -17,7 +17,6 @@ public abstract class Command {
       private static HashMap<String, Command> commands;
 
     private static void initCommands() {
-        System.out.println("WAZZAA");
         commands = new HashMap<>();
         commands.put( "login", new Login());
         commands.put( "register", new Register() );
