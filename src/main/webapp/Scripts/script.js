@@ -27,37 +27,32 @@ function sortTable(idTable, sortIndex) {
   ascOrDesc = document.getElementsByClassName("ascdesc")[sortIndex].value;
 
   switching = true;
-  /* Make a loop that will continue until
-  no switching has been done: */
+  
+  // continue loop until no switch have been made
   while (switching) {
-    // Start by saying: no switching is done:
     switching = false; 
     rows = table.getElementsByTagName("tr");
-    /* Loop through all table rows (except the
-    first, which contains table headers): */
+    
+    // loops throug, except the first, which is the header
     for (i = 1; i < (rows.length - 1); i++) {
-        // Start by saying there should be no switching:
         shouldSwitch = false;
-        /* Get the two elements you want to compare,
-        one from current row and one from the next: */
+        
+        // two objects which is compared
         x = rows[i].getElementsByTagName("td")[sortIndex];
         y = rows[i + 1].getElementsByTagName("td")[sortIndex];
-        // Check if the two rows should switch place:
-
-
+        
+        // Check if it should be sorted in descending or ascending order
+        // Check if the two rows should switch place
         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() && ascOrDesc === "asc") {
-            // I so, mark as a switch and break the loop:
             shouldSwitch= true;
             break;
         } else if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase() && ascOrDesc === "desc"){
-            // I so, mark as a switch and break the loop:
             shouldSwitch= true;
             break;
         }
     }
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
+      // It the switch should be made, replace the two rows
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
     }
@@ -73,25 +68,6 @@ function rowTextSearch(searchbar, tableId, index) {
     filter = input.value.toUpperCase();
     table = document.getElementById(tableId);
     tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[index];
-        if (td) {
-            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }       
-    }
-}
-
-function rowTextSearch(searchbar, tableId, index) {
-    var input, filter, table, tr, td, i;
-    input = searchbar;
-    filter = input.value.toUpperCase();
-    table = document.getElementById(tableId);
-    tr = table.getElementsByTagName("tr");
-    
     for (i = 0; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[index];
         if (td) {
