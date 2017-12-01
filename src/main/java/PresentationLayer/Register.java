@@ -19,7 +19,6 @@ public class Register extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("DDDDDDDDDDDDDDDDDDDDDEEEEEEEEEEEEEEBUUUUUUUUUUUUUGGGGGGGGGG");
         Customer c = null;
         
         String email = request.getParameter( "email" );
