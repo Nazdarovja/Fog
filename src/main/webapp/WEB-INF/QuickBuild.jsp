@@ -231,7 +231,7 @@
                                 </div>
 
                                 <div class="form-group has-feedback">
-                                    <label class="control-label" for="re-enterpasswordlabel">* Valider password</label>
+                                    <label class="control-label" for="re-enterpasswordlabel">* Gentag password</label>
                                     <input name="password2" type="password" class="form-control" id="password2" aria-describedby="re-enterpasswordinput" required="">
                                     <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 </div>

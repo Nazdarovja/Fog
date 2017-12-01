@@ -13,14 +13,14 @@ public class GenerateSVG {
     
     public static String generateSVGHTML(int length, int width, boolean withShack, int shackLength, int shackWidth, String roofType, int angle) {
             int gap = 40;
-            String html = "<SVG width='100%' viewbox='0 0 " + (length+gap) + " " + (width+gap) + "'>";
+            String html = "<SVG width='50%' viewbox='0 0 " + (length+gap) + " " + (width+gap) + "'>";
         if(roofType.equals("fladt")) {
             int gapFromEdgePosts = 27;
             int gapFromEdge = 30;
             html += generateSVGForLineMeasurements(length, width, withShack,shackWidth, gap, gapFromEdge);
             html += generateSVGForCarportArea(length, width, gap);
             if(withShack)
-                html += generateSVGForShack(length, width, shackLength-60, shackWidth, gap, gapFromEdge);
+                html += generateSVGForShack(length, width, shackLength, shackWidth, gap, gapFromEdge);
             if(withShack)
                 html += generateSVGForShackPosts(length, width, shackLength, shackWidth, gap, gapFromEdgePosts);
             html += generateSVGForEndRafters(length, width, gap);
@@ -34,7 +34,7 @@ public class GenerateSVG {
             html += generateSVGForLineMeasurements(length, width, withShack,shackWidth, gap, gapFromEdge);
             html += generateSVGForCarportArea(length, width, gap);
             if(withShack)
-                html += generateSVGForShack(length, width, shackLength-40, shackWidth, gap, gapFromEdge);
+                html += generateSVGForShack(length, width, shackLength, shackWidth, gap, gapFromEdge);
             if(withShack)
                 html += generateSVGForShackPosts(length, width, shackLength, shackWidth, gap, gapFromEdgePosts);
             html += generateSVGForPosts(length, width, withShack, shackLength, shackWidth, gap, gapFromEdgePosts);
@@ -156,15 +156,39 @@ public class GenerateSVG {
     
     private static String generateSVGForShack(int length, int width, int shackLength, int shackWidth, int gap, int gapFromEdge) {
         String html = "";
-        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(gapFromEdge+gap)+"' height='"+shackLength+"' width='"+shackWidth+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
+        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(gapFromEdge+gap)+"' height='"+(shackLength-20)+"' width='"+shackWidth+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
         return html;
     }
+    
+    /*private static String generateSVGForShackPosts(int length, int width, int shackLength, int shackWidth, int gap, int gapFromEdge) {
+        String html = "";
+        
+        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(gapFromEdge+gap)+"' height='"+16+"' width='"+16+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
+        if(shackLength ==  width) 
+            html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(width-gapFromEdge-5+gap-10)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        else {
+            html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(shackLength-gapFromEdge-5+gap-10)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+            html += "<rect x='"+(length+gap-30-16)+"' y='"+(shackLength-gapFromEdge-5+gap-10)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        }
+        if(width > 600) {
+            int yValue = width / 2;
+            yValue += gap - 8;
+            html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+yValue+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        }
+        return html;
+    }*/
     
     private static String generateSVGForShackPosts(int length, int width, int shackLength, int shackWidth, int gap, int gapFromEdge) {
         String html = "";
         
         html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(gapFromEdge+gap)+"' height='"+16+"' width='"+16+"' stroke-width='2' stroke='black' fill='#ffe100'/>";
-        html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(width-gapFromEdge-5+gap-10)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        if(shackLength ==  width) 
+            html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(width-gapFromEdge-5+gap-10)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        else {
+            html += "<rect x='"+(length-shackWidth-30+gap)+"' y='"+(shackLength+gapFromEdge-5+gap-10-16)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+            if(width / 2 != shackLength)
+                html += "<rect x='"+(length+gap-30-16)+"' y='"+(shackLength+gapFromEdge-5+gap-10-16)+"' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        }
         if(width > 600) {
             int yValue = width / 2;
             yValue += gap - 8;
@@ -266,6 +290,6 @@ public class GenerateSVG {
     
     
     public static void main(String[] args) {
-        System.out.println(GenerateSVG.generateSVGHTML(610, 420, true, 420, 210, "rejsning", 30));
+        System.out.println(GenerateSVG.generateSVGHTML(690, 630, true, 345, 210, "fladt", 30));
     }
 }
