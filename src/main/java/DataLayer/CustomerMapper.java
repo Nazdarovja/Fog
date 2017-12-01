@@ -159,7 +159,7 @@ public class CustomerMapper {
         }
     }
     
-    public static List<Customer> customersForInquiries() throws Exception{
+    public static List<Customer> customersWithInquiry() throws Exception{
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
@@ -197,6 +197,8 @@ public class CustomerMapper {
 
     }
     
+    
+    
     public static List<Customer> customersByInquiryStatus(String status) throws Exception{
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -224,6 +226,81 @@ public class CustomerMapper {
             }
             return customers;
             
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static List<Customer> allCustomers() throws Exception{
+        List<Customer> customers = new ArrayList<>();
+        Customer c;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode";
+            ps = conn.prepareStatement(SQL);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                c = new Customer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8));
+                customers.add(c);
+            }
+            return customers;
+            
+        } finally {
+            if (rs != null) {
+                rs.close();
+            } if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+    
+    public static Customer customerByEmail(String email) throws Exception{
+        Customer customer;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Connection conn = null;
+        
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "SELECT * FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode WHERE c.email = ?";
+            ps = conn.prepareStatement(SQL);
+            ps.setString( 1, email );
+            rs = ps.executeQuery();
+            if(rs.next()){
+                customer = new Customer(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8));
+                
+                return customer;
+            } else {
+                throw new Exception(" no customer with specified email ");
+            }
         } finally {
             if (rs != null) {
                 rs.close();

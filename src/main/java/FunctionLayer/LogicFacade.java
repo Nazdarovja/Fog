@@ -8,7 +8,6 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -56,7 +55,7 @@ public class LogicFacade {
         List[] list = new List[2];
         
         list[0] = InquiryMapper.allInquiries();
-        list[1] = CustomerMapper.customersForInquiries();
+        list[1] = CustomerMapper.customersWithInquiry();
         
         return list;
     }
@@ -69,6 +68,14 @@ public class LogicFacade {
         return InquiryMapper.LatestInquiryByCustomer(customerEmail);
     }
     
+    public static List<Customer> viewAllCustomers() throws Exception{
+        return CustomerMapper.allCustomers();
+    }
+    
+    public static Customer viewCustomerByEmail(String email) throws Exception{
+        return CustomerMapper.customerByEmail(email);
+    }
+    
     public static List<Customer> viewCustomersByInquiryStatus(String status) throws Exception{
         switch(status){
             case "ny":
@@ -79,4 +86,5 @@ public class LogicFacade {
                 throw new Exception(" unknown inquiry status ");
         }
     }
+    
 }
