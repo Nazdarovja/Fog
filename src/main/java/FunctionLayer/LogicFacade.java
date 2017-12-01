@@ -8,7 +8,6 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
-import java.util.HashMap;
 import java.util.List;
 
 /**
