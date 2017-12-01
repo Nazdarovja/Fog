@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
+import FunctionLayer.GenerateSVG;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,9 @@ public class Calculate extends Command {
         int shackLength = 0;
         int shackWidth = 0;
         shackCheckbox = request.getParameter("shackCheckbox");
+        boolean withShack = false;
         if(request.getParameter("shackCheckbox") != null && request.getParameter("shackCheckbox").equals("on")){
+        withShack = true;
         shackLength = Integer.parseInt(request.getParameter("shackLength"));
         shackWidth = Integer.parseInt(request.getParameter("shackWidth"));
         session.setAttribute("shackLength", shackLength);
@@ -41,6 +44,9 @@ public class Calculate extends Command {
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
+        String SVG = GenerateSVG.generateSVGHTML(length, width, withShack, shackWidth, shackLength, roofType, Integer.parseInt(angle));
+        
+        session.setAttribute("svg", SVG);
         session.setAttribute("shackCheckbox", shackCheckbox);
         session.setAttribute("height", height);
         session.setAttribute("length", length);

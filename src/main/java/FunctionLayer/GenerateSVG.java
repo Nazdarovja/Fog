@@ -13,7 +13,7 @@ public class GenerateSVG {
     
     public static String generateSVGHTML(int length, int width, boolean withShack, int shackLength, int shackWidth, String roofType, int angle) {
             int gap = 40;
-            String html = "<SVG width='50%' viewbox='0 0 " + (length+gap) + " " + (width+gap) + "'>";
+            String html = "<SVG width='100%' viewbox='0 0 " + (length+gap) + " " + (width+gap) + "'>";
         if(roofType.equals("fladt")) {
             int gapFromEdgePosts = 27;
             int gapFromEdge = 30;
@@ -132,7 +132,7 @@ public class GenerateSVG {
     
     private static String generateSVGForSoffits(int length, int width, int gap) {
         String html = "";
-        html += "<rect x="+(gap-6)+" y='"+gap+"' height="+width+" width='6' stroke-width='2' stroke='black' fill='#cece9f'/>";
+        html += "<rect x="+(gap)+" y='"+gap+"' height="+width+" width='6' stroke-width='2' stroke='black' fill='#cece9f'/>";
         html += "<rect x='"+(length-6+gap)+"' y="+(gap)+" height="+width+" width='6' stroke-width='2' stroke='black' fill='#cece9f'/>";
         return html;
     }
