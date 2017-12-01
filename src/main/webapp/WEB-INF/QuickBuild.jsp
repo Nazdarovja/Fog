@@ -185,7 +185,7 @@
                 <Br>
                 <%}%>
 
-                <input class="btn btn-default"  type="submit" value="Calculate"/>
+                <input class="btn btn-default"  type="submit" value="Beregn"/>
             </div>
         </div>
     </form>

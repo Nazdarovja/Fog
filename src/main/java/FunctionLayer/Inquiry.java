@@ -31,7 +31,7 @@ public class Inquiry {
     private BillOfMaterials bom;
     private Timestamp date;
 
-    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee) {
+    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date) {
         this.id = id;
         this.carportHeight = carportHeight;
         this.carportLength = carportLength;
@@ -46,6 +46,7 @@ public class Inquiry {
         this.status = status;
         this.email = email;
         this.id_employee = id_employee;
+        this.date = date;
     }
 
     public int getId() {

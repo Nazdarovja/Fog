@@ -52,7 +52,7 @@ public class InquiryMapper {
                 rs.next();
                 id = rs.getInt(1);
 
-                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee());
+                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
 
                 conn.commit();
             } else {
@@ -77,20 +77,20 @@ public class InquiryMapper {
         }
         return inquiry;
     }
-    
-    public static List<Inquiry> allInquiries() throws Exception{
+
+    public static List<Inquiry> allInquiries() throws Exception {
         List<Inquiry> inquiries = new ArrayList<>();
         Inquiry i;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * from Inquiry";
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 i = new Inquiry(
                         rs.getInt(1),
                         rs.getInt(2),
@@ -105,36 +105,39 @@ public class InquiryMapper {
                         rs.getDate(11),
                         rs.getString(12),
                         rs.getString(13),
-                        rs.getInt(14));
+                        rs.getInt(14),
+                        rs.getTimestamp(15));
                 inquiries.add(i);
             }
             return inquiries;
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
 
     }
-    
-    public static Inquiry inquiryById(int id) throws Exception{
+
+    public static Inquiry inquiryById(int id) throws Exception {
         Inquiry i;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * from Inquiry WHERE id = ?";
             ps = conn.prepareStatement(SQL);
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 i = new Inquiry(
                         rs.getInt(1),
                         rs.getInt(2),
@@ -149,30 +152,33 @@ public class InquiryMapper {
                         rs.getDate(11),
                         rs.getString(12),
                         rs.getString(13),
-                        rs.getInt(14));
+                        rs.getInt(14),
+                        rs.getTimestamp(15));
                 return i;
             } else {
                 throw new Exception(" no inquiry with specified id ");
             }
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
 
     }
-    
-    public static Inquiry LatestInquiryByCustomer(String customerEmail) throws Exception{
-    Inquiry i;
+
+    public static Inquiry LatestInquiryByCustomer(String customerEmail) throws Exception {
+        Inquiry i;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * FROM Inquiry WHERE email = ? AND date = ( SELECT MAX(date) FROM Inquiry WHERE email = ? GROUP BY email) ";
@@ -180,7 +186,7 @@ public class InquiryMapper {
             ps.setString(1, customerEmail);
             ps.setString(2, customerEmail);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 i = new Inquiry(
                         rs.getInt(1),
                         rs.getInt(2),
@@ -195,22 +201,24 @@ public class InquiryMapper {
                         rs.getDate(11),
                         rs.getString(12),
                         rs.getString(13),
-                        rs.getInt(14));
+                        rs.getInt(14),
+                        rs.getTimestamp(15));
                 return i;
             } else {
                 throw new Exception(" no inquiry found ");
             }
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
-    
-    
+
 }
