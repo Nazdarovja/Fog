@@ -6,6 +6,9 @@
 
 package FunctionLayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
@@ -32,7 +35,19 @@ public class Customer {
         this.city = city;
     }
 
-
+    public List<String> attributeNames(){
+        List<String> list = new ArrayList<>();
+        
+        list.add("email");
+        list.add("name");
+        list.add("surname");
+        list.add("phonenumber");
+        list.add("address");
+        list.add("zipcode");
+        list.add("city");
+        
+        return list;
+    }
 
     public String getEmail() {
         return email;

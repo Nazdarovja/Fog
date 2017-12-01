@@ -20,8 +20,11 @@ public class ViewCustomers extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Customer> cl = LogicFacade.viewAllCustomers();
+        String tableTagId = "customertable";
+        String customerTable = JspUtilTable.tableCustomer(tableTagId, cl);
         
-        request.setAttribute("customers", cl);
+        request.setAttribute("customertable", customerTable);
+        request.setAttribute("customers", cl); // not used..
         
         return "customers";
     }
