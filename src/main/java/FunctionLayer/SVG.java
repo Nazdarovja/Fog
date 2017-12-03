@@ -23,7 +23,7 @@ public class SVG {
     private int gap;
     private int gapFromEdgePosts;
     private int gapFromEdge;
-
+    
     public SVG(int length, int width, boolean withShack, int shackLength, int shackWidth, String roofType, int angle) {
         this.length = length;
         this.width = width;
@@ -78,6 +78,17 @@ public class SVG {
     
     public StringBuilder getSVG() {
         return svg;
+    }
+    
+    public int getMaxShackLength() {
+        return width - (gapFromEdge * 2);
+    }
+    
+    public double minusRight() {
+        double widthC = this.width;
+        double shackL = this.shackLength;
+        double res = shackL / widthC;
+        return gapFromEdge * res;
     }
 
     private void makeFlatRoofCarport() {
@@ -188,7 +199,7 @@ public class SVG {
     }
     
     private void generateSVGForShack() {
-        svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(gapFromEdge+gap).append("' height='").append(shackLength-gapFromEdge+8).append("' width='").append(shackWidth).append("' stroke-width='2' stroke='black' fill='#ffe100'/>");
+        svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(gapFromEdge+gap).append("' height='").append(shackLength-(minusRight()*2)).append("' width='").append(shackWidth).append("' stroke-width='2' stroke='black' fill='#ffe100'/>");
     }
     
     private void generateSVGForShackPosts() {
@@ -196,11 +207,11 @@ public class SVG {
         if(shackLength ==  width) 
             svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(width-gapFromEdgePosts-5+gap-10).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         else {
-            svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(shackLength+gapFromEdgePosts-5+gap-10-16).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
+            svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(shackLength+gapFromEdge+gap-(minusRight()*2)-8).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
             if(width / 2 != shackLength)
-                svg.append("<rect x='").append(length+gap-30-16).append("' y='").append(shackLength+gapFromEdgePosts-5+gap-10-16).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
+                svg.append("<rect x='").append(length+gap-30-16).append("' y='").append(shackLength+gapFromEdge+gap-(minusRight()*2)-8).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         }
-        if(width > 600) {
+        if(width > 600 && shackLength > width / 2) {
             int yValue = width / 2;
             yValue += gap - 8;
             svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(yValue).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
@@ -278,7 +289,7 @@ public class SVG {
     }
     
     public static void main(String[] args) {
-        SVG svg = new SVG(690, 630, true, 510, 240, "fladt", 30);
+        SVG svg = new SVG(690, 630, true, 400, 240, "fladt", 30);
         System.out.println(svg.getSVG());
     }
     
