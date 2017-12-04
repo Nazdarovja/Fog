@@ -37,12 +37,13 @@ public class InquiryMapper {
             pstmt.setInt(5, i.getShackWidth());
             pstmt.setInt(6, i.getShackLength());
             pstmt.setString(7, i.getRoofType());
-            pstmt.setString(8, i.getAngle());
-            pstmt.setString(9, i.getCommentCustomer());
-            pstmt.setString(10, i.getCommentEmployee());
-            pstmt.setDate(11, i.getPeriod());  //
-            pstmt.setString(12, i.getStatus());
-            pstmt.setString(13, i.getEmail());
+            pstmt.setString(8, i.getRoofMaterial());
+            pstmt.setString(9, i.getAngle());
+            pstmt.setString(10, i.getCommentCustomer());
+            pstmt.setString(11, i.getCommentEmployee());
+            pstmt.setDate(12, i.getPeriod());  //
+            pstmt.setString(13, i.getStatus());
+            pstmt.setString(14, i.getEmail());
             conn.setAutoCommit(false);
             int res = pstmt.executeUpdate();
             int id = -1;  //dummy
@@ -52,7 +53,7 @@ public class InquiryMapper {
                 rs.next();
                 id = rs.getInt(1);
 
-                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
+                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(),i.getRoofMaterial(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
 
                 conn.commit();
             } else {
@@ -102,11 +103,12 @@ public class InquiryMapper {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getDate(11),
-                        rs.getString(12),
+                        rs.getString(11),
+                        rs.getDate(12),
                         rs.getString(13),
-                        rs.getInt(14),
-                        rs.getTimestamp(15));
+                        rs.getString(14),
+                        rs.getInt(15),
+                        rs.getTimestamp(16));
                 inquiries.add(i);
             }
             return inquiries;
@@ -149,11 +151,12 @@ public class InquiryMapper {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getDate(11),
-                        rs.getString(12),
+                        rs.getString(11),
+                        rs.getDate(12),
                         rs.getString(13),
-                        rs.getInt(14),
-                        rs.getTimestamp(15));
+                        rs.getString(14),
+                        rs.getInt(15),
+                        rs.getTimestamp(16));
                 return i;
             } else {
                 throw new Exception(" no inquiry with specified id ");
@@ -198,11 +201,12 @@ public class InquiryMapper {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getDate(11),
-                        rs.getString(12),
+                        rs.getString(11),
+                        rs.getDate(12),
                         rs.getString(13),
-                        rs.getInt(14),
-                        rs.getTimestamp(15));
+                        rs.getString(14),
+                        rs.getInt(15),
+                        rs.getTimestamp(16));
                 return i;
             } else {
                 throw new Exception(" no inquiry found ");

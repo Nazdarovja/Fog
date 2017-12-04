@@ -154,22 +154,22 @@
 
 
                 <!--TAGMATERIALE - doesnt change correctly -->
-                <input id="roofMaterialTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofMaterialType") != null) {%><%=(String) request.getSession().getAttribute("roofMaterialType")%><%}%>">
+                <input id="roofMaterialCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofMaterial") != null) {%><%=(String) request.getSession().getAttribute("roofMaterial")%><%}%>">
                 Vælg tag materiale
-                <select class="form-control" name="roofMaterialType">
-                    <% String roofMaterialType = "";
-                        if (request.getSession().getAttribute("roofMaterialType") != null) {
-                            roofMaterialType = (String) request.getSession().getAttribute("roofMaterialType");
+                <select class="form-control" name="roofMaterial">
+                    <% String roofMaterial = "";
+                        if (request.getSession().getAttribute("roofMaterial") != null) {
+                            roofMaterial = (String) request.getSession().getAttribute("roofMaterial");
                         }
                     %>
 
                     <!--doesnt change at all-->
                     <% if (roofType.equals("fladt")) {%>
-                    <option value="tagpap"<%if (roofMaterialType.equals("tagpap")) { %> selected <%} %>>tagpap</option>
-                    <option value="trapeztag"<%if (roofMaterialType.equals("trapeztag")) { %> selected <%} %>>trapeztag</option>
+                    <option value="tagpap"<%if (roofMaterial.equals("tagpap")) { %> selected <%} %>>tagpap</option>
+                    <option value="trapeztag"<%if (roofMaterial.equals("trapeztag")) { %> selected <%} %>>trapeztag</option>
                     <%} else {%>
-                    <option value="tagpap"<%if (roofMaterialType.equals("tagpap")) { %> selected <%} %>>tagpap</option>
-                    <option value="tagsten"<%if (roofMaterialType.equals("tagsten")) { %> selected <%} %>>tagsten</option>
+                    <option value="tagpap"<%if (roofMaterial.equals("tagpap")) { %> selected <%} %>>tagpap</option>
+                    <option value="tagsten"<%if (roofMaterial.equals("tagsten")) { %> selected <%} %>>tagsten</option>
                     <%}%>
                 </select>
 

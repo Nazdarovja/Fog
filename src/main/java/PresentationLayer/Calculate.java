@@ -25,6 +25,7 @@ public class Calculate extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         String roofType = request.getParameter("roofType");
+        String roofMaterial = request.getParameter("roofMaterial");
         String angle = request.getParameter("angle");
        
         String shackCheckbox = null;
@@ -40,7 +41,7 @@ public class Calculate extends Command {
         session.setAttribute("shackWidth", shackWidth);
         }
 
-        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, angle, null, null, null, "ny", null, 1, null);
+        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, roofMaterial, angle, null, null, null, "ny", null, 1, null);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
@@ -53,6 +54,7 @@ public class Calculate extends Command {
         session.setAttribute("width", width);
         session.setAttribute("angle", angle);
         session.setAttribute("roofType", roofType);
+        session.setAttribute("roofMaterial", roofMaterial);
         session.setAttribute("inquiry", inquiry);
         return "QuickBuild";
     }

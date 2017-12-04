@@ -28,9 +28,10 @@ public class SendInquiry extends Command {
         int length = i.getCarportLength();
         int width = i.getCarportWidth();
         String roofType = i.getRoofType();
+        String roofMaterial = i.getRoofMaterial();
         String angle = i.getAngle();
         
-        Inquiry inquiry = new Inquiry(0, height, length, width, 0, 0, roofType, angle, null, null, null, "ny", customer.getEmail(), 1, null);
+        Inquiry inquiry = new Inquiry(0, height, length, width, 0, 0, roofType, roofMaterial, angle, null, null, null, "ny", customer.getEmail(), 1, null);
         LogicFacade.SendInquiry(inquiry);
         
         //remove stuff from session
