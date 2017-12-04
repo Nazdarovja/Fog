@@ -33,10 +33,7 @@ public class SVG {
         this.roofType = roofType;
         this.angle = angle;
         gap = 40;
-        
-//        if(this.shackLength > this.length - 40 && this.shackLength <= this.length)
-//            this.
-        
+
         if(this.roofType.equals("fladt")) {
             gapFromEdgePosts = 27;
             gapFromEdge = 30;
@@ -130,21 +127,6 @@ public class SVG {
     }
     
     private void generateSVGForLaths() {
-//        double halfWidth = width / 2;
-//        double radiantAngle = Math.toRadians(angle);
-//        double carportHeight =  halfWidth / Math.cos(radiantAngle);
-//        Double result = calcHypotenuse(width,carportHeight); // hyp bredde
-//        int hypWidth = result.intValue();
-//        
-//        boolean oneMoreNeeded = true;
-//        int yValue = 45;
-//        int newYValue = 30; // sets default to 60 if the space between the raftes fits to 60cm.
-//        int amountOfRafters;
-//        if((hypWidth-90) % 30 > 0) {
-//            amountOfRafters = (hypWidth - 90) / 30;
-//            amountOfRafters++; // amount of rafters needed
-//            newYValue =  length / amountOfRafters;
-//        }
           int spaceBetweenLaths = 30;
           int half = width / 2 + gap;
           boolean oneMore = true;
