@@ -151,14 +151,39 @@
                         </select>
                     </div>
                 </div>
+
+
+                <!--TAGMATERIALE - doesnt change correctly -->
+                <input id="roofMaterialTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofMaterialType") != null) {%><%=(String) request.getSession().getAttribute("roofMaterialType")%><%}%>">
+                Vælg tag materiale
+                <select class="form-control" name="roofMaterialType">
+                    <% String roofMaterialType = "";
+                        if (request.getSession().getAttribute("roofMaterialType") != null) {
+                            roofMaterialType = (String) request.getSession().getAttribute("roofMaterialType");
+                        }
+                    %>
+
+                    <!--doesnt change at all-->
+                    <% if (roofType.equals("fladt")) {%>
+                    <option value="tagpap"<%if (roofMaterialType.equals("tagpap")) { %> selected <%} %>>tagpap</option>
+                    <option value="trapeztag"<%if (roofMaterialType.equals("trapeztag")) { %> selected <%} %>>trapeztag</option>
+                    <%} else {%>
+                    <option value="tagpap"<%if (roofMaterialType.equals("tagpap")) { %> selected <%} %>>tagpap</option>
+                    <option value="tagsten"<%if (roofMaterialType.equals("tagsten")) { %> selected <%} %>>tagsten</option>
+                    <%}%>
+                </select>
+
+
+
+
             </div>
-                        
-                <div id="svg" class="col-sm-6 text-center lead" >
-                    <% if(request.getSession().getAttribute("svg") != null) { 
-                            String svg = (String) request.getSession().getAttribute("svg"); %>
-                            <%= svg %>
-                    <% } %>
-                </div>
+
+            <div id="svg" class="col-sm-6 text-center lead" >
+                <% if (request.getSession().getAttribute("svg") != null) {
+                        String svg = (String) request.getSession().getAttribute("svg");%>
+                <%= svg%>
+                <% } %>
+            </div>
 
             <div class="col-sm-2">
                 Tilvælg redskabsrum<br>
@@ -302,7 +327,7 @@
                                     <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
                                     <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                 </div>
-                                
+
                                 <input type="hidden" name="command" value="QuickBuild">
                                 <button type="sumbit" class="btn btn-primary">Login</button>
 
