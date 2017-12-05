@@ -14,7 +14,7 @@ import java.sql.DriverManager;
  */
 public class DBConnectorTemplate {
 
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://207.154.222.88:3306/fog";
     private static final String USER = "";
     private static final String PASSWORD = "";

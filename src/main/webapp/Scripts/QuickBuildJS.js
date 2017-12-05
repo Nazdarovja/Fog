@@ -2,6 +2,8 @@ function confirmFunction() {
     alert("Forespørgsel er nu sendt til Fog. Tak for din henvendelse");
 }
 
+check();
+
 // Adds options to jsp after Calculate button
 function check() {
     if ($("#shackCheckboxCheck").val() !== "") {
@@ -25,8 +27,20 @@ function check() {
         $("#shackLengthInput").attr("value", null);
         $("#shackWidthInput").attr("value", null);
     }
-}
-check();
+
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    if(day < 10){
+        day = "0" + day;
+    }
+    if(month < 10){
+        month = "0" + month;
+    }
+    //Add date restriction to wished delivery date
+    $("#wishedDelivery").attr("min", year+"-"+month+"-"+day);
+}   
 
 // Adds angle option, when rejsning is chosen in the dropdown.
 $('select[name=roofType]').on('change', function () {
@@ -100,7 +114,7 @@ $('#registration').submit(function () {
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test($('#password1').val())) {
         alert("Dit password skal minimum indeholde : 8 karakterer, et lille bogstav, et stort bogstav og et tal");
         return false;
-    } 
+    }
     if ($('#password2').val() !== $('#password1').val()) {
         alert("Passwords matcher ikke!");
         return false;

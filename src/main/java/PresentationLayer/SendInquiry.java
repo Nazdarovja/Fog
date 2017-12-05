@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.Customer;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Inquiry;
+import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,15 +28,22 @@ public class SendInquiry extends Command {
         int height = i.getCarportHeight();
         int length = i.getCarportLength();
         int width = i.getCarportWidth();
+        int shackWidth = i.getShackWidth();
+        int shackLength = i.getShackLength();
         String roofType = i.getRoofType();
         String angle = i.getAngle();
-        
-        Inquiry inquiry = new Inquiry(0, height, length, width, 0, 0, roofType, angle, null, null, null, "ny", customer.getEmail(), 1, null);
+        String comment = i.getCommentCustomer();
+        Date deliveryDate = i.getPeriod();
+        if (request.getParameter("comment") != null) {
+            comment = request.getParameter("comment");
+        }
+
+        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, angle, comment, null, deliveryDate,"ny", customer.getEmail(), 1, null);
         LogicFacade.SendInquiry(inquiry);
-        
+
         //remove stuff from session
         request.getSession().removeAttribute("inquiry");
-        
+
         return "QuickBuild";
     }
 

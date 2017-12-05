@@ -143,12 +143,12 @@ INSERT INTO
 Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email)
 VALUES
 (320,420,320,320,120,'fladt',null,null,null,null,'ny','test1@test.dk'),
-(320,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
-(320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
-(320,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
-(320,570,410,null,null,'rejsning','25',null,'Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
-(320,570,410,null,null,'rejsning','25',null,null,'2017-07-15','ny','test8@test.dk'),
-(320,420,320,null,null,'rejsning','15',null,null,null,'ny','test6@test.dk');
+(240,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
+(320,420,320,210,150,'rejsning','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
+(210,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'rejsning','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
+(270,570,410,null,null,'rejsning','25',null,null,'2017-07-15','ny','test8@test.dk'),
+(320,420,320,null,null,'rejsning','15','Ring tak!',null,null,'ny','test6@test.dk');
 
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade',','løsholt'
