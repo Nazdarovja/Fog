@@ -16,8 +16,10 @@ function check() {
     }
     if (document.getElementById("roofTypeCheck").value === "rejsning") {
         $("#angle").show();
+    
     } else {
         $("#angle").hide();
+    
     }
     if (document.getElementById("shackCheckboxCheck").value === "") {
         $("#shackLength").hide();
@@ -32,8 +34,10 @@ check();
 $('select[name=roofType]').on('change', function () {
     if (this.value === "rejsning") {
         $("#angle").show();
+        
     } else {
         $("#angle").hide();
+    
     }
 });
 

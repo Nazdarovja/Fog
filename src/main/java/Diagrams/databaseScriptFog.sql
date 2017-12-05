@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
   `shackWidth` INT NULL,
   `shackLength` INT NULL,
   `roofType` ENUM('fladt', 'rejsning') NOT NULL,
+  `roofMaterial` ENUM('tagpap', 'tagsten', 'trapeztag') NOT NULL,
   `angle` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
   `commentCustomer` VARCHAR(2000) NULL,
   `commentEmployee` VARCHAR(2000) NULL,
