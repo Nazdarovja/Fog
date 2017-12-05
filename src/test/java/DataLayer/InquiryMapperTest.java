@@ -28,9 +28,9 @@ public class InquiryMapperTest {
     @Test
     public void testRegisterInitialInquiry() throws Exception {
         System.out.println("registerInitialInquiry");
-        Inquiry i = new Inquiry(0, 0, 700, 360, 0, 0, "rejsning","tagpap", "15", "", "", new Date(2017,11,21), "ny", "test1@test.dk", 0, null);
+        Inquiry i = new Inquiry(0, 0, 700, 360, 0, 0, "rejsning","trapeztag", "15", "", "", new Date(2017,11,21), "ny", "test1@test.dk", 0, null);
         Inquiry result = InquiryMapper.registerInitialInquiry(i);
-        assertEquals("tagpap", result.getRoofMaterial());
+        assertEquals("trapeztag", result.getRoofMaterial());
         assertTrue( result.getId() > 0);
     }
     
