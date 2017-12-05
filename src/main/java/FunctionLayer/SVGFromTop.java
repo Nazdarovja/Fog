@@ -9,7 +9,7 @@ package FunctionLayer;
  *
  * @author Orchi
  */
-public class SVG {
+public class SVGFromTop {
     private StringBuilder svg = new StringBuilder();
     
     private int length;
@@ -24,7 +24,7 @@ public class SVG {
     private int gapFromEdgePosts;
     private int gapFromEdge;
     
-    public SVG(int length, int width, boolean withShack, int shackLength, int shackWidth, String roofType, int angle) {
+    public SVGFromTop(int length, int width, boolean withShack, int shackLength, int shackWidth, String roofType, int angle) {
         this.length = length;
         this.width = width;
         this.withShack = withShack;
@@ -105,6 +105,7 @@ public class SVG {
     }
 
     private void makePitchedRoofCarport() {
+        svg.append("<SVG width='50%' viewbox='0 0 ").append(length+gap).append(" ").append(width+gap).append("'>");
         generateSVGForLineMeasurements();
         generateSVGForCarportArea();
         if(this.withShack)
@@ -271,7 +272,7 @@ public class SVG {
     }
     
     public static void main(String[] args) {
-        SVG svg = new SVG(690, 630, true, 400, 240, "fladt", 30);
+        SVGFromTop svg = new SVGFromTop(690, 630, true, 400, 240, "fladt", 30);
         System.out.println(svg.getSVG());
     }
     
