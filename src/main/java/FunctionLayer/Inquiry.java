@@ -21,7 +21,7 @@ public class Inquiry {
     private int shackWidth;
     private int shackLength;
     private String roofType;  //enum
-    private String roofMaterial;  //enum
+    private String roofMaterial;
     private String angle;          //enum
     private String commentCustomer;
     private String commentEmployee;
