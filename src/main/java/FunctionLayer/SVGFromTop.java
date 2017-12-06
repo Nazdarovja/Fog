@@ -37,11 +37,9 @@ public class SVGFromTop {
         if(this.roofType.equals("fladt")) {
             gapFromEdgePosts = 27;
             gapFromEdge = 30;
-            makeFlatRoofCarport();
         } else {
             gapFromEdgePosts = 17;
             gapFromEdge = 20;
-            makePitchedRoofCarport();
         }
     }
     
@@ -108,9 +106,9 @@ public class SVGFromTop {
         svg.append("<SVG width='50%' viewbox='0 0 ").append(length+gap).append(" ").append(width+gap).append("'>");
         generateSVGForLineMeasurements();
         generateSVGForCarportArea();
-        if(this.withShack)
+        if(withShack)
             generateSVGForShack();
-        if(this.withShack)
+        if(withShack)
             generateSVGForShackPosts();
         generateSVGForPosts();
         generateSVGForTopPlate();
@@ -270,11 +268,4 @@ public class SVGFromTop {
             svg.append("<rect x='").append(xValue-8).append("' y='").append(yValue).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         }
     }
-    
-    public static void main(String[] args) {
-        SVGFromTop svg = new SVGFromTop(690, 630, true, 400, 240, "fladt", 30);
-        System.out.println(svg.getSVG());
-    }
-    
-    
 }
