@@ -27,6 +27,10 @@ public class Inquiry {
     private Date period;
     private String status;      //enum
     private String email;
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private int id_employee;
     private BillOfMaterials bom;
     private Timestamp date;
@@ -53,6 +57,10 @@ public class Inquiry {
         return id;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public int getCarportHeight() {
         return carportHeight;
     }
@@ -71,6 +79,10 @@ public class Inquiry {
 
     public int getCarportWidth() {
         return carportWidth;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getShackWidth() {

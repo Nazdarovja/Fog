@@ -44,6 +44,8 @@ public class CustomerMapper {
                 Customer customer = new Customer(mail, name, surname, phonenumber, address, zipcode, pass, city);
                 return customer;
             } else {
+                // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
+                //////////////////////////////////////////////////////////////////////////////////////////////////////
                 throw new FogException("could not validate user");
             }
         

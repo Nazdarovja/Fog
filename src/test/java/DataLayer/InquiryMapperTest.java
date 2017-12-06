@@ -24,7 +24,7 @@ public class InquiryMapperTest {
     public void setUp() {
     }
 
-//    @Test
+    @Test
     public void testRegisterInitialInquiry() throws Exception {
         System.out.println("registerInitialInquiry");
         Inquiry i = new Inquiry(0, 0, 700, 360, 0, 0, "rejsning", "15", "", "", new Date(2017,11,21), "ny", "test1@test.dk", 0, null);

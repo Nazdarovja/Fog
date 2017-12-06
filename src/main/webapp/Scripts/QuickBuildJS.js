@@ -1,8 +1,16 @@
 function confirmFunction() {
     alert("Forespørgsel er nu sendt til Fog. Tak for din henvendelse");
 }
+function saved() {
+    alert("Forspørgslen er nu gemt. \n\
+    Tag forbehold for at du kan blive kontaktet af Fog om gemte ordre.");
+}
 
+
+// Run on start
 check();
+///////////////////////////////////////////////
+
 
 // Adds options to jsp after Calculate button
 function check() {
@@ -32,60 +40,16 @@ function check() {
     var year = d.getFullYear();
     var month = d.getMonth() + 1;
     var day = d.getDate();
-    if(day < 10){
+    if (day < 10) {
         day = "0" + day;
     }
-    if(month < 10){
+    if (month < 10) {
         month = "0" + month;
     }
     //Add date restriction to wished delivery date
-    $("#wishedDelivery").attr("min", year+"-"+month+"-"+day);
-}   
+    $("#wishedDelivery").attr("min", year + "-" + month + "-" + day);
+}
 
-// Adds angle option, when rejsning is chosen in the dropdown.
-$('select[name=roofType]').on('change', function () {
-    if (this.value === "rejsning") {
-        $("#angle").show();
-    } else {
-        $("#angle").hide();
-    }
-});
-
-// Adds Length and Height visibilty to jsp
-$('input[name=shackCheckbox]').on('change', function () {
-    if ($(this).is(':checked')) {
-        $("#shackLength").show();
-        $("#shackWidth").show();
-        $("#shackLengthInput").attr("required", true);
-        $("#shackWidthInput").attr("required", true);
-        restrictLength();
-        restrictWidth();
-    } else {
-        $("#shackLengthInput").attr("required", false);
-        $("#shackWidthInput").attr("required", false);
-        $("#shackLengthInput").val(null);
-        $("#shackWidthInput").val(null);
-        $("#shackLength").hide();
-        $("#shackWidth").hide();
-        $("#shackCheckbox").attr("value", null);
-    }
-});
-
-$('select[name=length]').on('change', function () {
-    $("#shackLengthInput").attr({
-        "max": $("#length").val() / 2,
-        "min": 100,
-        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
-    });
-});
-
-$('select[name=width]').on('change', function () {
-    $("#shackWidthInput").attr({
-        "max": $("#width").val(),
-        "min": widthRules(),
-        "placeholder": "Tillad bredde fra " + widthRules() + " til " + $("#width").val()
-    });
-});
 
 function restrictWidth() {
     $("#shackWidthInput").attr({
@@ -125,10 +89,52 @@ $('#registration').submit(function () {
 
 });
 
-//$('input'[]) {
-//    if($("#password2").val() !== $("#password1").val()){
-//        alert("Dine passwords matcher ikke!");
-//        return false;
-//    }
-//   return true;
-//}
+
+// Adds Length and Height visibilty to jsp
+$('input[name=shackCheckbox]').on('change', function () {
+    if ($(this).is(':checked')) {
+        $("#shackLength").show();
+        $("#shackWidth").show();
+        $("#shackLengthInput").attr("required", true);
+        $("#shackWidthInput").attr("required", true);
+        restrictLength();
+        restrictWidth();
+    } else {
+        $("#shackLengthInput").attr("required", false);
+        $("#shackWidthInput").attr("required", false);
+        $("#shackLengthInput").val(null);
+        $("#shackWidthInput").val(null);
+        $("#shackLength").hide();
+        $("#shackWidth").hide();
+        $("#shackCheckbox").attr("value", null);
+    }
+});
+
+$('select[name=length]').on('change', function () {
+    $("#shackLengthInput").attr({
+        "max": $("#length").val() / 2,
+        "min": 100,
+        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
+    });
+});
+
+$('select[name=width]').on('change', function () {
+    $("#shackWidthInput").attr({
+        "max": $("#width").val(),
+        "min": widthRules(),
+        "placeholder": "Tillad bredde fra " + widthRules() + " til " + $("#width").val()
+    });
+});
+
+// Adds angle option, when rejsning is chosen in the dropdown.
+$('select[name=roofType]').on('change', function () {
+    if (this.value === "rejsning") {
+        $("#angle").show();
+    } else {
+        $("#angle").hide();
+    }
+});
+
+$('#orderForm').on('change', function () {
+    $("#sendSaveInquiry").hide();
+});

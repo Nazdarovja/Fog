@@ -6,38 +6,26 @@
 package PresentationLayer;
 
 import FunctionLayer.Customer;
-import FunctionLayer.LogicFacade;
-import FunctionLayer.Inquiry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Stanislav
  */
-public class SendInquiry extends Command {
-
-    public SendInquiry() {
-    }
+public class NewInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        
         Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
-
-        inquiry.setEmail(customer.getEmail());
-        inquiry.setStatus("ny");
-        LogicFacade.SendInquiry(inquiry);
         
-        //remove stuff from session
         if (session != null) {
             session.invalidate();
         }
+        
         request.getSession().setAttribute("customer", customer);
-
         return "QuickBuild";
     }
 

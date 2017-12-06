@@ -30,14 +30,10 @@ public class Calculate extends Command {
         String comment = request.getParameter("comment");
         String wishedDelivery = request.getParameter("wishedDelivery");
         System.out.println(wishedDelivery);
-        String wishedDeliveryCheck = null;
         Date wishDeliveryDate = null;
-        if (wishedDelivery.length() > 5) {
-            wishedDeliveryCheck = "tada";
+        if (wishedDelivery.length() > 1) {
             wishDeliveryDate = new Date(Integer.parseInt(wishedDelivery.substring(0, 4))-1900, Integer.parseInt(wishedDelivery.substring(5, 7))-1, Integer.parseInt(wishedDelivery.substring(8)));
-            session.setAttribute("wishedDeliveryCheck", wishedDeliveryCheck);
         }
-        System.out.println(wishDeliveryDate.toString());
         String shackCheckbox = null;
         int shackLength = 0;
         int shackWidth = 0;
@@ -51,7 +47,7 @@ public class Calculate extends Command {
             session.setAttribute("shackWidth", shackWidth);
         }
 
-        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, angle, comment, null, wishDeliveryDate, "ny", null, 1, null);
+        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, angle, comment, null, wishDeliveryDate, "", null, 1, null);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
 
@@ -64,8 +60,7 @@ public class Calculate extends Command {
         session.setAttribute("width", width);
         session.setAttribute("angle", angle);
         session.setAttribute("comment", comment);
-        session.setAttribute("wishDelivery", wishedDelivery);
-
+        session.setAttribute("wishedDelivery", wishedDelivery);
         session.setAttribute("roofType", roofType);
         session.setAttribute("inquiry", inquiry);
         return "QuickBuild";

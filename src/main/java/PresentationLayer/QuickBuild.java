@@ -5,8 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
-import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,12 +19,6 @@ public class QuickBuild extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if(request.getParameter("email") != null) {
-            String email = (String) request.getParameter("email");
-            String password = (String) request.getParameter("password");
-            Customer customer = LogicFacade.login(email, password);
-            request.getSession().setAttribute("customer", customer);
-        }
         return "QuickBuild";
     }
 }

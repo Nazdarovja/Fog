@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="FunctionLayer.Inquiry"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%-- 
@@ -17,6 +18,7 @@
         <link rel="icon" href="./img/foglogo.png"/>
         <title>Quick Byg</title>
     </head>
+
     <body>
         <div class="row">
             <img class="col-sm-3" style="margin-right: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
@@ -33,9 +35,9 @@
         <% } %>
     </div>
     <div id="measurements" >
-        <div class="row ">
 
-            <form name="order" action="FrontController" method="POST">
+        <form id="orderForm" name="order" action="FrontController" method="POST">
+            <div class="row ">
                 <input type="hidden" name="command" value="calculate">
                 <div class="col-sm-2 col-sm-offset-2">
                     Vælg længde<br>
@@ -115,232 +117,256 @@
                     <br>
                     <br>
                 </div>
-        </div>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-1">
-                Vælg tagtype<br>
-                <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
-                <select class="form-control" name="roofType">
-                    <% String roofType = "";
-                        if (request.getSession().getAttribute("roofType") != null) {
-                            roofType = (String) request.getSession().getAttribute("roofType");
-                        }
-                    %>
-                    <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
-                    <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
-                </select>
-
-                <div id="angle">
-                    Vælg hældning<br>
-                    <select class="form-control" name="angle" >
-                        <% int angle = -1;
-                            if (request.getSession().getAttribute("angle") != null) {
-                                angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-1">
+                    Vælg tagtype<br>
+                    <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
+                    <select class="form-control" name="roofType">
+                        <% String roofType = "";
+                            if (request.getSession().getAttribute("roofType") != null) {
+                                roofType = (String) request.getSession().getAttribute("roofType");
                             }
                         %>
-                        <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
-                        <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
-                        <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
-                        <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
-                        <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
-                        <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
-                        <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
+                        <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
+                        <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
                     </select>
-                </div>
-            </div>
 
-            <div id="svg" class="col-sm-6 text-center lead" >
-                <% if (request.getSession().getAttribute("svg") != null) {
-                        String svg = (String) request.getSession().getAttribute("svg");%>
-                <%= svg%>
-                <% } %>
-            </div>
-
-            <div class="col-sm-2">
-                Tilvælg redskabsrum<br>
-                <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
-
-                <div id="shackLength" >
-                    Redskabsrum Længde<br>
-                    <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
-                </div>
-                <div id="shackWidth" >
-                    Redskabsrum Bredde<br>
-                    <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
-                </div>
-
-                <div>
-                    <!--If user is logged in-->
-                    <%if (customer != null) {%>  
-                    <div class="form-group">
-                        <label>Kommentar til ordre</label>
-                        <textarea class="form-control" rows="8" name="comment" id="comment" maxlength="2000" placeholder="Skriv her hvis du har nogen særlige ønsker, eller spørgsmål.
-                                  (Bemærk kun 2000 karakterer tilladt)"><%if (request.getSession().getAttribute("comment") != null) {%><%= (String) request.getSession().getAttribute("comment")%><%}%></textarea>
+                    <div id="angle">
+                        Vælg hældning<br>
+                        <select class="form-control" name="angle" >
+                            <% int angle = -1;
+                                if (request.getSession().getAttribute("angle") != null) {
+                                    angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
+                                }
+                            %>
+                            <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
+                            <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
+                            <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
+                            <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
+                            <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
+                            <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
+                            <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
+                        </select>
                     </div>
-                    <%}%>
                 </div>
-                <div class="form-group">
-                    <label>Ønsket leveringstid</label>
-                    <input name="wishedDelivery" id="wishedDelivery" type="date" <%if (request.getSession().getAttribute("wishedDeliveryCheck") != null) {%>value="<%= (String) request.getSession().getAttribute("wishedDeliveryCheck")%>"<%}%>>
-                    <span class="help-block"> Bemærk der er minimum 1 uges behandlingstid</span>                    
+
+                <div id="svg" class="col-sm-6 text-center lead" >
+                    <% if (request.getSession().getAttribute("svg") != null) {
+                            String svg = (String) request.getSession().getAttribute("svg");%>
+                    <%= svg%>
+                    <% } %>
+                </div>
+
+                <div class="col-sm-2">
+                    Tilvælg redskabsrum<br>
+                    <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
+                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden" <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
+
+                    <div id="shackLength" >
+                        Redskabsrum Længde<br>
+                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                    </div>
+                    <div id="shackWidth" >
+                        Redskabsrum Bredde<br>
+                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                    </div>
+
+                    <div>
+                        <!--If user is logged in-->
+                        <%if (customer != null) {%>  
+                        <div class="form-group">
+                            <label>Kommentar til ordre</label>
+                            <textarea class="form-control" rows="8" name="comment" id="comment" maxlength="2000" placeholder="Skriv her hvis du har nogen særlige ønsker, eller spørgsmål.
+                                      (Bemærk kun 2000 karakterer tilladt)"><%if (request.getSession().getAttribute("comment") != null) {%><%= (String) request.getSession().getAttribute("comment")%><%}%></textarea>
+                        </div>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label>Ønsket leveringstid</label>
+                        <input name="wishedDelivery" id="wishedDelivery" type="date" value="<%= request.getSession().getAttribute("wishedDelivery")%>">
+                        <span class="help-block"> Bemærk der er minimum 1 uges behandlingstid</span>                    
+                    </div>
                 </div>
             </div>
+        </form>
+    </div>
 
-        </div>
+    <div class="row">
+        <div class="col-sm-2 well col-sm-offset-7" style=" background:#124989; color: white">
+            <% if (request.getSession().getAttribute("inquiry") != null) {  %>
+            <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
+            TOTAL PRIS: <br>
+            <%= inquiry.getBom().getTotalPrice()%>,-
+            <Br>
+            <%}%>
+            <input form="orderForm" class="btn btn-default"  type="submit" value="Beregn"/>
+            <form name="newInquiry" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="newInquiry">
+                <input class="btn btn-warning" type="submit" value="Ny forespørgsel"/>
+            </form>
 
-        <div class="row">
-            <div class="col-sm-2 well col-sm-offset-7" style=" background:#124989; color: white">
-                <% if (request.getSession().getAttribute("inquiry") != null) {  %>
-                <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
-                TOTAL PRIS: <br>
-                <%= inquiry.getBom().getTotalPrice()%>,-
-                <Br>
-                <%}%>
-                <input class="btn btn-default"  type="submit" value="Beregn"/>
+            <!--if user is logged in and has made a calculation-->
+            <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>
+            <!--Save order-->
+            <div id="sendSaveInquiry">
+                <p style="color: white">Gem til senere behandling?</p>
+                <form form="orderForm" name="saveInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="saveInquiry">
+                    <input class="btn btn-default" onclick="saved()" type="submit" value="Gem forespørgsel"/>
                 </form>
 
-                <!--if user is logged in and has made a calculation-->
-                <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
+                <!-- Send order -->
                 <p style="color: white">Send forespørgsel til Fog?</p>
-
-                <form name="sendinquiry" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="sendinquiry">
+                <form name="sendInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="sendInquiry">
                     <input class="btn btn-default" onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
-                </form>         
+                </form>
                 <% }%>
             </div>
         </div>
+    </div>
+
+    <div class="well" >
+        
+        <!--ORDER DATA SETUP-->
+        <%if (request.getSession().getAttribute("customer") != null) {%>
+        <!--LIST VIEW-->
+        <p style="color: white">Gemte forespørgsler</p>
+        <ul class="list-group">
+            <%= request.getSession().getAttribute("inquiries")%>
+            <%}%>
+        </ul>
+    </div>
 
 
+    <%----------------------------------------------------------------------------------------------%>
+    <%-- MODAL FOR LOGIN AND REGISTER --%>
+    <%----------------------------------------------------------------------------------------------%>
+    <div class="container">
+        <div class="row">
 
-        <%----------------------------------------------------------------------------------------------%>
-        <%-- MODAL FOR LOGIN AND REGISTER --%>
-        <%----------------------------------------------------------------------------------------------%>
-        <div class="container">
-            <div class="row">
+            <!-- Modal Register -->
+            <form action="FrontController" method="post" id="registration" name="registration" >
+                <div class="modal fade" id="registerUser" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Luk</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Registrer</h4>
+                            </div>
 
-                <!-- Modal Register -->
-                <form action="FrontController" method="post" id="registration" name="registration" >
-                    <div class="modal fade" id="registerUser" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Luk</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Registrer</h4>
+                            <div class="modal-body form-inline">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="emaillabel">* Email adresse</label>
+                                    <input name="email" type="email" class="form-control"  id="emailinput" aria-describedby="emailinput" required="">
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
-                                <div class="modal-body form-inline">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="emaillabel">* Email adresse</label>
-                                        <input name="email" type="email" class="form-control"  id="emailinput" aria-describedby="emailinput" required="">
-                                        <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="passwordlabel">* Password</label>
-                                        <input name="password1" type="password" class="form-control" id="password1" aria-describedby="passwordinput" required="">
-                                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="re-enterpasswordlabel">* Gentag password</label>
-                                        <input name="password2" type="password" class="form-control" id="password2" aria-describedby="re-enterpasswordinput" required="">
-                                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="postcodelabel">* Postnummer</label>
-                                        <input name="zipcode" type="number" class="form-control" id="postcodeinput" aria-describedby="postcodeinput">
-                                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="firstnamelabel">* Fornavn</label>
-                                        <input name="name" type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">
-                                        <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="lastnamelabel">* Efternavn</label>
-                                        <input name="surname" type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
-                                        <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="phonenumber">* Tlf. nummer</label>
-                                        <input name="phonenumber" type="number" class="form-control" id="phonenumber" aria-describedby="phonenumber" required="">
-                                        <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label" for="address">* Adresse</label>
-                                        <input name="address" type="text" class="form-control" id="address" aria-describedby="address" required="">
-                                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <br/>
-
-                                    <div class="form-group">
-                                        <input  type="hidden" name="command" value="register">
-                                        <button type="submit" class="btn btn-primary">Registrer</button>
-                                    </div>
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="passwordlabel">* Password</label>
+                                    <input name="password1" type="password" class="form-control" id="password1" aria-describedby="passwordinput" required="">
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
                                 </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="re-enterpasswordlabel">* Gentag password</label>
+                                    <input name="password2" type="password" class="form-control" id="password2" aria-describedby="re-enterpasswordinput" required="">
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="postcodelabel">* Postnummer</label>
+                                    <input name="zipcode" type="number" class="form-control" id="postcodeinput" aria-describedby="postcodeinput">
+                                    <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="firstnamelabel">* Fornavn</label>
+                                    <input name="name" type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">
+                                    <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="lastnamelabel">* Efternavn</label>
+                                    <input name="surname" type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
+                                    <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="phonenumber">* Tlf. nummer</label>
+                                    <input name="phonenumber" type="number" class="form-control" id="phonenumber" aria-describedby="phonenumber" required="">
+                                    <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label" for="address">* Adresse</label>
+                                    <input name="address" type="text" class="form-control" id="address" aria-describedby="address" required="">
+                                    <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <br/>
+
+                                <div class="form-group">
+                                    <input  type="hidden" name="command" value="register">
+                                    <button type="submit" class="btn btn-primary">Registrer</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+            <%----------------------------------------------------------------------------------------------%>
+            <!-- Modal Login form -->
+            <form id="logingform" action="FrontController" method="post">
+                <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Login</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label">Email</label>
+                                    <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <div class="form-group has-feedback">
+                                    <label class="control-label">Password</label>
+                                    <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                                </div>
+
+                                <input type="hidden" name="command" value="login">
+                                <button type="sumbit" class="btn btn-primary">Login</button>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <h4 class="modal-title" id="myModalLabel">Register</h4>
+                                Hvis du ikke allerede er medlem så  <a data-toggle="modal" data-target="#registerUser" data-dismiss="modal"> Registrer dig her</a>
+                                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>-->
                             </div>
 
                         </div>
                     </div>
-                </form>
+                </div>
+            </form> 
 
-                <%----------------------------------------------------------------------------------------------%>
-                <!-- Modal Login form -->
-                <form id="logingform" action="FrontController" method="post">
-                    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Login</h4>
-                                </div>
-
-                                <div class="modal-body">
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label">Email</label>
-                                        <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
-                                        <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <div class="form-group has-feedback">
-                                        <label class="control-label">Password</label>
-                                        <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
-                                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-
-                                    <input type="hidden" name="command" value="QuickBuild">
-                                    <button type="sumbit" class="btn btn-primary">Login</button>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <h4 class="modal-title" id="myModalLabel">Register</h4>
-                                    Hvis du ikke allerede er medlem så  <a data-toggle="modal" data-target="#registerUser" data-dismiss="modal"> Registrer dig her</a>
-                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>-->
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </form> 
-
-            </div>
         </div>
+    </div>
 
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="./Scripts/QuickBuildJS.js" type="text/javascript"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./Scripts/QuickBuildJS.js" type="text/javascript"></script>
 </body>
 </html>
