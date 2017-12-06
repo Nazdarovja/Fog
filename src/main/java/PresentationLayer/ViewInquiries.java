@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import java.util.List;

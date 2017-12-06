@@ -220,5 +220,76 @@ public class InquiryMapper {
             }
         }
     }
+    
+    public static Inquiry updateCarportSize(int id, int height, int length, int width) throws SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Inquiry inquiry = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, height);
+            ps.setInt(2, length);
+            ps.setInt(3, width);
+            ps.setInt(4, id);
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+                inquiry = inquiryById(id);
+            } else {
+                conn.rollback();
+                throw new Exception(" Update error ");
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+        return inquiry;
+    }
+    
+    public static Inquiry updateShackSize(int id, int length, int width) throws SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Inquiry inquiry = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET shackLength = ?, shackWidth = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, length);
+            ps.setInt(2, width);
+            ps.setInt(3, id);
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+                inquiry = inquiryById(id);
+            } else {
+                conn.rollback();
+                throw new Exception(" Update error ");
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+        return inquiry;
+    }
 
 }

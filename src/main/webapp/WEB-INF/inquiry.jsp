@@ -31,36 +31,166 @@
         
         <% Inquiry i = (Inquiry)request.getAttribute("inquiry"); %>
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
+        <% Customer cus = (Customer)request.getAttribute("customer"); %>
         
         <div class="container">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>CommentCustomer</th>
-                          <th>CommentEmployee</th>
-                          <th>Period</th>
-                          <th>Status</th>
-                          <th>Customer Email</th>
-                          <th>Id_employee</th>
-                        </tr>
-                    </thead>
                     <tr>
-                        <td> <%= i.getId() %> </td>
-                        <td> <%= i.getCommentCustomer() %> </td>
-                        <td> <%= i.getCommentEmployee() %> </td>
+                        <th>Carport højde</th>
+                        <td>
+                            <select class="form-control" name="height">
+                                <% int height = i.getCarportHeight(); %>
+                                <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
+                                <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (height == 300) { %> selected <%} %>>300</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Caport længde</th>
+                        <td> 
+                            <select class="form-control" name="length" id="length" >
+                                <% int length = i.getCarportLength(); %>
+                                <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (length == 300) { %> selected <%} %>>300</option>
+                                <option value=330 <%if (length == 330) { %> selected <%} %>>330</option>
+                                <option value=360 <%if (length == 360) { %> selected <%} %>>360</option>
+                                <option value=390 <%if (length == 390) { %> selected <%} %>>390</option>
+                                <option value=420 <%if (length == 420) { %> selected <%} %>>420</option>
+                                <option value=450 <%if (length == 450) { %> selected <%} %>>450</option>
+                                <option value=480 <%if (length == 480) { %> selected <%} %>>480</option>
+                                <option value=510 <%if (length == 510) { %> selected <%} %>>510</option>
+                                <option value=540 <%if (length == 540) { %> selected <%} %>>540</option>
+                                <option value=570 <%if (length == 570) { %> selected <%} %>>570</option>
+                                <option value=600 <%if (length == 600) { %> selected <%} %>>600</option>
+                                <option value=630 <%if (length == 630) { %> selected <%} %>>630</option>
+                                <option value=660 <%if (length == 660) { %> selected <%} %>>660</option>
+                                <option value=690 <%if (length == 690) { %> selected <%} %>>690</option>
+                                <option value=720 <%if (length == 720) { %> selected <%} %>>720</option>
+                                <option value=750 <%if (length == 750) { %> selected <%} %>>750</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Carport bredde</th>
+                        <td> 
+                            <select class="form-control" id="width" name="width">
+                                <% int width = i.getCarportWidth(); %>
+                                <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (width == 300) { %> selected <%} %>>300</option>
+                                <option value=330 <%if (width == 330) { %> selected <%} %>>330</option>
+                                <option value=360 <%if (width == 360) { %> selected <%} %>>360</option>
+                                <option value=390 <%if (width == 390) { %> selected <%} %>>390</option>
+                                <option value=420 <%if (width == 420) { %> selected <%} %>>420</option>
+                                <option value=450 <%if (width == 450) { %> selected <%} %>>450</option>
+                                <option value=480 <%if (width == 480) { %> selected <%} %>>480</option>
+                                <option value=510 <%if (width == 510) { %> selected <%} %>>510</option>
+                                <option value=540 <%if (width == 540) { %> selected <%} %>>540</option>
+                                <option value=570 <%if (width == 570) { %> selected <%} %>>570</option>
+                                <option value=600 <%if (width == 600) { %> selected <%} %>>600</option>
+                                <option value=630 <%if (width == 630) { %> selected <%} %>>630</option>
+                                <option value=660 <%if (width == 660) { %> selected <%} %>>660</option>
+                                <option value=690 <%if (width == 690) { %> selected <%} %>>690</option>
+                                <option value=720 <%if (width == 720) { %> selected <%} %>>720</option>
+                                <option value=750 <%if (width == 750) { %> selected <%} %>>750</option>
+                                <option value=780 <%if (width == 780) { %> selected <%} %>>780</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Skur længde</th>
+                        <td> <%= i.getShackLength() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Skur bredde</th>
+                        <td> <%= i.getShackWidth() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Tagtype</th>
+                        <td> 
+                            <% String tagtype = i.getRoofType(); %>
+                            <select class="form-control" name="tagtype">
+                                <option value="rejsning" <% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
+                                <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Taghældning (hvis "rejsning")</th>
+                        <td> <%= i.getAngle() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Kommentar ansat</th>
+                        <td><textarea  class="form-control" style="resize: none"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Kommentar kunde</th>
+                        <td><textarea class="form-control" style="resize: none"><% if(i.getCommentCustomer() != null) { %><%= i.getCommentCustomer() %><% } %></textarea></td>
+                    </tr>
+                    <tr>
+                        <th>Ønsket levering til</th>
                         <td> <%= i.getPeriod() %> </td>
-                        <td> <%= i.getStatus() %> </td>
-                        <td> <%= i.getEmail() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td> 
+                        <% String status = i.getStatus(); %>
+                        <select class="form-control" name="status">
+                            <option value="ny" <% if(status.equals("ny")) { %> selected <% } %> >Ny</option>
+                            <option value="behandles" <% if(status.equals("behandles")) { %> selected <% } %> >Behandles</option>
+                            <option value="behandlet" <% if(status.equals("behandlet")) { %> selected <% } %> >Behandlet</option>
+                        </select> 
+                        </td> 
+                    </tr>
+                    <tr>
+                        <th>Behandles af</th>
                         <td> <%= i.getId_employee() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Forespørgelse afsendt den</th>
+                        <td> <%= i.getDate() %> </td>
                     </tr>
                 </table>
             </div>
+            
+            <div class="col-lg-4">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Email</th>
+                        <td> <%= cus.getEmail() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td> <%= cus.getName() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Surname</th>
+                        <td> <%= cus.getSurname() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Phonenumber</th>
+                        <td> <%= cus.getPhonenumber() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td> <%= cus.getAddress() %> </td>
+                    </tr>
+                    <tr>
+                        <th>Zipcode</th>
+                        <td> <%= cus.getZipcode() %> </td>
+                    </tr>
+                </table>
+            </div>
+
+            
         </div>
         <br><br>
         
-        <h1>Bill of Materials</h1>
+        <h1> Stykliste </h1>
         
         <table class="table table-bordered">
                 <thead>

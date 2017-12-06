@@ -23,9 +23,8 @@ public abstract class Command {
         commands.put( "calculate", new Calculate());
         commands.put( "sendinquiry", new SendInquiry());
         commands.put( "viewinquiries", new ViewInquiries() );
-        commands.put( "viewbom", new ViewBoM() );
         commands.put( "viewcustomers" , new ViewCustomers() );
-        commands.put( "inquiry" , new ViewLatestInquiry() );
+        commands.put( "viewinquiry" , new ViewInquiry() );
         
     }
 

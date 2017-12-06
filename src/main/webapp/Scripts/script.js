@@ -9,7 +9,7 @@ function findInquiryByEmailAndId(cosEmail,inqId) {
     var email = cosEmail;
     var id = inqId;
     
-    window.open("/Fog/FrontController?command=inquiry&customer="+email+"&id="+id,"nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
+    window.open("/Fog/FrontController?command=viewinquiry&customer="+email+"&id="+id,"nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
 }
 
 function findInquiriesByEmail(cosEmail) {
