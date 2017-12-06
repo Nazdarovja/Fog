@@ -173,8 +173,11 @@ public class SVGFromSide {
         svg.append("<line x1='30' y1=").append(gap+13+roofHeight).append(" x2='30' y2=").append(gap+height+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
         svg.append("<text x='25' y=").append(height/2+gap+roofHeight).append(" style='writing-mode: tb;' fill='black'>").append(height-13).append("</text>"); // height minus Eave
         
-        svg.append("<line x1=").append(gap+length+20).append(" y1=").append(gap+roofHeight).append(" x2=").append(gap+length+20).append(" y2=").append(height+gap+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
-        svg.append("<text x=").append(gap+length+20-10).append(" y=").append(height/2+gap+roofHeight).append(" style='writing-mode: tb;' fill='black'>").append(height-10).append("</text>"); // end of carport
+        svg.append("<line x1=").append(gap+length+20).append(" y1=").append(gap).append(" x2=").append(gap+length+20).append(" y2=").append(height+gap+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
+        if(roofType.equals("fladt"))
+            svg.append("<text x=").append(gap+length+20-10).append(" y=").append(((roofHeight+height)/2)+gap).append(" style='writing-mode: tb;' fill='black'>").append(height+roofHeight-10).append("</text>"); // end of carport
+        else
+            svg.append("<text x=").append(gap+length+20-10).append(" y=").append(((roofHeight+height)/2)+gap).append(" style='writing-mode: tb;' fill='black'>").append(height+roofHeight).append("</text>"); // end of carport
         
         svg.append("<line x1='10' y1=").append(gap).append(" x2='10' y2=").append(height+gap+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
         svg.append("<text x='5' y=").append(height/2+gap+roofHeight).append(" style='writing-mode: tb;' fill='black'>").append(height+roofHeight).append("</text>"); // height of carport
