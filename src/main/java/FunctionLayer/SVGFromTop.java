@@ -37,9 +37,11 @@ public class SVGFromTop {
         if(this.roofType.equals("fladt")) {
             gapFromEdgePosts = 27;
             gapFromEdge = 30;
+            makeFlatRoofCarport();
         } else {
             gapFromEdgePosts = 17;
             gapFromEdge = 20;
+            makePitchedRoofCarport();
         }
     }
     
@@ -189,8 +191,7 @@ public class SVGFromTop {
             svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(width-gapFromEdgePosts-5+gap-10).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         else {
             svg.append("<rect x='").append(length-shackWidth-30+gap).append("' y='").append(shackLength+gapFromEdge+gap-(minusRight()*2)-8).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
-            if(width / 2 != shackLength)
-                svg.append("<rect x='").append(length+gap-30-16).append("' y='").append(shackLength+gapFromEdge+gap-(minusRight()*2)-8).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
+            svg.append("<rect x='").append(length+gap-30-16).append("' y='").append(shackLength+gapFromEdge+gap-(minusRight()*2)-8).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         }
         if(width > 600 && shackLength > width / 2) {
             int yValue = width / 2;
@@ -267,5 +268,9 @@ public class SVGFromTop {
             svg.append("<rect x='").append(length+gap-30-16).append("' y='").append(yValue).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
             svg.append("<rect x='").append(xValue-8).append("' y='").append(yValue).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         }
+    }
+    public static void main(String[] args) {
+        SVGFromTop svg = new SVGFromTop(630, 650, true, 326, 210, "fladt", 30);
+        System.out.println(svg.getSVG());
     }
 }
