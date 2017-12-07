@@ -22,6 +22,7 @@ public class Calculate extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
         int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("length"));
