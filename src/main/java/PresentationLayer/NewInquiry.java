@@ -19,12 +19,15 @@ public class NewInquiry extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        
+        String inquiries = (String) session.getAttribute("inquiries");
+
+        Customer customer = (Customer) session.getAttribute("customer");
+
         if (session != null) {
             session.invalidate();
         }
-        
+
+        request.getSession().setAttribute("inquiries", inquiries);
         request.getSession().setAttribute("customer", customer);
         return "QuickBuild";
     }
