@@ -111,6 +111,17 @@ $('#registration').submit(function () {
 
 });
 
+
+$('#svg').on('click', () => {
+    if($('.svgTop').css('display') === 'none') {
+        $('.svgSide').hide();
+        $('.svgTop').show('slow');
+    }
+    else {
+        $('.svgTop').hide();
+        $('.svgSide').show('slow');
+    }
+});
 //$('input'[]) {
 //    if($("#password2").val() !== $("#password1").val()){
 //        alert("Dine passwords matcher ikke!");

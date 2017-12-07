@@ -39,7 +39,8 @@ public class FrontController extends HttpServlet {
         catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher( "/WEB-INF/errorpage.jsp" ).forward( request, response );
+            String lastpage = (String) request.getSession().getAttribute("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

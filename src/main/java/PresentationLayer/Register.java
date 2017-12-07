@@ -19,6 +19,7 @@ public class Register extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().setAttribute("lastpage", "QuickBuild");
         Customer c = null;
         
         String email = request.getParameter( "email" );

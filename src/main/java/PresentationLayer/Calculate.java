@@ -9,6 +9,8 @@ import FunctionLayer.BillOfMaterials;
 import FunctionLayer.GenerateSVG;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.SVGFromSide;
+import FunctionLayer.SVGFromTop;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ public class Calculate extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
         int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("length"));
@@ -44,9 +47,12 @@ public class Calculate extends Command {
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
-        String SVG = GenerateSVG.generateSVGHTML(length, width, withShack, shackWidth, shackLength, roofType, Integer.parseInt(angle));
+        StringBuilder top = new SVGFromTop(length, width, withShack, shackLength, shackWidth, roofType, Integer.parseInt(angle)).getSVG();
+        StringBuilder side = new SVGFromSide(length, width, height, withShack, shackLength, shackWidth, roofType, Integer.parseInt(angle)).getSVG();
         
-        session.setAttribute("svg", SVG);
+        
+        session.setAttribute("svgTop", top.toString());
+        session.setAttribute("svgSide", side.toString());
         session.setAttribute("shackCheckbox", shackCheckbox);
         session.setAttribute("height", height);
         session.setAttribute("length", length);

@@ -18,6 +18,10 @@
         <title>Quick Byg</title>
     </head>
     <body>
+        <% if(request.getAttribute("error") != null) {
+            String error = (String) request.getAttribute("error"); %>
+            <script>alert("<%=error%>")</script>
+        <%}%>
         <div class="row">
             <img class="col-sm-3" style="margin-right: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
             <h1 class="col-sm-6 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
@@ -154,9 +158,16 @@
             </div>
                         
                 <div id="svg" class="col-sm-6 text-center lead" >
-                    <% if(request.getSession().getAttribute("svg") != null) { 
-                            String svg = (String) request.getSession().getAttribute("svg"); %>
-                            <%= svg %>
+                    <% if(request.getSession().getAttribute("svgTop") != null && request.getSession().getAttribute("svgSide") != null) { 
+                            String svgTop = (String) request.getSession().getAttribute("svgTop"); 
+                            String svgSide = (String) request.getSession().getAttribute("svgSide"); 
+                    %>
+                    <div class="svgTop">
+                            <%= svgTop %>
+                    </div>
+                    <div class="svgSide" style="display: none;">
+                            <%= svgSide %>
+                    </div>
                     <% } %>
                 </div>
 
