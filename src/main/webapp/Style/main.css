@@ -50,5 +50,10 @@ textarea {
    resize: none;
 }
 
+.middlediv {
+    width: 75%;
+    margin-left: 12%;
+}
+
 
 

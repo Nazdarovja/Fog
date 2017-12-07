@@ -27,14 +27,15 @@
         <link href="${pageContext.request.contextPath}/Style/main.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Inquiry</h1>
+        <h1>Forespørgelses oversigt</h1>
         
         <% Inquiry i = (Inquiry)request.getAttribute("inquiry"); %>
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
         <% Customer cus = (Customer)request.getAttribute("customer"); %>
         
         <div class="container">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin-right: 10%">
+                <h2>Forespørgelse</h2>
                 <table class="table table-bordered">
                     <tr>
                         <th>Carport højde</th>
@@ -121,7 +122,22 @@
                     </tr>
                     <tr>
                         <th>Taghældning (hvis "rejsning")</th>
-                        <td> <%= i.getAngle() %> </td>
+                        <td>
+                            <select class="form-control" name="angle" >
+                                <% int angle = -1;
+                                    if (request.getSession().getAttribute("angle") != null) {
+                                        angle = Integer.parseInt(i.getAngle());
+                                    }
+                                %>
+                                <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
+                                <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
+                                <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
+                                <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
+                                <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
+                                <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
+                                <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <th>Kommentar ansat</th>
@@ -129,7 +145,7 @@
                     </tr>
                     <tr>
                         <th>Kommentar kunde</th>
-                        <td><textarea class="form-control" style="resize: none"><% if(i.getCommentCustomer() != null) { %><%= i.getCommentCustomer() %><% } %></textarea></td>
+                        <td><%= i.getCommentCustomer() %></td>
                     </tr>
                     <tr>
                         <th>Ønsket levering til</th>
@@ -158,6 +174,7 @@
             </div>
             
             <div class="col-lg-4">
+                <h2>Kunde info</h2>
                 <table class="table table-bordered">
                     <tr>
                         <th>Email</th>
@@ -184,52 +201,64 @@
                         <td> <%= cus.getZipcode() %> </td>
                     </tr>
                 </table>
+                    
+                <h2>Muligheder</h2>
+                <legend style="margin: 10px">
+                    <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">   
+                    <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
+                </legend>
+                    
+                    
             </div>
 
             
         </div>
         <br><br>
         
-        <h1> Stykliste </h1>
         
-        <table class="table table-bordered">
-                <thead>
-                    <tr>
-                      <th>Product</th>
-                      <th>Category</th>
-                      <th>Qty</th>
-                      <th>Unit</th>
-                      <th>Price</th>
-                      <th>Usability Comment</th>
-                    </tr>
-                </thead>
-                <% for (OrderLine j : bom.getMaterials()) { %>
-                    <td> 
+        <div class="row">
+            <h2 style="margin-left: 45%"> Stykliste </h2>
+            <div class="middlediv">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Category</th>
+                          <th>Qty</th>
+                          <th>Unit</th>
+                          <th>Price</th>
+                          <th>Usability Comment</th>
+                        </tr>
+                    </thead>
+                    <% for (OrderLine j : bom.getMaterials()) { %>
+                        <td> 
+                            <% if (j.getProduct() != null) { %>
+                            <%= j.getProductName() %>
+                            <% } else {%>
+                            product
+                            <% } %>
+                        </td>
+                        <td> 
                         <% if (j.getProduct() != null) { %>
-                        <%= j.getProductName() %>
-                        <% } else {%>
-                        product
-                        <% } %>
-                    </td>
-                    <td> 
-                    <% if (j.getProduct() != null) { %>
-                        <%= j.getProductCategory() %>
-                        <% } else {%>
-                        category
-                        <% } %>
-                    </td>
-                    <td> <%= j.getQuantity() %> </td>
-                    <td> <%= j.getAmountType() %> </td>
-                    <td> 
-                    <% if (j.getProduct() != null) { %>
-                        <%= j.getOrderLinePrice() %> 
-                        <% } else {%>
-                        order line price
-                        <% } %>
-                    </td>
-                    <td> <%= j.getUsabilityComment() %> </td>
-                </tr>  
-                <% } %>
-            </table>
+                            <%= j.getProductCategory() %>
+                            <% } else {%>
+                            category
+                            <% } %>
+                        </td>
+                        <td> <%= j.getQuantity() %> </td>
+                        <td> <%= j.getAmountType() %> </td>
+                        <td> 
+                        <% if (j.getProduct() != null) { %>
+                            <%= j.getOrderLinePrice() %> 
+                            <% } else {%>
+                            order line price
+                            <% } %>
+                        </td>
+                        <td> <%= j.getUsabilityComment() %> </td>
+                    </tr>  
+                    <% } %>
+                </table>
+            </div>
+        </div>
     </body>
 </html>
