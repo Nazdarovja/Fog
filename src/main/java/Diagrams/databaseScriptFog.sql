@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
   `shackWidth` INT NULL,
   `shackLength` INT NULL,
   `roofType` ENUM('fladt', 'rejsning') NOT NULL,
+  `roofMaterial` VARCHAR(45),
   `angle` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
   `commentCustomer` VARCHAR(2000) NULL,
   `commentEmployee` VARCHAR(2000) NULL,
@@ -99,7 +100,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `fog`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
-  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade','løsholt') NOT NULL,
+  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag','løsholt') NOT NULL,
   `price` LONG NOT NULL,
   `length` INT NULL,
   `width` INT NULL,
@@ -151,7 +152,7 @@ VALUES
 (320,420,320,null,null,'rejsning','15','Ring tak!',null,null,'ny','test6@test.dk');
 
 -- --------------------------------------------------------------------------
--- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','tagplade',','løsholt'
+-- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag',','løsholt'
 -- --------------------------------------------------------------------------
 INSERT INTO
 Product (name,category,price,length,width,height)
@@ -249,10 +250,9 @@ VALUES
 ('RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
 ('RØDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM','tagsten', 8995, 0, 0, 0),  -- ingen mål defineret
 
--- tagplade
-('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','tagplade', 24900, 1100, 610, 1),
-('FASTLOCK UNI KLAR 6,0M','tagplade', 23397, 60000, 300, 1),  -- ingen width mål defineret
-('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','tagplade', 25900, 1090, 1180, 1),
+-- trapeztag
+('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','trapeztag', 24900, 1100, 610, 1),
+('CEMBRIT B6S FK GRÅ BØLGEPLADE 1090X1180MM - (MODEL 2013)','trapeztag', 25900, 1090, 1180, 1),
 
 -- løsholt
 ('45x95 Reglar ubh.','løsholt',7533,5400,95,45),

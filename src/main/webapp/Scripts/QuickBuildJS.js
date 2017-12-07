@@ -26,8 +26,10 @@ function check() {
     }
     if (document.getElementById("roofTypeCheck").value === "rejsning") {
         $("#angle").show();
+
     } else {
         $("#angle").hide();
+
     }
     if (document.getElementById("shackCheckboxCheck").value === "") {
         $("#shackLength").hide();
@@ -49,7 +51,6 @@ function check() {
     //Add date restriction to wished delivery date
     $("#wishedDelivery").attr("min", year + "-" + month + "-" + day);
 }
-
 
 function restrictWidth() {
     $("#shackWidthInput").attr({
@@ -74,6 +75,7 @@ function widthRules() {
         return 100;
 }
 ;
+
 $('#registration').submit(function () {
     if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test($('#password1').val())) {
         alert("Dit password skal minimum indeholde : 8 karakterer, et lille bogstav, et stort bogstav og et tal");
@@ -86,9 +88,15 @@ $('#registration').submit(function () {
         alert('Du er hermed registreret, login for at gemme din carport');
         return true;
     }
-
 });
-
+// Adds angle option, when rejsning is chosen in the dropdown.
+$('select[name=roofType]').on('change', function () {
+    if (this.value === "rejsning") {
+        $("#angle").show();
+    } else {
+        $("#angle").hide();
+    }
+});
 
 // Adds Length and Height visibilty to jsp
 $('input[name=shackCheckbox]').on('change', function () {

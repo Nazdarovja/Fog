@@ -22,8 +22,8 @@ public class Calculator {
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
+        Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
 
-//        stolpe, rem,  spær, lægte,             algortime til hypotenuse, tagpap/tagsten
         // FLAT ROOF ALGORITHM        
         if (inquiry.getRoofType().equals("fladt")) {
             System.out.println("FLAT");
@@ -33,8 +33,16 @@ public class Calculator {
             bom.addOrderLine(CalcTopPlate.getTopPlatesFlatRoof(length, width, getChosenCategory("rem", products)));
             //raft / spær
             bom.addOrderLine(CalcRafter.getRafterFlatRoof(length, width, getChosenCategory("spær", products)));
-            //tarPaper / tagpap
-            //  bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenCategory("tagpap", products)));
+
+            //roof material
+            if (roofMaterial.getCategory().equals("tagpap")) {
+                //tarPaper / tagpap
+                bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
+            } else {
+                //trapeztag / trapezeRoof
+                bom.addOrderLine(CalcTrapezeRoof.calculateAmountOfTrapezeRoof(length, width, roofMaterial));
+            };
+
             //Shack
             if (inquiry.getShackLength() > 0) {
                 int shackLength = inquiry.getShackLength();
@@ -61,10 +69,16 @@ public class Calculator {
             //lath / lægte
             bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenCategory("lægte", products)));
             bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
-            //tarPaper / tagpap
-            // bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, getChosenCategory("tagpap", products)));
-            //Bricks/rooftiles /tagsten
-            bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
+
+            //roof material
+            if (roofMaterial.getCategory().equals("tagpap")) {
+                //tarPaper / tagpap
+                bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
+            } else {
+                //Bricks/rooftiles /tagsten
+                bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
+            };
+
             //Shack
             if (inquiry.getShackLength() > 0) {
                 int shackLength = inquiry.getShackLength();
@@ -76,7 +90,7 @@ public class Calculator {
                 bom.addOrderLine(CalcShackTransom.getTransomsForShackWidth(shackWidth, getChosenCategory("løsholt", products)));
                 //Shack Cladding
                 bom.addOrderLine(CalcShackCladding.getCladdingForShackPitchedRoofGable(width, inquiry.getCarportHeight(), shackWidth, Integer.parseInt(inquiry.getAngle()), getChosenCategory("beklædning", products)));
-                bom.addOrderLine(CalcShackCladding.getCladdingForShackPitchedRoofSide(width, inquiry.getCarportHeight(), shackLength, Integer.parseInt(inquiry.getAngle()) , getChosenCategory("beklædning", products)));
+                bom.addOrderLine(CalcShackCladding.getCladdingForShackPitchedRoofSide(width, inquiry.getCarportHeight(), shackLength, Integer.parseInt(inquiry.getAngle()), getChosenCategory("beklædning", products)));
                 //Shack Door
                 bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
@@ -134,7 +148,7 @@ public class Calculator {
         double bPow = Math.pow(b, 2);
         return Math.sqrt(aPow + bPow);
     }
-    
+
     public static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

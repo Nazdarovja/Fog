@@ -30,6 +30,7 @@ public class SendInquiry extends Command {
 
         inquiry.setEmail(customer.getEmail());
         inquiry.setStatus("ny");
+        
         LogicFacade.SendInquiry(inquiry);
         
         //remove stuff from session
