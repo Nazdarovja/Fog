@@ -123,7 +123,7 @@
                     <tr>
                         <th>Taghældning (hvis "rejsning")</th>
                         <td>
-                            <select class="form-control" name="angle" >
+                            <select class="form-control" id="angle" disabled="true">
                                 <% int angle = -1;
                                     if (request.getSession().getAttribute("angle") != null) {
                                         angle = Integer.parseInt(i.getAngle());

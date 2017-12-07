@@ -80,10 +80,6 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
-function disable(toDisable) {
-    toDisable.disable = true;
-}
-
 function rowSorting(tableId) {
     var inputs, filter, table, tr, td, i, notmatch;
 
@@ -113,5 +109,5 @@ function rowSorting(tableId) {
 }
 
 rowSorting("customertable");
-disable(document.getElementsByName("angle"));
+
 
