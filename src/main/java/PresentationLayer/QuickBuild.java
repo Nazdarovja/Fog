@@ -21,6 +21,7 @@ public class QuickBuild extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().setAttribute("lastpage", "QuickBuild");
         if(request.getParameter("email") != null) {
             String email = (String) request.getParameter("email");
             String password = (String) request.getParameter("password");

@@ -22,6 +22,7 @@ public class SendInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.getSession().setAttribute("lastpage", "QuickBuild");
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Inquiry i = (Inquiry) request.getSession().getAttribute("inquiry");
         int height = i.getCarportHeight();
