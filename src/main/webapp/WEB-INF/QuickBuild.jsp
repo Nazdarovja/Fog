@@ -154,9 +154,16 @@
             </div>
                         
                 <div id="svg" class="col-sm-6 text-center lead" >
-                    <% if(request.getSession().getAttribute("svg") != null) { 
-                            String svg = (String) request.getSession().getAttribute("svg"); %>
-                            <%= svg %>
+                    <% if(request.getSession().getAttribute("svgTop") != null && request.getSession().getAttribute("svgSide") != null) { 
+                            String svgTop = (String) request.getSession().getAttribute("svgTop"); 
+                            String svgSide = (String) request.getSession().getAttribute("svgSide"); 
+                    %>
+                    <div class="svgTop">
+                            <%= svgTop %>
+                    </div>
+                    <div class="svgSide" style="display: none;">
+                            <%= svgSide %>
+                    </div>
                     <% } %>
                 </div>
 
