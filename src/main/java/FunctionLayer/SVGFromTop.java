@@ -234,13 +234,22 @@ public class SVGFromTop {
     }
     
     private void generateSVGForLineMeasurements() {
-            svg.append("<text x=").append(length/2+gap).append(" y='15' fill='black'>").append(length).append("</text>");
             svg.append("<text x='25' y=").append(width/2+gap).append(" style='writing-mode: tb;' fill='black'>").append(width-(gapFromEdge*2)).append("</text>");
             svg.append("<text x='5' y=").append(width/2+gap).append(" style='writing-mode: tb;' fill='black'>").append(width).append("</text>");
-            
-            svg.append("<line x1=").append(gap).append(" y1='30' x2='").append(length+gap).append("' y2='30' style='stroke:rgb(0,0,0);stroke-width:2'/>");
             svg.append("<line x1='30' y1=").append(gap+gapFromEdge).append(" x2='30' y2=").append(width+gap-gapFromEdge).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
             svg.append("<line x1='10' y1=").append(gap).append(" x2='10' y2=").append(width+gap).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
+            
+            if(!withShack) {
+                svg.append("<line x1=").append(gap).append(" y1='30' x2='").append(length+gap).append("' y2='30' style='stroke:rgb(0,0,0);stroke-width:2'/>");
+                svg.append("<text x=").append(length/2+gap).append(" y='15' fill='black'>").append(length).append("</text>");
+            }
+            else {
+                svg.append("<text x=").append((gap+length-shackWidth-30+gap)/2).append(" y='15' fill='black'>").append(length-shackWidth-30).append("</text>");
+                svg.append("<text x=").append(gap+length-(shackWidth/2)-30).append(" y='15' fill='black'>").append(shackWidth).append("</text>");
+                svg.append("<line x1=").append(gap+length-shackWidth-30).append(" y1='30' x2='").append(length+gap-30).append("' y2='30' style='stroke:rgb(0,0,0);stroke-width:2'/>");
+                svg.append("<line x1=").append(gap).append(" y1='30' x2='").append(length+gap-shackWidth-30).append("' y2='30' style='stroke:rgb(0,0,0);stroke-width:2'/>");
+                svg.append("<line x1=").append(gap+length-shackWidth-30).append(" y1='10' x2='").append(length+gap-shackWidth-30).append("' y2='35' style='stroke:rgb(0,0,0);stroke-width:2'/>");
+            }
     }
     
     private void generateSVGForPosts() {

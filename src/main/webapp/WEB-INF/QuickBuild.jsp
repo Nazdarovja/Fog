@@ -158,8 +158,12 @@
                             String svgTop = (String) request.getSession().getAttribute("svgTop"); 
                             String svgSide = (String) request.getSession().getAttribute("svgSide"); 
                     %>
+                    <div class="svgTop">
                             <%= svgTop %>
+                    </div>
+                    <div class="svgSide" style="display: none;">
                             <%= svgSide %>
+                    </div>
                     <% } %>
                 </div>
 
