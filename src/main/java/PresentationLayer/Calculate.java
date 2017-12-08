@@ -29,13 +29,24 @@ public class Calculate extends Command {
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));
         String roofType = request.getParameter("roofType");
+        String roofMaterial = "";
+        if (roofType.equals("rejsning") && request.getParameter("roofMaterialPitchedProduct") != null) {
+            roofMaterial = request.getParameter("roofMaterialPitchedProduct");
+            System.out.println(roofMaterial.toString());
+            
+        }
+        if (roofType.equals("fladt") && request.getParameter("roofMaterialFlatProduct") != null) {
+            roofMaterial = request.getParameter("roofMaterialFlatProduct");
+            System.out.println(roofMaterial.toString());
+        }
+
         String angle = request.getParameter("angle");
         String comment = request.getParameter("comment");
         String wishedDelivery = request.getParameter("wishedDelivery");
         System.out.println(wishedDelivery);
         Date wishDeliveryDate = null;
         if (wishedDelivery.length() > 1) {
-            wishDeliveryDate = new Date(Integer.parseInt(wishedDelivery.substring(0, 4))-1900, Integer.parseInt(wishedDelivery.substring(5, 7))-1, Integer.parseInt(wishedDelivery.substring(8)));
+            wishDeliveryDate = new Date(Integer.parseInt(wishedDelivery.substring(0, 4)) - 1900, Integer.parseInt(wishedDelivery.substring(5, 7)) - 1, Integer.parseInt(wishedDelivery.substring(8)));
         }
         String shackCheckbox = null;
         int shackLength = 0;
@@ -50,7 +61,7 @@ public class Calculate extends Command {
             session.setAttribute("shackWidth", shackWidth);
         }
 
-        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, angle, comment, null, wishDeliveryDate, "", null, 1, null);
+        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, roofMaterial, angle, comment, null, wishDeliveryDate, "", null, 1, null);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
@@ -70,6 +81,7 @@ public class Calculate extends Command {
         session.setAttribute("comment", comment);
         session.setAttribute("wishedDelivery", wishedDelivery);
         session.setAttribute("roofType", roofType);
+        session.setAttribute("roofMaterial", roofMaterial);
         session.setAttribute("inquiry", inquiry);
         return "QuickBuild";
     }

@@ -16,21 +16,22 @@ import static org.junit.Assert.*;
  * @author Stanislav
  */
 public class InquiryMapperTest {
-    
+
     public InquiryMapperTest() {
     }
-    
+
     @Before
     public void setUp() {
     }
 
+    //int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String roofMaterial, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date
     @Test
     public void testRegisterInitialInquiry() throws Exception {
         System.out.println("registerInitialInquiry");
-        Inquiry i = new Inquiry(0, 0, 700, 360, 0, 0, "rejsning", "15", "", "", new Date(2017,11,21), "ny", "test1@test.dk", 0, null);
+        Inquiry i = new Inquiry(0, 0, 700, 360, 0, 0, "rejsning", "trapeztag", "15", "", "", new Date(2017, 11, 21), "ny", "test1@test.dk", 0, null);
         Inquiry result = InquiryMapper.registerInitialInquiry(i);
-        assertEquals("rejsning", result.getRoofType());
-        assertTrue( result.getId() > 0);
+        assertEquals("trapeztag", result.getRoofMaterial());
+        assertTrue(result.getId() > 0);
     }
-    
+
 }

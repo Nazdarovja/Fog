@@ -31,6 +31,9 @@ public class Login extends Command {
         List<Inquiry> inquiriesList = LogicFacade.getCustomerInquiries(customer);
         String inquiries = LogicFacade.utilPreviousInquiries(inquiriesList);
         request.getSession().setAttribute("inquiries", inquiries);
+        
+        String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");
+        String roofMaterialFlat = LogicFacade.getRoofMaterials("fladt");
         return "QuickBuild";
     }
 

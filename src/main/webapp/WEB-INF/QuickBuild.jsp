@@ -201,6 +201,22 @@
                     </div>
                 </div>
             </div>
+                        <div>
+                            <div id="roofPitched">
+                                <!--LIST VIEW-->
+                                <select name="roofMaterialPitchedProduct" class="form-control">
+                                    <%= request.getSession().getAttribute("roofMaterialPitched")%>
+                                </select>
+                            </div>
+
+                            <div id="roofFlat">
+                                <!--LIST VIEW-->
+                                <select  name="roofMaterialFlatProduct" class="form-control" >
+                                    <%= request.getSession().getAttribute("roofMaterialFlat")%>
+                                </select>
+
+                            </div>
+                        </div>
         </form>
     </div>
 
@@ -240,7 +256,7 @@
     </div>
 
     <div class="well" >
-        
+
         <!--ORDER DATA SETUP-->
         <%if (request.getSession().getAttribute("customer") != null) {%>
         <!--LIST VIEW-->

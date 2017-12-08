@@ -5,8 +5,10 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,7 +21,15 @@ public class QuickBuild extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+
         request.getSession().setAttribute("lastpage", "QuickBuild");
+        String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");
+        String roofMaterialFlat = LogicFacade.getRoofMaterials("fladt");
+
+        session.setAttribute("roofMaterialPitched", roofMaterialPitched);
+        session.setAttribute("roofMaterialFlat", roofMaterialFlat);
+
         return "QuickBuild";
     }
 }
