@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="FunctionLayer.Inquiry"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%-- 
@@ -17,6 +18,7 @@
         <link rel="icon" href="./img/foglogo.png"/>
         <title>Quick Byg</title>
     </head>
+
     <body>
         <% if(request.getAttribute("error") != null) {
             String error = (String) request.getAttribute("error"); %>
@@ -27,8 +29,7 @@
             <h1 class="col-sm-6 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
             <% Customer customer = null;
                 if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
-            <h1 class="col-sm-3 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Hello <%= customer.getName()%></h1>
-            <%--href="FrontController?command=login"--%>
+            <h3 class="col-sm-3 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 25px; padding-bottom: 27px;">Logget ind som :<br><%= customer.getName()%></h3>
         </div>
         <% } else {%>
         <div class="col-sm-3 well" style="background:#124989; margin-left: 0px; padding-top: 18px; padding-bottom: 8px;">
@@ -38,9 +39,9 @@
         <% } %>
     </div>
     <div id="measurements" >
-        <div class="row ">
 
-            <form name="order" action="FrontController" method="POST">
+        <form id="orderForm" name="order" action="FrontController" method="POST">
+            <div class="row ">
                 <input type="hidden" name="command" value="calculate">
                 <div class="col-sm-2 col-sm-offset-2">
                     Vælg længde<br>
@@ -120,23 +121,22 @@
                     <br>
                     <br>
                 </div>
-        </div>
+            </div>
 
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-1">
-                Vælg tagtype<br>
-                <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
-                <select class="form-control" name="roofType">
-                    <% String roofType = "";
-                        if (request.getSession().getAttribute("roofType") != null) {
-                            roofType = (String) request.getSession().getAttribute("roofType");
-                        }
-                    %>
-                    <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
-                    <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
-                </select>
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-1">
+                    Vælg tagtype<br>
+                    <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
+                    <select class="form-control" name="roofType">
+                        <% String roofType = "";
+                            if (request.getSession().getAttribute("roofType") != null) {
+                                roofType = (String) request.getSession().getAttribute("roofType");
+                            }
+                        %>
+                        <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
+                        <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
+                    </select>
 
-                <div >
                     <div id="angle">
                         Vælg hældning<br>
                         <select class="form-control" name="angle" >
@@ -155,8 +155,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
-                        
+
                 <div id="svg" class="col-sm-6 text-center lead" >
                     <% if(request.getSession().getAttribute("svgTop") != null && request.getSession().getAttribute("svgSide") != null) { 
                             String svgTop = (String) request.getSession().getAttribute("svgTop"); 
@@ -171,46 +170,87 @@
                     <% } %>
                 </div>
 
-            <div class="col-sm-2">
-                Tilvælg redskabsrum<br>
-                <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden"  <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
+                <div class="col-sm-2">
+                    Tilvælg redskabsrum<br>
+                    <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
+                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden" <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
 
-                <div id="shackLength" >
-                    Redskabsrum Længde<br>
-                    <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
-                </div>
-                <div id="shackWidth" >
-                    Redskabsrum Bredde<br>
-                    <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                    <div id="shackLength" >
+                        Redskabsrum Længde<br>
+                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                    </div>
+                    <div id="shackWidth" >
+                        Redskabsrum Bredde<br>
+                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                    </div>
+
+                    <div>
+                        <!--If user is logged in-->
+                        <%if (customer != null) {%>  
+                        <div class="form-group">
+                            <label>Kommentar til ordre</label>
+                            <textarea class="form-control" rows="8" name="comment" id="comment" maxlength="2000" placeholder="Skriv her hvis du har nogen særlige ønsker, eller spørgsmål.
+                                      (Bemærk kun 2000 karakterer tilladt)"><%if (request.getSession().getAttribute("comment") != null) {%><%= (String) request.getSession().getAttribute("comment")%><%}%></textarea>
+                        </div>
+                        <%}%>
+                    </div>
+                    <div class="form-group">
+                        <label>Ønsket leveringstid</label>
+                        <input name="wishedDelivery" id="wishedDelivery" type="date" value="<%= request.getSession().getAttribute("wishedDelivery")%>">
+                        <span class="help-block"> Bemærk der er minimum 1 uges behandlingstid</span>                    
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-9 well bg-primary text-white" style=" background:#124989">
-                <% if (request.getSession().getAttribute("inquiry") != null) {  %>
-                <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
-                TOTAL PRIS: <br>
-                <%= inquiry.getBom().getTotalPrice()%>,-
-                <Br>
-                <%}%>
+    <div class="row">
+        <div class="col-sm-2 well col-sm-offset-7" style=" background:#124989; color: white">
+            <% if (request.getSession().getAttribute("inquiry") != null) {  %>
+            <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
+            TOTAL PRIS: <br>
+            <%= inquiry.getBom().getTotalPrice()%>,-
+            <Br>
+            <%}%>
+            <input form="orderForm" class="btn btn-default"  type="submit" value="Beregn"/>
+            <form name="newInquiry" action="FrontController" method="POST">
+                <input type="hidden" name="command" value="newInquiry">
+                <input class="btn btn-warning" type="submit" value="Ny forespørgsel"/>
+            </form>
 
-                <input class="btn btn-default"  type="submit" value="Beregn"/>
+            <!--if user is logged in and has made a calculation-->
+            <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>
+            <!--Save order-->
+            <div id="sendSaveInquiry">
+                <p style="color: white">Gem til senere behandling?</p>
+                <form form="orderForm" name="saveInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="saveInquiry">
+                    <input class="btn btn-default" onclick="saved()" type="submit" value="Gem forespørgsel"/>
+                </form>
+
+                <!-- Send order -->
+                <p style="color: white">Send forespørgsel til Fog?</p>
+                <form name="sendInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="sendInquiry">
+                    <input class="btn btn-default" onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
+                </form>
+                <% }%>
             </div>
         </div>
-    </form>
+    </div>
 
-    <!--if user is logged in and has made a calculation-->
-    <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>  
-    <p>Send forespørgsel til Fog?</p>
+    <div class="well" >
+        
+        <!--ORDER DATA SETUP-->
+        <%if (request.getSession().getAttribute("customer") != null) {%>
+        <!--LIST VIEW-->
+        <p style="color: white">Gemte forespørgsler</p>
+        <ul class="list-group">
+            <%= request.getSession().getAttribute("inquiries")%>
+            <%}%>
+        </ul>
+    </div>
 
-    <form name="sendinquiry" action="FrontController" method="POST">
-        <input type="hidden" name="command" value="sendinquiry">
-        <input onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
-    </form>
-
-    <% }%>
 
     <%----------------------------------------------------------------------------------------------%>
     <%-- MODAL FOR LOGIN AND REGISTER --%>
@@ -232,49 +272,49 @@
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="emaillabel">* Email adresse</label>
                                     <input name="email" type="email" class="form-control"  id="emailinput" aria-describedby="emailinput" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="passwordlabel">* Password</label>
                                     <input name="password1" type="password" class="form-control" id="password1" aria-describedby="passwordinput" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="re-enterpasswordlabel">* Gentag password</label>
                                     <input name="password2" type="password" class="form-control" id="password2" aria-describedby="re-enterpasswordinput" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="postcodelabel">* Postnummer</label>
                                     <input name="zipcode" type="number" class="form-control" id="postcodeinput" aria-describedby="postcodeinput">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="firstnamelabel">* Fornavn</label>
                                     <input name="name" type="text" class="form-control" id="firstnameinput" aria-describedby="firstnameinput" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="lastnamelabel">* Efternavn</label>
                                     <input name="surname" type="text" class="form-control" id="lastnameinput" aria-describedby="lastnameinput" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="phonenumber">* Tlf. nummer</label>
                                     <input name="phonenumber" type="number" class="form-control" id="phonenumber" aria-describedby="phonenumber" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label" for="address">* Adresse</label>
                                     <input name="address" type="text" class="form-control" id="address" aria-describedby="address" required="">
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <br/>
@@ -305,16 +345,16 @@
                                 <div class="form-group has-feedback">
                                     <label class="control-label">Email</label>
                                     <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
                                 </div>
 
                                 <div class="form-group has-feedback">
                                     <label class="control-label">Password</label>
                                     <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
-                                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
                                 </div>
-                                
-                                <input type="hidden" name="command" value="QuickBuild">
+
+                                <input type="hidden" name="command" value="login">
                                 <button type="sumbit" class="btn btn-primary">Login</button>
 
                             </div>
