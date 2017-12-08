@@ -114,7 +114,7 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="tagtype" onclick="disable('angle')">
+                            <select class="form-control" name="tagtype" id='rooftype' onchange="disable('angle')">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
@@ -203,10 +203,10 @@
                 </table>
                     
                 <h2>Muligheder</h2>
-                <legend style="margin: 10px">
+                <div style="margin: 10px">
                     <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">   
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
-                </legend>  
+                </div>  
             </div>
         </div>
         <br><br>
