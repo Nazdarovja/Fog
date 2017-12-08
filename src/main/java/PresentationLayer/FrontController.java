@@ -5,7 +5,10 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
+import FunctionLayer.LoginException;
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,13 +32,35 @@ public class FrontController extends HttpServlet {
      @throws IOException if an I/O error occurs
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
-            throws ServletException, IOException {
+            throws ServletException, IOException  {
         try {
             Command action = Command.from( request );
             String view = action.execute( request, response );
             request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
-        } 
+        }
         
+        catch(LoginException ex) {
+            ex.printStackTrace();
+            
+            request.setAttribute("error", "Could not validate user");
+            String lastpage = (String) request.getSession().getAttribute("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
+        }
+        
+        catch(FogException ex) {
+            ex.printStackTrace();
+            request.setAttribute("error", ex.getMessage());
+            String lastpage = (String) request.getSession().getAttribute("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
+        }
+        
+        catch(SQLException ex) {
+            ex.printStackTrace();
+            request.setAttribute("error", ex.getMessage());
+            String lastpage = (String) request.getSession().getAttribute("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
+        }
+         
         catch (Exception ex) {
             ex.printStackTrace();
             request.setAttribute("error", ex.getMessage());

@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Login extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception, SQLException {
         request.setAttribute("lastpage", "QuickBuild");
         Customer customer = null;
         if (request.getParameter("email") != null) {

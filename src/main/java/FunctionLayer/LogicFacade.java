@@ -8,6 +8,7 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ import java.util.List;
 public class LogicFacade {
 
     //USER 
-    public static Customer login(String email, String password) throws Exception {
+    public static Customer login(String email, String password) throws LoginException, SQLException, Exception {
         return CustomerMapper.login(email, password);
     }
 
-    public static Customer createCostumer(Customer c) throws Exception {
+    public static Customer createCostumer(Customer c) throws FogException, SQLException,Exception {
         return CustomerMapper.createCustomer(c);
     }
 
@@ -33,24 +34,24 @@ public class LogicFacade {
      * @return
      * @throws Exception
      */
-    public static List<Product> getProducts() throws Exception {
+    public static List<Product> getProducts() throws SQLException,Exception {
         return ProductMapper.getProducts();
     }
 
     // CALCULATE
-    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws Exception {
+    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws SQLException,Exception {
         return Calculator.getBillOfMaterials(inquiry);
     }
 
-    public static void SendInquiry(Inquiry inquiry) throws Exception {
+    public static void SendInquiry(Inquiry inquiry) throws SQLException,Exception {
         InquiryMapper.registerInitialInquiry(inquiry);
     }
 
-    public static List<Inquiry> viewInquiries() throws Exception {
+    public static List<Inquiry> viewInquiries() throws SQLException,Exception {
         return InquiryMapper.allInquiries();
     }
 
-    public static List[] viewCustomersAndInquiries() throws Exception {
+    public static List[] viewCustomersAndInquiries() throws SQLException,Exception {
         List[] list = new List[2];
 
         list[0] = InquiryMapper.allInquiries();
@@ -59,34 +60,34 @@ public class LogicFacade {
         return list;
     }
 
-    public static Inquiry viewInquiry(int id) throws Exception {
+    public static Inquiry viewInquiry(int id) throws FogException, SQLException,Exception {
         return InquiryMapper.inquiryById(id);
     }
 
-    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws Exception {
+    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws FogException,SQLException,Exception {
         return InquiryMapper.LatestInquiryByCustomer(customerEmail);
     }
 
-    public static List<Customer> viewAllCustomers() throws Exception {
+    public static List<Customer> viewAllCustomers() throws SQLException,Exception {
         return CustomerMapper.allCustomers();
     }
 
-    public static Customer viewCustomerByEmail(String email) throws Exception {
+    public static Customer viewCustomerByEmail(String email) throws FogException,SQLException,Exception {
         return CustomerMapper.customerByEmail(email);
     }
 
-    public static List<Customer> viewCustomersByInquiryStatus(String status) throws Exception {
+    public static List<Customer> viewCustomersByInquiryStatus(String status) throws FogException,SQLException,Exception {
         switch (status) {
             case "ny":
             case "behandles":
             case "behandlet":
                 return CustomerMapper.customersByInquiryStatus(status);
             default:
-                throw new Exception(" unknown inquiry status ");
+                throw new FogException(" unknown inquiry status ");
         }
     }
 
-    public static List<Inquiry> getCustomerInquiries(Customer customer) throws Exception {
+    public static List<Inquiry> getCustomerInquiries(Customer customer) throws SQLException,Exception {
         return InquiryMapper.getCustomerInquiries(customer);
     }
 
@@ -103,7 +104,7 @@ public class LogicFacade {
         return null;
     }
 
-    public static String getRoofMaterials(String roofType) throws Exception {
+    public static String getRoofMaterials(String roofType) throws SQLException, Exception {
         return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
         
     }

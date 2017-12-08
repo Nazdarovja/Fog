@@ -12,6 +12,7 @@ import FunctionLayer.LogicFacade;
 import FunctionLayer.SVGFromSide;
 import FunctionLayer.SVGFromTop;
 import java.sql.Date;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class Calculate extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception, SQLException {
         request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
         int height = Integer.parseInt(request.getParameter("height"));

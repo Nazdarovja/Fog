@@ -5,6 +5,7 @@
  */
 package DataLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,7 +71,7 @@ public class ProductMapper {
         return productList;
     }
 
-    public static Product getSingleProduct(String category, String productName) throws Exception {
+    public static Product getSingleProduct(String category, String productName) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -92,6 +93,8 @@ public class ProductMapper {
                 int width = rs.getInt("width");
                 int height = rs.getInt("height");
                 product = new Product(id, name, cat, price, length, width, height);
+            } else {
+                throw new FogException("Could not find product");
             }
         } finally {
             // Always make sure result sets and statements are closed,
