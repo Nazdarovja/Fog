@@ -86,6 +86,16 @@ public class LogicFacade {
         }
     }
 
+    
+    public static Inquiry updateInquiry(int id, int height, int length, int width, 
+                                        int shackLength, int shackWidth, String roofType,
+                                        String angle, String comment, String status) 
+            throws Exception{
+        return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, angle, comment, status);
+    }
+    
+
+
     public static List<Inquiry> getCustomerInquiries(Customer customer) throws Exception {
         return InquiryMapper.getCustomerInquiries(customer);
     }
@@ -107,5 +117,6 @@ public class LogicFacade {
         return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
         
     }
+
 
 }

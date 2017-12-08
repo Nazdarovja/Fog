@@ -225,6 +225,122 @@ public class InquiryMapper {
             }
         }
     }
+    
+    public static Inquiry updateCarportSize(int id, int height, int length, int width) throws SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Inquiry inquiry = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, height);
+            ps.setInt(2, length);
+            ps.setInt(3, width);
+            ps.setInt(4, id);
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+                inquiry = inquiryById(id);
+            } else {
+                conn.rollback();
+                throw new Exception(" Update error ");
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+        return inquiry;
+    }
+    
+    public static Inquiry updateShackSize(int id, int length, int width) throws SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Inquiry inquiry = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET shackLength = ?, shackWidth = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, length);
+            ps.setInt(2, width);
+            ps.setInt(3, id);
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+                inquiry = inquiryById(id);
+            } else {
+                conn.rollback();
+                throw new Exception(" Update error ");
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+        return inquiry;
+    }
+    
+    public static Inquiry updateInquiry(int id, int height, int length, int width, 
+                                        int shackLength, int shackWidth, String roofType,
+                                        String angle, String comment, String status) 
+            throws SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        Inquiry inquiry = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setInt(1, height);
+            ps.setInt(2, length);
+            ps.setInt(3, width);
+            ps.setInt(4, shackLength);
+            ps.setInt(5, shackWidth);
+            ps.setString(6, roofType);
+            ps.setString(7, angle);
+            ps.setString(8, comment);
+            ps.setString(9, status);
+            ps.setInt(10, id);
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+                inquiry = inquiryById(id);
+            } else {
+                conn.rollback();
+                throw new Exception(" Update error ");
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            } if (conn != null) {
+                conn.close();
+            }
+        }
+        return inquiry;
+    }
 
     public static List<Inquiry> getCustomerInquiries(Customer customer) throws Exception {
         List<Inquiry> inquiries = new ArrayList<>();

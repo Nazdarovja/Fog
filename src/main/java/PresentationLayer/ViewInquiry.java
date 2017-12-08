@@ -16,19 +16,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class ViewBoM extends Command {
+public class ViewInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-                int id = Integer.parseInt(request.getParameter("id"));
-	        
-	        Inquiry inquiry = LogicFacade.viewInquiry(id);
-	        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
-	        // NEEDS CHANGING 
-                
-	        request.setAttribute("bom", bom);
-	        
-	        return "billofmaterials";
+
+        String customer = request.getParameter("customer");
+        Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
+        Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
+        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        
+        request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
+        request.setAttribute("bom", bom);
+        request.setAttribute("inquiry", i);
+        
+        return "inquiry";
     }
     
 }
