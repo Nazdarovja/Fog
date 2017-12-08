@@ -19,6 +19,7 @@ public class SaveInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("lastpage", "QuickBuild");
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
         

@@ -5,6 +5,8 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,5 +45,5 @@ public abstract class Command {
         return commands.getOrDefault(commandName, new UnknownCommand());
     }
 
-    abstract String execute(HttpServletRequest request, HttpServletResponse response) throws Exception; // might change this
+    abstract String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, SQLException, Exception; // might change this
 }

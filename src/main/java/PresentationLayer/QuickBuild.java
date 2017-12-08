@@ -21,6 +21,7 @@ public class QuickBuild extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
 
         request.getSession().setAttribute("lastpage", "QuickBuild");
