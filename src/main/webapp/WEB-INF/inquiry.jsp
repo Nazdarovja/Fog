@@ -106,7 +106,7 @@
                         <th>Tilvalg af skur</th>
                         <td> 
                             <% boolean withShack = i.getShackLength() != 0; %>
-                            <select class="form-control" name="tagtype" id="withshack" onchange="disOrEnable('shackLength');disOrEnable('shackWidth');" form="updateinquiry">
+                            <select class="form-control" name="withShack" id="withshack" onchange="disOrEnable('shackLength');disOrEnable('shackWidth');" form="updateinquiry">
                                 <option value="nej"<% if(!withShack) { %> selected <% } %> >Nej</option>
                                 <option value="ja" <% if(withShack) { %> selected <% } %> >Ja</option>
                             </select> 
@@ -133,7 +133,7 @@
                     <tr>
                         <th>Taghældning (hvis "rejsning")</th>
                         <td>
-                            <select class="form-control" id="angle" form="updateinquiry">
+                            <select class="form-control" name="angle" id="angle" form="updateinquiry">
                                 <% int angle = -1;
                                     if (request.getSession().getAttribute("angle") != null) {
                                         angle = Integer.parseInt(i.getAngle());
@@ -151,7 +151,7 @@
                     </tr>
                     <tr>
                         <th>Kommentar ansat</th>
-                        <td><textarea  class="form-control" style="resize: none" form="updateinquiry"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
+                        <td><textarea name="comment"  class="form-control" style="resize: none" form="updateinquiry"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
                     </tr>
                     <tr>
                         <th>Kommentar kunde</th>
