@@ -224,6 +224,7 @@
                 <div style="margin: 10px">
                     <form name="updateinquiry" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="updateinquiry">
+                        <input type="hidden" name="prevPage" value="inquiry.jsp">
                         <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
                     </form>
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
