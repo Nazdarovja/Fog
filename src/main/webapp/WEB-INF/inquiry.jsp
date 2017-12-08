@@ -103,6 +103,16 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Tilvalg af skur</th>
+                        <td> 
+                            <% boolean withCarport = i.getShackLength() != 0; %>
+                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')">
+                                <option value="nej"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
+                                <option value="ja" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
+                            </select> 
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Skur længde</th>
                         <td> <%= i.getShackLength() %> </td>
                     </tr>
@@ -114,7 +124,7 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="tagtype" id='rooftype' onchange="disable('angle')">
+                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 

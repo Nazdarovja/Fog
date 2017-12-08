@@ -116,17 +116,14 @@ if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
 
-var e = document.getElementById("ddlViewBy");
-var strUser = e.options[e.selectedIndex].value;
-
-
 if(document.getElementById("rooftype") !== null) {
     var e = document.getElementById("rooftype");
     var rt = e.options[e.selectedIndex].value;
-    
-    if (rt === 1){
-        
-        
+
+    if (rt === "fladt"){
+        document.getElementById("angle").disabled = true;
+    } else {
+        document.getElementById("angle").disabled = false;
     }
 }
 
