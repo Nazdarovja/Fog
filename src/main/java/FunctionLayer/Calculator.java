@@ -23,8 +23,8 @@ public class Calculator {
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
-
-        // FLAT ROOF ALGORITHM        
+        
+        // FLAT ROOF ALGORITHM
         if (inquiry.getRoofType().equals("fladt")) {
             System.out.println("FLAT");
             //post / stolpe

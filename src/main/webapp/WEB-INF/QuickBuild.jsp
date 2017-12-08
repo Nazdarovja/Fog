@@ -159,26 +159,6 @@
                     <% } %>
                 </div>
 
-                <!--TAGMATERIALE - doesnt change correctly -->
-                <input id="roofMaterialCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofMaterial") != null) {%><%=(String) request.getSession().getAttribute("roofMaterial")%><%}%>">
-                Vælg tag materiale
-                <select class="form-control" name="roofMaterial">
-                    <% String roofMaterial = "";
-                        if (request.getSession().getAttribute("roofMaterial") != null) {
-                            roofMaterial = (String) request.getSession().getAttribute("roofMaterial");
-                        }
-                    %>
-
-                    <!--doesnt change at all-->
-                    <% if (roofType.equals("fladt")) {%>
-                    <option value="tagpap"<%if (roofMaterial.equals("tagpap")) { %> selected <%} %>>tagpap</option>
-                    <option value="trapeztag"<%if (roofMaterial.equals("trapeztag")) { %> selected <%} %>>trapeztag</option>
-                    <%} else {%>
-                    <option value="tagpap"<%if (roofMaterial.equals("tagpap")) { %> selected <%} %>>tagpap</option>
-                    <option value="tagsten"<%if (roofMaterial.equals("tagsten")) { %> selected <%} %>>tagsten</option>
-                    <%}%>
-                </select>
-
                 <div class="col-sm-2">
                     Tilvælg redskabsrum<br>
                     <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
@@ -210,6 +190,22 @@
                     </div>
                 </div>
             </div>
+                        <div>
+                            <div id="roofPitched">
+                                <!--LIST VIEW-->
+                                <select name="roofMaterialPitchedProduct" class="form-control">
+                                    <%= request.getSession().getAttribute("roofMaterialPitched")%>
+                                </select>
+                            </div>
+
+                            <div id="roofFlat">
+                                <!--LIST VIEW-->
+                                <select  name="roofMaterialFlatProduct" class="form-control" >
+                                    <%= request.getSession().getAttribute("roofMaterialFlat")%>
+                                </select>
+
+                            </div>
+                        </div>
         </form>
     </div>
 

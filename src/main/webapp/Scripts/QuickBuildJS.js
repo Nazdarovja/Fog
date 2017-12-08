@@ -26,9 +26,12 @@ function check() {
     }
     if (document.getElementById("roofTypeCheck").value === "rejsning") {
         $("#angle").show();
-
+        $("#roofPitched").show();
+        $("#roofFlat").hide();
     } else {
         $("#angle").hide();
+        $("#roofFlat").show();
+        $("#roofPitched").hide();
 
     }
     if (document.getElementById("shackCheckboxCheck").value === "") {
@@ -93,8 +96,12 @@ $('#registration').submit(function () {
 $('select[name=roofType]').on('change', function () {
     if (this.value === "rejsning") {
         $("#angle").show();
+        $("#roofPitched").show();
+        $("#roofFlat").hide();
     } else {
         $("#angle").hide();
+        $("#roofFlat").show();
+        $("#roofPitched").hide();
     }
 });
 

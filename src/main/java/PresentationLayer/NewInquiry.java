@@ -20,13 +20,17 @@ public class NewInquiry extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
         String inquiries = (String) session.getAttribute("inquiries");
-
         Customer customer = (Customer) session.getAttribute("customer");
+        
+        String roofMaterialPitched = (String) session.getAttribute("roofMaterialPitched");
+        String roofMaterialFlat = (String) session.getAttribute("roofMaterialFlat");
 
         if (session != null) {
             session.invalidate();
         }
 
+        request.getSession().setAttribute("roofMaterialPitched", roofMaterialPitched);
+        request.getSession().setAttribute("roofMaterialFlat", roofMaterialFlat);
         request.getSession().setAttribute("inquiries", inquiries);
         request.getSession().setAttribute("customer", customer);
         return "QuickBuild";

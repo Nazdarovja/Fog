@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
   `shackWidth` INT NULL,
   `shackLength` INT NULL,
   `roofType` ENUM('fladt', 'rejsning') NOT NULL,
-  `roofMaterial` VARCHAR(45),
+  `roofMaterial` VARCHAR(100),
   `angle` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
   `commentCustomer` VARCHAR(2000) NULL,
   `commentEmployee` VARCHAR(2000) NULL,
@@ -141,15 +141,16 @@ VALUES
 
 
 INSERT INTO
-Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,angle,commentCustomer,commentEmployee,period, status, email)
+Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,roofMaterial,angle,commentCustomer,commentEmployee,period, status, email)
 VALUES
-(320,420,320,320,120,'fladt',null,null,null,null,'gemt','test1@test.dk'),
-(240,470,360,360,220,'fladt' ,null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
-(320,420,320,210,150,'rejsning','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
-(210,420,320,null,null,'rejsning','15',null,null,null,'behandlet','test3@test.dk'),
-(320,570,410,null,null,'rejsning','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
-(270,570,410,null,null,'rejsning','25',null,null,'2017-07-15','ny','test8@test.dk'),
-(320,420,320,null,null,'rejsning','15','Ring tak!',null,null,'ny','test6@test.dk');
+(320,420,320,200,120,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,null,null,null,'gemt','test1@test.dk'),
+(320,420,320,0,0,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2',20,'send Email',null,'2017-12-20','gemt','test1@test.dk'),
+(240,470,360,360,220,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
+(320,420,320,210,150,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
+(210,420,320,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
+(270,570,410,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25',null,null,'2017-07-15','ny','test8@test.dk'),
+(320,420,320,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Ring tak!',null,null,'ny','test6@test.dk');
 
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag',','løsholt'

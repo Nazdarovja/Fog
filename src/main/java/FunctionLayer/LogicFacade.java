@@ -27,10 +27,9 @@ public class LogicFacade {
 
     //PRODUCT
     /**
-     * Gets a category name parameter and returns a list from the database with
-     * ProductMPrice objects.
+     * Returns a list from the database with
+     * Product objects.
      *
-     * @param category
      * @return
      * @throws Exception
      */
@@ -102,6 +101,11 @@ public class LogicFacade {
             }
         }
         return null;
+    }
+
+    public static String getRoofMaterials(String roofType) throws Exception {
+        return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
+        
     }
 
 }
