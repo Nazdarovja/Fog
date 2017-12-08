@@ -174,6 +174,7 @@
                         <td> 
                         <% String status = i.getStatus(); %>
                         <select class="form-control" name="status" id="status" form="updateinquiry">
+                            <option value="gemt" <% if(status.equals("gemt")) { %> selected <% } %> >Gemt</option>
                             <option value="ny" <% if(status.equals("ny")) { %> selected <% } %> >Ny</option>
                             <option value="behandles" <% if(status.equals("behandles")) { %> selected <% } %> >Behandles</option>
                             <option value="behandlet" <% if(status.equals("behandlet")) { %> selected <% } %> >Behandlet</option>
