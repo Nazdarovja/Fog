@@ -14,10 +14,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author Orchi
  */
 public abstract class Command {
-      private static HashMap<String, Command> commands;
+
+    private static HashMap<String, Command> commands;
 
     private static void initCommands() {
         commands = new HashMap<>();
+
         commands.put( "register", new Register() );
         commands.put( "QuickBuild", new QuickBuild());
         commands.put( "calculate", new Calculate());
@@ -26,15 +28,31 @@ public abstract class Command {
         commands.put( "viewcustomers" , new ViewCustomers() );
         commands.put( "viewinquiry" , new ViewInquiry() );
         commands.put( "updateinquiry" , new UpdateInquiry() );
+
+        commands.put("QuickBuild", new QuickBuild());
+        commands.put("login", new Login());
+        commands.put("register", new Register());
+        commands.put("calculate", new Calculate());
+        commands.put("sendInquiry", new SendInquiry());
+        commands.put("viewinquiries", new ViewInquiries());
+
+        commands.put("viewcustomers", new ViewCustomers());
+
+        commands.put("saveInquiry", new SaveInquiry());
+        commands.put("newInquiry", new NewInquiry());
+        commands.put("chooseInquiry", new ChooseInquiry());
+
+
     }
 
-    static Command from( HttpServletRequest request ) {
-        String commandName = request.getParameter( "command" );
-        if ( commands == null ) 
+    static Command from(HttpServletRequest request) {
+        String commandName = request.getParameter("command");
+        if (commands == null) {
             initCommands();
-        
-        return commands.getOrDefault(commandName, new UnknownCommand() );
+        }
+
+        return commands.getOrDefault(commandName, new UnknownCommand());
     }
 
-    abstract String execute( HttpServletRequest request, HttpServletResponse response ) throws Exception; // might change this
+    abstract String execute(HttpServletRequest request, HttpServletResponse response) throws Exception; // might change this
 }
