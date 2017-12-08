@@ -108,6 +108,8 @@ function rowSorting(tableId) {
     }
 }
 
-rowSorting("customertable");
+if(document.getElementById("inquirytabel") !== null) {
+    rowSorting("inquirytabel");
+}
 
 
