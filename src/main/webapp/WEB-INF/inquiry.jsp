@@ -114,8 +114,8 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="tagtype">
-                                <option value="rejsning" <% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
+                            <select class="form-control" name="tagtype" onclick="disable('angle')">
+                                <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
                         </td>
@@ -123,7 +123,7 @@
                     <tr>
                         <th>Taghældning (hvis "rejsning")</th>
                         <td>
-                            <select class="form-control" id="angle" disabled="true">
+                            <select class="form-control" id="angle">
                                 <% int angle = -1;
                                     if (request.getSession().getAttribute("angle") != null) {
                                         angle = Integer.parseInt(i.getAngle());
@@ -206,15 +206,10 @@
                 <legend style="margin: 10px">
                     <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">   
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
-                </legend>
-                    
-                    
+                </legend>  
             </div>
-
-            
         </div>
         <br><br>
-        
         
         <div class="row">
             <h2 style="margin-left: 45%"> Stykliste </h2>
@@ -260,5 +255,7 @@
                 </table>
             </div>
         </div>
+                
+        <script src="${pageContext.request.contextPath}/Scripts/script.js" type="text/javascript"></script>
     </body>
 </html>

@@ -80,6 +80,10 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
+function disOrEnable(id){
+    document.getElementById(id).disabled = !document.getElementById(id).disabled;
+}
+
 function rowSorting(tableId) {
     var inputs, filter, table, tr, td, i, notmatch;
 
@@ -111,5 +115,6 @@ function rowSorting(tableId) {
 if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
+
 
 
