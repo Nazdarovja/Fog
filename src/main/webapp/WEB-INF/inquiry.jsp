@@ -40,7 +40,7 @@
                     <tr>
                         <th>Carport højde</th>
                         <td>
-                            <select class="form-control" name="height">
+                            <select class="form-control" name="height" form="updateinquiry">
                                 <% int height = i.getCarportHeight(); %>
                                 <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
                                 <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
@@ -52,7 +52,7 @@
                     <tr>
                         <th>Caport længde</th>
                         <td> 
-                            <select class="form-control" name="length" id="length" >
+                            <select class="form-control" name="length" id="length" form="updateinquiry">
                                 <% int length = i.getCarportLength(); %>
                                 <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
@@ -78,7 +78,7 @@
                     <tr>
                         <th>Carport bredde</th>
                         <td> 
-                            <select class="form-control" id="width" name="width">
+                            <select class="form-control" id="width" name="width" form="updateinquiry">
                                 <% int width = i.getCarportWidth(); %>
                                 <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
@@ -105,26 +105,26 @@
                     <tr>
                         <th>Tilvalg af skur</th>
                         <td> 
-                            <% boolean withCarport = i.getShackLength() != 0; %>
-                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')">
-                                <option value="nej"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
-                                <option value="ja" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
+                            <% boolean withShack = i.getShackLength() != 0; %>
+                            <select class="form-control" name="tagtype" id="withshack" onchange="disOrEnable('shackLength');disOrEnable('shackWidth');" form="updateinquiry">
+                                <option value="nej"<% if(!withShack) { %> selected <% } %> >Nej</option>
+                                <option value="ja" <% if(withShack) { %> selected <% } %> >Ja</option>
                             </select> 
                         </td>
                     </tr>
                     <tr>
                         <th>Skur længde</th>
-                        <td> <%= i.getShackLength() %> </td>
+                        <td> <input id="shackLength" type="number" min="100" max="120" class="form-control" name="shackLength" value="<%= i.getShackLength() %>" form="updateinquiry"> </td>
                     </tr>
                     <tr>
                         <th>Skur bredde</th>
-                        <td> <%= i.getShackWidth() %> </td>
+                        <td> <input id="shackWidth" type="number" min="100" max="120" class="form-control" name="shackLength" value="<%= i.getShackWidth() %>" from="updateinquiry"> </td>
                     </tr>
                     <tr>
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')">
+                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')" form="updateinquiry">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
@@ -133,7 +133,7 @@
                     <tr>
                         <th>Taghældning (hvis "rejsning")</th>
                         <td>
-                            <select class="form-control" id="angle">
+                            <select class="form-control" id="angle" form="updateinquiry">
                                 <% int angle = -1;
                                     if (request.getSession().getAttribute("angle") != null) {
                                         angle = Integer.parseInt(i.getAngle());
@@ -151,21 +151,29 @@
                     </tr>
                     <tr>
                         <th>Kommentar ansat</th>
-                        <td><textarea  class="form-control" style="resize: none"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
+                        <td><textarea  class="form-control" style="resize: none" form="updateinquiry"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
                     </tr>
                     <tr>
                         <th>Kommentar kunde</th>
-                        <td><%= i.getCommentCustomer() %></td>
+                        <td>
+                        <% if (i.getCommentCustomer() != null) { %>
+                            <%= i.getCommentCustomer() %> 
+                            <% } else { %> inten kommentar <%  }%> 
+                        </td>
                     </tr>
                     <tr>
                         <th>Ønsket levering til</th>
-                        <td> <%= i.getPeriod() %> </td>
+                        <td>
+                            <% if (i.getPeriod() != null) { %>
+                            <%= i.getPeriod() %> 
+                            <% } else { %> intet valgt <%  }%> 
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
                         <td> 
                         <% String status = i.getStatus(); %>
-                        <select class="form-control" name="status">
+                        <select class="form-control" name="status" form="updateinquiry">
                             <option value="ny" <% if(status.equals("ny")) { %> selected <% } %> >Ny</option>
                             <option value="behandles" <% if(status.equals("behandles")) { %> selected <% } %> >Behandles</option>
                             <option value="behandlet" <% if(status.equals("behandlet")) { %> selected <% } %> >Behandlet</option>
@@ -214,7 +222,10 @@
                     
                 <h2>Muligheder</h2>
                 <div style="margin: 10px">
-                    <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">   
+                    <form name="updateinquiry" action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="updateinquiry">
+                        <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
+                    </form>
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
                 </div>  
             </div>

@@ -127,3 +127,16 @@ if(document.getElementById("rooftype") !== null) {
     }
 }
 
+if(document.getElementById("withshack") !== null) {
+    var e = document.getElementById("withshack");
+    var rt = e.options[e.selectedIndex].value;
+
+    if (rt === "nej"){
+        document.getElementById("shackLength").disabled = true;
+        document.getElementById("shackWidth").disabled = true;
+    } else {
+        document.getElementById("shackLength").disabled = false;
+        document.getElementById("shackWidth").disabled = false;
+    }
+}
+
