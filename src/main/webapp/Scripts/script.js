@@ -116,8 +116,8 @@ if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
 
-if(document.getElementById("rooftype") !== null) {
-    var e = document.getElementById("rooftype");
+if(document.getElementById("roofType") !== null) {
+    var e = document.getElementById("roofType");
     var rt = e.options[e.selectedIndex].value;
 
     if (rt === "fladt"){
@@ -126,11 +126,11 @@ if(document.getElementById("rooftype") !== null) {
         document.getElementById("angle").disabled = false;
     }
 }
-
-if(document.getElementById("withshack") !== null) {
-    var e = document.getElementById("withshack");
+console.log(document.getElementById("withShack"));
+if(document.getElementById("withShack") !== null) {
+    var e = document.getElementById("withShack");
     var rt = e.options[e.selectedIndex].value;
-
+    console.log(rt);
     if (rt === "nej"){
         document.getElementById("shackLength").disabled = true;
         document.getElementById("shackWidth").disabled = true;
@@ -139,4 +139,6 @@ if(document.getElementById("withshack") !== null) {
         document.getElementById("shackWidth").disabled = false;
     }
 }
+
+
 

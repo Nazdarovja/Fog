@@ -25,7 +25,7 @@ public abstract class Command {
         commands.put( "viewinquiries", new ViewInquiries() );
         commands.put( "viewcustomers" , new ViewCustomers() );
         commands.put( "viewinquiry" , new ViewInquiry() );
-        
+        commands.put( "updateinquiry" , new UpdateInquiry() );
     }
 
     static Command from( HttpServletRequest request ) {

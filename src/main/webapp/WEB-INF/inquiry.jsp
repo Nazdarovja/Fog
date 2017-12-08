@@ -106,7 +106,7 @@
                         <th>Tilvalg af skur</th>
                         <td> 
                             <% boolean withShack = i.getShackLength() != 0; %>
-                            <select class="form-control" name="withShack" id="withshack" onchange="disOrEnable('shackLength');disOrEnable('shackWidth');" form="updateinquiry">
+                            <select class="form-control" name="withShack" id="withShack" onchange="disOrEnable('shackLength');disOrEnable('shackWidth');" form="updateinquiry">
                                 <option value="nej"<% if(!withShack) { %> selected <% } %> >Nej</option>
                                 <option value="ja" <% if(withShack) { %> selected <% } %> >Ja</option>
                             </select> 
@@ -118,13 +118,13 @@
                     </tr>
                     <tr>
                         <th>Skur bredde</th>
-                        <td> <input id="shackWidth" type="number" min="100" max="120" class="form-control" name="shackLength" value="<%= i.getShackWidth() %>" from="updateinquiry"> </td>
+                        <td> <input id="shackWidth" type="number" min="100" max="120" class="form-control" name="shackWidth" value="<%= i.getShackWidth() %>" form="updateinquiry"> </td>
                     </tr>
                     <tr>
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="tagtype" id="rooftype" onchange="disOrEnable('angle')" form="updateinquiry">
+                            <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle')" form="updateinquiry">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
@@ -151,7 +151,7 @@
                     </tr>
                     <tr>
                         <th>Kommentar ansat</th>
-                        <td><textarea name="comment"  class="form-control" style="resize: none" form="updateinquiry"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
+                        <td><textarea name="comment"  class="form-control" id="comment" style="resize: none" form="updateinquiry"><% if(i.getCommentEmployee() != null) { %><%= i.getCommentEmployee() %><% } %></textarea></td>
                     </tr>
                     <tr>
                         <th>Kommentar kunde</th>
@@ -173,7 +173,7 @@
                         <th>Status</th>
                         <td> 
                         <% String status = i.getStatus(); %>
-                        <select class="form-control" name="status" form="updateinquiry">
+                        <select class="form-control" name="status" id="status" form="updateinquiry">
                             <option value="ny" <% if(status.equals("ny")) { %> selected <% } %> >Ny</option>
                             <option value="behandles" <% if(status.equals("behandles")) { %> selected <% } %> >Behandles</option>
                             <option value="behandlet" <% if(status.equals("behandlet")) { %> selected <% } %> >Behandlet</option>
@@ -222,9 +222,11 @@
                     
                 <h2>Muligheder</h2>
                 <div style="margin: 10px">
-                    <form name="updateinquiry" action="FrontController" method="POST">
+                    <form id="updateinquiry" name="updateinquiry" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="updateinquiry">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
+                        <input type="hidden" name="id" value="<%= i.getId() %>">
+                        <input type="hidden" name="customer" value="<%= cus.getEmail() %>">
                         <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
                     </form>
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
