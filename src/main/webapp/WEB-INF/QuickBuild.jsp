@@ -167,6 +167,7 @@
                     <div class="svgSide" style="display: none;">
                             <%= svgSide %>
                     </div>
+                    <p id="svgimage" class="btn btn-default">Next image</p>
                     <% } %>
                 </div>
 
