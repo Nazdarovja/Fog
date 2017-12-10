@@ -39,16 +39,28 @@ public class GeneratePDF {
         Document doc = new Document(pdf);
 
         // Creating a table       
-        float[] pointColumnWidths = {150F, 150F, 150F};
+        float[] pointColumnWidths = {50F, 50F, 50F, 50F, 50F};  //5 wide
         Table table = new Table(pointColumnWidths);
 
-        // Adding cells to the table       
-        table.addCell(new Cell().add("Name"));
-        table.addCell(new Cell().add("Raju"));
-        table.addCell(new Cell().add("Id"));
-        table.addCell(new Cell().add("1001"));
-        table.addCell(new Cell().add("Designation"));
-        table.addCell(new Cell().add("Programmer"));
+        // Adding cells to the table   
+        table.addCell(new Cell().add("Stykliste"));
+        table.addCell(new Cell());
+        table.addCell(new Cell());
+        table.addCell(new Cell());
+        table.addCell(new Cell());
+        table.addCell(new Cell().add("Product"));
+        table.addCell(new Cell().add("Category"));
+        table.addCell(new Cell().add("Qty"));
+        table.addCell(new Cell().add("Unit"));
+        table.addCell(new Cell().add("Usability Comment"));
+        //bom
+        for (OrderLine j : bom.getMaterials()) {
+            table.addCell(new Cell().add(j.getProductName()));
+            table.addCell(new Cell().add(j.getProductCategory()));
+            table.addCell(new Cell().add(j.getQuantity() + ""));
+            table.addCell(new Cell().add(j.getAmountType()));
+            table.addCell(new Cell().add(j.getUsabilityComment()));
+        }
 
         // Adding Table to document        
         doc.add(table);
@@ -80,7 +92,7 @@ public class GeneratePDF {
 
         email.setHostName("smtp.googlemail.com");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("awha86", "Awha0502862103"));
+        email.setAuthenticator(new DefaultAuthenticator("LOGIN", "PASSWORD"));
         email.setSSL(true);
         email.setFrom("awha86@gmail.com");
         email.addTo("awha86@gmail.com", "A Lex");
@@ -95,7 +107,7 @@ public class GeneratePDF {
         email.attach(source, "result.pdf", "Description of some file");
 
         // send the email
-//        email.send();  //TODO UNCOMMENT TO ENABLE SENDING
+        email.send();  //TODO UNCOMMENT TO ENABLE SENDING
         System.out.println("great succes");
         return email;
     }
