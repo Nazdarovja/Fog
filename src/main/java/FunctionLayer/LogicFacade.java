@@ -117,6 +117,8 @@ public class LogicFacade {
         return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
         
     }
-
-
+    
+    public static String generatePDF (String customer, Inquiry inquiry, BillOfMaterials bom){
+        return GeneratePDF(customer, inquiry, bom);
+    }
 }
