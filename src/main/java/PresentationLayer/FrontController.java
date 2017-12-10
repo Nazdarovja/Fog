@@ -49,7 +49,7 @@ public class FrontController extends HttpServlet {
         
         catch(LoginException ex) {
             // LOGGING
-            Configuration.getMyLogger().log(Level.SEVERE, null, ex.getMessage() + "FUCK YI");
+            Configuration.getMyLogger().log(Level.SEVERE, null, ex.getMessage());
             
             ex.printStackTrace();
             request.setAttribute("error", "Could not validate user");

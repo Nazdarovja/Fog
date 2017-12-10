@@ -18,7 +18,7 @@ import java.util.List;
 public class LogicFacade {
 
     //USER 
-    public static Customer login(String email, String password) throws LoginException, SQLException, Exception {
+    public static Customer login(String email, String password) throws LoginException, SQLException, ClassNotFoundException, Exception {
         return CustomerMapper.login(email, password);
     }
 
@@ -39,7 +39,7 @@ public class LogicFacade {
     }
 
     // CALCULATE
-    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws SQLException,Exception {
+    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws FogException, SQLException, ClassNotFoundException, Exception {
         return Calculator.getBillOfMaterials(inquiry);
     }
 

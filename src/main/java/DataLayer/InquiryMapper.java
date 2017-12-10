@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class InquiryMapper {
 
-    public static Inquiry registerInitialInquiry(Inquiry i) throws SQLException, FogException, Exception {
+    public static Inquiry registerInitialInquiry(Inquiry i) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -63,7 +63,11 @@ public class InquiryMapper {
                 throw new FogException("Error creating Inquiry in database.");
             }
 
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
 
@@ -81,7 +85,7 @@ public class InquiryMapper {
         return inquiry;
     }
 
-    public static List<Inquiry> allInquiries() throws SQLException, Exception {
+    public static List<Inquiry> allInquiries() throws FogException, Exception {
         List<Inquiry> inquiries = new ArrayList<>();
         Inquiry i;
         ResultSet rs = null;
@@ -115,7 +119,11 @@ public class InquiryMapper {
             }
             return inquiries;
 
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             }
@@ -129,7 +137,7 @@ public class InquiryMapper {
 
     }
 
-    public static Inquiry inquiryById(int id) throws FogException, SQLException, Exception {
+    public static Inquiry inquiryById(int id) throws FogException, Exception {
         Inquiry i;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -164,7 +172,11 @@ public class InquiryMapper {
                 throw new FogException(" no inquiry with specified id ");
             }
 
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             }
@@ -178,7 +190,7 @@ public class InquiryMapper {
 
     }
 
-    public static Inquiry LatestInquiryByCustomer(String customerEmail) throws FogException, SQLException, Exception {
+    public static Inquiry LatestInquiryByCustomer(String customerEmail) throws FogException, Exception {
         Inquiry i;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -214,7 +226,11 @@ public class InquiryMapper {
                 throw new FogException(" no inquiry found ");
             }
 
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             }
@@ -227,7 +243,7 @@ public class InquiryMapper {
         }
     }
 
-    public static List<Inquiry> getCustomerInquiries(Customer customer) throws SQLException, Exception {
+    public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException, Exception {
         List<Inquiry> inquiries = new ArrayList<>();
         Inquiry i;
         ResultSet rs = null;
@@ -261,7 +277,11 @@ public class InquiryMapper {
             }
             return inquiries;
 
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             }

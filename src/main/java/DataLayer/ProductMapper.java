@@ -26,14 +26,16 @@ public class ProductMapper {
      * Recieve a list from the database with Product objects.
      *
      * @return List of Product objects form the chosen category
+     * @throws FunctionLayer.FogException
      * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public static List<Product> getProducts() throws SQLException, Exception {
+    public static List<Product> getProducts() throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        if (productList == null) {
+        if (productList == null) { 
 
             try {
                 conn = DBConnector.getConnection();
@@ -52,7 +54,11 @@ public class ProductMapper {
                     productList.add(new Product(id, name, cat, price, length, width, height));
                 }
 
-            } finally {
+            } 
+            catch ( SQLException | ClassNotFoundException ex ) {
+                throw new FogException( ex.getMessage() );
+        }
+            finally {
                 // Always make sure result sets and statements are closed,
                 // and the connection is returned to the pool
 
@@ -96,7 +102,11 @@ public class ProductMapper {
             } else {
                 throw new FogException("Could not find product");
             }
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+                throw new FogException( ex.getMessage() );
+        }
+        finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
 

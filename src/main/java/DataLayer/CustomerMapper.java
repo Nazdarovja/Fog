@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CustomerMapper {
 
-    public static Customer login(String email, String password) throws LoginException, SQLException, Exception {
+    public static Customer login(String email, String password) throws LoginException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         Connection conn = null;
@@ -49,8 +49,11 @@ public class CustomerMapper {
                 //////////////////////////////////////////////////////////////////////////////////////////////////////
                 throw new LoginException("Login attempt on user with email: " + email);
             }
-        
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             }
@@ -64,7 +67,7 @@ public class CustomerMapper {
     }
 
 
-    public static boolean isCustomerRegistered(Customer c) throws Exception {
+    public static boolean isCustomerRegistered(Customer c) throws FogException, Exception {
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
@@ -106,7 +109,7 @@ public class CustomerMapper {
                 throw new FogException(" no city with specified zipcode ");
             }
         } catch ( SQLException | ClassNotFoundException ex ) {
-            throw new Exception( ex.getMessage() );
+            throw new FogException( ex.getMessage() );
         } finally {
             if (rs != null) {
                 rs.close();
@@ -120,7 +123,7 @@ public class CustomerMapper {
     
     
     // Exception til LoginException??
-    public static Customer createCustomer(Customer c) throws FogException, SQLException, Exception {
+    public static Customer createCustomer(Customer c) throws FogException, Exception {
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -162,7 +165,7 @@ public class CustomerMapper {
         }
     }
     
-    public static List<Customer> customersWithInquiry() throws SQLException, Exception{
+    public static List<Customer> customersWithInquiry() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
@@ -188,7 +191,11 @@ public class CustomerMapper {
             }
             return customers;
             
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             } if (ps != null) {
@@ -202,7 +209,7 @@ public class CustomerMapper {
     
     
     
-    public static List<Customer> customersByInquiryStatus(String status) throws SQLException, Exception{
+    public static List<Customer> customersByInquiryStatus(String status) throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
@@ -229,7 +236,10 @@ public class CustomerMapper {
             }
             return customers;
             
-        } finally {
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             } if (ps != null) {
@@ -240,7 +250,7 @@ public class CustomerMapper {
         }
     }
     
-    public static List<Customer> allCustomers() throws SQLException, Exception{
+    public static List<Customer> allCustomers() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
@@ -266,7 +276,10 @@ public class CustomerMapper {
             }
             return customers;
             
-        } finally {
+        } catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             } if (ps != null) {
@@ -277,7 +290,7 @@ public class CustomerMapper {
         }
     }
     
-    public static Customer customerByEmail(String email) throws FogException, SQLException, Exception{
+    public static Customer customerByEmail(String email) throws FogException, Exception {
         Customer customer;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -304,7 +317,11 @@ public class CustomerMapper {
             } else {
                 throw new FogException(" no customer with specified email ");
             }
-        } finally {
+        } 
+        catch ( SQLException | ClassNotFoundException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (rs != null) {
                 rs.close();
             } if (ps != null) {

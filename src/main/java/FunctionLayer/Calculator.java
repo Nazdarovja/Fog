@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Calculator {
 
-    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws SQLException, Exception {
+    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException, SQLException, ClassNotFoundException, Exception {
         BillOfMaterials bom = new BillOfMaterials();
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
