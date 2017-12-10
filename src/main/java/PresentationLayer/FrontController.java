@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,6 +38,9 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException  {
+        
+        Logging.setUp();
+        
         try {
             Command action = Command.from( request );
             String view = action.execute( request, response );
@@ -43,9 +48,10 @@ public class FrontController extends HttpServlet {
         }
         
         catch(LoginException ex) {
-            ex.printStackTrace();
             // LOGGING
+            Configuration.getMyLogger().log(Level.SEVERE, null, ex.getMessage() + "FUCK YI");
             
+            ex.printStackTrace();
             request.setAttribute("error", "Could not validate user");
             String lastpage = (String) request.getSession().getAttribute("lastpage");
             request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
