@@ -9,7 +9,7 @@ function findInquiryByEmailAndId(cosEmail,inqId) {
     var email = cosEmail;
     var id = inqId;
     
-    window.open("/Fog/FrontController?command=inquiry&customer="+email+"&id="+id,"nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
+    window.open("/Fog/FrontController?command=viewinquiry&customer="+email+"&id="+id,"nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
 }
 
 function findInquiriesByEmail(cosEmail) {
@@ -80,6 +80,10 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
+function disOrEnable(id){
+    document.getElementById(id).disabled = !document.getElementById(id).disabled;
+}
+
 function rowSorting(tableId) {
     var inputs, filter, table, tr, td, i, notmatch;
 
@@ -108,4 +112,33 @@ function rowSorting(tableId) {
     }
 }
 
-rowSorting("customertable");
+if(document.getElementById("inquirytabel") !== null) {
+    rowSorting("inquirytabel");
+}
+
+if(document.getElementById("roofType") !== null) {
+    var e = document.getElementById("roofType");
+    var rt = e.options[e.selectedIndex].value;
+
+    if (rt === "fladt"){
+        document.getElementById("angle").disabled = true;
+    } else {
+        document.getElementById("angle").disabled = false;
+    }
+}
+console.log(document.getElementById("withShack"));
+if(document.getElementById("withShack") !== null) {
+    var e = document.getElementById("withShack");
+    var rt = e.options[e.selectedIndex].value;
+    console.log(rt);
+    if (rt === "nej"){
+        document.getElementById("shackLength").disabled = true;
+        document.getElementById("shackWidth").disabled = true;
+    } else {
+        document.getElementById("shackLength").disabled = false;
+        document.getElementById("shackWidth").disabled = false;
+    }
+}
+
+
+

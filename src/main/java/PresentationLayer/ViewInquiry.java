@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class ViewLatestInquiry extends Command {
+public class ViewInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -26,8 +26,7 @@ public class ViewLatestInquiry extends Command {
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
         
-        System.out.println(bom.getMaterials().get(0).getProductName());
-        
+        request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);
         

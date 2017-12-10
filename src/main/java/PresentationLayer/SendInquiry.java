@@ -10,6 +10,7 @@ import FunctionLayer.LogicFacade;
 import FunctionLayer.Inquiry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,21 +23,23 @@ public class SendInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.getSession().setAttribute("lastpage", "QuickBuild");
+        HttpSession session = request.getSession(false);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Inquiry i = (Inquiry) request.getSession().getAttribute("inquiry");
-        int height = i.getCarportHeight();
-        int length = i.getCarportLength();
-        int width = i.getCarportWidth();
-        String roofType = i.getRoofType();
-        String angle = i.getAngle();
+        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
+
+        inquiry.setEmail(customer.getEmail());
+        inquiry.setStatus("ny");
         
-        Inquiry inquiry = new Inquiry(0, height, length, width, 0, 0, roofType, angle, null, null, null, "ny", customer.getEmail(), 1, null);
         LogicFacade.SendInquiry(inquiry);
         
         //remove stuff from session
-        request.getSession().removeAttribute("inquiry");
+        if (session != null) {
+            session.invalidate();
+        }
         
+        request.getSession().setAttribute("lastpage", "QuickBuild");
+        request.getSession().setAttribute("customer", customer);
+
         return "QuickBuild";
     }
 

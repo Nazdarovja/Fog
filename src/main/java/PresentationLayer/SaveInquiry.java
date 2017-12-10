@@ -5,8 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.BillOfMaterials;
-import FunctionLayer.Calculator;
+import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
@@ -14,21 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Mellem
+ * @author Stanislav
  */
-public class ViewBoM extends Command {
+public class SaveInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-                int id = Integer.parseInt(request.getParameter("id"));
-	        
-	        Inquiry inquiry = LogicFacade.viewInquiry(id);
-	        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
-	        // NEEDS CHANGING 
-                
-	        request.setAttribute("bom", bom);
-	        
-	        return "billofmaterials";
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
+        
+        inquiry.setEmail(customer.getEmail());
+        inquiry.setStatus("gemt");
+        LogicFacade.SendInquiry(inquiry);
+
+        return "QuickBuild";
     }
-    
+
 }
