@@ -8,8 +8,6 @@ package PresentationLayer;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -26,9 +24,9 @@ public class Logging {
                 fileHandler.setFormatter(new SimpleFormatter());
                 Configuration.getMyLogger().addHandler(fileHandler);
             } catch (IOException ex) {
-                Logger.getLogger(Logging.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             } catch (SecurityException ex) {
-                Logger.getLogger(Logging.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
     }
