@@ -231,8 +231,9 @@
                         <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
                     </form>
                     <form id="pdf" name="pdf" action="FrontController" method="POST">
-<!--                        <input type="hidden" name="command" value="updateinquiry">-->
+                        <input type="hidden" name="command" value="pdf">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
+                        <input type="hidden" name="id" value="<%= i.getId()%>">
                         <input type="hidden" name="customer" value="<%= cus.getEmail()%>">
                         <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
                     </form>

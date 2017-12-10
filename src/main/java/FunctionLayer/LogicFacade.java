@@ -8,7 +8,12 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.MultiPartEmail;
 
 /**
  *
@@ -118,7 +123,7 @@ public class LogicFacade {
         
     }
     
-    public static String generatePDF (String customer, Inquiry inquiry, BillOfMaterials bom){
-        return GeneratePDF(customer, inquiry, bom);
+    public static MultiPartEmail generatePDF (String customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException{
+        return GeneratePDF.createPDF(customer, inquiry, bom);
     }
 }

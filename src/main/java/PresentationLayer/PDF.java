@@ -28,9 +28,9 @@ public class PDF extends Command {
 
         request.setAttribute("generatedPDF", LogicFacade.generatePDF(customer, inquiry, bom));
 
-//        request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
-//        request.setAttribute("bom", bom);
-//        request.setAttribute("inquiry", i);
+        request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
+        request.setAttribute("bom", bom);
+        request.setAttribute("inquiry", i);
         
         return "inquiry";  //correct?
     }
