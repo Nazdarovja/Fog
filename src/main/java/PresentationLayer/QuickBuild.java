@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public class QuickBuild extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
 

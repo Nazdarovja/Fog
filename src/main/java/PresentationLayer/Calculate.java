@@ -6,7 +6,6 @@
 package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
-import FunctionLayer.GenerateSVG;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.SVGFromSide;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class Calculate extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception, SQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException,Exception {
         request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
         int height = Integer.parseInt(request.getParameter("height"));

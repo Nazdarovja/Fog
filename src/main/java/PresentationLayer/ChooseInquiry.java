@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class ChooseInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception, SQLException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
         Customer customer = (Customer)session.getAttribute("customer");

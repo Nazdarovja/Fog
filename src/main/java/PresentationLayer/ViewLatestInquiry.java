@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewLatestInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
 
         String customer = request.getParameter("customer");
         Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
