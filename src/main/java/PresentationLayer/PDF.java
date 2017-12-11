@@ -28,13 +28,13 @@ public class PDF extends Command {
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
 
-        request.setAttribute("generatedPDF", LogicFacade.generatePDF(cus, inquiry, bom));
+        request.setAttribute("generatedPDF", LogicFacade.generatePDF(cus, inquiry, bom)); //TODO if generatedPDF på session, fjern "send pdf" knap fra inquiry.jsp
 
         request.setAttribute("customer", cus);
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);
         
-        return "inquiry";  //correct?
+        return "inquiry"; 
     }
 
 }
