@@ -71,7 +71,7 @@ public class Calculator {
             bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
 
             //roof material
-            if (roofMaterial.getCategory().equals("tagpap")) {
+            if (roofMaterial.getCategory().equals("tagpap")) {  
                 //tarPaper / tagpap
                 bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
             } else {

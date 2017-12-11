@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@page import="FunctionLayer.Inquiry"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%-- 
@@ -20,193 +19,131 @@
     </head>
 
     <body>
-        <% if(request.getAttribute("error") != null) {
-            String error = (String) request.getAttribute("error"); %>
+        <div class="wrapper container-fluid">
+            <% if (request.getAttribute("error") != null) {
+                    String error = (String) request.getAttribute("error");%>
             <script>alert("<%=error%>")</script>
-        <%}%>
-        <div class="row">
-            <img class="col-sm-3" style="margin-right: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
-            <h1 class="col-sm-6 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
-            <% Customer customer = null;
-                if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
-            <h3 class="col-sm-3 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; margin-bottom: 0px; padding-top: 25px; padding-bottom: 27px;">Logget ind som :<br><%= customer.getName()%></h3>
-        </div>
-        <% } else {%>
-        <div class="col-sm-3 well" style="background:#124989; margin-left: 0px; padding-top: 18px; padding-bottom: 8px;">
-            <p class="text-right" style="margin-right: 42px"><a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#login" >  Login  </a></p>
-            <p class="text-right"><a class="btn btn-sm btn-default" data-toggle="modal" data-target="#registerUser">Register here</a></p>
-        </div>
-        <% } %>
-    </div>
-    <div id="measurements" >
-
-        <form id="orderForm" name="order" action="FrontController" method="POST">
-            <div class="row ">
-                <input type="hidden" name="command" value="calculate">
-                <div class="col-sm-2 col-sm-offset-2">
-                    Vælg længde<br>
-                    <select class="form-control" name="length" id="length" >
-                        <% int length = 0;
-                            if (request.getSession().getAttribute("length") != null) {
-                                length = (int) request.getSession().getAttribute("length");
-                            }
-                        %>
-                        <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
-                        <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
-                        <option value=300 <%if (length == 300) { %> selected <%} %>>300</option>
-                        <option value=330 <%if (length == 330) { %> selected <%} %>>330</option>
-                        <option value=360 <%if (length == 360) { %> selected <%} %>>360</option>
-                        <option value=390 <%if (length == 390) { %> selected <%} %>>390</option>
-                        <option value=420 <%if (length == 420) { %> selected <%} %>>420</option>
-                        <option value=450 <%if (length == 450) { %> selected <%} %>>450</option>
-                        <option value=480 <%if (length == 480) { %> selected <%} %>>480</option>
-                        <option value=510 <%if (length == 510) { %> selected <%} %>>510</option>
-                        <option value=540 <%if (length == 540) { %> selected <%} %>>540</option>
-                        <option value=570 <%if (length == 570) { %> selected <%} %>>570</option>
-                        <option value=600 <%if (length == 600) { %> selected <%} %>>600</option>
-                        <option value=630 <%if (length == 630) { %> selected <%} %>>630</option>
-                        <option value=660 <%if (length == 660) { %> selected <%} %>>660</option>
-                        <option value=690 <%if (length == 690) { %> selected <%} %>>690</option>
-                        <option value=720 <%if (length == 720) { %> selected <%} %>>720</option>
-                        <option value=750 <%if (length == 750) { %> selected <%} %>>750</option>
-                    </select>
-                    <br>
-                    <br>
-                </div>
-                <div class="col-sm-2 col-sm-offset-1">
-                    Vælg bredde<br>
-                    <select class="form-control" id="width" name="width">
-                        <% int width = 0;
-                            if (request.getSession().getAttribute("width") != null) {
-                                width = (int) request.getSession().getAttribute("width");
-                            }
-                        %>
-                        <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
-                        <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
-                        <option value=300 <%if (width == 300) { %> selected <%} %>>300</option>
-                        <option value=330 <%if (width == 330) { %> selected <%} %>>330</option>
-                        <option value=360 <%if (width == 360) { %> selected <%} %>>360</option>
-                        <option value=390 <%if (width == 390) { %> selected <%} %>>390</option>
-                        <option value=420 <%if (width == 420) { %> selected <%} %>>420</option>
-                        <option value=450 <%if (width == 450) { %> selected <%} %>>450</option>
-                        <option value=480 <%if (width == 480) { %> selected <%} %>>480</option>
-                        <option value=510 <%if (width == 510) { %> selected <%} %>>510</option>
-                        <option value=540 <%if (width == 540) { %> selected <%} %>>540</option>
-                        <option value=570 <%if (width == 570) { %> selected <%} %>>570</option>
-                        <option value=600 <%if (width == 600) { %> selected <%} %>>600</option>
-                        <option value=630 <%if (width == 630) { %> selected <%} %>>630</option>
-                        <option value=660 <%if (width == 660) { %> selected <%} %>>660</option>
-                        <option value=690 <%if (width == 690) { %> selected <%} %>>690</option>
-                        <option value=720 <%if (width == 720) { %> selected <%} %>>720</option>
-                        <option value=750 <%if (width == 750) { %> selected <%} %>>750</option>
-                        <option value=780 <%if (width == 780) { %> selected <%} %>>780</option>
-                    </select>
-                    <br>
-                    <br>
-                </div>
-
-                <div class="col-sm-2 col-sm-offset-1">
-                    Vælg højde<br>
-                    <select class="form-control" name="height">
-                        <% int height = 0;
-                            if (request.getSession().getAttribute("height") != null) {
-                                height = (int) request.getSession().getAttribute("height");
-                            }
-                        %>
-                        <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
-                        <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
-                        <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
-                        <option value=300 <%if (height == 300) { %> selected <%} %>>300</option>
-                    </select>
-                    <br>
-                    <br>
-                </div>
-            </div>
-
+            <%}%>
             <div class="row">
-                <div class="col-sm-2 col-sm-offset-1">
-                    Vælg tagtype<br>
-                    <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
-                    <select class="form-control" name="roofType">
-                        <% String roofType = "";
-                            if (request.getSession().getAttribute("roofType") != null) {
-                                roofType = (String) request.getSession().getAttribute("roofType");
-                            }
-                        %>
-                        <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
-                        <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%} %>>rejsning</option>
-                    </select>
-
-                    <div id="angle">
-                        Vælg hældning<br>
-                        <select class="form-control" name="angle" >
-                            <% int angle = -1;
-                                if (request.getSession().getAttribute("angle") != null) {
-                                    angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
-                                }
-                            %>
-                            <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
-                            <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
-                            <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
-                            <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
-                            <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
-                            <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
-                            <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
-                        </select>
-                    </div>
+                <img class="col-sm-3" style="margin-right: 0px; margin-left: 0px; padding-left: 0px; padding-right: 0px;" src="./img/johannesfog.jpg" alt="johannesfog" >
+                <h1 class="col-sm-6 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; margin-right: 0px; padding-top: 30px; padding-bottom: 35px">Quick Byg</h1>
+                <% Customer customer = null;
+                    if ((customer = (Customer) request.getSession().getAttribute("customer")) != null) {%>
+                <h3 class="col-sm-3 well text-center bg-primary text-white" style=" background:#124989; margin-top: 1px; padding-top: 25px; padding-bottom: 27px;">Logget ind som :<br><%= customer.getName()%></h3>
+                    <% } else {%>
+                <div class="col-sm-3 well" style="background:#124989; margin-left: 0px; padding-top: 18px; padding-bottom: 8px;">
+                    <p class="text-right" style="margin-right: 42px"><a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#login" >  Login  </a></p>
+                    <p class="text-right"><a class="btn btn-sm btn-default" data-toggle="modal" data-target="#registerUser">Register here</a></p>
                 </div>
-
-                <div id="svg" class="col-sm-6 text-center lead" >
-                    <% if(request.getSession().getAttribute("svgTop") != null && request.getSession().getAttribute("svgSide") != null) { 
-                            String svgTop = (String) request.getSession().getAttribute("svgTop"); 
-                            String svgSide = (String) request.getSession().getAttribute("svgSide"); 
-                    %>
-                    <div class="svgTop">
-                            <%= svgTop %>
-                    </div>
-                    <div class="svgSide" style="display: none;">
-                            <%= svgSide %>
-                    </div>
-                    <% } %>
-                </div>
-
-                <div class="col-sm-2">
-                    Tilvælg redskabsrum<br>
-                    <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
-                    <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden" <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
-
-                    <div id="shackLength" >
-                        Redskabsrum Længde<br>
-                        <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
-                    </div>
-                    <div id="shackWidth" >
-                        Redskabsrum Bredde<br>
-                        <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
-                    </div>
-
-                    <div>
-                        <!--If user is logged in-->
-                        <%if (customer != null) {%>  
-                        <div class="form-group">
-                            <label>Kommentar til ordre</label>
-                            <textarea class="form-control" rows="8" name="comment" id="comment" maxlength="2000" placeholder="Skriv her hvis du har nogen særlige ønsker, eller spørgsmål.
-                                      (Bemærk kun 2000 karakterer tilladt)"><%if (request.getSession().getAttribute("comment") != null) {%><%= (String) request.getSession().getAttribute("comment")%><%}%></textarea>
-                        </div>
-                        <%}%>
-                    </div>
-                    <div class="form-group">
-                        <label>Ønsket leveringstid</label>
-                        <input name="wishedDelivery" id="wishedDelivery" type="date" value="<%= request.getSession().getAttribute("wishedDelivery")%>">
-                        <span class="help-block"> Bemærk der er minimum 1 uges behandlingstid</span>                    
-                    </div>
-                </div>
+                <% } %>
             </div>
-                        <div>
+            <!------------------ MESUREMENTS FORM ------------------>
+            <div id="measurements" >
+
+                <form id="orderForm" name="order" action="FrontController" method="POST">
+                    <!---------- First row col 1 ------------->
+                    <div class="row">
+                        <input type="hidden" name="command" value="calculate">
+
+                        <div class="col-sm-1">
+                            Vælg længde<br>
+                            <select class="form-control" name="length" id="length" >
+                                <% int length = 0;
+                                    if (request.getSession().getAttribute("length") != null) {
+                                        length = (int) request.getSession().getAttribute("length");
+                                    }
+                                %>
+                                <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (length == 300) { %> selected <%} %>>300</option>
+                                <option value=330 <%if (length == 330) { %> selected <%} %>>330</option>
+                                <option value=360 <%if (length == 360) { %> selected <%} %>>360</option>
+                                <option value=390 <%if (length == 390) { %> selected <%} %>>390</option>
+                                <option value=420 <%if (length == 420) { %> selected <%} %>>420</option>
+                                <option value=450 <%if (length == 450) { %> selected <%} %>>450</option>
+                                <option value=480 <%if (length == 480) { %> selected <%} %>>480</option>
+                                <option value=510 <%if (length == 510) { %> selected <%} %>>510</option>
+                                <option value=540 <%if (length == 540) { %> selected <%} %>>540</option>
+                                <option value=570 <%if (length == 570) { %> selected <%} %>>570</option>
+                                <option value=600 <%if (length == 600) { %> selected <%} %>>600</option>
+                                <option value=630 <%if (length == 630) { %> selected <%} %>>630</option>
+                                <option value=660 <%if (length == 660) { %> selected <%} %>>660</option>
+                                <option value=690 <%if (length == 690) { %> selected <%} %>>690</option>
+                                <option value=720 <%if (length == 720) { %> selected <%} %>>720</option>
+                                <option value=750 <%if (length == 750) { %> selected <%} %>>750</option>
+                            </select>
+                            <br>
+                            Vælg bredde<br>
+                            <select class="form-control" id="width" name="width">
+                                <% int width = 0;
+                                    if (request.getSession().getAttribute("width") != null) {
+                                        width = (int) request.getSession().getAttribute("width");
+                                    }
+                                %>
+                                <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (width == 300) { %> selected <%} %>>300</option>
+                                <option value=330 <%if (width == 330) { %> selected <%} %>>330</option>
+                                <option value=360 <%if (width == 360) { %> selected <%} %>>360</option>
+                                <option value=390 <%if (width == 390) { %> selected <%} %>>390</option>
+                                <option value=420 <%if (width == 420) { %> selected <%} %>>420</option>
+                                <option value=450 <%if (width == 450) { %> selected <%} %>>450</option>
+                                <option value=480 <%if (width == 480) { %> selected <%} %>>480</option>
+                                <option value=510 <%if (width == 510) { %> selected <%} %>>510</option>
+                                <option value=540 <%if (width == 540) { %> selected <%} %>>540</option>
+                                <option value=570 <%if (width == 570) { %> selected <%} %>>570</option>
+                                <option value=600 <%if (width == 600) { %> selected <%} %>>600</option>
+                                <option value=630 <%if (width == 630) { %> selected <%} %>>630</option>
+                                <option value=660 <%if (width == 660) { %> selected <%} %>>660</option>
+                                <option value=690 <%if (width == 690) { %> selected <%} %>>690</option>
+                                <option value=720 <%if (width == 720) { %> selected <%} %>>720</option>
+                                <option value=750 <%if (width == 750) { %> selected <%} %>>750</option>
+                                <option value=780 <%if (width == 780) { %> selected <%} %>>780</option>
+                            </select>
+                            <br>
+
+                            Vælg højde<br>
+                            <select class="form-control" name="height">
+                                <% int height = 0;
+                                    if (request.getSession().getAttribute("height") != null) {
+                                        height = (int) request.getSession().getAttribute("height");
+                                    }
+                                %>
+                                <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
+                                <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
+                                <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
+                                <option value=300 <%if (height == 300) { %> selected <%} %>>300</option>
+                            </select>
+                            <br>
+
+                            Vælg tagtype<br>
+                            <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
+                            <select class="form-control" name="roofType">
+                                <% String roofType = "";
+                                    if (request.getSession().getAttribute("roofType") != null) {
+                                        roofType = (String) request.getSession().getAttribute("roofType");
+                                    }
+                                %>
+                                <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
+                                <option value="rejsning" <%if (roofType.equals("rejsning")) { %> selected <%}%>>rejsning</option>
+                            </select>
+                            <br>
+
+                            Tilvælg redskabsrum<br>
+                            <input id="shackCheckbox" name="shackCheckbox" type="checkbox"/>
+                            <input id="shackCheckboxCheck" name="shackCheckboxCheck" type="hidden" <% if ((String) request.getSession().getAttribute("shackCheckbox") != null) {%>value="on"<%}%>>
+                            <br>
+                        </div> <!--- CLOSES FIRST COLUMN OF MESUREMENTS-->
+
+                        <!------------------------- SECOND COLUMN ------------------->
+                        <div class="col-sm-2">
+                            Tag materiale<br>
                             <div id="roofPitched">
                                 <!--LIST VIEW-->
                                 <select name="roofMaterialPitchedProduct" class="form-control">
                                     <%= request.getSession().getAttribute("roofMaterialPitched")%>
                                 </select>
+                                <br>
                             </div>
 
                             <div id="roofFlat">
@@ -214,60 +151,121 @@
                                 <select  name="roofMaterialFlatProduct" class="form-control" >
                                     <%= request.getSession().getAttribute("roofMaterialFlat")%>
                                 </select>
-
+                                <br>
                             </div>
-                        </div>
-        </form>
-    </div>
 
-    <div class="row">
-        <div class="col-sm-2 well col-sm-offset-7" style=" background:#124989; color: white">
-            <% if (request.getSession().getAttribute("inquiry") != null) {  %>
-            <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
-            TOTAL PRIS: <br>
-            <%= inquiry.getBom().getTotalPrice()%>,-
-            <Br>
-            <%}%>
-            <input form="orderForm" class="btn btn-default"  type="submit" value="Beregn"/>
-            <form name="newInquiry" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="newInquiry">
-                <input class="btn btn-warning" type="submit" value="Ny forespørgsel"/>
-            </form>
+                            <div id="shackLength" >
+                                Redskabsrum Længde<br>
+                                <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                                <br>
+                            </div>
+                            <div id="shackWidth" >
+                                Redskabsrum Bredde<br>
+                                <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                                <br>
+                            </div>
 
-            <!--if user is logged in and has made a calculation-->
-            <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>
-            <!--Save order-->
-            <div id="sendSaveInquiry">
-                <p style="color: white">Gem til senere behandling?</p>
-                <form form="orderForm" name="saveInquiry" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="saveInquiry">
-                    <input class="btn btn-default" onclick="saved()" type="submit" value="Gem forespørgsel"/>
+                            <div id="angle">
+                                Vælg hældning<br>
+                                <select class="form-control" name="angle" >
+                                    <% int angle = -1;
+                                        if (request.getSession().getAttribute("angle") != null) {
+                                            angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
+                                        }
+                                    %>
+                                    <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
+                                    <option value=20 <%if (angle == 20) { %> selected <%} %>>20°</option>
+                                    <option value=25 <%if (angle == 25) { %> selected <%} %>>25°</option>
+                                    <option value=30 <%if (angle == 30) { %> selected <%} %>>30°</option>
+                                    <option value=35 <%if (angle == 35) { %> selected <%} %>>35°</option>
+                                    <option value=40 <%if (angle == 40) { %> selected <%} %>>40°</option>
+                                    <option value=45 <%if (angle == 45) { %> selected <%} %>>45°</option>
+                                </select>
+                            </div>
+                        </div> <!-- END 2 COLUMN --->
+
+                        <!------------------------------ THIRD COLUMN (SVG) ---------------------------->
+                        <div id="svg" class="col-sm-6 text-center"> 
+                            <% if (request.getSession().getAttribute("svgTop") != null && request.getSession().getAttribute("svgSide") != null) {
+                                    String svgTop = (String) request.getSession().getAttribute("svgTop");
+                                    String svgSide = (String) request.getSession().getAttribute("svgSide");
+                            %>
+                            <div class="svgTop">
+                                <%= svgTop%>
+                            </div>
+                            <div class="svgSide" style="display: none;">
+                                <%= svgSide%>
+                            </div>
+                            <% } %>
+                        </div> <!----- END 3. COLUMN ------------>
+
+                        <!--------------------------------- FOURTH COLUMN ----------------------------->
+                        <div class="col-sm-3"> 
+                            <!--ORDER DATA SETUP-->
+                            <%if (request.getSession().getAttribute("customer") != null) {%>
+                            <div class="well" style="margin-top: 0px; margin-bottom: 0px; background:#124989; color: white">
+
+                                <!--LIST VIEW-->
+                                Gemte forespørgsler
+                                <ul id="previousInquiries" class="list-group">
+                                    <%= request.getSession().getAttribute("inquiries")%>
+                                </ul>
+                            </div>
+                            <%}%>
+
+                            <div class="well" style="background:#124989; color: white">
+                                <% if (request.getSession().getAttribute("inquiry") != null) {  %>
+                                <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
+                                TOTAL PRIS: <br>
+                                <%= inquiry.getBom().getTotalPrice()%>,-
+                                <Br>
+                                <%}%>
+                                <input form="orderForm" class="btn btn-default"  type="submit" value="Beregn"/>&emsp;&emsp;&emsp;&emsp;
+
+                                <form name="newInquiry" action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="newInquiry">
+                                    <input class="btn btn-warning" type="submit" value="Ny forespørgsel"/>
+                                </form>
+
+                                <!--if user is logged in and has made a calculation-->
+                                <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>
+                                <!--Save order-->
+                                <div id="sendSaveInquiry">
+                                    Gem til senere behandling?
+                                    <form form="orderForm" name="saveInquiry" action="FrontController" method="POST">
+                                        <input type="hidden" name="command" value="saveInquiry">
+                                        <input class="btn btn-default" onclick="saved()" type="submit" value="Gem forespørgsel"/>
+                                    </form>
+
+                                    <!-- Send order -->
+                                    Send forespørgsel til Fog?
+                                    <form form="sendInquiry" name="sendInquiry" action="FrontController" method="POST">
+                                        <input type="hidden" name="command" value="sendInquiry">
+                                        <input class="btn btn-default" onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
+                                    </form>
+                                    <% }%>
+                                </div>
+                            </div>
+
+                            <!--If user is logged in-->
+                            <%if (customer != null) {%>  
+                            <div class="form-group">
+                                <label>Kommentar til ordre</label>
+                                <textarea class="form-control" rows="3" name="comment" id="comment" maxlength="2000" placeholder="Skriv her hvis du har nogen særlige ønsker, eller spørgsmål. (Bemærk kun 2000 karakterer tilladt)"><%if (request.getSession().getAttribute("comment") != null) {%><%= (String) request.getSession().getAttribute("comment")%><%}%></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ønsket leveringstid</label> <br>
+                                <input name="wishedDelivery" id="wishedDelivery" type="date" value="<%= request.getSession().getAttribute("wishedDelivery")%>">
+                                <span class="help-block"> Bemærk der er minimum 1 uges behandlingstid</span>                    
+                            </div>
+                            <%}%>
+
+                        </div> <!------ END LAST COLUMN FIRST ROW ----->
                 </form>
-
-                <!-- Send order -->
-                <p style="color: white">Send forespørgsel til Fog?</p>
-                <form name="sendInquiry" action="FrontController" method="POST">
-                    <input type="hidden" name="command" value="sendInquiry">
-                    <input class="btn btn-default" onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
-                </form>
-                <% }%>
-            </div>
-        </div>
-    </div>
-
-    <div class="well" >
-
-        <!--ORDER DATA SETUP-->
-        <%if (request.getSession().getAttribute("customer") != null) {%>
-        <!--LIST VIEW-->
-        <p style="color: white">Gemte forespørgsler</p>
-        <ul class="list-group">
-            <%= request.getSession().getAttribute("inquiries")%>
-            <%}%>
-        </ul>
-    </div>
-
-
+            </div> <!--------- FIRST ROW ------->
+        </div> <!--- END MESUREMENTS FORM ------>
+    </div> <!-- WRAPPER -->
     <%----------------------------------------------------------------------------------------------%>
     <%-- MODAL FOR LOGIN AND REGISTER --%>
     <%----------------------------------------------------------------------------------------------%>
@@ -345,51 +343,49 @@
                     </div>
                 </div>
             </form>
+        </div>
 
-            <%----------------------------------------------------------------------------------------------%>
-            <!-- Modal Login form -->
-            <form id="logingform" action="FrontController" method="post">
-                <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Login</h4>
+        <%----------------------------------------------------------------------------------------------%>
+        <!-- Modal Login form -->
+        <form id="logingform" action="FrontController" method="post">
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Login</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group has-feedback">
+                                <label class="control-label">Email</label>
+                                <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
+                                <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
                             </div>
 
-                            <div class="modal-body">
-                                <div class="form-group has-feedback">
-                                    <label class="control-label">Email</label>
-                                    <input name="email" type="email" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Email" required>
-                                    <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
-                                </div>
-
-                                <div class="form-group has-feedback">
-                                    <label class="control-label">Password</label>
-                                    <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
-                                    <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
-                                </div>
-
-                                <input type="hidden" name="command" value="login">
-                                <button type="sumbit" class="btn btn-primary">Login</button>
-
+                            <div class="form-group has-feedback">
+                                <label class="control-label">Password</label>
+                                <input name="password" type="password" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status" placeholder="Password" required >
+                                <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
                             </div>
 
-                            <div class="modal-footer">
-                                <h4 class="modal-title" id="myModalLabel">Register</h4>
-                                Hvis du ikke allerede er medlem så  <a data-toggle="modal" data-target="#registerUser" data-dismiss="modal"> Registrer dig her</a>
-                                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>-->
-                            </div>
+                            <input type="hidden" name="command" value="login">
+                            <button type="sumbit" class="btn btn-primary">Login</button>
 
                         </div>
+
+                        <div class="modal-footer">
+                            <h4 class="modal-title" id="myModalLabel">Register</h4>
+                            Hvis du ikke allerede er medlem så  <a data-toggle="modal" data-target="#registerUser" data-dismiss="modal"> Registrer dig her</a>
+                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+
                     </div>
                 </div>
-            </form> 
-
-        </div>
+            </div>
+        </form> 
     </div>
-
 
     <!-- Latest compiled JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

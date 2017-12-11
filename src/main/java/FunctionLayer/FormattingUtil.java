@@ -17,7 +17,7 @@ public class FormattingUtil {
         StringBuilder res = new StringBuilder();
 
         inquiriesList.forEach((inquiry) -> {
-            res.append("<li class=\"list-group-item btn\"> <a style=\"display: block\" href=\"FrontController?command=chooseInquiry&inquiryId=")
+            res.append("<li class=\"list-group-item btn btn-default\"> <a style=\"display: block\" href=\"FrontController?command=chooseInquiry&inquiryId=")
                     .append(inquiry.getId())
                     .append("\">")
                     .append(inquiry.getId())

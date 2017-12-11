@@ -6,7 +6,6 @@
 package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
-import FunctionLayer.GenerateSVG;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.SVGFromSide;
@@ -45,7 +44,7 @@ public class Calculate extends Command {
         String wishedDelivery = request.getParameter("wishedDelivery");
         System.out.println(wishedDelivery);
         Date wishDeliveryDate = null;
-        if (wishedDelivery.length() > 1) {
+        if (wishedDelivery != null && wishedDelivery.length() > 1) {
             wishDeliveryDate = new Date(Integer.parseInt(wishedDelivery.substring(0, 4)) - 1900, Integer.parseInt(wishedDelivery.substring(5, 7)) - 1, Integer.parseInt(wishedDelivery.substring(8)));
         }
         String shackCheckbox = null;
@@ -55,8 +54,8 @@ public class Calculate extends Command {
         boolean withShack = false;
         if (request.getParameter("shackCheckbox") != null && request.getParameter("shackCheckbox").equals("on")) {
             withShack = true;
-            shackLength = Integer.parseInt(request.getParameter("shackLength"));
-            shackWidth = Integer.parseInt(request.getParameter("shackWidth"));
+            shackLength = Integer.parseInt(request.getParameter("shackWidth"));
+            shackWidth = Integer.parseInt(request.getParameter("shackLength"));
             session.setAttribute("shackLength", shackLength);
             session.setAttribute("shackWidth", shackWidth);
         }
@@ -71,8 +70,6 @@ public class Calculate extends Command {
         
         session.setAttribute("svgTop", top.toString());
         session.setAttribute("svgSide", side.toString());
-
-
         session.setAttribute("shackCheckbox", shackCheckbox);
         session.setAttribute("height", height);
         session.setAttribute("length", length);
