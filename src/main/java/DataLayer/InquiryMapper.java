@@ -141,7 +141,7 @@ public class InquiryMapper {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-
+                
                 i = new Inquiry(
                         rs.getInt("id"),
                         rs.getInt("carportHeight"),
@@ -300,7 +300,7 @@ public class InquiryMapper {
     
     public static Inquiry updateInquiry(int id, int height, int length, int width, 
                                         int shackLength, int shackWidth, String roofType,
-                                        String angle, String comment, String status) 
+                                        String roofMat, String angle, String comment, String status) 
             throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -308,7 +308,7 @@ public class InquiryMapper {
 
         try {
             conn = DBConnector.getConnection();
-            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
             ps = conn.prepareStatement(SQL);
             
             ps.setInt(1, height);
@@ -317,10 +317,11 @@ public class InquiryMapper {
             ps.setInt(4, shackLength);
             ps.setInt(5, shackWidth);
             ps.setString(6, roofType);
-            ps.setString(7, angle);
-            ps.setString(8, comment);
-            ps.setString(9, status);
-            ps.setInt(10, id);
+            ps.setString(7, roofMat);
+            ps.setString(8, angle);
+            ps.setString(9, comment);
+            ps.setString(10, status);
+            ps.setInt(11, id);
 
             conn.setAutoCommit(false);
             int res = ps.executeUpdate();

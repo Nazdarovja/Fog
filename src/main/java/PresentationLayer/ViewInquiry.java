@@ -9,6 +9,8 @@ import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Product;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +27,13 @@ public class ViewInquiry extends Command {
         Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        List<Product> flatMat, pitchedMat, neutralMat;
+
+        flatMat = LogicFacade.getFlatRoofProducts();
+        pitchedMat = LogicFacade.getPitchedRoofProducts();
         
+        request.setAttribute("pitchedMat", pitchedMat);
+        request.setAttribute("flatMat", flatMat);
         request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);

@@ -8,6 +8,7 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,9 +90,9 @@ public class LogicFacade {
     
     public static Inquiry updateInquiry(int id, int height, int length, int width, 
                                         int shackLength, int shackWidth, String roofType,
-                                        String angle, String comment, String status) 
+                                        String roofMat, String angle, String comment, String status) 
             throws Exception{
-        return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, angle, comment, status);
+        return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
     }
     
 
@@ -113,10 +114,37 @@ public class LogicFacade {
         return null;
     }
 
+    // TODO do not throw FogException
     public static String getRoofMaterials(String roofType) throws Exception {
         return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
-        
     }
+    
+    // TODO do not throw FogException
+    public static List<Product> getPitchedRoofProducts() throws Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("tagsten") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
+    
+    // TODO do not throw FogException
+    public static List<Product> getFlatRoofProducts() throws Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("trapeztag") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
+
 
 
 }

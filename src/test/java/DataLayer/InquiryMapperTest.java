@@ -67,11 +67,12 @@ public class InquiryMapperTest {
         int id = 1, height = 300, length = 300, width = 300, shackLength = 200, shackWidth = 200;
         int lRes = 200, wRes = 200;
         String roofType = "fladt";
+        String roofMat = "testMat";
         String angle = null;
         String comment = null;
         String status = "ny";
         
-        Inquiry result = InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, angle, comment, status);
+        Inquiry result = InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
         
         assertEquals(lRes, result.getShackLength());
         assertEquals(wRes, result.getShackWidth());

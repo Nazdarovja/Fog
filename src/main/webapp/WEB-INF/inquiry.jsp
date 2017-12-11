@@ -4,6 +4,7 @@
     Author     : Mellem
 --%>
 
+<%@page import="FunctionLayer.Product"%>
 <%@page import="FunctionLayer.OrderLine"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%@page import="FunctionLayer.Customer"%>
@@ -32,6 +33,8 @@
         <% Inquiry i = (Inquiry)request.getAttribute("inquiry"); %>
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
         <% Customer cus = (Customer)request.getAttribute("customer"); %>
+        <% List<Product> flatMat = (List<Product>)request.getAttribute("flatMat"); %>
+        <% List<Product> pitchedMat = (List<Product>)request.getAttribute("pitchedMat"); %>
         
         <div class="container">
             <div class="col-lg-6" style="margin-right: 10%">
@@ -124,14 +127,36 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle')" form="updateinquiry">
+                            <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle');chooseRoofMat(this,'pitchedMat','flatMat');" form="updateinquiry">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
                         </td>
                     </tr>
                     <tr>
-                        <th>Taghældning (hvis "rejsning")</th>
+                        <th>Tagmateriale</th>
+                        <td> 
+                            <% String tagMat = i.getRoofMaterial(); %>
+                            <div id="pitchedMat">
+                                <select name="pitchedMat" class="form-control" form="updateinquiry">
+                                    <% for (Product pro : pitchedMat) {
+                                            %><option value="<%= pro.getName()%>"<% if(tagMat.equals(pro.getName())) { %> selected <% } %> ><%= pro.getName()%></option><%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                            <div id="flatMat">
+                                <select name="flatMat" class="form-control" form="updateinquiry">
+                                    <% for (Product pro : flatMat) {
+                                            %><option value="<%= pro.getName()%>"<% if(tagMat.equals(pro.getName())) { %> selected <% } %> ><%= pro.getName()%></option><%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Taghældning</th>
                         <td>
                             <select class="form-control" name="angle" id="angle" form="updateinquiry">
                                 <% int angle = -1;
