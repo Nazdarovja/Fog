@@ -92,13 +92,13 @@ public class GeneratePDF {
 
         email.setHostName("smtp.googlemail.com");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator("LOGIN", "PASSWORD"));
+        email.setAuthenticator(new DefaultAuthenticator("fakejohannesfog", "johannesfogpassword1"));
         email.setSSL(true);
-        email.setFrom("awha86@gmail.com");
-        email.addTo("awha86@gmail.com", "A Lex");
-        email.setFrom("awha86@gmail.com", "A Lex");
-        email.setSubject("ITS ALIVE");
-        email.setMsg("test test");
+        email.setFrom("fakejohannesfog@gmail.com");
+        email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog");
+        email.setFrom("fakejohannesfog@gmail.com", "Fake Johannes Fog");
+        email.setSubject("Ordre fra Fake Johannes Fog");
+        email.setMsg("Besked om din ordre her.");
 
         System.out.println("worked???");
         DataSource source = new ByteArrayDataSource(byteArray, "application/pdf");
