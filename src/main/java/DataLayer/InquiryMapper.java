@@ -64,7 +64,7 @@ public class InquiryMapper {
             }
 
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -120,7 +120,7 @@ public class InquiryMapper {
             return inquiries;
 
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -173,7 +173,7 @@ public class InquiryMapper {
             }
 
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -227,7 +227,7 @@ public class InquiryMapper {
             }
 
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -278,7 +278,7 @@ public class InquiryMapper {
             return inquiries;
 
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {

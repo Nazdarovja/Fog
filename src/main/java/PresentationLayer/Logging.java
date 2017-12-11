@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -16,17 +17,17 @@ import java.util.logging.SimpleFormatter;
  */
 public class Logging {
     
-    public static void setUp() {
-        Configuration.getMyLogger().addHandler(new ConsoleHandler());
-        if(Configuration.PRODUCTION) {
-            try {
-                FileHandler fileHandler = new FileHandler(Configuration.LOGFILEPATH);
-                fileHandler.setFormatter(new SimpleFormatter());
-                Configuration.getMyLogger().addHandler(fileHandler);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (SecurityException ex) {
-                ex.printStackTrace();
+    public static void setUp() throws FogException {
+        if(Configuration.getMyLogger().getHandlers().length < 1) { // singleton? causing any problems?
+            Configuration.getMyLogger().addHandler(new ConsoleHandler());
+            if(Configuration.PRODUCTION) {
+                try {
+                    FileHandler fileHandler = new FileHandler(Configuration.LOGFILEPATH);
+                    fileHandler.setFormatter(new SimpleFormatter());
+                    Configuration.getMyLogger().addHandler(fileHandler);
+                } catch (IOException | SecurityException ex) {
+                    throw new FogException(ex.getMessage());
+                } 
             }
         }
     }

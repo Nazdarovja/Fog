@@ -50,7 +50,7 @@ public class CustomerMapper {
                 throw new LoginException("Login attempt on user with email: " + email + ", pwd: " + password + ", IP Address: " + ipAddress);
             }
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -79,7 +79,7 @@ public class CustomerMapper {
             rs = ps.executeQuery();
 
             return rs.next();
-        } catch ( SQLException | ClassNotFoundException ex ) {
+        } catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         } finally {
             if (rs != null) {
@@ -108,7 +108,7 @@ public class CustomerMapper {
             } else {
                 throw new FogException(" no city with specified zipcode ");
             }
-        } catch ( SQLException | ClassNotFoundException ex ) {
+        } catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         } finally {
             if (rs != null) {
@@ -192,7 +192,7 @@ public class CustomerMapper {
             return customers;
             
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -236,7 +236,7 @@ public class CustomerMapper {
             }
             return customers;
             
-        } catch ( SQLException | ClassNotFoundException ex ) {
+        } catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -276,7 +276,7 @@ public class CustomerMapper {
             }
             return customers;
             
-        } catch ( SQLException | ClassNotFoundException ex ) {
+        } catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {
@@ -318,7 +318,7 @@ public class CustomerMapper {
                 throw new FogException(" no customer with specified email ");
             }
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
             throw new FogException( ex.getMessage() );
         }
         finally {

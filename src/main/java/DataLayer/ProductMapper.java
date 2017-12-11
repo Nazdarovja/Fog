@@ -55,7 +55,7 @@ public class ProductMapper {
                 }
 
             } 
-            catch ( SQLException | ClassNotFoundException ex ) {
+            catch ( SQLException ex ) {
                 throw new FogException( ex.getMessage() );
         }
             finally {
@@ -103,7 +103,7 @@ public class ProductMapper {
                 throw new FogException("Could not find product");
             }
         } 
-        catch ( SQLException | ClassNotFoundException ex ) {
+        catch ( SQLException ex ) {
                 throw new FogException( ex.getMessage() );
         }
         finally {
