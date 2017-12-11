@@ -21,16 +21,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.activation.DataSource;
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.mail.*;
 
 public class GeneratePDF {
 
-    static String dest = "C:/itextExamples/GeneratedPDF.pdf";
+    static String path = "C:/itextExamples/";
+    static String destPDF = path + "GeneratedPDF.pdf";
 
     public static MultiPartEmail createPDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException {
 
         // Creating a PdfDocument object   
-        PdfWriter writer = new PdfWriter(dest);
+        PdfWriter writer = new PdfWriter(destPDF);
 
         // Creating a PdfDocument object      
         PdfDocument pdf = new PdfDocument(writer);
@@ -170,7 +172,7 @@ public class GeneratePDF {
         System.out.println("Table created successfully..");
 
         //write PDF to outputStream
-        return sendEmail(loadFile(dest));
+        return sendEmail(loadFile(destPDF));
 
     }
 
@@ -222,4 +224,5 @@ public class GeneratePDF {
         }
         return baos.toByteArray();
     }
+
 }
