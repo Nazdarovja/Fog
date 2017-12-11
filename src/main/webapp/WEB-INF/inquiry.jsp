@@ -188,6 +188,10 @@
                         <th>Forespørgelse afsendt den</th>
                         <td> <%= i.getDate() %> </td>
                     </tr>
+                    <tr>
+                        <th>Forespørgelse ID</th>
+                        <td> <%= i.getId() %> </td>
+                    </tr>
                 </table>
             </div>
             
@@ -225,6 +229,7 @@
                     <form name="updateinquiry" action="FrontController" method="POST">
                         <input type="hidden" name="command" value="updateinquiry">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
+                        <input type="hidden" name="id" value="<%= i.getId() %>">
                         <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
                     </form>
                     <input type="submit" value="Genere PDF af stykliste" name="generate" style="margin: 10px">   
