@@ -21,7 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.activation.DataSource;
-import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.mail.*;
 
 public class GeneratePDF {
