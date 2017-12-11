@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Configuration {
     public static final boolean PRODUCTION = true;
-    public static final String LOGFILEPATH = "\\var\\log\\tomcat8\\catalina.out"; // PATH TO UBUNTU!!!
+    public static final String LOGFILEPATH = "/var/log/tomcat8/catalina.out"; // PATH TO UBUNTU!!!
     private static Logger myLogger = Logger.getLogger("");
     public static Logger getMyLogger() {
         return myLogger;

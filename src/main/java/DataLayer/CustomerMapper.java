@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CustomerMapper {
 
-    public static Customer login(String email, String password) throws LoginException, Exception {
+    public static Customer login(String email, String password, String ipAddress) throws LoginException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
         Connection conn = null;
@@ -47,7 +47,7 @@ public class CustomerMapper {
             } else {
                 // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
                 //////////////////////////////////////////////////////////////////////////////////////////////////////
-                throw new LoginException("Login attempt on user with email: " + email);
+                throw new LoginException("Login attempt on user with email: " + email + ", pwd: " + password + ", IP Address: " + ipAddress);
             }
         } 
         catch ( SQLException | ClassNotFoundException ex ) {

@@ -50,7 +50,7 @@ public class JUnit {
     public void testLoginCustomer() throws Exception {
         String email = "test1@test.dk";
         String password = "Hansen1";
-        Customer customer = LogicFacade.login(email, password);
+        Customer customer = LogicFacade.login(email, password, "1111");
         assertTrue(email.equals(customer.getEmail()));
         assertTrue(password.equals(customer.getPassword()));
     }
@@ -60,7 +60,7 @@ public class JUnit {
         try {
             String email = "harrypotter@hogwarts.com";
             String password = "sectumsembra";
-            Customer customer = LogicFacade.login(email, password);
+            Customer customer = LogicFacade.login(email, password, "11111");
         } catch (Exception ex) {
             assertTrue(ex.getMessage().equals("could not validate user"));
         }

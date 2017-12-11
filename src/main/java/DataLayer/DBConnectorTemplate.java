@@ -5,8 +5,10 @@
  */
 package DataLayer;
 
+import FunctionLayer.FogException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,10 +22,14 @@ public class DBConnectorTemplate {
     private static final String PASSWORD = "";
     private static Connection conn = null;
 
-    public static Connection getConnection() throws Exception {
-        if (conn == null || conn.isClosed()) {
-            Class.forName(DRIVER).newInstance();
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection getConnection() throws FogException {
+        try {
+            if (conn == null || conn.isClosed()) {
+                Class.forName(DRIVER).newInstance();
+                conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            }
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            throw new FogException(ex.getMessage());
         }
         return conn;
     }

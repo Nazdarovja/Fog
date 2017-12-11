@@ -49,7 +49,7 @@ public class FrontController extends HttpServlet {
         
         catch(LoginException ex) {
             // LOGGING
-            Configuration.getMyLogger().log(Level.SEVERE, null, ex.getMessage());
+            Configuration.getMyLogger().log(Level.WARNING, ex.getMessage(), ex);
             
             ex.printStackTrace();
             request.setAttribute("error", "Could not validate user");
@@ -58,13 +58,6 @@ public class FrontController extends HttpServlet {
         }
         
         catch(FogException ex) {
-            ex.printStackTrace();
-            request.setAttribute("error", ex.getMessage());
-            String lastpage = (String) request.getSession().getAttribute("lastpage");
-            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
-        }
-        
-        catch(SQLException ex) {
             ex.printStackTrace();
             request.setAttribute("error", ex.getMessage());
             String lastpage = (String) request.getSession().getAttribute("lastpage");
