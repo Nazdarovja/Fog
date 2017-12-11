@@ -17,9 +17,8 @@ public class CalcRafter {
     static int RAFTERLENGTHFLAT = 7200;
     static int RAFTERSPACEPITCHED = 60;
     static int RAFTERLENGTHPITCHED = 0;
-
     
-    public static OrderLine getRafterFlatRoof(int length, int width, List<Product> rafter) throws Exception {
+    public static OrderLine getRafterFlatRoof(int length, int width, List<Product> rafter) throws FogException {
         Product raft = null;
         
         for (int i = 0; i < rafter.size(); i++) {
@@ -29,11 +28,11 @@ public class CalcRafter {
         int qty = length / RAFTERSPACEFLAT;
         if (qty % RAFTERSPACEFLAT != 0) qty++;
 
-        if (raft == null) throw new Exception(" no raft with length: "+RAFTERLENGTHFLAT);
+        if (raft == null) throw new FogException( "no raft found with length: "+RAFTERLENGTHFLAT );
         return new OrderLine(raft, length, qty, "stk.", "Spærtræ");
     }
 
-    public static OrderLine getRafterPitchedRoof(int length, int width, List<Product> rafter) throws Exception {
+    public static OrderLine getRafterPitchedRoof(int length, int width, List<Product> rafter) throws FogException {
         Product raft = null;
         
         for (int i = 0; i < rafter.size(); i++) {
@@ -43,7 +42,7 @@ public class CalcRafter {
         int qty = length / RAFTERSPACEPITCHED;
         if (qty % RAFTERSPACEPITCHED != 0) qty++;
         
-        if (raft == null) throw new Exception(" no raft with length: "+RAFTERLENGTHPITCHED);
+        if (raft == null) throw new FogException( "no raft found with length: "+RAFTERLENGTHPITCHED );
         return new OrderLine(raft, length, qty, "stk.", "Spær sæt");
     }
     

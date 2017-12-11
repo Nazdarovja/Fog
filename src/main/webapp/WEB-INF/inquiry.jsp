@@ -78,7 +78,7 @@
                     <tr>
                         <th>Carport bredde</th>
                         <td> 
-                            <select class="form-control" id="width" name="width" form="updateinquiry">
+                            <select class="form-control" id="width" name="width" form="updateinquiry" onchange="setMaxValue(this);">
                                 <% int width = i.getCarportWidth(); %>
                                 <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>

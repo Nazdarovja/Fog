@@ -141,23 +141,24 @@ public class InquiryMapper {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
+
                 i = new Inquiry(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getDate(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getInt(15),
-                        rs.getTimestamp(16));
+                        rs.getInt("id"),
+                        rs.getInt("carportHeight"),
+                        rs.getInt("carportLength"),
+                        rs.getInt("carportWidth"),
+                        rs.getInt("shackWidth"),
+                        rs.getInt("shackLength"),
+                        rs.getString("roofType"),
+                        rs.getString("roofMaterial"),
+                        rs.getString("angle"),
+                        rs.getString("commentCustomer"),
+                        rs.getString("commentEmployee"),
+                        rs.getDate("period"),
+                        rs.getString("status"),
+                        rs.getString("email"),
+                        rs.getInt("id_employee"),
+                        rs.getTimestamp("date"));
                 return i;
             } else {
                 throw new Exception(" no inquiry with specified id ");

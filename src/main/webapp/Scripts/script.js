@@ -80,6 +80,10 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
+function setMaxValue(calledFrom){
+    alert(document.getElementById(calledFrom));
+}
+
 function disOrEnable(id){
     document.getElementById(id).disabled = !document.getElementById(id).disabled;
 }
@@ -112,6 +116,8 @@ function rowSorting(tableId) {
     }
 }
 
+
+
 if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
@@ -126,7 +132,7 @@ if(document.getElementById("roofType") !== null) {
         document.getElementById("angle").disabled = false;
     }
 }
-console.log(document.getElementById("withShack"));
+
 if(document.getElementById("withShack") !== null) {
     var e = document.getElementById("withShack");
     var rt = e.options[e.selectedIndex].value;
@@ -139,6 +145,4 @@ if(document.getElementById("withShack") !== null) {
         document.getElementById("shackWidth").disabled = false;
     }
 }
-
-
 
