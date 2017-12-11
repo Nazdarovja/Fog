@@ -25,7 +25,6 @@ public class QuickBuild extends Command {
         request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
 
-        request.getSession().setAttribute("lastpage", "QuickBuild");
         String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");
         String roofMaterialFlat = LogicFacade.getRoofMaterials("fladt");
 
