@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
