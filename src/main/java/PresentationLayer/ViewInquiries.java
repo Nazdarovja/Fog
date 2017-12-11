@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import java.util.List;
@@ -28,7 +29,6 @@ public class ViewInquiries extends Command
         if (email != null) request.setAttribute("email", email);
         else request.setAttribute("email", "");
         
-        request.setAttribute("tableTagId", tableTagId);
         request.setAttribute("inquirytable", inquiryTable);
         request.setAttribute("inquiries", i); // not used..
         

@@ -26,7 +26,7 @@ public class GeneratePDF {
 
     static String dest = "C:/itextExamples/GeneratedPDF.pdf";
 
-    public static MultiPartEmail createPDF(String customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException {
+    public static MultiPartEmail createPDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException {
 
         //TODO Generate PDF file from input, return as bytestream?
         // Creating a PdfDocument object   
@@ -38,32 +38,53 @@ public class GeneratePDF {
         // Creating a Document object       
         Document doc = new Document(pdf);
 
-        // Creating a table       
-        float[] pointColumnWidths = {50F, 50F, 50F, 50F, 50F};  //5 wide
-        Table table = new Table(pointColumnWidths);
+        //Creating customer table
+        float[] pointColumnWidthsCustomer = {50F, 50F};  //2 wide
+        Table table_cus = new Table(pointColumnWidthsCustomer);
+        table_cus.addCell(new Cell().add("Kunde info"));
+        table_cus.addCell(new Cell().add(""));
+        table_cus.addCell(new Cell().add("Email"));
+        table_cus.addCell(new Cell().add(customer.getEmail()));
+        table_cus.addCell(new Cell().add("Name"));
+        table_cus.addCell(new Cell().add(customer.getName()));
+        table_cus.addCell(new Cell().add("Surname"));
+        table_cus.addCell(new Cell().add(customer.getSurname()));
+        table_cus.addCell(new Cell().add("Phonenumber"));
+        table_cus.addCell(new Cell().add(customer.getPhonenumber()+""));
+        table_cus.addCell(new Cell().add("Address"));
+        table_cus.addCell(new Cell().add(customer.getAddress()));
+        table_cus.addCell(new Cell().add("Zipcode"));
+        table_cus.addCell(new Cell().add(customer.getZipcode()+""));
+        
+        doc.add(table_cus);
+        
+        
+        // Creating bom table       
+        float[] pointColumnWidthsBom = {50F, 50F, 50F, 50F, 50F};  //5 wide
+        Table table_bom = new Table(pointColumnWidthsBom);
 
         // Adding cells to the table   
-        table.addCell(new Cell().add("Stykliste"));
-        table.addCell(new Cell());
-        table.addCell(new Cell());
-        table.addCell(new Cell());
-        table.addCell(new Cell());
-        table.addCell(new Cell().add("Product"));
-        table.addCell(new Cell().add("Category"));
-        table.addCell(new Cell().add("Qty"));
-        table.addCell(new Cell().add("Unit"));
-        table.addCell(new Cell().add("Usability Comment"));
+        table_bom.addCell(new Cell().add("Stykliste"));
+        table_bom.addCell(new Cell());
+        table_bom.addCell(new Cell());
+        table_bom.addCell(new Cell());
+        table_bom.addCell(new Cell());
+        table_bom.addCell(new Cell().add("Product"));
+        table_bom.addCell(new Cell().add("Category"));
+        table_bom.addCell(new Cell().add("Qty"));
+        table_bom.addCell(new Cell().add("Unit"));
+        table_bom.addCell(new Cell().add("Usability Comment"));
         //bom
         for (OrderLine j : bom.getMaterials()) {
-            table.addCell(new Cell().add(j.getProductName()));
-            table.addCell(new Cell().add(j.getProductCategory()));
-            table.addCell(new Cell().add(j.getQuantity() + ""));
-            table.addCell(new Cell().add(j.getAmountType()));
-            table.addCell(new Cell().add(j.getUsabilityComment()));
+            table_bom.addCell(new Cell().add(j.getProductName()));
+            table_bom.addCell(new Cell().add(j.getProductCategory()));
+            table_bom.addCell(new Cell().add(j.getQuantity() + ""));
+            table_bom.addCell(new Cell().add(j.getAmountType()));
+            table_bom.addCell(new Cell().add(j.getUsabilityComment()));
         }
 
-        // Adding Table to document        
-        doc.add(table);
+        // Adding Tables to document        
+        doc.add(table_bom);
 
         // Closing the document       
         doc.close();
@@ -94,8 +115,7 @@ public class GeneratePDF {
         email.setSmtpPort(465);
         email.setAuthenticator(new DefaultAuthenticator("fakejohannesfog", "johannesfogpassword1"));
         email.setSSL(true);
-        email.setFrom("fakejohannesfog@gmail.com");
-        email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog");
+        email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog"); //TODO .getEmail
         email.setFrom("fakejohannesfog@gmail.com", "Fake Johannes Fog");
         email.setSubject("Ordre fra Fake Johannes Fog");
         email.setMsg("Besked om din ordre her.");
