@@ -52,7 +52,7 @@
                     <tr>
                         <th>Caport længde</th>
                         <td> 
-                            <select class="form-control" name="length" id="length" form="updateinquiry">
+                            <select class="form-control" name="length" id="length" form="updateinquiry" onchange="setMaxValue(this,'shackLength',2);">
                                 <% int length = i.getCarportLength(); %>
                                 <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
@@ -78,7 +78,7 @@
                     <tr>
                         <th>Carport bredde</th>
                         <td> 
-                            <select class="form-control" id="width" name="width" form="updateinquiry" onchange="setMaxValue(this,'shackWidth');">
+                            <select class="form-control" id="width" name="width" form="updateinquiry" onchange="setMaxValue(this,'shackWidth',1);">
                                 <% int width = i.getCarportWidth(); %>
                                 <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>

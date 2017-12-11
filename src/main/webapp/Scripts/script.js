@@ -80,8 +80,8 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
-function setMaxValue(calledFrom, id){
-    document.getElementById(id).setAttribute("max",calledFrom.value);
+function setMaxValue(calledFrom, id, divideBy){
+    document.getElementById(id).setAttribute("max",(calledFrom.value/divideBy));
 }
 
 function disOrEnable(id){
