@@ -141,23 +141,24 @@ public class InquiryMapper {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
+                
                 i = new Inquiry(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getDate(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getInt(15),
-                        rs.getTimestamp(16));
+                        rs.getInt("id"),
+                        rs.getInt("carportHeight"),
+                        rs.getInt("carportLength"),
+                        rs.getInt("carportWidth"),
+                        rs.getInt("shackWidth"),
+                        rs.getInt("shackLength"),
+                        rs.getString("roofType"),
+                        rs.getString("roofMaterial"),
+                        rs.getString("angle"),
+                        rs.getString("commentCustomer"),
+                        rs.getString("commentEmployee"),
+                        rs.getDate("period"),
+                        rs.getString("status"),
+                        rs.getString("email"),
+                        rs.getInt("id_employee"),
+                        rs.getTimestamp("date"));
                 return i;
             } else {
                 throw new Exception(" no inquiry with specified id ");
@@ -299,7 +300,7 @@ public class InquiryMapper {
     
     public static Inquiry updateInquiry(int id, int height, int length, int width, 
                                         int shackLength, int shackWidth, String roofType,
-                                        String angle, String comment, String status) 
+                                        String roofMat, String angle, String comment, String status) 
             throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -307,7 +308,7 @@ public class InquiryMapper {
 
         try {
             conn = DBConnector.getConnection();
-            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
             ps = conn.prepareStatement(SQL);
             
             ps.setInt(1, height);
@@ -316,10 +317,11 @@ public class InquiryMapper {
             ps.setInt(4, shackLength);
             ps.setInt(5, shackWidth);
             ps.setString(6, roofType);
-            ps.setString(7, angle);
-            ps.setString(8, comment);
-            ps.setString(9, status);
-            ps.setInt(10, id);
+            ps.setString(7, roofMat);
+            ps.setString(8, angle);
+            ps.setString(9, comment);
+            ps.setString(10, status);
+            ps.setInt(11, id);
 
             conn.setAutoCommit(false);
             int res = ps.executeUpdate();

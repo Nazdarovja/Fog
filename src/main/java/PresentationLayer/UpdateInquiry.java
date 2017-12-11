@@ -9,6 +9,8 @@ import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Product;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,14 +35,27 @@ public class UpdateInquiry extends Command {
         }
         String angle = null;
         String roofType = request.getParameter("roofType");
+        String roofMat;
         if(roofType.equals("rejsning")){
             angle = request.getParameter("angle");
+            roofMat = request.getParameter("pitchedMat");
+        }else {
+            roofMat = request.getParameter("flatMat");
         }
+        System.out.println("++++++++++++++++++++++++++++++++++++"+roofMat+"++++++++++++++++++++++++++++++++++++");
         String comment = request.getParameter("comment");
         String status = request.getParameter("status");
-
-        Inquiry inquiry = LogicFacade.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, angle, comment, status);
+        
+        Inquiry inquiry = LogicFacade.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        
+        // roof mats -----
+        List<Product> flatMat, pitchedMat;
+        flatMat = LogicFacade.getFlatRoofProducts();
+        pitchedMat = LogicFacade.getPitchedRoofProducts();
+        request.setAttribute("pitchedMat", pitchedMat);
+        request.setAttribute("flatMat", flatMat);
+        // ---------------
         
         request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
         request.setAttribute("bom", bom);
