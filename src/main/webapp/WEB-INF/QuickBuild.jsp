@@ -154,20 +154,20 @@
                                 <br>
                             </div>
 
-                            <div id="shackLength" >
-                                Redskabsrum Længde<br>
+                            <div id="shackLength">
+                                Redskabsrum Bredde<br>
                                 <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
                                 <br>
                             </div>
-                            <div id="shackWidth" >
-                                Redskabsrum Bredde<br>
+                            <div id="shackWidth">
+                                Redskabsrum Længde<br>
                                 <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
                                 <br>
                             </div>
 
                             <div id="angle">
                                 Vælg hældning<br>
-                                <select class="form-control" name="angle" >
+                                <select class="form-control" name="angle">
                                     <% int angle = -1;
                                         if (request.getSession().getAttribute("angle") != null) {
                                             angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
@@ -384,7 +384,7 @@
                     </div>
                 </div>
             </div>
-        </form> 
+        </form>
     </div>
 
     <!-- Latest compiled JavaScript -->
