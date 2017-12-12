@@ -25,7 +25,6 @@ public class ViewCustomers extends Command {
         String customerTable = JspUtilTable.tableCustomer(tableTagId, cl);
         
         request.setAttribute("customertable", customerTable);
-        request.setAttribute("customers", cl); // not used..
         
         return "customers";
     }

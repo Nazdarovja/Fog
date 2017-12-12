@@ -18,6 +18,10 @@ and open the template in the editor.
     background-color: #124989; 
 }
 
+.errorholder {
+    
+}
+
 .formcontent {
     position:absolute;
     left: 50%;

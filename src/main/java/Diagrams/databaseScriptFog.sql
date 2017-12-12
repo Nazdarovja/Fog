@@ -133,11 +133,11 @@ VALUES
 ('test6@test.dk','Oliver','Håkonsson',24566333,'Taskestrupvej 42',2000, 'gggg');
 
 INSERT INTO
-Employee (name, surname)
+Employee (name, surname, password)
 VALUES
-('Martin', 'Fogmaster'),
-('Johannes', 'Fog'),
-('Frodo', 'Baggings');
+('Martin', 'Fogmaster', 'emp1'),
+('Johannes', 'Fog','emp2'),
+('Frodo', 'Baggings','emp3');
 
 
 INSERT INTO

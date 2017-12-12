@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import DataLayer.CustomerMapper;
+import DataLayer.EmployeeMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
 import java.util.ArrayList;
@@ -138,5 +139,9 @@ public class LogicFacade {
             }
         }
         return null;
+    }
+
+    public static Employee login(int id, String pwd, String ipAddress) throws LoginException, Exception {
+        return EmployeeMapper.login(id, pwd, ipAddress);
     }
 }

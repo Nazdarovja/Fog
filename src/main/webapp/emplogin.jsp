@@ -25,18 +25,27 @@
             <div class="inner">
             <div class="formbackground">
 
-                <div class="picholder">
-                    <img src="./img/foglogo2.png" alt="Fog">
+                <% String error = (String)request.getAttribute("error"); %>
+                
+                <% if(error != null) { %>
+                <div class="errorholder">
+                    <p><%= error %></p>
                 </div>
-
-                <form>
-                    <div class="formcontent" id="emplogin" action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="emplogin">
-                        <input class="form-control" type="text" id="loginid" placeholder="id" style="margin-bottom: 30px;">
-                        <input class="form-control" type="password" id="loginpwd" placeholder="password"style="margin-bottom: 60px;">
+                <% } %>
+                
+                <form id="loginemployee" name="loginemployee" action="FrontController" method="POST">
+                    <div class="formcontent" >
+                        <input type="hidden" name="command" value="loginemployee">
+                        <input type="hidden" name="lastpage" value="error">
+                        <input class="form-control" type="number" name="id" placeholder="id" style="margin-bottom: 30px;">
+                        <input class="form-control" type="password" name="pwd" placeholder="password"style="margin-bottom: 60px;">
                         <input id="buttondown" class="form-control" type="submit" value="login">
                     </div>
                 </form>
+                
+                <div class="picholder">
+                    <img src="./img/foglogo2.png" alt="Fog">
+                </div>
             </div>
             </div>
         </div>
