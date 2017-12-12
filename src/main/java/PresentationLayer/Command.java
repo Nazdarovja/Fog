@@ -29,7 +29,7 @@ public abstract class Command {
         commands.put( "viewinquiries", new ViewInquiries() );
         commands.put( "viewcustomers" , new ViewCustomers() );
         commands.put( "viewinquiry" , new ViewInquiry() );
-//        commands.put( "updateinquiry" , new UpdateInquiry() );
+        commands.put( "updateinquiry" , new UpdateInquiry() );
         commands.put( "pdf" , new PDF() );
 
         commands.put("QuickBuild", new QuickBuild());

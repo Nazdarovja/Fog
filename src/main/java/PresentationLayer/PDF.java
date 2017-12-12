@@ -10,6 +10,8 @@ import FunctionLayer.Calculator;
 import FunctionLayer.Customer;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Product;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,20 +23,25 @@ public class PDF extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+
         String customer = request.getParameter("customer");
         Customer cus = LogicFacade.viewCustomerByEmail(customer);
         Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        List<Product> flatMat, pitchedMat;
+        
+        flatMat = LogicFacade.getFlatRoofProducts();
+        pitchedMat = LogicFacade.getPitchedRoofProducts();
 
         request.setAttribute("generatedPDF", LogicFacade.generatePDF(cus, inquiry, bom)); //TODO if generatedPDF på session, fjern "send pdf" knap fra inquiry.jsp
-
+        request.setAttribute("pitchedMat", pitchedMat);
+        request.setAttribute("flatMat", flatMat);
         request.setAttribute("customer", cus);
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);
-        
-        return "inquiry"; 
+
+        return "inquiry";
     }
 
 }
