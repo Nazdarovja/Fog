@@ -187,7 +187,18 @@ public class GeneratePDF {
         }
     }
 
-    private static MultiPartEmail sendEmail(byte[] byteArray) throws EmailException, IOException {
+    public static byte[] readFully(InputStream stream) throws IOException {
+        byte[] buffer = new byte[8192];
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        int bytesRead;
+        while ((bytesRead = stream.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+        return baos.toByteArray();
+    }
+
+    private static MultiPartEmail sendEmail(byte[] PDF) throws EmailException, IOException {
 
         // create the mail
         MultiPartEmail email = new MultiPartEmail();
@@ -202,7 +213,7 @@ public class GeneratePDF {
         email.setMsg("Besked om din ordre her.");
 
         System.out.println("worked???");
-        DataSource source = new ByteArrayDataSource(byteArray, "application/pdf");
+        DataSource source = new ByteArrayDataSource(PDF, "application/pdf");
         source.getInputStream().close();
         // add the attachment
         email.attach(source, "result.pdf", "Description of some file");
@@ -211,17 +222,6 @@ public class GeneratePDF {
 //        email.send();  //TODO UNCOMMENT TO ENABLE SENDING
         System.out.println("great succes");
         return email;
-    }
-
-    public static byte[] readFully(InputStream stream) throws IOException {
-        byte[] buffer = new byte[8192];
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        int bytesRead;
-        while ((bytesRead = stream.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
-        }
-        return baos.toByteArray();
     }
 
 }
