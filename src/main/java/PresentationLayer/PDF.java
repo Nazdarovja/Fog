@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import static DataLayer.InquiryMapper.inquiryById;
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Customer;
@@ -26,11 +27,11 @@ public class PDF extends Command {
 
         String customer = request.getParameter("customer");
         Customer cus = LogicFacade.viewCustomerByEmail(customer);
-        Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
-        Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
+        int id = Integer.parseInt(request.getParameter("id"));
+        Inquiry inquiry = LogicFacade.viewInquiry(id);
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
         List<Product> flatMat, pitchedMat;
-        
+
         flatMat = LogicFacade.getFlatRoofProducts();
         pitchedMat = LogicFacade.getPitchedRoofProducts();
 
@@ -39,7 +40,9 @@ public class PDF extends Command {
         request.setAttribute("flatMat", flatMat);
         request.setAttribute("customer", cus);
         request.setAttribute("bom", bom);
-        request.setAttribute("inquiry", i);
+        request.setAttribute("inquiry", inquiry);
+        request.setAttribute("id", id);
+        
 
         return "inquiry";
     }
