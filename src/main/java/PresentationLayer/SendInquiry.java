@@ -24,7 +24,6 @@ public class SendInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession(false);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");

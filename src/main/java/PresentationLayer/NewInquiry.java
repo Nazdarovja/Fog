@@ -19,7 +19,6 @@ public class NewInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession(false);
         String inquiries = (String) session.getAttribute("inquiries");
         Customer customer = (Customer) session.getAttribute("customer");

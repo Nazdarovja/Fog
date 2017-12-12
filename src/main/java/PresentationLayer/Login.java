@@ -23,7 +23,6 @@ public class Login extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception{
-        request.setAttribute("lastpage", "QuickBuild");
         Customer customer = null;
         if (request.getParameter("email") != null) {
             String email = (String) request.getParameter("email");

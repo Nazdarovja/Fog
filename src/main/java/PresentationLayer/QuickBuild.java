@@ -22,7 +22,6 @@ public class QuickBuild extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        request.setAttribute("lastpage", "QuickBuild");
         HttpSession session = request.getSession();
 
         String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");
