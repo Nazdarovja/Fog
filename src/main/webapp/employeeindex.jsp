@@ -15,12 +15,14 @@
     <body>
         <h1>View customers</h1>
         <form name="viewcustomers" action="FrontController" method="POST">
+            <input type="hidden" name="lastpage" value="employeeindex">
             <input type="hidden" name="command" value="viewcustomers">
             <input type="submit" value="Submit">
         </form>
         
         <h1>View inquiries</h1>
         <form name="viewinquiries" action="FrontController" method="POST">
+            <input type="hidden" name="lastpage" value="employeeindex">
             <input type="hidden" name="command" value="viewinquiries">
             <input type="submit" value="Submit">
         </form>

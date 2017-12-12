@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Inquiry;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class SendInquiry extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession(false);
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");

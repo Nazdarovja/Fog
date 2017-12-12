@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewCustomers extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         List<Customer> cl = LogicFacade.viewAllCustomers();
         String tableTagId = "customertable";
         String customerTable = JspUtilTable.tableCustomer(tableTagId, cl);

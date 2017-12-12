@@ -41,6 +41,7 @@
     <div id="measurements" >
 
         <form id="orderForm" name="order" action="FrontController" method="POST">
+            <input type="hidden" name="lastpage" value="QuickBuild">
             <div class="row ">
                 <input type="hidden" name="command" value="calculate">
                 <div class="col-sm-2 col-sm-offset-2">
@@ -167,6 +168,7 @@
                     <div class="svgSide" style="display: none;">
                             <%= svgSide %>
                     </div>
+                    <p id="svgimage" class="btn btn-default">Next image</p>
                     <% } %>
                 </div>
 
@@ -230,6 +232,7 @@
             <%}%>
             <input form="orderForm" class="btn btn-default"  type="submit" value="Beregn"/>
             <form name="newInquiry" action="FrontController" method="POST">
+                <input type="hidden" name="lastpage" value="QuickBuild">
                 <input type="hidden" name="command" value="newInquiry">
                 <input class="btn btn-warning" type="submit" value="Ny forespørgsel"/>
             </form>
@@ -240,6 +243,7 @@
             <div id="sendSaveInquiry">
                 <p style="color: white">Gem til senere behandling?</p>
                 <form form="orderForm" name="saveInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="lastpage" value="QuickBuild">
                     <input type="hidden" name="command" value="saveInquiry">
                     <input class="btn btn-default" onclick="saved()" type="submit" value="Gem forespørgsel"/>
                 </form>
@@ -247,6 +251,7 @@
                 <!-- Send order -->
                 <p style="color: white">Send forespørgsel til Fog?</p>
                 <form name="sendInquiry" action="FrontController" method="POST">
+                    <input type="hidden" name="lastpage" value="QuickBuild">
                     <input type="hidden" name="command" value="sendInquiry">
                     <input class="btn btn-default" onclick="confirmFunction()" type="submit" value="Send forespørgsel"/>
                 </form>
@@ -276,6 +281,7 @@
 
             <!-- Modal Register -->
             <form action="FrontController" method="post" id="registration" name="registration" >
+                <input type="hidden" name="lastpage" value="QuickBuild">
                 <div class="modal fade" id="registerUser" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -349,6 +355,7 @@
             <%----------------------------------------------------------------------------------------------%>
             <!-- Modal Login form -->
             <form id="logingform" action="FrontController" method="post">
+                <input type="hidden" name="lastpage" value="QuickBuild">
                 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="LoginModal" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
