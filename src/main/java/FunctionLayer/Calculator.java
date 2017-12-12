@@ -25,6 +25,7 @@ public class Calculator {
         int width = inquiry.getCarportWidth();
         System.out.println("----------------------------"+inquiry.getRoofMaterial()+"---- ROOOF MAT ++++++++++");
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
+        if(roofMaterial == null) throw new FogException( "No roof material was found" );
         
         // FLAT ROOF ALGORITHM
         if (inquiry.getRoofType().equals("fladt")) {
