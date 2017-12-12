@@ -127,16 +127,11 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <<<<<<< HEAD
+
                             <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle');chooseRoofMat(this, 'pitchedMat', 'flatMat');" form="updateinquiry">
                                 <option value="rejsning"<% if (tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if (tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
-                                =======
-                                <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle')" form="updateinquiry">
-                                    <option value="rejsning"<% if (tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
-                                    <option value="fladt" <% if (tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
-                                    >>>>>>> ae49b1f19817602a69bb7c1301fdeffa4186e48b
-                                </select> 
+                            </select> 
                         </td>
                     </tr>
                     <tr>
