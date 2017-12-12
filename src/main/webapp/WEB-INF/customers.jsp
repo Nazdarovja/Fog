@@ -37,7 +37,7 @@
                 <form name="viewinquiries" action="FrontController" method="POST">
                     <input type="hidden" name="lastpage" value="customers">
                     <input type="hidden" name="command" value="viewinquiries">
-                    <input type="submit" value="viewinquiries" />
+                    <input type="submit" value="view inquiries" />
                 </form>
             </div>
         </div>

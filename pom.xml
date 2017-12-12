@@ -28,6 +28,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>3.0.21</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -40,8 +46,70 @@
             <version>6.0.6</version>   
         </dependency>
         
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>kernel</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>io</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>layout</artifactId>         
+            <version>7.0.2</version>
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>forms</artifactId>         
+            <version>7.0.2</version>    
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>pdfa</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>sign</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>barcodes</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>font-asian</artifactId>         
+            <version>7.0.2</version>     
+        </dependency>  
+      
+        <dependency>         
+            <groupId>com.itextpdf</groupId>         
+            <artifactId>hyph</artifactId>         
+            <version>7.0.2</version>    
+        </dependency> 
         
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.1</version>
+            <type>jar</type>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>

@@ -7,7 +7,6 @@ package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
-import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
@@ -17,19 +16,22 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class ViewBoM extends Command {
+public class ViewLatestInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        int id = Integer.parseInt(request.getParameter("id"));
+    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        Inquiry inquiry = LogicFacade.viewInquiry(id);
+        String customer = request.getParameter("customer");
+        Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
+        Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
-        // NEEDS CHANGING 
-
+        
+        System.out.println(bom.getMaterials().get(0).getProductName());
+        
         request.setAttribute("bom", bom);
-
-        return "billofmaterials";
+        request.setAttribute("inquiry", i);
+        
+        return "inquiry";
     }
-
+    
 }
