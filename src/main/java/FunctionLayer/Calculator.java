@@ -22,6 +22,7 @@ public class Calculator {
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
+        System.out.println("----------------------------"+inquiry.getRoofMaterial()+"---- ROOOF MAT ++++++++++");
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
         
         // FLAT ROOF ALGORITHM
@@ -69,15 +70,16 @@ public class Calculator {
             //lath / lægte
             bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenCategory("lægte", products)));
             bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
-
+            
+            
             //roof material
             if (roofMaterial.getCategory().equals("tagpap")) {
                 //tarPaper / tagpap
                 bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
             } else {
                 //Bricks/rooftiles /tagsten
-                bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
-            };
+                bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), roofMaterial));
+            }
 
             //Shack
             if (inquiry.getShackLength() > 0) {
@@ -107,7 +109,7 @@ public class Calculator {
         ///////////////////////////////////////////////////////////////////////////
         return bom;
     }
-
+    
     private static Product getChosenProduct(String productName, List<Product> products) {
         Product product = null;
         for (Product p : products) {

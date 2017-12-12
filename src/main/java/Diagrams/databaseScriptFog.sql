@@ -146,11 +146,11 @@ VALUES
 (320,420,320,200,120,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,null,null,null,'gemt','test1@test.dk'),
 (320,420,320,0,0,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','20','send Email',null,'2017-12-20','gemt','test1@test.dk'),
 (240,470,360,360,220,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
-(320,420,320,210,150,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
-(210,420,320,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15',null,null,null,'behandlet','test3@test.dk'),
-(320,570,410,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
-(270,570,410,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25',null,null,'2017-07-15','ny','test8@test.dk'),
-(320,420,320,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Ring tak!',null,null,'ny','test6@test.dk');
+(320,420,320,210,150,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
+(210,420,320,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
+(270,570,410,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25',null,null,'2017-07-15','ny','test8@test.dk'),
+(320,420,320,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Ring tak!',null,null,'ny','test6@test.dk');
 
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag',','løsholt'
@@ -248,8 +248,8 @@ VALUES
 ('25X100 MM FYR SEKSTA TRYKIMPR. NTR/AB','beklædning', 2868, 2400, 100, 25), 
 
 -- tagsten
-('RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
-('RØDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM','tagsten', 8995, 0, 0, 0),  -- ingen mål defineret
+('ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','tagsten', 1495, 404, 236, 0),
+('ROEDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM','tagsten', 8995, 0, 0, 0),  -- ingen mål defineret
 
 -- trapeztag
 ('CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM','trapeztag', 24900, 1100, 610, 1),

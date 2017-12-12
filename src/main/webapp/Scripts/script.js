@@ -18,8 +18,6 @@ function findInquiriesByEmail(cosEmail) {
     window.location.replace("/Fog/FrontController?command=viewinquiries&email="+email);
 }
 
-
-
 function sortTable(idTable, sortIndex) {
   var table, rows, switching, i, x, y, shouldSwitch, ascOrDesc;
   
@@ -116,13 +114,9 @@ function showByClassName(className){
 
 function chooseRoofMat(chooser,pitchedId,flatId){
     if(chooser.value === 'fladt'){
-//        hideByClassName(pitchedClassName);
-//        showByClassName(flatClassName);
         showById(flatId);
         hideById(pitchedId);
     } else {
-//        hideByClassName(flatClassName);
-//        showByClassName(pitchedClassName);
         showById(pitchedId);
         hideById(flatId);
     }
@@ -186,6 +180,14 @@ if(document.getElementById("withShack") !== null) {
         document.getElementById("shackLength").disabled = false;
         document.getElementById("shackWidth").disabled = false;
     }
+}
+
+if(document.getElementById('length') !== null && document.getElementById('width') !== null){
+    var carportLength = document.getElementById('length');
+    var carportWidth = document.getElementById('width');
+    
+    setMaxValue(carportLength,'shackLength',2);
+    setMaxValue(carportWidth,'shackWidth',1);
 }
 
 
