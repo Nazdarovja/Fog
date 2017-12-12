@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
 public class NewInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession(false);
         String inquiries = (String) session.getAttribute("inquiries");
         Customer customer = (Customer) session.getAttribute("customer");

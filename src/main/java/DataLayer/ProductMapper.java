@@ -5,6 +5,7 @@
  */
 package DataLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,14 +26,16 @@ public class ProductMapper {
      * Recieve a list from the database with Product objects.
      *
      * @return List of Product objects form the chosen category
+     * @throws FunctionLayer.FogException
      * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public static List<Product> getProducts() throws SQLException, Exception {
+    public static List<Product> getProducts() throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        if (productList == null) {
+        if (productList == null) { 
 
             try {
                 conn = DBConnector.getConnection();
@@ -51,7 +54,11 @@ public class ProductMapper {
                     productList.add(new Product(id, name, cat, price, length, width, height));
                 }
 
-            } finally {
+            } 
+            catch ( SQLException ex ) {
+                throw new FogException( ex.getMessage() );
+        }
+            finally {
                 // Always make sure result sets and statements are closed,
                 // and the connection is returned to the pool
 
@@ -70,7 +77,7 @@ public class ProductMapper {
         return productList;
     }
 
-    public static Product getSingleProduct(String category, String productName) throws Exception {
+    public static Product getSingleProduct(String category, String productName) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -92,8 +99,14 @@ public class ProductMapper {
                 int width = rs.getInt("width");
                 int height = rs.getInt("height");
                 product = new Product(id, name, cat, price, length, width, height);
+            } else {
+                throw new FogException("Could not find product");
             }
-        } finally {
+        } 
+        catch ( SQLException ex ) {
+                throw new FogException( ex.getMessage() );
+        }
+        finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
 

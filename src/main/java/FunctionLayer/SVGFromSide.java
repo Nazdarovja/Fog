@@ -217,10 +217,10 @@ public class SVGFromSide {
             }
         } 
         else {
-            if(!withShack) { // with shack with 2 posts
-                svg.append("<line x1=").append(gapFromFrontToFirstPost+gap).append(" y1=").append(height+gap+20+roofHeight).append(" x2=").append(gap+length-30).append(" y2=").append(height+gap+20).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>"); // 
+            if(!withShack) { // without shack with 2 posts
+                svg.append("<line x1=").append(gapFromFrontToFirstPost+gap).append(" y1=").append(height+gap+20+roofHeight).append(" x2=").append(gap+length-30).append(" y2=").append(height+gap+20+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>"); // 
                 svg.append("<text x=").append((gap+length-30+gapFromFrontToFirstPost+gap)/2).append(" y=").append(height+gap+15+roofHeight).append(">").append((gap+length-30)-(gapFromFrontToFirstPost+gap)).append("</text>");
-                svg.append("<line x1=").append(gap+length-30).append(" y1=").append(height+gap+5+roofHeight).append(" x2=").append(gap+length-30).append(" y2=").append(height+gap+30).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
+                svg.append("<line x1=").append(gap+length-30).append(" y1=").append(height+gap+5+roofHeight).append(" x2=").append(gap+length-30).append(" y2=").append(height+gap+30+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>");
             }
             else { // with shack with 2 posts
                 svg.append("<line x1=").append(gapFromFrontToFirstPost+gap).append(" y1=").append(height+gap+20+roofHeight).append(" x2=").append(gap+length-shackWidth-30).append(" y2=").append(height+gap+20+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>"); // 
@@ -232,7 +232,7 @@ public class SVGFromSide {
         // gap at the end
         svg.append("<line x1=").append(gap+length-30).append(" y1=").append(height+gap+20+roofHeight).append(" x2=").append(gap+length).append(" y2=").append(height+gap+20+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>"); // 30 cm to the end
         svg.append("<line x1=").append(gap+length).append(" y1=").append(height+gap+5+roofHeight).append(" x2=").append(gap+length).append(" y2=").append(height+gap+30+roofHeight).append(" style='stroke:rgb(0,0,0);stroke-width:2'/>"); // 
-        svg.append("<text x=").append(gap+length-20).append(" y=").append(height+gap+15+roofHeight).append(">").append(30).append("</text>");
+        svg.append("<text x=").append(gap+length-25).append(" y=").append(height+gap+15+roofHeight).append(">").append(30).append("</text>");
     }
     
     public static void main(String[] args) {

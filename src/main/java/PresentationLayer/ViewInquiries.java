@@ -5,6 +5,8 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import java.util.List;
@@ -19,7 +21,7 @@ public class ViewInquiries extends Command
 {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         List<Inquiry> i = LogicFacade.viewInquiries();
         String email = request.getParameter("email");
         String tableTagId = "inquirytabel";

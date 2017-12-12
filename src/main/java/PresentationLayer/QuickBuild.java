@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,10 +21,9 @@ public class QuickBuild extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession();
 
-        request.getSession().setAttribute("lastpage", "QuickBuild");
         String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");
         String roofMaterialFlat = LogicFacade.getRoofMaterials("fladt");
 

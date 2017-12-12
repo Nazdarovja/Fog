@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,7 @@ import javax.servlet.http.HttpSession;
 public class Register extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.getSession().setAttribute("lastpage", "QuickBuild");
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         Customer c = null;
         
         String email = request.getParameter( "email" );

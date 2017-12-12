@@ -5,7 +5,15 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.FogException;
+import FunctionLayer.LoginException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.SimpleFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,17 +37,34 @@ public class FrontController extends HttpServlet {
      @throws IOException if an I/O error occurs
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
-            throws ServletException, IOException {
+            throws ServletException, IOException  {
+        
+        
         try {
+            Logging.setUp();
             Command action = Command.from( request );
             String view = action.execute( request, response );
             request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
-        } 
+        }
         
-        catch (Exception ex) {
-            ex.printStackTrace();
+        catch(LoginException ex) {
+            // LOGGING
+            Configuration.getMyLogger().log(Level.WARNING, ex.getMessage());
+            
+            request.setAttribute("error", "Could not validate user");
+            String lastpage = (String) request.getParameter("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
+        }
+        
+        catch(FogException ex) {
             request.setAttribute("error", ex.getMessage());
-            String lastpage = (String) request.getSession().getAttribute("lastpage");
+            String lastpage = (String) request.getParameter("lastpage");
+            request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
+        }
+         
+        catch (Exception ex) {
+            request.setAttribute("error", ex.getMessage());
+            String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
         }
     }

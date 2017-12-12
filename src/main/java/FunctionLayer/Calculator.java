@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import DataLayer.ProductMapper;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class Calculator {
 
-    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws Exception {
+    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException, Exception {
         BillOfMaterials bom = new BillOfMaterials();
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
