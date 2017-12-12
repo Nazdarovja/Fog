@@ -249,6 +249,7 @@
                 <h2>Muligheder</h2>
                 <div style="margin: 10px">
                     <form id="updateinquiry" name="updateinquiry" action="FrontController" method="POST">
+                        <input type="hidden" name="lastpage" value="inquiry">
                         <input type="hidden" name="command" value="updateinquiry">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
                         <input type="hidden" name="id" value="<%= i.getId() %>">

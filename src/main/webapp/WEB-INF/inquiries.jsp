@@ -36,6 +36,7 @@
         <div class="topbar">
             <div style="margin: 10px;">
                 <form name="viewcustomers" action="FrontController" method="POST">
+                    <input type="hidden" name="lastpage" value="inquiries">
                     <input type="hidden" name="command" value="viewcustomers">
                     <input type="submit" value="view customers" />
                 </form>
