@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import DataLayer.ProductMapper;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,12 +18,14 @@ import java.util.List;
  */
 public class Calculator {
 
-    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws Exception {
+    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException, Exception {
         BillOfMaterials bom = new BillOfMaterials();
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
+        System.out.println("----------------------------"+inquiry.getRoofMaterial()+"---- ROOOF MAT ++++++++++");
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
+        if(roofMaterial == null) throw new FogException( "No roof material was found" );
         
         // FLAT ROOF ALGORITHM
         if (inquiry.getRoofType().equals("fladt")) {
@@ -69,15 +72,16 @@ public class Calculator {
             //lath / lægte
             bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenCategory("lægte", products)));
             bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
-
+            
+            
             //roof material
-            if (roofMaterial.getCategory().equals("tagpap")) {
+            if (roofMaterial.getCategory().equals("tagpap")) {  
                 //tarPaper / tagpap
                 bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
             } else {
                 //Bricks/rooftiles /tagsten
-                bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenProduct("RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", products)));
-            };
+                bom.addOrderLine(CalcBricks.calculateAmountOfBricks(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), roofMaterial));
+            }
 
             //Shack
             if (inquiry.getShackLength() > 0) {
@@ -107,7 +111,7 @@ public class Calculator {
         ///////////////////////////////////////////////////////////////////////////
         return bom;
     }
-
+    
     private static Product getChosenProduct(String productName, List<Product> products) {
         Product product = null;
         for (Product p : products) {

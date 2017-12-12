@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UnknownCommand extends Command {
 
     @Override
-    String execute( HttpServletRequest request, HttpServletResponse response ) throws Exception {
+    String execute( HttpServletRequest request, HttpServletResponse response ) throws FogException, Exception {
         String msg = "Unknown command. Contact IT";
         throw new FogException( msg );
     }

@@ -154,13 +154,13 @@ $('#orderForm').on('change', function () {
     $("#sendSaveInquiry").hide();
 });
 
-$('#svg').on('click', () => {
+$('#svgimage').on('click', () => {
     if($('.svgTop').css('display') === 'none') {
         $('.svgSide').hide();
-        $('.svgTop').show('slow');
+        $('.svgTop').fadeIn(500);
     }
     else {
         $('.svgTop').hide();
-        $('.svgSide').show('slow');
+        $('.svgSide').fadeIn(500);
     }
 });

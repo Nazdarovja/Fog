@@ -5,7 +5,8 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
+import FunctionLayer.BillOfMaterials;
+import FunctionLayer.Calculator;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
@@ -14,20 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Stanislav
+ * @author Mellem
  */
-public class SaveInquiry extends Command {
+public class ViewBoM extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
-        
-        inquiry.setEmail(customer.getEmail());
-        inquiry.setStatus("gemt");
-        LogicFacade.SendInquiry(inquiry);
-
-        return "QuickBuild";
+                int id = Integer.parseInt(request.getParameter("id"));
+	        
+	        Inquiry inquiry = LogicFacade.viewInquiry(id);
+	        BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+	        // NEEDS CHANGING 
+                
+	        request.setAttribute("bom", bom);
+	        
+	        return "billofmaterials";
     }
-
+    
 }

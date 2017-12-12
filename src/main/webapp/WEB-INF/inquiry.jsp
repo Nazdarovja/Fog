@@ -4,6 +4,7 @@
     Author     : Mellem
 --%>
 
+<%@page import="FunctionLayer.Product"%>
 <%@page import="FunctionLayer.OrderLine"%>
 <%@page import="FunctionLayer.BillOfMaterials"%>
 <%@page import="FunctionLayer.Customer"%>
@@ -32,6 +33,8 @@
         <% Inquiry i = (Inquiry)request.getAttribute("inquiry"); %>
         <% BillOfMaterials bom = (BillOfMaterials)request.getAttribute("bom"); %>
         <% Customer cus = (Customer)request.getAttribute("customer"); %>
+        <% List<Product> flatMat = (List<Product>)request.getAttribute("flatMat"); %>
+        <% List<Product> pitchedMat = (List<Product>)request.getAttribute("pitchedMat"); %>
         
         <div class="container">
             <div class="col-lg-6" style="margin-right: 10%">
@@ -52,7 +55,7 @@
                     <tr>
                         <th>Caport længde</th>
                         <td> 
-                            <select class="form-control" name="length" id="length" form="updateinquiry">
+                            <select class="form-control" name="length" id="length" form="updateinquiry" onchange="setMaxValue(this,'shackLength',2);">
                                 <% int length = i.getCarportLength(); %>
                                 <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
@@ -78,7 +81,7 @@
                     <tr>
                         <th>Carport bredde</th>
                         <td> 
-                            <select class="form-control" id="width" name="width" form="updateinquiry">
+                            <select class="form-control" id="width" name="width" form="updateinquiry" onchange="setMaxValue(this,'shackWidth',1);">
                                 <% int width = i.getCarportWidth(); %>
                                 <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
@@ -124,14 +127,36 @@
                         <th>Tagtype</th>
                         <td> 
                             <% String tagtype = i.getRoofType(); %>
-                            <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle')" form="updateinquiry">
+                            <select class="form-control" name="roofType" id="roofType" onchange="disOrEnable('angle');chooseRoofMat(this,'pitchedMat','flatMat');" form="updateinquiry">
                                 <option value="rejsning"<% if(tagtype.equals("rejsning")) { %> selected <% } %> >Rejsning</option>
                                 <option value="fladt" <% if(tagtype.equals("fladt")) { %> selected <% } %> >Fladt</option>
                             </select> 
                         </td>
                     </tr>
                     <tr>
-                        <th>Taghældning (hvis "rejsning")</th>
+                        <th>Tagmateriale</th>
+                        <td> 
+                            <% String tagMat = i.getRoofMaterial(); %>
+                            <div id="pitchedMat">
+                                <select name="pitchedMat" class="form-control" form="updateinquiry">
+                                    <% for (Product pro : pitchedMat) {
+                                            %><option value="<%= pro.getName()%>"<% if(tagMat.equals(pro.getName())) { %> selected <% } %> ><%= pro.getName()%></option><%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                            <div id="flatMat">
+                                <select name="flatMat" class="form-control" form="updateinquiry">
+                                    <% for (Product pro : flatMat) {
+                                            %><option value="<%= pro.getName()%>"<% if(tagMat.equals(pro.getName())) { %> selected <% } %> ><%= pro.getName()%></option><%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Taghældning</th>
                         <td>
                             <select class="form-control" name="angle" id="angle" form="updateinquiry">
                                 <% int angle = -1;
@@ -224,6 +249,7 @@
                 <h2>Muligheder</h2>
                 <div style="margin: 10px">
                     <form id="updateinquiry" name="updateinquiry" action="FrontController" method="POST">
+                        <input type="hidden" name="lastpage" value="inquiry">
                         <input type="hidden" name="command" value="updateinquiry">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
                         <input type="hidden" name="id" value="<%= i.getId() %>">

@@ -9,7 +9,7 @@ function findInquiryByEmailAndId(cosEmail,inqId) {
     var email = cosEmail;
     var id = inqId;
     
-    window.open("/Fog/FrontController?command=viewinquiry&customer="+email+"&id="+id,"nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
+    window.open("/Fog/FrontController?command=viewinquiry&customer="+email+"&id="+id+"&lastpage=error","nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
 }
 
 function findInquiriesByEmail(cosEmail) {
@@ -17,8 +17,6 @@ function findInquiriesByEmail(cosEmail) {
     
     window.location.replace("/Fog/FrontController?command=viewinquiries&email="+email);
 }
-
-
 
 function sortTable(idTable, sortIndex) {
   var table, rows, switching, i, x, y, shouldSwitch, ascOrDesc;
@@ -80,8 +78,48 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
+function setMaxValue(calledFrom, id, divideBy){
+    document.getElementById(id).setAttribute("max",(calledFrom.value/divideBy));
+}
+
 function disOrEnable(id){
     document.getElementById(id).disabled = !document.getElementById(id).disabled;
+}
+
+function hideById(id){
+    document.getElementById(id).style.display = 'none';
+}
+
+function hideByClassName(className){
+    var options = document.getElementsByClassName(className);
+
+    for (var option in options) {
+
+        option.style.display = 'none';
+    }
+}
+
+function showById(id){
+    document.getElementById(id).style.display = 'inline-block';
+}
+
+function showByClassName(className){
+    var options = document.getElementsByClassName(className);
+
+    for (var option in options) {
+
+        option.style.visibility = 'visible';
+    }
+}
+
+function chooseRoofMat(chooser,pitchedId,flatId){
+    if(chooser.value === 'fladt'){
+        showById(flatId);
+        hideById(pitchedId);
+    } else {
+        showById(pitchedId);
+        hideById(flatId);
+    }
 }
 
 function rowSorting(tableId) {
@@ -112,6 +150,8 @@ function rowSorting(tableId) {
     }
 }
 
+
+
 if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
@@ -125,8 +165,10 @@ if(document.getElementById("roofType") !== null) {
     } else {
         document.getElementById("angle").disabled = false;
     }
+    
+    chooseRoofMat(document.getElementById("roofType"),"pitchedMat","flatMat");
 }
-console.log(document.getElementById("withShack"));
+
 if(document.getElementById("withShack") !== null) {
     var e = document.getElementById("withShack");
     var rt = e.options[e.selectedIndex].value;
@@ -138,6 +180,14 @@ if(document.getElementById("withShack") !== null) {
         document.getElementById("shackLength").disabled = false;
         document.getElementById("shackWidth").disabled = false;
     }
+}
+
+if(document.getElementById('length') !== null && document.getElementById('width') !== null){
+    var carportLength = document.getElementById('length');
+    var carportWidth = document.getElementById('width');
+    
+    setMaxValue(carportLength,'shackLength',2);
+    setMaxValue(carportWidth,'shackWidth',1);
 }
 
 
