@@ -32,6 +32,7 @@ public class LogicFacade {
      * Product objects.
      *
      * @return
+     * @throws FunctionLayer.FogException
      * @throws Exception
      */
     public static List<Product> getProducts() throws FogException,Exception {

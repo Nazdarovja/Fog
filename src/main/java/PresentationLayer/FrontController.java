@@ -39,9 +39,9 @@ public class FrontController extends HttpServlet {
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException  {
         
-        Logging.setUp();
         
         try {
+            Logging.setUp();
             Command action = Command.from( request );
             String view = action.execute( request, response );
             request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
@@ -52,19 +52,19 @@ public class FrontController extends HttpServlet {
             Configuration.getMyLogger().log(Level.WARNING, ex.getMessage());
             
             request.setAttribute("error", "Could not validate user");
-            String lastpage = (String) request.getAttribute("lastpage");
+            String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
         }
         
         catch(FogException ex) {
             request.setAttribute("error", ex.getMessage());
-            String lastpage = (String) request.getAttribute("lastpage");
+            String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
         }
          
         catch (Exception ex) {
             request.setAttribute("error", ex.getMessage());
-            String lastpage = (String) request.getAttribute("lastpage");
+            String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher( "/WEB-INF/"+lastpage+".jsp" ).forward(request, response);
         }
     }
