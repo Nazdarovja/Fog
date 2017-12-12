@@ -258,6 +258,7 @@
                         <input type="submit" value="Updater Forespørgelse" name="update" style="margin: 10px">  
                     </form>
                     <form id="pdf" name="pdf" action="FrontController" method="POST">
+                        <input type="hidden" name="lastpage" value="inquiry">
                         <input type="hidden" name="command" value="pdf">
                         <input type="hidden" name="prevPage" value="inquiry.jsp">
                         <input type="hidden" name="id" value="<%= i.getId()%>">
