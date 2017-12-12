@@ -11,6 +11,7 @@ import FunctionLayer.LoginException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 /**
@@ -45,7 +46,7 @@ public class EmployeeMapper {
                 throw new LoginException("Login attempt on user with id: " + id + ", pwd: " + pwd + ", IP Address: " + ipAddress);
             }
         } 
-        catch (Exception ex) {
+        catch (SQLException ex) {
             throw new FogException( ex.getMessage() );
         }
         finally {
