@@ -144,7 +144,7 @@ INSERT INTO
 Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,roofMaterial,angle,commentCustomer,commentEmployee,period, status, email)
 VALUES
 (320,420,320,200,120,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,null,null,null,'gemt','test1@test.dk'),
-(320,420,320,0,0,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2',20,'send Email',null,'2017-12-20','gemt','test1@test.dk'),
+(320,420,320,0,0,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','20','send Email',null,'2017-12-20','gemt','test1@test.dk'),
 (240,470,360,360,220,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
 (320,420,320,210,150,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
 (210,420,320,null,null,'rejsning','RØDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15',null,null,null,'behandlet','test3@test.dk'),

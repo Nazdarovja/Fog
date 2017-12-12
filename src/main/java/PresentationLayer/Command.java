@@ -21,18 +21,29 @@ public abstract class Command {
 
     private static void initCommands() {
         commands = new HashMap<>();
+
+        commands.put( "register", new Register() );
+        commands.put( "QuickBuild", new QuickBuild());
+        commands.put( "calculate", new Calculate());
+        commands.put( "sendinquiry", new SendInquiry());
+        commands.put( "viewinquiries", new ViewInquiries() );
+        commands.put( "viewcustomers" , new ViewCustomers() );
+        commands.put( "viewinquiry" , new ViewInquiry() );
+        commands.put( "updateinquiry" , new UpdateInquiry() );
+
         commands.put("QuickBuild", new QuickBuild());
         commands.put("login", new Login());
         commands.put("register", new Register());
         commands.put("calculate", new Calculate());
         commands.put("sendInquiry", new SendInquiry());
         commands.put("viewinquiries", new ViewInquiries());
-        commands.put("viewbom", new ViewBoM());
+
         commands.put("viewcustomers", new ViewCustomers());
-        commands.put("inquiry", new ViewLatestInquiry());
+
         commands.put("saveInquiry", new SaveInquiry());
         commands.put("newInquiry", new NewInquiry());
         commands.put("chooseInquiry", new ChooseInquiry());
+
 
     }
 

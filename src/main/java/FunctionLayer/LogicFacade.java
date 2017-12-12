@@ -8,7 +8,7 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,6 +90,41 @@ public class LogicFacade {
     public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException,Exception {
         return InquiryMapper.getCustomerInquiries(customer);
     }
+    
+    public static Inquiry updateInquiry(int id, int height, int length, int width, 
+                                        int shackLength, int shackWidth, String roofType,
+                                        String roofMat, String angle, String comment, String status) 
+            throws FogException, Exception {
+        return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
+    }
+
+    public static String getRoofMaterials(String roofType) throws FogException,Exception {
+        return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
+    }
+    
+    public static List<Product> getPitchedRoofProducts() throws FogException, Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("tagsten") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
+    
+    public static List<Product> getFlatRoofProducts() throws FogException, Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("trapeztag") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
 
     public static String utilPreviousInquiries(List<Inquiry> inquiriesList) {
         return FormattingUtil.utilPreviousInquiries(inquiriesList);
@@ -103,10 +138,4 @@ public class LogicFacade {
         }
         return null;
     }
-
-    public static String getRoofMaterials(String roofType) throws FogException,Exception {
-        return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
-        
-    }
-
 }

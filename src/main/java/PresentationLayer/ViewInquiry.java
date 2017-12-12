@@ -10,6 +10,8 @@ import FunctionLayer.Calculator;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Product;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mellem
  */
-public class ViewLatestInquiry extends Command {
+public class ViewInquiry extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
@@ -26,9 +28,14 @@ public class ViewLatestInquiry extends Command {
         Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
+        List<Product> flatMat, pitchedMat, neutralMat;
+
+        flatMat = LogicFacade.getFlatRoofProducts();
+        pitchedMat = LogicFacade.getPitchedRoofProducts();
         
-        System.out.println(bom.getMaterials().get(0).getProductName());
-        
+        request.setAttribute("pitchedMat", pitchedMat);
+        request.setAttribute("flatMat", flatMat);
+        request.setAttribute("customer", LogicFacade.viewCustomerByEmail(customer));
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);
         
