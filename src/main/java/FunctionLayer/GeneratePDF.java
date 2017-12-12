@@ -39,6 +39,34 @@ public class GeneratePDF {
         // Creating a Document object       
         Document doc = new Document(pdf);
 
+        float[] pointColumnWidthsTitle = {100F};  //1 wide
+        Table title_table = new Table(pointColumnWidthsTitle);
+        title_table.addCell(new Paragraph("Tilbud på carport"));
+        doc.add(title_table.setBold());
+        doc.add(new Paragraph("\n"));
+
+        /////////////////////
+        //Creating customer table
+        /////////////////////
+        float[] pointColumnWidthsCustomer = {50F, 50F};  //2 wide
+        Table table_cus = new Table(pointColumnWidthsCustomer);
+        table_cus.addCell(new Cell().add("Kunde info").setBold());
+        table_cus.addCell(new Cell().add(""));
+        table_cus.addCell(new Cell().add("Email"));
+        table_cus.addCell(new Cell().add(customer.getEmail()));
+        table_cus.addCell(new Cell().add("Name"));
+        table_cus.addCell(new Cell().add(customer.getName()));
+        table_cus.addCell(new Cell().add("Surname"));
+        table_cus.addCell(new Cell().add(customer.getSurname()));
+        table_cus.addCell(new Cell().add("Phonenumber"));
+        table_cus.addCell(new Cell().add(customer.getPhonenumber() + ""));
+        table_cus.addCell(new Cell().add("Address"));
+        table_cus.addCell(new Cell().add(customer.getAddress()));
+        table_cus.addCell(new Cell().add("Zipcode"));
+        table_cus.addCell(new Cell().add(customer.getZipcode() + ""));
+        doc.add(table_cus);
+        doc.add(new Paragraph("\n"));
+
         /////////////////////
         // Creating inquiry info
         /////////////////////
@@ -115,28 +143,6 @@ public class GeneratePDF {
         }
 
         doc.add(table_inquiry);
-        doc.add(new Paragraph("\n"));
-
-        /////////////////////
-        //Creating customer table
-        /////////////////////
-        float[] pointColumnWidthsCustomer = {50F, 50F};  //2 wide
-        Table table_cus = new Table(pointColumnWidthsCustomer);
-        table_cus.addCell(new Cell().add("Kunde info").setBold());
-        table_cus.addCell(new Cell().add(""));
-        table_cus.addCell(new Cell().add("Email"));
-        table_cus.addCell(new Cell().add(customer.getEmail()));
-        table_cus.addCell(new Cell().add("Name"));
-        table_cus.addCell(new Cell().add(customer.getName()));
-        table_cus.addCell(new Cell().add("Surname"));
-        table_cus.addCell(new Cell().add(customer.getSurname()));
-        table_cus.addCell(new Cell().add("Phonenumber"));
-        table_cus.addCell(new Cell().add(customer.getPhonenumber() + ""));
-        table_cus.addCell(new Cell().add("Address"));
-        table_cus.addCell(new Cell().add(customer.getAddress()));
-        table_cus.addCell(new Cell().add("Zipcode"));
-        table_cus.addCell(new Cell().add(customer.getZipcode() + ""));
-        doc.add(table_cus);
         doc.add(new Paragraph("\n"));
 
         /////////////////////
