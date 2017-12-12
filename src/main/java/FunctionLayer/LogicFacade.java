@@ -8,6 +8,7 @@ package FunctionLayer;
 import DataLayer.CustomerMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,10 +28,9 @@ public class LogicFacade {
 
     //PRODUCT
     /**
-     * Gets a category name parameter and returns a list from the database with
-     * ProductMPrice objects.
+     * Returns a list from the database with
+     * Product objects.
      *
-     * @param category
      * @return
      * @throws Exception
      */
@@ -46,38 +46,38 @@ public class LogicFacade {
     public static void SendInquiry(Inquiry inquiry) throws Exception {
         InquiryMapper.registerInitialInquiry(inquiry);
     }
-    
-    public static List<Inquiry> viewInquiries() throws Exception{
+
+    public static List<Inquiry> viewInquiries() throws Exception {
         return InquiryMapper.allInquiries();
     }
-    
-    public static List[] viewCustomersAndInquiries() throws Exception{
+
+    public static List[] viewCustomersAndInquiries() throws Exception {
         List[] list = new List[2];
-        
+
         list[0] = InquiryMapper.allInquiries();
         list[1] = CustomerMapper.customersWithInquiry();
-        
+
         return list;
     }
-    
-    public static Inquiry viewInquiry(int id) throws Exception{
+
+    public static Inquiry viewInquiry(int id) throws Exception {
         return InquiryMapper.inquiryById(id);
     }
-    
-    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws Exception{
+
+    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws Exception {
         return InquiryMapper.LatestInquiryByCustomer(customerEmail);
     }
-    
-    public static List<Customer> viewAllCustomers() throws Exception{
+
+    public static List<Customer> viewAllCustomers() throws Exception {
         return CustomerMapper.allCustomers();
     }
-    
-    public static Customer viewCustomerByEmail(String email) throws Exception{
+
+    public static Customer viewCustomerByEmail(String email) throws Exception {
         return CustomerMapper.customerByEmail(email);
     }
-    
-    public static List<Customer> viewCustomersByInquiryStatus(String status) throws Exception{
-        switch(status){
+
+    public static List<Customer> viewCustomersByInquiryStatus(String status) throws Exception {
+        switch (status) {
             case "ny":
             case "behandles":
             case "behandlet":
@@ -86,5 +86,65 @@ public class LogicFacade {
                 throw new Exception(" unknown inquiry status ");
         }
     }
+
     
+    public static Inquiry updateInquiry(int id, int height, int length, int width, 
+                                        int shackLength, int shackWidth, String roofType,
+                                        String roofMat, String angle, String comment, String status) 
+            throws Exception{
+        return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
+    }
+    
+
+
+    public static List<Inquiry> getCustomerInquiries(Customer customer) throws Exception {
+        return InquiryMapper.getCustomerInquiries(customer);
+    }
+
+    public static String utilPreviousInquiries(List<Inquiry> inquiriesList) {
+        return FormattingUtil.utilPreviousInquiries(inquiriesList);
+    }
+
+    public static Inquiry getChosenInquiry(List<Inquiry> inquiries, int inquiryId) {
+        for (Inquiry i : inquiries) {
+            if (i.getId() == inquiryId) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    // TODO do not throw FogException
+    public static String getRoofMaterials(String roofType) throws Exception {
+        return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
+    }
+    
+    // TODO do not throw FogException
+    public static List<Product> getPitchedRoofProducts() throws Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("tagsten") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
+    
+    // TODO do not throw FogException
+    public static List<Product> getFlatRoofProducts() throws Exception{
+        List<Product> products = ProductMapper.getProducts();
+        List<Product> res = new ArrayList<>();
+        
+        for (Product pro : products) {
+            if(pro.getCategory().equals("trapeztag") || pro.getCategory().equals("tagpap")){
+                res.add(pro);
+            }
+        }
+        return res;
+    }
+
+
+
 }

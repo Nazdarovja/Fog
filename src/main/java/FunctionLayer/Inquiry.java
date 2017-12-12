@@ -21,17 +21,22 @@ public class Inquiry {
     private int shackWidth;
     private int shackLength;
     private String roofType;  //enum
+    private String roofMaterial;
     private String angle;          //enum
     private String commentCustomer;
     private String commentEmployee;
     private Date period;
     private String status;      //enum
     private String email;
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private int id_employee;
     private BillOfMaterials bom;
     private Timestamp date;
 
-    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date) {
+    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String roofMaterial, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date) {
         this.id = id;
         this.carportHeight = carportHeight;
         this.carportLength = carportLength;
@@ -39,6 +44,7 @@ public class Inquiry {
         this.shackWidth = shackWidth;
         this.shackLength = shackLength;
         this.roofType = roofType;
+        this.roofMaterial = roofMaterial;
         this.angle = angle;
         this.commentCustomer = commentCustomer;
         this.commentEmployee = commentEmployee;
@@ -51,6 +57,10 @@ public class Inquiry {
 
     public int getId() {
         return id;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getCarportHeight() {
@@ -73,6 +83,10 @@ public class Inquiry {
         return carportWidth;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getShackWidth() {
         return shackWidth;
     }
@@ -85,6 +99,10 @@ public class Inquiry {
         return roofType;
     }
 
+    public String getRoofMaterial() {
+        return roofMaterial;
+    }
+    
     public String getAngle() {
         return angle;
     }

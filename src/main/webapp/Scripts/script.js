@@ -80,8 +80,52 @@ function rowTextSearch(searchbar, tableId, index) {
     }
 }
 
+function setMaxValue(calledFrom, id, divideBy){
+    document.getElementById(id).setAttribute("max",(calledFrom.value/divideBy));
+}
+
 function disOrEnable(id){
     document.getElementById(id).disabled = !document.getElementById(id).disabled;
+}
+
+function hideById(id){
+    document.getElementById(id).style.display = 'none';
+}
+
+function hideByClassName(className){
+    var options = document.getElementsByClassName(className);
+
+    for (var option in options) {
+
+        option.style.display = 'none';
+    }
+}
+
+function showById(id){
+    document.getElementById(id).style.display = 'inline-block';
+}
+
+function showByClassName(className){
+    var options = document.getElementsByClassName(className);
+
+    for (var option in options) {
+
+        option.style.visibility = 'visible';
+    }
+}
+
+function chooseRoofMat(chooser,pitchedId,flatId){
+    if(chooser.value === 'fladt'){
+//        hideByClassName(pitchedClassName);
+//        showByClassName(flatClassName);
+        showById(flatId);
+        hideById(pitchedId);
+    } else {
+//        hideByClassName(flatClassName);
+//        showByClassName(pitchedClassName);
+        showById(pitchedId);
+        hideById(flatId);
+    }
 }
 
 function rowSorting(tableId) {
@@ -112,12 +156,14 @@ function rowSorting(tableId) {
     }
 }
 
+
+
 if(document.getElementById("inquirytabel") !== null) {
     rowSorting("inquirytabel");
 }
 
-if(document.getElementById("rooftype") !== null) {
-    var e = document.getElementById("rooftype");
+if(document.getElementById("roofType") !== null) {
+    var e = document.getElementById("roofType");
     var rt = e.options[e.selectedIndex].value;
 
     if (rt === "fladt"){
@@ -125,12 +171,14 @@ if(document.getElementById("rooftype") !== null) {
     } else {
         document.getElementById("angle").disabled = false;
     }
+    
+    chooseRoofMat(document.getElementById("roofType"),"pitchedMat","flatMat");
 }
 
-if(document.getElementById("withshack") !== null) {
-    var e = document.getElementById("withshack");
+if(document.getElementById("withShack") !== null) {
+    var e = document.getElementById("withShack");
     var rt = e.options[e.selectedIndex].value;
-
+    console.log(rt);
     if (rt === "nej"){
         document.getElementById("shackLength").disabled = true;
         document.getElementById("shackWidth").disabled = true;
@@ -139,4 +187,6 @@ if(document.getElementById("withshack") !== null) {
         document.getElementById("shackWidth").disabled = false;
     }
 }
+
+
 
