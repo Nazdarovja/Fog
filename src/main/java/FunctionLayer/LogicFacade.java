@@ -122,7 +122,7 @@ public class LogicFacade {
         
     }
     
-    public static MultiPartEmail generatePDF (Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException{
+    public static MultiPartEmail generatePDF (Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException{
         return GeneratePDF.createPDF(customer, inquiry, bom);
     }
 }
