@@ -24,19 +24,18 @@
         <div class="container">
             <div class="inner">
             <div class="formbackground">
-
                 <% String error = (String)request.getAttribute("error"); %>
-                
-                <% if(error != null) { %>
+
                 <div class="errorholder">
+                    <% if(error != null) { %>
                     <p><%= error %></p>
+                    <% } %>
                 </div>
-                <% } %>
                 
                 <form id="loginemployee" name="loginemployee" action="FrontController" method="POST">
                     <div class="formcontent" >
                         <input type="hidden" name="command" value="loginemployee">
-                        <input type="hidden" name="lastpage" value="error">
+                        <input type="hidden" name="lastpage" value="emplogin">
                         <input class="form-control" type="number" name="id" placeholder="id" style="margin-bottom: 30px;">
                         <input class="form-control" type="password" name="pwd" placeholder="password"style="margin-bottom: 60px;">
                         <input id="buttondown" class="form-control" type="submit" value="login">

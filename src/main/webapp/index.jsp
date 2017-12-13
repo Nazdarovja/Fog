@@ -25,6 +25,15 @@
                     <img src="https://www.johannesfog.dk/globalassets/inriver/resources/33529" ></a>
             </div>
         </div>
+        <div class="row" style="background-color: #124989; position: fixed; width: 100%; bottom: 0;">
+            <div class="col-sm-12">
+                <form id="passtoemplogin" name="passtoemplogin" action="FrontController" method="POST">
+                    <input type="hidden" name="command" value="passtoemplogin">
+                    <input type="hidden" name="lastpage" value="error">
+                    <input class="form-control" type="submit" value="employee login" style="margin:7px; width: 200px; height: 50px;">
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="../Scripts/QuickBuildJS.js" type="text/javascript"></script>
