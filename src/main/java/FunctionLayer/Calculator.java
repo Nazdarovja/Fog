@@ -73,7 +73,7 @@ public class Calculator {
             
             
             //roof material
-            if (roofMaterial.getCategory().equals("tagpap")) {
+            if (roofMaterial.getCategory().equals("tagpap")) {  
                 //tarPaper / tagpap
                 bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
             } else {

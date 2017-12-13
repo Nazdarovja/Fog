@@ -25,6 +25,7 @@
                     <img src="https://www.johannesfog.dk/globalassets/inriver/resources/33529" ></a>
             </div>
         </div>
+
         <div class="row" style="background-color: #124989; position: fixed; width: 100%; bottom: 0;">
             <div class="col-sm-12">
                 <form id="passtoemplogin" name="passtoemplogin" action="FrontController" method="POST">
