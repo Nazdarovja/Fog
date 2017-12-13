@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author Orchi
  */
 public class Configuration {
-    public static final boolean PRODUCTION = true;
+    public static final boolean PRODUCTION = false;
     public static final String LOGFILEPATH = "/var/log/tomcat8/foglogs/loginlogs.log"; // PATH TO UBUNTU!!!
     private static Logger myLogger = Logger.getLogger("");
     public static Logger getMyLogger() {

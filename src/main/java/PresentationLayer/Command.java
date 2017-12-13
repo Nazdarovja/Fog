@@ -29,7 +29,7 @@ public abstract class Command {
         commands.put( "viewinquiries", new ViewInquiries() );
         commands.put( "viewcustomers" , new ViewCustomers() );
         commands.put( "viewinquiry" , new ViewInquiry() );
-//        commands.put( "updateinquiry" , new UpdateInquiry() );
+        commands.put( "updateinquiry" , new UpdateInquiry() );
         commands.put( "pdf" , new PDF() );
 
         commands.put("QuickBuild", new QuickBuild());
@@ -44,7 +44,9 @@ public abstract class Command {
         commands.put("saveInquiry", new SaveInquiry());
         commands.put("newInquiry", new NewInquiry());
         commands.put("chooseInquiry", new ChooseInquiry());
-
+        
+        commands.put("loginemployee", new LoginEmployee());
+        commands.put("passtoemplogin", new PassToEmpLogin());
 
     }
 
