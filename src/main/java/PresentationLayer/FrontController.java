@@ -46,9 +46,11 @@ public class FrontController extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
         } catch (LoginException ex) {
             // LOGGING
+            ex.printStackTrace();
             Configuration.getMyLogger().log(Level.WARNING, ex.getMessage());
             request.setAttribute("error", "Could not validate user");
             String lastpage = (String) request.getParameter("lastpage");
+
             request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);
         } catch (FogException ex) {
             request.setAttribute("error", ex.getMessage());
