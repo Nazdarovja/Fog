@@ -37,14 +37,13 @@ public class Inquiry {
     private BillOfMaterials bom;
     private Timestamp date;
 
-    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, boolean withShack, String roofType, String roofMaterial, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date) {
+    public Inquiry(int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String roofMaterial, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date) {
         this.id = id;
         this.carportHeight = carportHeight;
         this.carportLength = carportLength;
         this.carportWidth = carportWidth;
         this.shackWidth = shackWidth;
         this.shackLength = shackLength;
-        this.withShack = withShack;
         this.roofType = roofType;
         this.roofMaterial = roofMaterial;
         this.angle = angle;
@@ -87,6 +86,10 @@ public class Inquiry {
 
     public boolean isWithShack() {
         return withShack;
+    }
+
+    public void setWithShack(boolean withShack) {
+        this.withShack = withShack;
     }
     
     public void setEmail(String email) {

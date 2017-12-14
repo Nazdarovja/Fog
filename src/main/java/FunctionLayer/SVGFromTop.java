@@ -19,7 +19,7 @@ public class SVGFromTop {
     public SVGFromTop(Inquiry inquiry) {
         this.inquiry = inquiry;
         gap = 40;
-
+        
         if(this.inquiry.getRoofType().equals("fladt")) {
             gapFromEdgePosts = 27;
             gapFromEdge = 30;

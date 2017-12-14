@@ -60,7 +60,8 @@ public class Calculate extends Command {
             session.setAttribute("shackWidth", shackWidth);
         }
 
-        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, withShack, roofType, roofMaterial, angle, comment, null, wishDeliveryDate, "", null, 1, null);
+        Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, roofMaterial, angle, comment, null, wishDeliveryDate, "", null, 1, null);
+        inquiry.setWithShack(withShack);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         

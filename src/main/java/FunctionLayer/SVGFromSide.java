@@ -22,7 +22,6 @@ public class SVGFromSide {
         this.inquiry = inquiry;
         gap = 40;
         
-        
         if(inquiry.getRoofType().equals("fladt")) {
             gapFromFrontToFirstPost = 100;
             roofHeight = 0;
@@ -37,7 +36,7 @@ public class SVGFromSide {
     public StringBuilder getSVG() {
         return svg;
     }
-
+    
     private void makeFlatRoofCarport() {
         svg.append("<SVG width='50%' viewbox='0 0 ").append(inquiry.getCarportLength()+gap+gap).append(" ").append(inquiry.getCarportHeight()+gap+gap).append("'>");
         makePosts();
