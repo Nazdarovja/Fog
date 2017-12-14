@@ -37,7 +37,7 @@ public class Register extends Command {
              session.setAttribute( "user", c );
             return "QuickBuild";
         } else {
-            throw new Exception( "the two passwords did not match" );
+            throw new FogException( "the two passwords did not match" );
         }
 
 
