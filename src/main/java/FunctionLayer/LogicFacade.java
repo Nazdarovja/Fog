@@ -146,4 +146,12 @@ public class LogicFacade {
     public static MultiPartEmail generatePDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException {
         return GeneratePDF.createPDF(customer, inquiry, bom);
     }
+
+    public static StringBuilder getSVGFromSide(Inquiry inquiry) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static StringBuilder getSVGFromTop(Inquiry inquiry) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

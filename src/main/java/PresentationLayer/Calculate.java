@@ -65,8 +65,9 @@ public class Calculate extends Command {
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
-        StringBuilder top = new SVGFromTop(inquiry).getSVG();
-        StringBuilder side = new SVGFromSide(inquiry).getSVG();
+        
+        StringBuilder top = LogicFacade.getSVGFromSide(inquiry); // TODO get the drawings through logicfacade
+        StringBuilder side = LogicFacade.getSVGFromTop(inquiry);
         
         
         session.setAttribute("svgTop", top.toString());
