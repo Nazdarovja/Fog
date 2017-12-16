@@ -148,10 +148,10 @@ public class LogicFacade {
     }
 
     public static StringBuilder getSVGFromSide(Inquiry inquiry) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SVGFromSide(inquiry).getSVG();
     }
 
     public static StringBuilder getSVGFromTop(Inquiry inquiry) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SVGFromTop(inquiry).getSVG();
     }
 }

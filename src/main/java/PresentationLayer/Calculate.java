@@ -66,7 +66,7 @@ public class Calculate extends Command {
         inquiry.setBom(bom);
         
         
-        StringBuilder top = LogicFacade.getSVGFromSide(inquiry); // TODO get the drawings through logicfacade
+        StringBuilder top = LogicFacade.getSVGFromSide(inquiry); 
         StringBuilder side = LogicFacade.getSVGFromTop(inquiry);
         
         
