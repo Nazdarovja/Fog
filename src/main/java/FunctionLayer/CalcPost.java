@@ -55,7 +55,7 @@ public class CalcPost {
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
-    public static OrderLine getPostsPitchedRoof(int length, int width, int height, List<Product> posts) throws Exception {
+    public static OrderLine getPostsPitchedRoof(int length, int width, int height, List<Product> posts) {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 110; // (NO POLES UNDER EAVES) FLATROOF = 1100mm
         int roofSideEaves = 40; // (NO POLES UNDER EAVES) FLATROOF = 400mm

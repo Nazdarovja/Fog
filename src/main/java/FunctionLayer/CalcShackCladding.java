@@ -20,7 +20,7 @@ public class CalcShackCladding {
     //--------------------     løsholt
     //  --|--   --|--       cladding, inner
     //      --|--           cladding, outer
-    public static OrderLine getCladdingForShackFlatRoof(int shackLength, int shackWidth, int carportHeight, List<Product> claddingList) throws Exception {
+    public static OrderLine getCladdingForShackFlatRoof(int shackLength, int shackWidth, int carportHeight, List<Product> claddingList) {
 
         //CM TO MM
         shackWidth = shackWidth * 10;
@@ -45,7 +45,7 @@ public class CalcShackCladding {
     }
 
     //gavle / gable / width
-    public static OrderLine getCladdingForShackPitchedRoofGable(int carportWidth, int carportHeight, int shackWidth, int roofAngle, List<Product> claddingList) throws Exception {
+    public static OrderLine getCladdingForShackPitchedRoofGable(int carportWidth, int carportHeight, int shackWidth, int roofAngle, List<Product> claddingList) {
 
         //CM TO MM
         shackWidth = shackWidth * 10;
@@ -69,7 +69,7 @@ public class CalcShackCladding {
     }
     
     //side / length
-    public static OrderLine getCladdingForShackPitchedRoofSide(int carportWidth, int carportHeight, int shackLength, int roofAngle, List<Product> claddingList) throws Exception {
+    public static OrderLine getCladdingForShackPitchedRoofSide(int carportWidth, int carportHeight, int shackLength, int roofAngle, List<Product> claddingList) {
 
         //CM TO MM
         shackLength = shackLength * 10;
