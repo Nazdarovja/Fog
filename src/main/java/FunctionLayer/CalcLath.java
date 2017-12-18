@@ -66,9 +66,7 @@ public class CalcLath {
             quantity *= length / p.getLength();
         
         if (length % p.getLength() > 0 && length > p.getLength()) {
-            // finds the full length of the remaining pieces, and then how many of the product there is need for to cover that length
             int extraPostsIfInsuficcientLength = ((length % p.getLength()) * quantity) / p.getLength();
-            // checks if there still is a piece remaining after, and adds one additional product
             if (((length % p.getLength()) * quantity) % p.getLength() > 0) {
                 extraPostsIfInsuficcientLength++;
             }
