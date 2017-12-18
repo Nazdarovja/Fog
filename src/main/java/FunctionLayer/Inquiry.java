@@ -20,6 +20,7 @@ public class Inquiry {
     private int carportWidth;
     private int shackWidth;
     private int shackLength;
+    private boolean withShack;
     private String roofType;  //enum
     private String roofMaterial;
     private String angle;          //enum
@@ -83,6 +84,14 @@ public class Inquiry {
         return carportWidth;
     }
 
+    public boolean isWithShack() {
+        return withShack;
+    }
+
+    public void setWithShack(boolean withShack) {
+        this.withShack = withShack;
+    }
+    
     public void setEmail(String email) {
         this.email = email;
     }

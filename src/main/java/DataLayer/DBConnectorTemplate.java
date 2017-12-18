@@ -22,6 +22,10 @@ public class DBConnectorTemplate {
     private static final String PASSWORD = "";
     private static Connection conn = null;
 
+    public static void setConn(Connection conn) {
+        DBConnectorTemplate.conn = conn;
+    }
+
     public static Connection getConnection() throws FogException {
         try {
             if (conn == null || conn.isClosed()) {

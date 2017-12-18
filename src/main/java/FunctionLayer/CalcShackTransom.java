@@ -22,7 +22,7 @@ public class CalcShackTransom {
     //- middleLayer: transoms on 4 sides , 90cm above bottomLayer
     //- topLayer: transoms on 2 sides (ends, not sides) at the top between "remme" - 2 other uses sides connected to "remme" already in place. 
     //gavle
-    public static OrderLine getTransomsForShackWidth(int shackWidth, List<Product> transoms) throws Exception {
+    public static OrderLine getTransomsForShackWidth(int shackWidth, List<Product> transoms) {
 
         shackWidth = shackWidth * 10;
 
@@ -40,7 +40,7 @@ public class CalcShackTransom {
     }
 
     //sides
-    public static OrderLine getTransomsForShackLength(int shackLength, List<Product> transoms) throws Exception {
+    public static OrderLine getTransomsForShackLength(int shackLength, List<Product> transoms) {
 
         shackLength = shackLength * 10;
 

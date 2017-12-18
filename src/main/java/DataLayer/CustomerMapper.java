@@ -39,7 +39,6 @@ public class CustomerMapper {
                 int zipcode = rs.getInt("zipcode");
                 String pass = rs.getString("password");
                 String city = rs.getString("city");
-                
 
 //            String city = //methode til at hente fra anden table
                 Customer customer = new Customer(mail, name, surname, phonenumber, address, zipcode, pass, city);
@@ -49,11 +48,9 @@ public class CustomerMapper {
                 //////////////////////////////////////////////////////////////////////////////////////////////////////
                 throw new LoginException("Login attempt on user with email: " + email + ", pwd: " + password + ", IP Address: " + ipAddress);
             }
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -65,7 +62,6 @@ public class CustomerMapper {
             }
         }
     }
-
 
     public static boolean isCustomerRegistered(Customer c) throws FogException, Exception {
         ResultSet rs = null;
@@ -79,19 +75,21 @@ public class CustomerMapper {
             rs = ps.executeQuery();
 
             return rs.next();
-        } catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
         } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
     public static String getCity(int zipcode) throws FogException, Exception {
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -103,42 +101,43 @@ public class CustomerMapper {
             ps.setString(1, Integer.toString(zipcode));
             rs = ps.executeQuery();
 
-            if (rs.next()){
+            if (rs.next()) {
                 return rs.getString(1);
             } else {
                 throw new FogException(" no city with specified zipcode ");
             }
-        } catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
         } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
-    
-    
+
     // Exception til LoginException??
     public static Customer createCustomer(Customer c) throws FogException, Exception {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            
+
             if (!isCustomerRegistered(c)) {
                 con = DBConnector.getConnection();
                 String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                ps = con.prepareStatement( SQL );
-                ps.setString( 1, c.getEmail() );
-                ps.setString( 2, c.getName() );
-                ps.setString( 3, c.getSurname() );
-                ps.setString( 4, Integer.toString(c.getPhonenumber()) );
-                ps.setString( 5, c.getAddress() );
-                ps.setString( 6, c.getPassword() );
-                ps.setString( 7, Integer.toString(c.getZipcode()) );
+                ps = con.prepareStatement(SQL);
+                ps.setString(1, c.getEmail());
+                ps.setString(2, c.getName());
+                ps.setString(3, c.getSurname());
+                ps.setString(4, Integer.toString(c.getPhonenumber()));
+                ps.setString(5, c.getAddress());
+                ps.setString(6, c.getPassword());
+                ps.setString(7, Integer.toString(c.getZipcode()));
                 ps.executeUpdate();
 
                 String email = c.getEmail();
@@ -150,34 +149,35 @@ public class CustomerMapper {
                 int zipcode = c.getZipcode();
                 String city = getCity(zipcode);
 
-                return new Customer(email,name,surname,phonenumber,address,zipcode,passwd,city);
-            }else {
+                return new Customer(email, name, surname, phonenumber, address, zipcode, passwd, city);
+            } else {
                 throw new FogException(" Specified email already exists ");
             }
-        } catch ( SQLException | ClassNotFoundException ex ) {
-            throw new Exception( ex.getMessage() );
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new Exception(ex.getMessage());
         } finally {
             if (ps != null) {
                 ps.close();
-            } if (con != null) {
+            }
+            if (con != null) {
                 con.close();
             }
         }
     }
-    
+
     public static List<Customer> customersWithInquiry() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * FROM Customer c INNER JOIN Inquiry i ON c.email = i.email INNER JOIN Zipcode z ON c.zipcode = z.zipcode";
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 c = new Customer(
                         rs.getString(1),
                         rs.getString(2),
@@ -190,39 +190,37 @@ public class CustomerMapper {
                 customers.add(c);
             }
             return customers;
-            
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
 
     }
-    
-    
-    
+
     public static List<Customer> customersByInquiryStatus(String status) throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT DISTINCT(c.email), c.name, c.surname, c.phonenumber, c.address, c.zipcode, c.password, z.city FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode INNER JOIN Inquiry i on c.email = i.email WHERE i.status = ?";
             ps = conn.prepareStatement(SQL);
-            ps.setString( 1, status );
+            ps.setString(1, status);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 c = new Customer(
                         rs.getString(1),
                         rs.getString(2),
@@ -235,34 +233,35 @@ public class CustomerMapper {
                 customers.add(c);
             }
             return customers;
-            
-        } catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
     public static List<Customer> allCustomers() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode";
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 c = new Customer(
                         rs.getString(1),
                         rs.getString(2),
@@ -275,34 +274,35 @@ public class CustomerMapper {
                 customers.add(c);
             }
             return customers;
-            
-        } catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
     public static Customer customerByEmail(String email) throws FogException, Exception {
         Customer customer;
         ResultSet rs = null;
         PreparedStatement ps = null;
         Connection conn = null;
-        
+
         try {
             conn = DBConnector.getConnection();
             String SQL = "SELECT * FROM Customer c INNER JOIN Zipcode z ON c.zipcode = z.zipcode WHERE c.email = ?";
             ps = conn.prepareStatement(SQL);
-            ps.setString( 1, email );
+            ps.setString(1, email);
             rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 customer = new Customer(
                         rs.getString(1),
                         rs.getString(2),
@@ -312,24 +312,23 @@ public class CustomerMapper {
                         rs.getInt(6),
                         rs.getString(7),
                         rs.getString(8));
-                
+
                 return customer;
             } else {
                 throw new FogException(" no customer with specified email ");
             }
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
-            } if (ps != null) {
+            }
+            if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
     }
 }
-
