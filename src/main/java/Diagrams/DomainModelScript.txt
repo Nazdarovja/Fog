@@ -1,47 +1,43 @@
 @startuml
 
-title Domain Model - Fog Diagram
+title Activity Diagram - TO-BE \n
+|Kunde|
+start
+:Forespørgsel på hjemmeside;
+|Quickbuild|
+:Forespørgsel registreres;
+|Sælger/Fog|
+:Åbner forespørgsel;
 
-class Forespørgsel{
-- Date tidsstempel
-- Int carportHøjde
-- Int carportBredde
-- Int carportLængde
-- Int redskabsrumBredde
-- Int redskabsrumLængde
-- String tagType
-- Int hældning
-- String kommentar
-- String ansatKommentar
-- Date tidshorisontForØnsketLevering
-- Int samletPris
-- String ansat
-- String status
-}
+repeat
+:Kontaker kunde (mail/tlf);
+|Kunde|
+:Svarer på spørgsmål (mail/tlf);
+|Sælger/Fog|
+:Modtager svar (mail/tlf);
+|Quickbuild|
+:Opdaterer forespørgsel;
+repeat while(Fyldestgørende info?) is (Nej)
+|Quickbuild|
+:Send tilbud til kunde (mail);
 
-class Stykliste {
-}
+if(Accepterer tilbud?) then (Nej)
+stop
+else (Ja)
+|Quickbuild|
+:Konverterer tilbud til ordre;
+|Sælger/Fog|
+:Sender mail med ordrebekræftelse til kunde;
+|Kunde|
+:Betaler for ordre;
+|Sælger/Fog|
 
-class Ordrelinje {
-- int længde
-- int antal
-- String antalTypeStkRullePakke
-- String anvendelse
-}
-
-class Vare {
--String kategori
--String navn
--Int pris
-}
-
-class Bruger {
-}
-
-Bruger "1"--"*" Forespørgsel
-Forespørgsel "1"--"1" Stykliste
-Ordrelinje "1" -- "1" Vare
-Stykliste "1" -- "*" Ordrelinje
-
+if(Betaling for ordre modtaget?) then (Nej)
+stop
+else (Ja)
+        :Frigiver/leverer ordre;
+        |Kunde|
+        :Modtager ordre;
+stop
 
 @enduml
