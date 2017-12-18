@@ -119,7 +119,6 @@ public class CustomerMapperTest {
     @Test
     public void testCreateCustomer() throws Exception {
         System.out.println("createCustomer");
-
         Customer c = new Customer("batman@robin.dk", "Bruce", "Wayne", 44332211, "Gothamvej 1", 9999, "Catwoman1", "Gotham");
         String expResult = "Wayne";
         Customer result = CustomerMapper.createCustomer(c);
@@ -139,6 +138,7 @@ public class CustomerMapperTest {
         System.out.println("customerByEmail");
         String email = "test1@test.dk";
         Customer result = CustomerMapper.customerByEmail(email);
+        System.out.println("--------------------------------------------------------------------CuSTOMER EMAil = "+ result.getEmail());
         assertNotNull(result);
         assertEquals("Hansen", result.getSurname());
     }

@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class CustomerMapper {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-
                 String mail = rs.getString("email");
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
@@ -122,11 +120,12 @@ public class CustomerMapper {
     }
 
     // Exception til LoginException??
-    public static Customer createCustomer(Customer c) throws FogException, Exception {
+     public static Customer createCustomer(Customer c) throws FogException, Exception {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-
+            
+            //TODO REMOVE isCustomerRegistered (SQL throws an exception is the right approach)
             if (!isCustomerRegistered(c)) {
                 con = DBConnector.getConnection();
                 String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";

@@ -16,13 +16,6 @@ import static org.junit.Assert.*;
  */
 public class calcTrapezeRoofTest {
 
-    public calcTrapezeRoofTest() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
     @Test
     public void testCalculateAmountOfTrapezeRoof() throws Exception {
         System.out.println("calculateAmountOfTrapezeRoof");

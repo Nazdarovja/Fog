@@ -423,7 +423,7 @@ public class InquiryMapper {
         }
     }
 
-    public static void registerSavedInquiry(Inquiry i) throws FogException, SQLException, Exception {
+    public static void sendSavedInquiry(Inquiry i) throws FogException, SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
 

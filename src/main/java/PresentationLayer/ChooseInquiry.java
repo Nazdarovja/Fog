@@ -49,7 +49,6 @@ public class ChooseInquiry extends Command {
         }
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
-        inquiry.setId(0);
         session.setAttribute("inquiry", inquiry);
         
         return "QuickBuild";
