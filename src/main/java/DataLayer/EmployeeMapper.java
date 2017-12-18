@@ -20,6 +20,15 @@ import java.sql.SQLException;
  */
 public class EmployeeMapper {
 
+    /**
+     * Checks if employee with given credentials exist in database.
+     * @param id String 
+     * @param pwd String
+     * @param ipAddress String
+     * @return Employee Objec if found. 
+     * @throws LoginException
+     * @throws Exception
+     */
     public static Employee login(int id, String pwd, String ipAddress) throws LoginException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;

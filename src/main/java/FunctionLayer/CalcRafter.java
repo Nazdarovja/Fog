@@ -18,6 +18,14 @@ public class CalcRafter {
     static int RAFTERSPACEPITCHED = 60;
     static int RAFTERLENGTHPITCHED = 0;
     
+    /**
+     * Calculate the amount of Rafter of a given type, needed to fill corresponding dimensions.
+     * @param length int
+     * @param width int
+     * @param rafter list of Product
+     * @return OrderLine Object
+     * @throws FogException
+     */
     public static OrderLine getRafterFlatRoof(int length, int width, List<Product> rafter) throws FogException {
         Product raft = null;
         
@@ -32,6 +40,14 @@ public class CalcRafter {
         return new OrderLine(raft, length, qty, "stk.", "Spærtræ");
     }
 
+    /**
+     * Calculate the amount of Rafter of a given type, needed to fill corresponding dimensions
+     * @param length int
+     * @param width int 
+     * @param rafter list of Product
+     * @return Orderline Object
+     * @throws FogException
+     */
     public static OrderLine getRafterPitchedRoof(int length, int width, List<Product> rafter) throws FogException {
         Product raft = null;
         

@@ -6,7 +6,7 @@
 package FunctionLayer;
 
 /**
- *
+ * The purpose of the SVGFromSide class is to generate a string of SVG html code, by appending various sub methods returned Strings to a Stringbuilder. 
  * @author Orchi
  */
 public class SVGFromSide {
@@ -18,6 +18,10 @@ public class SVGFromSide {
     private int gapFromFrontToFirstPost;
     private int roofHeight;
     
+    /**
+     * If rooftype of "fladt" type, generate SVG for flat roof, if not generate SVG for Pitched roof.
+     * @param inquiry
+     */
     public SVGFromSide(Inquiry inquiry) {
         this.inquiry = inquiry;
         gap = 40;

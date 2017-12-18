@@ -14,6 +14,15 @@ import java.util.List;
  */
 public class CalcPost {
 
+    /**
+     * Calculate the amount of Post of a given type, needed to fill corresponding roof area.
+     * @param length int
+     * @param width int
+     * @param height int
+     * @param posts list of Product
+     * @return OrderLine Object
+     * @throws Exception
+     */
     public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) throws Exception {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 130; // (NO POLES UNDER EAVES) FLATROOF = 1300mm
@@ -55,6 +64,14 @@ public class CalcPost {
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
+    /**
+     * Calculate the amount of Post of a given type, needed to fill corresponding roof area.
+     * @param length int
+     * @param width int
+     * @param height int
+     * @param posts list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getPostsPitchedRoof(int length, int width, int height, List<Product> posts) {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 110; // (NO POLES UNDER EAVES) FLATROOF = 1100mm
@@ -95,6 +112,12 @@ public class CalcPost {
         return new OrderLine(post, post.getLength(), quantity, "stk", "Stolper nedgraves 90 cm. i jord");
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param height int
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

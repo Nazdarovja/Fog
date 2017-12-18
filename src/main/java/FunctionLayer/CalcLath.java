@@ -5,7 +5,6 @@
  */
 package FunctionLayer;
 
-import PresentationLayer.Calculate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -16,6 +15,13 @@ import java.util.List;
  */
 public class CalcLath {
     
+    /**
+     * Calculate the amount of Lath needed to fill corresponding length X width area.
+     * @param length int
+     * @param width int
+     * @param products List of Product
+     * @return Orderline Object
+     */
     public static OrderLine calculateRegularLath(int length, int width, List<Product> products) {
         int quantity = 0;
         
@@ -54,7 +60,13 @@ public class CalcLath {
         return new OrderLine(p, length, quantity, "stk", "Til montering på spær");
     }
     
-
+    /**
+     *Calculate the amount of Lath of a given type, needed to fill corresponding length X width area.
+     * @param length int
+     * @param width int
+     * @param products List of Product
+     * @return Orderline Object.
+     */
     public static OrderLine calculateTopLath(int length, int width, List<Product> products) {
         int quantity = 1;
         Product p = getCorrectLengthProduct(length, products);
@@ -78,7 +90,13 @@ public class CalcLath {
         return new OrderLine(p, length, quantity, "stk", "Toplægte til montering af rygsten lægges i toplægteholder");
     }
     
-
+    /**
+     * Calculate the amount of Lath of a given type, needed to fill corresponding length X width area.
+     * @param length int
+     * @param width int
+     * @param products list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine calculateDoorZLath(int length, int width, List<Product> products) {
         int quantity = 1;
         
@@ -101,6 +119,12 @@ public class CalcLath {
         return new OrderLine(p, length, quantity, "stk", "til z på bagside af dær");
     }
     
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param length int
+     * @param products int
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

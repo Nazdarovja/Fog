@@ -22,6 +22,13 @@ public class CalcShackTransom {
     //- middleLayer: transoms on 4 sides , 90cm above bottomLayer
     //- topLayer: transoms on 2 sides (ends, not sides) at the top between "remme" - 2 other uses sides connected to "remme" already in place. 
     //gavle
+
+    /**
+     * Calculate the amount of Transom of a given type, needed to fill corresponding area
+     * @param shackWidth int
+     * @param transoms list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTransomsForShackWidth(int shackWidth, List<Product> transoms) {
 
         shackWidth = shackWidth * 10;
@@ -40,6 +47,13 @@ public class CalcShackTransom {
     }
 
     //sides
+
+    /**
+     * Calculate the amount of Transom of a given type, needed to fill corresponding area
+     * @param shackLength int
+     * @param transoms list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTransomsForShackLength(int shackLength, List<Product> transoms) {
 
         shackLength = shackLength * 10;
@@ -57,6 +71,12 @@ public class CalcShackTransom {
         return new OrderLine(transom, transom.getLength(), result, "stk", "løsholter i siderne af skur");
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param length int
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

@@ -9,8 +9,6 @@ import FunctionLayer.BillOfMaterials;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.SVGFromSide;
-import FunctionLayer.SVGFromTop;
 import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
