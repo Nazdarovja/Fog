@@ -22,7 +22,7 @@ CREATE TABLE ProductTest LIKE fogTest.Product;
 -- DUMMYDATA 
 -- -----------------------------------------------------
 INSERT INTO 
-ZipcodeTest (zipcode, city)
+Zipcode (zipcode, city)
 VALUES
 (2750,'Ballerup'),
 (2000,'Frederiksberg'),
@@ -41,7 +41,7 @@ VALUES
 ('test6@test.dk','Oliver','Håkonsson',24566333,'Taskestrupvej 42',2000, 'gggg');
 
 INSERT INTO
-EmployeeTest (name, surname, password)
+Employee (name, surname, password)
 VALUES
 ('Martin', 'Fogmaster', 'emp1'),
 ('Johannes', 'Fog','emp2'),
@@ -64,7 +64,7 @@ VALUES
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag',','løsholt'
 -- --------------------------------------------------------------------------
 INSERT INTO
-ProductTest (name,category,price,length,width,height)
+Product (name,category,price,length,width,height)
 VALUES
 -- bræt
 ('25X200 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',29970,6000,200,25),

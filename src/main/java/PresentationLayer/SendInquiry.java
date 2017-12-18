@@ -33,8 +33,8 @@ public class SendInquiry extends Command {
 
         inquiry.setEmail(customer.getEmail());
         inquiry.setStatus("ny");
-
-        LogicFacade.SendInquiry(inquiry);
+        System.out.println("------------------------------puta madre-----------"+ inquiry.getId());
+        LogicFacade.sendSavedInquiry(inquiry);
 
         //remove stuff from session
         if (session != null) {

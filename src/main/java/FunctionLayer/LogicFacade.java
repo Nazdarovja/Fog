@@ -9,6 +9,7 @@ import DataLayer.CustomerMapper;
 import DataLayer.EmployeeMapper;
 import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
+import PresentationLayer.JspUtilTable;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -49,11 +50,11 @@ public class LogicFacade {
     }
 
     public static void SendInquiry(Inquiry inquiry) throws FogException, Exception {
-        if (inquiry.getId() == 0) {
             InquiryMapper.registerInitialInquiry(inquiry);
-        } else {
-            InquiryMapper.registerSavedInquiry(inquiry);
-        }
+    }
+    
+    public static void sendSavedInquiry(Inquiry inquiry) throws FogException, Exception {
+            InquiryMapper.sendSavedInquiry(inquiry);
     }
 
     public static List<Inquiry> viewInquiries() throws FogException, Exception {
@@ -108,7 +109,7 @@ public class LogicFacade {
     }
 
     public static String getRoofMaterials(String roofType) throws FogException, Exception {
-        return FormattingUtil.utilDropDownFlat(ProductMapper.getProducts(), roofType);
+        return JspUtilTable.utilDropDownFlat(ProductMapper.getProducts(), roofType);
     }
 
     public static List<Product> getPitchedRoofProducts() throws FogException, Exception {
@@ -136,7 +137,7 @@ public class LogicFacade {
     }
 
     public static String utilPreviousInquiries(List<Inquiry> inquiriesList) {
-        return FormattingUtil.utilPreviousInquiries(inquiriesList);
+        return JspUtilTable.utilPreviousInquiries(inquiriesList);
     }
 
     public static Inquiry getChosenInquiry(List<Inquiry> inquiries, int inquiryId) {

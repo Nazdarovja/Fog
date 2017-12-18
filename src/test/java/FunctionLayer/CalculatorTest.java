@@ -15,22 +15,13 @@ import static org.junit.Assert.*;
  * @author Stanislav
  */
 public class CalculatorTest {
-    
-    public CalculatorTest() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-
+        
+    //TODO create test
     @Test
     public void testGetBillOfMaterials() throws Exception {
         System.out.println("getBillOfMaterials");
-        Inquiry inquiry = null;
-        BillOfMaterials expResult = null;
-        BillOfMaterials result = Calculator.getBillOfMaterials(inquiry);
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
+        
+
     }
 
     

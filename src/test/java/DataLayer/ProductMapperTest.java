@@ -5,10 +5,8 @@
  */
 package DataLayer;
 
-import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

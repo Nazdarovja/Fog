@@ -154,7 +154,7 @@ $('#orderForm').on('change', function () {
     $("#sendSaveInquiry").hide();
 });
 
-$('#svgimage').on('click', () => {
+$('#svg').on('click', () => {
     if($('.svgTop').css('display') === 'none') {
         $('.svgSide').hide();
         $('.svgTop').fadeIn(500);

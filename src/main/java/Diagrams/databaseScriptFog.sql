@@ -120,6 +120,17 @@ VALUES
 (2800, 'Kongens Lyngby'),
 (9999, 'Gotham');
 
+INSERT INTO 
+Customer (email, name, surname, phonenumber, address, zipcode, password)
+VALUES 
+('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750, 'Hansen1')
+;
+
+INSERT INTO
+Inquiry (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,roofMaterial,angle,commentCustomer,commentEmployee,period, status, email)
+VALUES
+(320,420,320,200,120,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,null,null,null,'gemt','test1@test.dk'),
+(320,420,320,0,0,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','20','send Email',null,'2017-12-20','gemt','test1@test.dk');
 
 INSERT INTO
 Employee (name, surname, password)
