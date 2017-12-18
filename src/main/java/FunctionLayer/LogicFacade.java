@@ -155,4 +155,12 @@ public class LogicFacade {
     public static MultiPartEmail generatePDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException {
         return GeneratePDF.createPDF(customer, inquiry, bom);
     }
+
+    public static StringBuilder getSVGFromSide(Inquiry inquiry) {
+        return new SVGFromSide(inquiry).getSVG();
+    }
+
+    public static StringBuilder getSVGFromTop(Inquiry inquiry) {
+        return new SVGFromTop(inquiry).getSVG();
+    }
 }

@@ -61,11 +61,13 @@ public class Calculate extends Command {
         }
 
         Inquiry inquiry = new Inquiry(0, height, length, width, shackWidth, shackLength, roofType, roofMaterial, angle, comment, null, wishDeliveryDate, "", null, 1, null);
+        inquiry.setWithShack(withShack);
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         
-        StringBuilder top = new SVGFromTop(length, width, withShack, shackLength, shackWidth, roofType, Integer.parseInt(angle)).getSVG();
-        StringBuilder side = new SVGFromSide(length, width, height, withShack, shackLength, shackWidth, roofType, Integer.parseInt(angle)).getSVG();
+        
+        StringBuilder top = LogicFacade.getSVGFromSide(inquiry); 
+        StringBuilder side = LogicFacade.getSVGFromTop(inquiry);
         
         
         session.setAttribute("svgTop", top.toString());

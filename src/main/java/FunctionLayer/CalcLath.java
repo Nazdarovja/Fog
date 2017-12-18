@@ -95,7 +95,7 @@ public class CalcLath {
                 extraPostsIfInsuficcientLength++;
             }
             quantity += extraPostsIfInsuficcientLength;
-        }
+        } //TODO FIX THIS SHIT
         
         // hvis dør, på skur??
         return new OrderLine(p, length, quantity, "stk", "til z på bagside af dær");

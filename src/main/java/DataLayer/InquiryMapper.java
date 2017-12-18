@@ -263,7 +263,11 @@ public class InquiryMapper {
                 throw new Exception(" Update error ");
             }
 
-        } finally {
+        }
+        catch ( SQLException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (ps != null) {
                 ps.close();
             }
@@ -300,7 +304,11 @@ public class InquiryMapper {
                 throw new Exception(" Update error ");
             }
 
-        } finally {
+        }
+        catch ( SQLException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (ps != null) {
                 ps.close();
             }
@@ -347,7 +355,11 @@ public class InquiryMapper {
                 throw new Exception("--- Update error ---");
             }
 
-        } finally {
+        }
+        catch ( SQLException ex ) {
+            throw new FogException( ex.getMessage() );
+        }
+        finally {
             if (ps != null) {
                 ps.close();
             }
