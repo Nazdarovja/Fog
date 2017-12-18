@@ -16,6 +16,16 @@ import java.util.List;
  */
 public class CustomerMapper {
 
+    /**
+     * Checks if user with given credentials exist in database.
+     *
+     * @param email String with user email
+     * @param password String with user password
+     * @param ipAddress String with ipAddress
+     * @return Customer object if exist.
+     * @throws LoginException with ipAddress info if not.
+     * @throws Exception
+     */
     public static Customer login(String email, String password, String ipAddress) throws LoginException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
@@ -29,6 +39,7 @@ public class CustomerMapper {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
+
                 String mail = rs.getString("email");
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
@@ -61,6 +72,14 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get corresponding city from database to given zipcode.
+     *
+     * @param zipcode
+     * @return City as String.
+     * @throws FogException
+     * @throws Exception
+     */
     public static String getCity(int zipcode) throws FogException, Exception {
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -91,7 +110,14 @@ public class CustomerMapper {
             }
         }
     }
-
+    
+    /**
+     * Insert a customer in database.
+     * @param c Customer object
+     * @return Customer object
+     * @throws FogException
+     * @throws Exception
+     */
     public static Customer createCustomer(Customer c) throws FogException, Exception {
         Connection con = null;
         PreparedStatement ps = null;
@@ -121,11 +147,12 @@ public class CustomerMapper {
             return new Customer(email, name, surname, phonenumber, address, zipcode, passwd, city);
 
         } catch (SQLException | ClassNotFoundException ex) {
-            if(ex.getMessage().contains("Duplicate")){
-            throw new FogException("Specified email already exists");
+            if (ex.getMessage().contains("Duplicate")) {
+                throw new FogException("Specified email already exists");
             } else {
                 throw new FogException(ex.getMessage());
             }
+
         } finally {
             if (ps != null) {
                 ps.close();
@@ -136,6 +163,13 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get list of customer objects with inquiry from database.
+     *
+     * @return list of Customer objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> customersWithInquiry() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -178,6 +212,14 @@ public class CustomerMapper {
 
     }
 
+    /**
+     * Get list of customers from database with inquiries of a given status.
+     *
+     * @param status String ogject
+     * @return List of Customer Objects
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> customersByInquiryStatus(String status) throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -220,6 +262,13 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get lst of all customers from database.
+     *
+     * @return list of Customer Objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> allCustomers() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -261,6 +310,14 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get customer from database with a given email adress.
+     *
+     * @param email String object
+     * @return Customer Object.
+     * @throws FogException
+     * @throws Exception
+     */
     public static Customer customerByEmail(String email) throws FogException, Exception {
         Customer customer;
         ResultSet rs = null;

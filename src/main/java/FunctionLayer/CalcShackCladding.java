@@ -5,7 +5,6 @@
  */
 package FunctionLayer;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,6 +19,15 @@ public class CalcShackCladding {
     //--------------------     løsholt
     //  --|--   --|--       cladding, inner
     //      --|--           cladding, outer
+
+    /**
+     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions
+     * @param shackLength int
+     * @param shackWidth int
+     * @param carportHeight int
+     * @param claddingList list of Product
+     * @return OrderLine Object 
+     */
     public static OrderLine getCladdingForShackFlatRoof(int shackLength, int shackWidth, int carportHeight, List<Product> claddingList) {
 
         //CM TO MM
@@ -45,6 +53,16 @@ public class CalcShackCladding {
     }
 
     //gavle / gable / width
+
+    /**
+     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions
+     * @param carportWidth int
+     * @param carportHeight int
+     * @param shackWidth int
+     * @param roofAngle int
+     * @param claddingList list of Product
+     * @return OrderLine Object.
+     */
     public static OrderLine getCladdingForShackPitchedRoofGable(int carportWidth, int carportHeight, int shackWidth, int roofAngle, List<Product> claddingList) {
 
         //CM TO MM
@@ -69,6 +87,16 @@ public class CalcShackCladding {
     }
     
     //side / length
+
+    /**
+     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions.
+     * @param carportWidth int 
+     * @param carportHeight int
+     * @param shackLength int
+     * @param roofAngle int
+     * @param claddingList list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getCladdingForShackPitchedRoofSide(int carportWidth, int carportHeight, int shackLength, int roofAngle, List<Product> claddingList) {
 
         //CM TO MM
@@ -92,6 +120,12 @@ public class CalcShackCladding {
 
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param length int
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

@@ -15,6 +15,13 @@ import java.util.List;
  */
 public class CalcTopPlate {
 
+    /**
+     * Calculate the amount of TopPlate of a given type, needed to fill corresponding dimensions
+     * @param length int
+     * @param width int
+     * @param products list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTopPlatesFlatRoof(int length, int width, List<Product> products) {
 
         int roofSideEaves = 70; // (NO POLES UNDER EAVES) FLATROOF = 70mm
@@ -54,6 +61,13 @@ public class CalcTopPlate {
         return new OrderLine(p, p.getLength(), rowsOfPosts, "stk", "Remme i sider, sadles ned i stolper");
     }
 
+    /**
+     * Calculate the amount of TopPlate of a given type, needed to fill corresponding dimensions
+     * @param length int
+     * @param width int
+     * @param products list of Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTopPlatesPitchedRoof(int length, int width, List<Product> products) {
         int roofFrontBackEves = 50; // 300mm back, and chosen 200mm for front.
         int roofSideEaves = 70; // (NO POLES UNDER EAVES) FLATROOF = 700mm
@@ -92,6 +106,12 @@ public class CalcTopPlate {
         return new OrderLine(p, p.getLength(), rowsOfPosts, "stk", "Remme i sider, sadles ned i stolper");
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param length int
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

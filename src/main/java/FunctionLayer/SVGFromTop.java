@@ -6,7 +6,7 @@
 package FunctionLayer;
 
 /**
- *
+ * The purpose of the SVGFromTop class is to generate a string of SVG html code, by appending various sub methods returned Strings to a Stringbuilder. 
  * @author Orchi
  */
 public class SVGFromTop {

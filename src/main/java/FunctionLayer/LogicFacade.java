@@ -18,8 +18,8 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
- *
- * @author Orchi
+ * The purpose of the LogicFacade class is to facilitate the "facade layer" between the FunctionLayer and the DataLayer. 
+ * @author 
  */
 public class LogicFacade {
 
@@ -32,19 +32,10 @@ public class LogicFacade {
         return CustomerMapper.createCustomer(c);
     }
 
-    //PRODUCT
-    /**
-     * Returns a list from the database with Product objects.
-     *
-     * @return
-     * @throws FunctionLayer.FogException
-     * @throws Exception
-     */
     public static List<Product> getProducts() throws FogException, Exception {
         return ProductMapper.getProducts();
     }
 
-    // CALCULATE
     public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws FogException, Exception {
         return Calculator.getBillOfMaterials(inquiry);
     }
