@@ -69,10 +69,8 @@ public class CustomerMapperTest {
     public void testSetUpOK() {
         // Just check that we have a connection.
         assertNotNull(testConnection);
-
     }
 
-    //TODO fatter ikke hvorfor den failer....?
     @Test
     public void testLogin() throws Exception {
         String email = "test1@test.dk";
@@ -87,24 +85,6 @@ public class CustomerMapperTest {
         String email = "harrypotter@hogwarts.com";
         String password = "sectumsembra";
         Customer customer = LogicFacade.login(email, password, "11111");
-    }
-
-    @Test
-    public void testIsCustomerRegisteredTrue() throws Exception {
-        System.out.println("isCustomerRegistered");
-        Customer c = new Customer("test1@test.dk", null, null, 0, null, 0, null, null);
-        boolean expResult = true;
-        boolean result = CustomerMapper.isCustomerRegistered(c);
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testIsCustomerRegisteredFalse() throws Exception {
-        System.out.println("isCustomerRegistered");
-        Customer c = new Customer("fail@fail.dk", null, null, 0, null, 0, null, null);
-        boolean expResult = false;
-        boolean result = CustomerMapper.isCustomerRegistered(c);
-        assertEquals(expResult, result);
     }
 
     @Test
@@ -138,7 +118,6 @@ public class CustomerMapperTest {
         System.out.println("customerByEmail");
         String email = "test1@test.dk";
         Customer result = CustomerMapper.customerByEmail(email);
-        System.out.println("--------------------------------------------------------------------CuSTOMER EMAil = "+ result.getEmail());
         assertNotNull(result);
         assertEquals("Hansen", result.getSurname());
     }

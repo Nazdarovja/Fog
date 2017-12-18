@@ -97,7 +97,7 @@ public class Calculator {
                 bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
         }
-
+//TODO REMOVE THIS DEBUG :) 
         /////////////////////////////////////////////////////////////////////////////
         //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG /////// MUHAHAHAHAHAHAHHA
         ///////////////////////////////////////////////////////////////////////////

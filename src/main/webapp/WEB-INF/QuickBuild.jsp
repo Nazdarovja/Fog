@@ -39,6 +39,12 @@
                 <% } %>
             </div>
 
+            <%---------- Setup inquiry ------------%>
+            <% Inquiry inquiry = null;
+                if (request.getSession().getAttribute("inquiry") != null) {
+                    inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
+                }%>
+
             <!------------------ MESUREMENTS FORM ------------------>
             <div id="measurements" >
 
@@ -51,10 +57,9 @@
                             Vælg længde<br>
                             <select class="form-control" name="length" id="length" >
                                 <% int length = 0;
-                                    if (request.getSession().getAttribute("length") != null) {
-                                        length = (int) request.getSession().getAttribute("length");
-                                    }
-                                %>
+                                    if (inquiry != null) {
+                                        length = inquiry.getCarportLength();
+                                    }%>
                                 <option value=240 <%if (length == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (length == 270) { %> selected <%} %>>270</option>
                                 <option value=300 <%if (length == 300) { %> selected <%} %>>300</option>
@@ -78,10 +83,9 @@
                             Vælg bredde<br>
                             <select class="form-control" id="width" name="width">
                                 <% int width = 0;
-                                    if (request.getSession().getAttribute("width") != null) {
-                                        width = (int) request.getSession().getAttribute("width");
-                                    }
-                                %>
+                                    if (inquiry != null) {
+                                        width = inquiry.getCarportWidth();
+                                    }%>
                                 <option value=240 <%if (width == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (width == 270) { %> selected <%} %>>270</option>
                                 <option value=300 <%if (width == 300) { %> selected <%} %>>300</option>
@@ -107,10 +111,9 @@
                             Vælg højde<br>
                             <select class="form-control" name="height">
                                 <% int height = 0;
-                                    if (request.getSession().getAttribute("height") != null) {
-                                        height = (int) request.getSession().getAttribute("height");
-                                    }
-                                %>
+                                    if (inquiry != null) {
+                                        height = inquiry.getCarportHeight();
+                                    }%>
                                 <option value=210 <%if (height == 210) { %> selected <%} %>>210</option>
                                 <option value=240 <%if (height == 240) { %> selected <%} %>>240</option>
                                 <option value=270 <%if (height == 270) { %> selected <%} %>>270</option>
@@ -119,11 +122,11 @@
                             <br>
 
                             Vælg tagtype<br>
-                            <input id="roofTypeCheck" type="hidden" value="<% if (request.getSession().getAttribute("roofType") != null) {%><%=(String) request.getSession().getAttribute("roofType")%><%}%>">
+                            <input id="roofTypeCheck" type="hidden" value="<%if(inquiry != null){%><%=inquiry.getRoofType()%><%}%>">
                             <select class="form-control" name="roofType">
                                 <% String roofType = "";
-                                    if (request.getSession().getAttribute("roofType") != null) {
-                                        roofType = (String) request.getSession().getAttribute("roofType");
+                                    if (inquiry != null) {
+                                        roofType = inquiry.getRoofType();
                                     }
                                 %>
                                 <option value="fladt" <%if (roofType.equals("fladt")) { %> selected <%} %>>fladt</option>
@@ -157,13 +160,13 @@
                             </div>
 
                             <div id="shackLength">
-                                Redskabsrum Bredde<br>
-                                <input id="shackLengthInput" type="number" min="100" max="120" class="form-control" name="shackLength" value="<% if (request.getSession().getAttribute("shackLength") != null) {%><%= (int) request.getSession().getAttribute("shackLength")%><%}%>">
+                                Redskabsrum længde<br>
+                                <input id="shackLengthInput" type="number" min="100"  class="form-control" name="shackLength" value="<%if(inquiry != null && inquiry.getShackLength() != 0){%><%=inquiry.getShackLength()%><%}%>">
                                 <br>
                             </div>
                             <div id="shackWidth">
-                                Redskabsrum Længde<br>
-                                <input id="shackWidthInput" type="number" min="100" max="240" class="form-control" name="shackWidth" value="<% if (request.getSession().getAttribute("shackWidth") != null) {%><%= (int) request.getSession().getAttribute("shackWidth")%><%}%>">
+                                Redskabsrum bredde<br>
+                                <input id="shackWidthInput" type="number" min="100"  class="form-control" name="shackWidth" value="<% if (inquiry != null && inquiry.getShackWidth() != 0) {%><%= inquiry.getShackWidth()%><%}%>">
                                 <br>
                             </div>
 
@@ -171,8 +174,8 @@
                                 Vælg hældning<br>
                                 <select class="form-control" name="angle">
                                     <% int angle = -1;
-                                        if (request.getSession().getAttribute("angle") != null) {
-                                            angle = Integer.parseInt((String) request.getSession().getAttribute("angle"));
+                                        if (inquiry != null && inquiry.getAngle() != null) {
+                                            angle = Integer.parseInt(inquiry.getAngle());
                                         }
                                     %>
                                     <option value=15 <%if (angle == 15) { %> selected <%} %>>15°</option>
@@ -216,8 +219,7 @@
                             <%}%>
 
                             <div class="well" style="background:#124989; color: white">
-                                <% if (request.getSession().getAttribute("inquiry") != null) {  %>
-                                <% Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");%>
+                                <% if (inquiry != null) {%>
                                 TOTAL PRIS: <br>
                                 <%= inquiry.getBom().getTotalPrice()%>,-
                                 <Br>
@@ -231,7 +233,7 @@
                                 </form>
 
                                 <!--if user is logged in and has made a calculation-->
-                                <%if (customer != null && request.getSession().getAttribute("inquiry") != null) {%>
+                                <%if (customer != null && inquiry != null) {%>
                                 <!--Save order-->
                                 <div id="sendSaveInquiry">
                                     Gem til senere behandling?

@@ -79,7 +79,7 @@ public class InquiryMapperTest {
         Inquiry i = new Inquiry(0, 210, 700, 360, 0, 0, "rejsning", "ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", "15", "", "", new Date(2017, 11, 21), "ny", "test1@test.dk", 0, null);
         Inquiry result = InquiryMapper.registerInitialInquiry(i);
         assertEquals("ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", result.getRoofMaterial());
-        assertTrue(result.getId() > 0);
+        assertTrue(result.getId() > 8);
     }
 
     @Test
