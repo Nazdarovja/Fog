@@ -49,7 +49,11 @@ public class LogicFacade {
     }
 
     public static void SendInquiry(Inquiry inquiry) throws FogException, Exception {
-        InquiryMapper.registerInitialInquiry(inquiry);
+        if (inquiry.getId() == 0) {
+            InquiryMapper.registerInitialInquiry(inquiry);
+        } else {
+            InquiryMapper.registerSavedInquiry(inquiry);
+        }
     }
 
     public static List<Inquiry> viewInquiries() throws FogException, Exception {
@@ -144,11 +148,10 @@ public class LogicFacade {
         return null;
     }
 
-
     public static Employee login(int id, String pwd, String ipAddress) throws LoginException, Exception {
         return EmployeeMapper.login(id, pwd, ipAddress);
     }
-        
+
     public static MultiPartEmail generatePDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException {
         return GeneratePDF.createPDF(customer, inquiry, bom);
     }

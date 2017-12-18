@@ -1,138 +1,70 @@
--- MySQL Workbench Forward Engineering
+-- -----------------------------------------------------
+-- Schema fogTest
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `fogTest`;
+CREATE SCHEMA IF NOT EXISTS `fogTest` DEFAULT CHARACTER SET utf8 ;
+USE `fogTest`;
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+CREATE TABLE fogTest.Zipcode LIKE fog.Zipcode;
+CREATE TABLE fogTest.Customer LIKE fog.Customer;
+CREATE TABLE fogTest.Employee LIKE fog.Employee;
+CREATE TABLE fogTest.Inquiry LIKE fog.Inquiry;
+CREATE TABLE fogTest.Product LIKE fog.Product;
 
--- -----------------------------------------------------
--- Schema fog
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `fog` ;
-
--- -----------------------------------------------------
--- Schema fog
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `fog` DEFAULT CHARACTER SET utf8 ;
-USE `fog` ;
-
--- -----------------------------------------------------
--- Table `fog`.`Zipcode`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Zipcode` (
-  `zipcode` INT NOT NULL,
-  `city` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`zipcode`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `fog`.`Customer`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Customer` (
-  `email` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `surname` VARCHAR(45) NOT NULL,
-  `phonenumber` INT NOT NULL,
-  `address` VARCHAR(45) NOT NULL,
-  `zipcode` INT NOT NULL,
-  `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`email`),
-  INDEX `postnummer_idx` (`zipcode` ASC),
-  CONSTRAINT `zipcode`
-    FOREIGN KEY (`zipcode`)
-    REFERENCES `fog`.`Zipcode` (`zipcode`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `fog`.`Employee`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Employee` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(30) NOT NULL,
-  `surname` VARCHAR(30) NOT NULL,
-  `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `fog`.`Inquiry`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Inquiry` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `carportHeight` INT NOT NULL,
-  `carportLength` INT NOT NULL,
-  `carportWidth` INT NOT NULL,
-  `shackWidth` INT NULL,
-  `shackLength` INT NULL,
-  `roofType` ENUM('fladt', 'rejsning') NOT NULL,
-  `roofMaterial` VARCHAR(100),
-  `angle` ENUM('15', '20', '25', '30', '35', '40', '45') NULL,
-  `commentCustomer` VARCHAR(2000) NULL,
-  `commentEmployee` VARCHAR(2000) NULL,
-  `period` DATE NULL,
-  `status` ENUM('gemt','ny', 'behandles', 'behandlet') NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `id_employee` INT NULL,
-  `date` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  INDEX `email_idx` (`email` ASC),
-  INDEX `id_ansat_idx` (`id_employee` ASC),
-  CONSTRAINT `email`
-    FOREIGN KEY (`email`)
-    REFERENCES `fog`.`Customer` (`email`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `id_employee`
-    FOREIGN KEY (`id_employee`)
-    REFERENCES `fog`.`Employee` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `fog`.`Product`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `fog`.`Product` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(200) NOT NULL,
-  `category` ENUM('bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag','løsholt') NOT NULL,
-  `price` LONG NOT NULL,
-  `length` INT NULL,
-  `width` INT NULL,
-  `height` INT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
+-- make an other copy for copy purpuses
+CREATE TABLE ZipcodeTest LIKE fogTest.Zipcode;
+CREATE TABLE CustomerTest LIKE fogTest.Customer;
+CREATE TABLE EmployeeTest LIKE fogTest.Employee;
+CREATE TABLE InquiryTest LIKE fogTest.Inquiry;
+CREATE TABLE ProductTest LIKE fogTest.Product;
 
 -- -----------------------------------------------------
 -- DUMMYDATA 
 -- -----------------------------------------------------
 INSERT INTO 
-Zipcode (zipcode, city)
+ZipcodeTest (zipcode, city)
 VALUES
 (2750,'Ballerup'),
 (2000,'Frederiksberg'),
 (2800, 'Kongens Lyngby'),
 (9999, 'Gotham');
 
+INSERT INTO 
+CustomerTest (email, name, surname, phonenumber, address, zipcode, password)
+VALUES 
+('test1@test.dk','Hans','Hansen',11223344,'Torskevej 1',2750, 'Hansen1'),
+('test2@test.dk','Tom','Tomsen',44332211,'Sildevej 2',2000, 'Tomsen1'),
+('test3@test.dk','Hanne','Hannesen',11112233,'Makrelvej 3',2800, 'Hannesen'),
+('test4@test.dk','Pernille','Pernillesen',44443322,'Spættevej 4',2800, 'Pernillesen'),
+('test5@test.dk','Dorthe','Larsen',44533322,'Totalvej 2',2800, 'Dorthel'),
+('test8@test.dk','Anders','Andersen',42343322,'Absvej 2',2730, '333aaa'),
+('test6@test.dk','Oliver','Håkonsson',24566333,'Taskestrupvej 42',2000, 'gggg');
 
 INSERT INTO
-Employee (name, surname, password)
+EmployeeTest (name, surname, password)
 VALUES
 ('Martin', 'Fogmaster', 'emp1'),
 ('Johannes', 'Fog','emp2'),
 ('Frodo', 'Baggings','emp3');
 
+INSERT INTO
+InquiryTest (carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,roofMaterial,angle,commentCustomer,commentEmployee,period, status, email)
+VALUES
+(320,420,320,200,120,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,null,null,null,'gemt','test1@test.dk'),
+(320,420,320,0,0,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','20','send Email',null,'2017-12-20','gemt','test1@test.dk'),
+(240,470,360,360,220,'fladt','CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM',null,'Kan der vælges andre tag-materialer end det viste?',null,'2017-12-24','ny','test2@test.dk'),
+(320,420,320,210,150,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Hurtigts muligt','Ring op omkring leveringstidspunkt',null,'behandlet','test3@test.dk'),
+(210,420,320,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15',null,null,null,'behandlet','test3@test.dk'),
+(320,570,410,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25','Kan jeg sætte en tagrende på denne carport?','Kontakt vedr. valg af tagtype','2017-07-14','ny','test5@test.dk'),
+(270,570,410,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','25',null,null,'2017-07-15','ny','test8@test.dk'),
+(320,420,320,null,null,'rejsning','ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2','15','Ring tak!',null,null,'ny','test6@test.dk');
+
+
 -- --------------------------------------------------------------------------
 -- CATEGORIES =  'bræt', 'rem', 'spær', 'værktøj', 'stolpe', 'skrue', 'søm', 'lægte', 'tagpap', 'stern', 'vindskede','beklædning','tagsten','trapeztag',','løsholt'
 -- --------------------------------------------------------------------------
 INSERT INTO
-Product (name,category,price,length,width,height)
+ProductTest (name,category,price,length,width,height)
 VALUES
 -- bræt
 ('25X200 MM VTA TRYKIMPR. NTR/AB 600 CM','bræt',29970,6000,200,25),
@@ -250,7 +182,3 @@ VALUES
 ('45x95 Reglar ubh.','løsholt',3766,2700,95,45),
 ('45x95 Reglar ubh.','løsholt',3348,2400,95,45)
 ;
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
