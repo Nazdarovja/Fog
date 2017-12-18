@@ -160,13 +160,13 @@
                             </div>
 
                             <div id="shackLength">
-                                Redskabsrum længde<br>
-                                <input id="shackLengthInput" type="number" min="100"  class="form-control" name="shackLength" value="<%if(inquiry != null && inquiry.getShackLength() != 0){%><%=inquiry.getShackLength()%><%}%>">
+                                Redskabsrum bredde<br>
+                                <input id="shackLengthInput" type="number" min="100"  class="form-control" name="shackLength" value="<%if(inquiry != null && inquiry.getShackWidth() != 0){%><%=inquiry.getShackWidth()%><%}%>">
                                 <br>
                             </div>
                             <div id="shackWidth">
-                                Redskabsrum bredde<br>
-                                <input id="shackWidthInput" type="number" min="100"  class="form-control" name="shackWidth" value="<% if (inquiry != null && inquiry.getShackWidth() != 0) {%><%= inquiry.getShackWidth()%><%}%>">
+                                Redskabsrum længde<br>
+                                <input id="shackWidthInput" type="number" min="100"  class="form-control" name="shackWidth" value="<% if (inquiry != null && inquiry.getShackLength() != 0) {%><%= inquiry.getShackLength()%><%}%>">
                                 <br>
                             </div>
 

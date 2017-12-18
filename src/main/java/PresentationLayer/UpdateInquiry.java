@@ -42,7 +42,6 @@ public class UpdateInquiry extends Command {
         }else {
             roofMat = request.getParameter("flatMat");
         }
-        System.out.println("++++++++++++++++++++++++++++++++++++"+roofMat+"++++++++++++++++++++++++++++++++++++");
         String comment = request.getParameter("comment");
         String status = request.getParameter("status");
         

@@ -59,7 +59,7 @@ function restrictWidth() {
     $("#shackWidthInput").attr({
         "max": $("#width").val(),
         "min": widthRules(),
-        "placeholder": "Tillad bredde fra " + widthRules() + " til " + $("#width").val()
+        "placeholder": "Tillad længde fra " + widthRules() + " til " + $("#width").val()
     });
 }
 ;
@@ -67,7 +67,7 @@ function restrictLength() {
     $("#shackLengthInput").attr({
         "max": $("#length").val() / 2,
         "min": 100,
-        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
+        "placeholder": "Tillad bredde fra 100 til " + ($("#length").val() / 2)
     });
 }
 ;
@@ -129,7 +129,7 @@ $('select[name=length]').on('change', function () {
     $("#shackLengthInput").attr({
         "max": $("#length").val() / 2,
         "min": 100,
-        "placeholder": "Tillad længde fra 100 til " + ($("#length").val() / 2)
+        "placeholder": "Tillad bredde fra 100 til " + ($("#length").val() / 2)
     });
 });
 
@@ -137,7 +137,7 @@ $('select[name=width]').on('change', function () {
     $("#shackWidthInput").attr({
         "max": $("#width").val(),
         "min": widthRules(),
-        "placeholder": "Tillad bredde fra " + widthRules() + " til " + $("#width").val()
+        "placeholder": "Tillad længde fra " + widthRules() + " til " + $("#width").val()
     });
 });
 
