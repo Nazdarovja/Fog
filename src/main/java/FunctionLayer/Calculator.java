@@ -6,7 +6,6 @@
 package FunctionLayer;
 
 import DataLayer.ProductMapper;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,7 +22,6 @@ public class Calculator {
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
-        System.out.println("----------------------------"+inquiry.getRoofMaterial()+"---- ROOOF MAT ++++++++++");
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
         if(roofMaterial == null) throw new FogException( "No roof material was found" );
         
