@@ -44,7 +44,9 @@ public abstract class Command {
         commands.put("saveInquiry", new SaveInquiry());
         commands.put("newInquiry", new NewInquiry());
         commands.put("chooseInquiry", new ChooseInquiry());
-
+        
+        commands.put("loginemployee", new LoginEmployee());
+        commands.put("passtoemplogin", new PassToEmpLogin());
 
     }
 

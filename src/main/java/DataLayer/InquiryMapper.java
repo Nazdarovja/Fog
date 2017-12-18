@@ -55,7 +55,7 @@ public class InquiryMapper {
                 rs.next();
                 id = rs.getInt(1);
 
-                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(),i.getRoofMaterial(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
+                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getRoofMaterial(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
 
                 conn.commit();
             } else {
@@ -63,11 +63,9 @@ public class InquiryMapper {
                 throw new FogException("Error creating Inquiry in database.");
             }
 
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             // Always make sure result sets and statements are closed,
             // and the connection is returned to the pool
 
@@ -119,11 +117,9 @@ public class InquiryMapper {
             }
             return inquiries;
 
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -150,7 +146,7 @@ public class InquiryMapper {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                
+
                 i = new Inquiry(
                         rs.getInt("id"),
                         rs.getInt("carportHeight"),
@@ -173,11 +169,9 @@ public class InquiryMapper {
                 throw new FogException(" no inquiry with specified id ");
             }
 
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -227,11 +221,9 @@ public class InquiryMapper {
                 throw new FogException(" no inquiry found ");
             }
 
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -243,7 +235,8 @@ public class InquiryMapper {
             }
         }
     }
-    
+///// BRUGES IKKE NOGEN STEDER ???? //////
+
     public static Inquiry updateCarportSize(int id, int height, int length, int width) throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -253,7 +246,7 @@ public class InquiryMapper {
             conn = DBConnector.getConnection();
             String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ? WHERE id = ?";
             ps = conn.prepareStatement(SQL);
-            
+
             ps.setInt(1, height);
             ps.setInt(2, length);
             ps.setInt(3, width);
@@ -277,13 +270,15 @@ public class InquiryMapper {
         finally {
             if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
         return inquiry;
     }
-    
+///// BRUGES IKKE NOGEN STEDER ???? //////
+
     public static Inquiry updateShackSize(int id, int length, int width) throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -293,7 +288,7 @@ public class InquiryMapper {
             conn = DBConnector.getConnection();
             String SQL = "UPDATE Inquiry SET shackLength = ?, shackWidth = ? WHERE id = ?";
             ps = conn.prepareStatement(SQL);
-            
+
             ps.setInt(1, length);
             ps.setInt(2, width);
             ps.setInt(3, id);
@@ -316,16 +311,17 @@ public class InquiryMapper {
         finally {
             if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
         return inquiry;
     }
-    
-    public static Inquiry updateInquiry(int id, int height, int length, int width, 
-                                        int shackLength, int shackWidth, String roofType,
-                                        String roofMat, String angle, String comment, String status) 
+
+    public static Inquiry updateInquiry(int id, int height, int length, int width,
+            int shackLength, int shackWidth, String roofType,
+            String roofMat, String angle, String comment, String status)
             throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -335,7 +331,7 @@ public class InquiryMapper {
             conn = DBConnector.getConnection();
             String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
             ps = conn.prepareStatement(SQL);
-            
+
             ps.setInt(1, height);
             ps.setInt(2, length);
             ps.setInt(3, width);
@@ -356,7 +352,7 @@ public class InquiryMapper {
                 inquiry = inquiryById(id);
             } else {
                 conn.rollback();
-                throw new Exception(" Update error ");
+                throw new Exception("--- Update error ---");
             }
 
         }
@@ -366,7 +362,8 @@ public class InquiryMapper {
         finally {
             if (ps != null) {
                 ps.close();
-            } if (conn != null) {
+            }
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -382,7 +379,7 @@ public class InquiryMapper {
 
         try {
             conn = DBConnector.getConnection();
-            String SQL = "SELECT * from Inquiry where email= \""+ customer.getEmail() +"\" and status = \"gemt\"";
+            String SQL = "SELECT * from Inquiry where email= \"" + customer.getEmail() + "\" and status = \"gemt\"";
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -405,16 +402,62 @@ public class InquiryMapper {
                         rs.getTimestamp(16));
                 inquiries.add(i);
             }
+
+            if (inquiries.isEmpty()) {
+                throw new FogException("No Inquiries for " + customer.getEmail());
+            }
             return inquiries;
 
-        } 
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-        finally {
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+        } finally {
             if (rs != null) {
                 rs.close();
             }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public static void registerSavedInquiry(Inquiry i) throws FogException, SQLException, Exception {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = DBConnector.getConnection();
+            String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
+            ps = conn.prepareStatement(SQL);
+
+            ps.setInt(1, i.getCarportHeight());
+            ps.setInt(2, i.getCarportLength());
+            ps.setInt(3, i.getCarportWidth());
+            ps.setInt(4, i.getShackLength());
+            ps.setInt(5, i.getShackWidth());
+            ps.setString(6, i.getRoofType());
+            ps.setString(7, i.getRoofMaterial());
+            ps.setString(8, i.getAngle());
+            ps.setString(9, i.getCommentCustomer());
+            ps.setString(10, i.getStatus());
+            ps.setInt(11, i.getId());
+
+            conn.setAutoCommit(false);
+            int res = ps.executeUpdate();
+
+            if (res == 1) {
+                conn.commit();
+            } else {
+                conn.rollback();
+                throw new FogException(" Update error ");
+            }
+
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
+
+        } finally {
             if (ps != null) {
                 ps.close();
             }
