@@ -120,7 +120,7 @@ public class CustomerMapperTest {
     public void testCreateCustomer() throws Exception {
         System.out.println("createCustomer");
 
-        Customer c = new Customer("batman@batman.dk", "Bruce", "Wayne", 44332211, "Gothamvej 1", 9999, "Catwoman1", "Gotham");
+        Customer c = new Customer("batman@robin.dk", "Bruce", "Wayne", 44332211, "Gothamvej 1", 9999, "Catwoman1", "Gotham");
         String expResult = "Wayne";
         Customer result = CustomerMapper.createCustomer(c);
         assertEquals(expResult, result.getSurname());
