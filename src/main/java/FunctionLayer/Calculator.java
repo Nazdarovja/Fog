@@ -22,7 +22,6 @@ public class Calculator {
      * @param inquiry Inquiry object
      * @return BillOfMaterials Object
      * @throws FogException
-     * @throws Exception
      */
     public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException {
         BillOfMaterials bom = new BillOfMaterials();
