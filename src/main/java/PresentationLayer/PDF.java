@@ -22,11 +22,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PDF extends Command {
 
+    /** Gets the customer, the inquiry and BillOfMaterials - and generates a PDF from them which is set on the request
+    *
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String customer = request.getParameter("customer");
-        Customer cus = LogicFacade.viewCustomerByEmail(customer);
+        String customerEmail = request.getParameter("customer");
+        Customer cus = LogicFacade.viewCustomerByEmail(customerEmail);
         int id = Integer.parseInt(request.getParameter("id"));
         Inquiry inquiry = LogicFacade.viewInquiry(id);
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
@@ -35,7 +39,7 @@ public class PDF extends Command {
         flatMat = LogicFacade.getFlatRoofProducts();
         pitchedMat = LogicFacade.getPitchedRoofProducts();
 
-        request.setAttribute("generatedPDF", LogicFacade.generatePDF(cus, inquiry, bom)); //TODO if generatedPDF på session, fjern "send pdf" knap fra inquiry.jsp
+        request.setAttribute("generatedPDF", LogicFacade.generatePDF(cus, inquiry, bom)); 
         request.setAttribute("pitchedMat", pitchedMat);
         request.setAttribute("flatMat", flatMat);
         request.setAttribute("customer", cus);

@@ -20,6 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Login extends Command {
 
+    /** If login is succesful the customer returned is set on the session aswell as the customer's inquiries. Else an exception is thrown
+    * returns "QuickBuild" 
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception{
         Customer customer = null;

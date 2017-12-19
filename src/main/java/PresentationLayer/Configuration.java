@@ -7,7 +7,7 @@ package PresentationLayer;
 
 import java.util.logging.Logger;
 
-/**
+/** specifies the path to a log file on the Ubuntu server for logging. It also hold the Logger which we add handlers to.
  *
  * @author Orchi
  */

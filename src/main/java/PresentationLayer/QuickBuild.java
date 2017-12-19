@@ -20,6 +20,10 @@ public class QuickBuild extends Command {
     public QuickBuild() {
     }
 
+    /** sends you to the QuickBuild site from the index page. Retrieving some materials from database, which is set on the session.
+    *
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession();
