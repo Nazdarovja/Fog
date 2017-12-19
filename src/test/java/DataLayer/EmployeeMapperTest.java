@@ -22,7 +22,7 @@ public class EmployeeMapperTest {
             //('Johannes', 'Fog','emp2'),
             //('Frodo', 'Baggings','emp3');
 
-//TODO test fucker
+
     @Test
     public void testLogin() throws Exception {
         System.out.println("login");

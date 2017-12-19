@@ -19,7 +19,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author ML
  */
 public class LoginEmployee extends Command {
-
+    
+    /** If login is succesful the employee is set on the session aswell as all the inquiries, else an exception is thrown
+    * returns "inquiries"
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception {
         int id;

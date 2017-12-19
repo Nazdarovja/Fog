@@ -17,6 +17,11 @@ import javax.servlet.http.HttpSession;
  */
 public class NewInquiry extends Command {
 
+    /** before deleting the current session, we pull the customer and the customer's inquiries from the session,
+     * creates a new session and sets the customer and the inquiries. The current inquiry is deleted when the session is renewed 
+    * returns "QuickBuild"
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession(false);

@@ -17,8 +17,13 @@ import java.util.logging.SimpleFormatter;
  */
 public class Logging {
     
+    /** Made as a singleton - if Configuration.getMyLogger() doesn't have any handlers, we add a ConsoleHandler
+     * which writes to System.err and a handler which writes to a log file on the Ubuntu server.
+    *
+    * @author Orchi
+    */
     public static void setUp() throws FogException {
-        if(Configuration.getMyLogger().getHandlers().length < 1) { // singleton? causing any problems?
+        if(Configuration.getMyLogger().getHandlers().length < 1) { 
             Configuration.getMyLogger().addHandler(new ConsoleHandler());
             if(Configuration.PRODUCTION) {
                 try {

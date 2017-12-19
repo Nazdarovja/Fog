@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get id from request and use it to get Inquiry, then Calculate BillOfMaterials from it. 
+ * Set BillOfMaterials on request
  * @author Mellem
  */
 public class ViewBoM extends Command {

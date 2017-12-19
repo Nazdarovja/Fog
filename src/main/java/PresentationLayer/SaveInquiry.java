@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SaveInquiry extends Command {
 
+    /** Used to save a inquiry on the database, so the customer can see his previous saved inquiries.
+    * returns "QuickBuild"
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         Customer customer = (Customer) request.getSession().getAttribute("customer");

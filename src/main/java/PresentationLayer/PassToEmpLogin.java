@@ -16,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PassToEmpLogin extends Command {
 
+    /** Sends you to the employee page
+    *
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception {
         return "emplogin";

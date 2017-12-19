@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
  */
 public class Register extends Command {
 
+    /** Used to create a customer on the database, and then sets the customer on session
+    * returns "QuickBuild"
+    * @author Orchi
+    */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         Customer c = null;
@@ -30,15 +34,11 @@ public class Register extends Command {
         int phonenumber = Integer.parseInt(request.getParameter( "phonenumber" ));
         String address = request.getParameter( "address" );
         int zipcode = Integer.parseInt(request.getParameter( "zipcode" ));
+        c = LogicFacade.createCostumer( new Customer(email, name, surname, phonenumber, address, zipcode, password1, null ));
+        HttpSession session = request.getSession();
+        session.setAttribute( "user", c );
+        return "QuickBuild";
         
-        if ( password1.equals( password2 ) ) {
-            c = LogicFacade.createCostumer( new Customer(email, name, surname, phonenumber, address, zipcode, password1, null ));
-             HttpSession session = request.getSession();
-             session.setAttribute( "user", c );
-            return "QuickBuild";
-        } else {
-            throw new FogException( "the two passwords did not match" );
-        }
 
 
 

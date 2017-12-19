@@ -96,7 +96,7 @@ public class CustomerMapperTest {
         assertEquals(expResult, result);
     }
 
-    @Test
+    //@Test
     public void testCreateCustomer() throws Exception {
         System.out.println("createCustomer");
         Customer c = new Customer("batman@robin.dk", "Bruce", "Wayne", 44332211, "Gothamvej 1", 9999, "Catwoman1", "Gotham");
