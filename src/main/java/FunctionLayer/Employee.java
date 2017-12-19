@@ -2,7 +2,7 @@ package FunctionLayer;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen 
  */
 public class Employee {    
 private int id;

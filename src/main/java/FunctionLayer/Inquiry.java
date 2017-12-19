@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen 
  */
 public class Inquiry {
 
