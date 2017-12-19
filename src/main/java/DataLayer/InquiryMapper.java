@@ -328,8 +328,6 @@ public class InquiryMapper {
 
         } catch (SQLException ex) {
             throw new FogException(ex.getMessage());
-
         } 
     }
-
 }
