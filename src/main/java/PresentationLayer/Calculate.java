@@ -62,7 +62,7 @@ public class Calculate extends Command {
         shackCheckbox = request.getParameter("shackCheckbox");
         boolean withShack = false;
         // checks if the checkbox for added shack is ticked, if true it adds shack mesurements
-        if (request.getParameter("shackCheckbox").equals("on")) {
+        if (shackCheckbox != null && request.getParameter("shackCheckbox").equals("on")) {
             withShack = true;
             shackLength = Integer.parseInt(request.getParameter("shackLength"));
             shackWidth = Integer.parseInt(request.getParameter("shackWidth"));
