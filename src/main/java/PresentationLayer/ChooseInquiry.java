@@ -10,6 +10,7 @@ import FunctionLayer.Customer;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,10 +31,10 @@ public class ChooseInquiry extends Command {
      */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
-        HttpSession session = request.getSession();
-
+        HttpSession session = request.getSession(false);
+        Customer c = (Customer) session.getAttribute("customer");
        //Get list of all of logged in customer inquiries with the status "gemt"(saved)
-        List<Inquiry> inquiries = (List<Inquiry>)session.getAttribute("inquiries");
+        List<Inquiry> inquiries = LogicFacade.getCustomerInquiries(c);
         int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
         Inquiry inquiry = LogicFacade.getChosenInquiry(inquiries, inquiryId);
 

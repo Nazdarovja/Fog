@@ -24,6 +24,7 @@ public class InquiryMapper {
 
     /**
      * Insert Inquiry object into database.
+     *
      * @param i Inquiry object
      * @return Inquiry object
      * @throws FogException
@@ -33,7 +34,7 @@ public class InquiryMapper {
         String SQL = "INSERT INTO Inquiry (id, carportHeight,carportLength,carportWidth,shackWidth,shackLength,roofType,roofMaterial,angle,commentCustomer,commentEmployee,period, status, email) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
+                PreparedStatement pstmt = conn.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);) {
             pstmt.setInt(1, i.getId());
             pstmt.setInt(2, i.getCarportHeight());
             pstmt.setInt(3, i.getCarportLength());
@@ -54,24 +55,30 @@ public class InquiryMapper {
 
             if (res == 1) {
                 try (ResultSet rs = pstmt.getGeneratedKeys();) {
-                rs.next();
-                id = rs.getInt(1);
-                inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getRoofMaterial(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
-                conn.commit();
+                    rs.next();
+                    id = rs.getInt(1);
+                    inquiry = new Inquiry(id, i.getCarportHeight(), i.getCarportLength(), i.getCarportWidth(), i.getShackWidth(), i.getShackLength(), i.getRoofType(), i.getRoofMaterial(), i.getAngle(), i.getCommentCustomer(), i.getCommentEmployee(), i.getPeriod(), i.getStatus(), i.getEmail(), i.getId_employee(), null);
+                    conn.commit();
                 }
             } else {
                 conn.rollback();
-                throw new FogException("Error creating Inquiry in database.");
+                throw new FogException("Der er desværre sket en fejl i oprettelsen af denne forespørgsel på databasen \n"
+                        + "Prøv venligst igen.");
             }
 
         } catch (SQLException ex) {
-            throw new FogException(ex.getMessage());
-        } 
+            if (ex.getMessage().contains("Duplicate")) {
+                throw new FogException("Forspørgelsen du forsøger at gemme eksisterer allerede");
+            } else {
+                throw new FogException(ex.getMessage());
+            }
+        }
         return inquiry;
     }
 
     /**
      * Get list of all inquiries from database.
+     *
      * @return List of Inquiry Objects.
      * @throws FogException
      */
@@ -81,7 +88,7 @@ public class InquiryMapper {
         String SQL = "SELECT * from Inquiry";
 
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(SQL);
+                PreparedStatement pstmt = conn.prepareStatement(SQL);
                 ResultSet rs = pstmt.executeQuery();) {
             while (rs.next()) {
                 i = new Inquiry(
@@ -107,11 +114,12 @@ public class InquiryMapper {
 
         } catch (SQLException ex) {
             throw new FogException(ex.getMessage());
-        } 
+        }
     }
 
     /**
      * Get inquiry with given id from database.
+     *
      * @param id of inquiry as int
      * @return Inquiry object
      * @throws FogException
@@ -121,7 +129,7 @@ public class InquiryMapper {
         String SQL = "SELECT * from Inquiry WHERE id = ?";
 
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(SQL);) {
+                PreparedStatement pstmt = conn.prepareStatement(SQL);) {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery();) {
                 if (rs.next()) {
@@ -144,16 +152,18 @@ public class InquiryMapper {
                             rs.getTimestamp("date"));
                     return i;
                 } else {
-                    throw new FogException(" no inquiry with specified id ");
+                    throw new FogException("Der eksisterer ikke en forespørgsel med denne id");
                 }
             }
         } catch (SQLException ex) {
             throw new FogException(ex.getMessage());
-        } 
+        }
     }
 
     /**
-     * Get a Inquiry from database by given customers email, sorted by (latest) date.
+     * Get a Inquiry from database by given customers email, sorted by (latest)
+     * date.
+     *
      * @param customerEmail String
      * @return Inquiry Object.
      * @throws FogException
@@ -163,7 +173,7 @@ public class InquiryMapper {
         String SQL = "SELECT * FROM Inquiry WHERE email = ? AND date = ( SELECT MAX(date) FROM Inquiry WHERE email = ? GROUP BY email) ";
 
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(SQL);) {
+                PreparedStatement pstmt = conn.prepareStatement(SQL);) {
             pstmt.setString(1, customerEmail);
             pstmt.setString(2, customerEmail);
             try (ResultSet rs = pstmt.executeQuery();) {
@@ -187,16 +197,17 @@ public class InquiryMapper {
                             rs.getTimestamp(16));
                     return i;
                 } else {
-                    throw new FogException(" no inquiry found ");
+                    throw new FogException(" Ingen forespørgsel fundet.");
                 }
             }
         } catch (SQLException ex) {
             throw new FogException(ex.getMessage());
-        } 
+        }
     }
 
     /**
      * Update inquiry in database by given parameters.
+     *
      * @param id int
      * @param height int
      * @param length int
@@ -218,7 +229,7 @@ public class InquiryMapper {
         String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
         Inquiry inquiry = null;
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement ps = conn.prepareStatement(SQL);) {
+                PreparedStatement ps = conn.prepareStatement(SQL);) {
             ps.setInt(1, height);
             ps.setInt(2, length);
             ps.setInt(3, width);
@@ -239,18 +250,18 @@ public class InquiryMapper {
                 inquiry = inquiryById(id);
             } else {
                 conn.rollback();
-                throw new FogException("--- Update error ---");
+                throw new FogException(" Fejl ved opdatering \n Prøv igen.");
             }
 
-        }
-        catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
+        } catch (SQLException ex) {
+            throw new FogException(ex.getMessage());
         }
         return inquiry;
     }
 
     /**
      * Get list of Inquiries by a given customer.
+     *
      * @param customer Customer object
      * @return List of Inquiry objects.
      * @throws FogException
@@ -261,7 +272,7 @@ public class InquiryMapper {
         String SQL = "SELECT * from Inquiry where email= \"" + customer.getEmail() + "\" and status = \"gemt\"";
 
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement pstmt = conn.prepareStatement(SQL);
+                PreparedStatement pstmt = conn.prepareStatement(SQL);
                 ResultSet rs = pstmt.executeQuery();) {
             while (rs.next()) {
                 i = new Inquiry(
@@ -285,7 +296,7 @@ public class InquiryMapper {
             }
 
             if (inquiries.isEmpty()) {
-                throw new FogException("No Inquiries for " + customer.getEmail());
+                throw new FogException(" Ingen forespørgsler for " + customer.getEmail());
             }
             return inquiries;
 
@@ -296,13 +307,14 @@ public class InquiryMapper {
 
     /**
      * Update inquiry in database.
+     *
      * @param i Inquiry object.
      * @throws FogException
      */
     public static void sendSavedInquiry(Inquiry i) throws FogException {
         String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";
         try (Connection conn = DBConnector.getConnection();
-               PreparedStatement ps = conn.prepareStatement(SQL);) {
+                PreparedStatement ps = conn.prepareStatement(SQL);) {
 
             ps.setInt(1, i.getCarportHeight());
             ps.setInt(2, i.getCarportLength());
@@ -323,11 +335,11 @@ public class InquiryMapper {
                 conn.commit();
             } else {
                 conn.rollback();
-                throw new FogException(" Update error ");
+                throw new FogException(" Fejl ved opdatering \n Prøv igen ");
             }
 
         } catch (SQLException ex) {
             throw new FogException(ex.getMessage());
-        } 
+        }
     }
 }
