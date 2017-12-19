@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get Customer, Inquiry info from request.
+ * Calculate BillOfMaterials, FlatMat and PitchedMat for Customer and set them on session.
  * @author ML
  */
 public class UpdateInquiry extends Command {

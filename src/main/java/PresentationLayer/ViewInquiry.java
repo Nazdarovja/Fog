@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get Customer from request, and use it to get latest inquiry from it. Then calculate BillOFMaterials from it. 
+ * Calculate and et set list of PitchedMats and FlatMats, Customer, BillOfMaterials and Inquiry on request atrtributes. 
  * @author Mellem
  */
 public class ViewInquiry extends Command {

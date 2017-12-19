@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get list of all customers, generate table of all customers from it.
+ * Set table on request attribute.
  * @author Mellem
  */
 public class ViewCustomers extends Command {
