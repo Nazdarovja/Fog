@@ -262,7 +262,6 @@ public class InquiryMapper {
             }
         }
     }
-///// BRUGES IKKE NOGEN STEDER ???? //////
 
     /**
      * Update carport size in database, by given parameters.
@@ -274,7 +273,7 @@ public class InquiryMapper {
      * @throws SQLException
      * @throws Exception
      */
-    public static Inquiry updateCarportSize(int id, int height, int length, int width) throws SQLException, Exception {
+    public static Inquiry updateCarportSize(int id, int height, int length, int width) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         Inquiry inquiry = null;
@@ -297,7 +296,7 @@ public class InquiryMapper {
                 inquiry = inquiryById(id);
             } else {
                 conn.rollback();
-                throw new Exception(" Update error ");
+                throw new FogException(" Update error ");
             }
 
         }
@@ -314,7 +313,6 @@ public class InquiryMapper {
         }
         return inquiry;
     }
-///// BRUGES IKKE NOGEN STEDER ???? //////
 
     /**
      * Update carport shack size in database, by given parameters.
@@ -325,7 +323,7 @@ public class InquiryMapper {
      * @throws SQLException
      * @throws Exception
      */
-    public static Inquiry updateShackSize(int id, int length, int width) throws SQLException, Exception {
+    public static Inquiry updateShackSize(int id, int length, int width) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         Inquiry inquiry = null;
@@ -347,7 +345,7 @@ public class InquiryMapper {
                 inquiry = inquiryById(id);
             } else {
                 conn.rollback();
-                throw new Exception(" Update error ");
+                throw new FogException(" Update error ");
             }
 
         }
@@ -385,7 +383,7 @@ public class InquiryMapper {
     public static Inquiry updateInquiry(int id, int height, int length, int width,
             int shackLength, int shackWidth, String roofType,
             String roofMat, String angle, String comment, String status)
-            throws SQLException, Exception {
+            throws FogException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
         Inquiry inquiry = null;
@@ -415,7 +413,7 @@ public class InquiryMapper {
                 inquiry = inquiryById(id);
             } else {
                 conn.rollback();
-                throw new Exception("--- Update error ---");
+                throw new FogException("--- Update error ---");
             }
 
         }
@@ -500,7 +498,7 @@ public class InquiryMapper {
      * @throws SQLException
      * @throws Exception
      */
-    public static void sendSavedInquiry(Inquiry i) throws FogException, SQLException, Exception {
+    public static void sendSavedInquiry(Inquiry i) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
 

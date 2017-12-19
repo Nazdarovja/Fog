@@ -46,7 +46,6 @@ public class SendInquiry extends Command {
         request.getSession().setAttribute("inquiries", inquiries);
         request.getSession().setAttribute("roofMaterialPitched", roofMaterialPitched);
         request.getSession().setAttribute("roofMaterialFlat", roofMaterialFlat);
-        request.getSession().setAttribute("lastpage", "QuickBuild");
         request.getSession().setAttribute("customer", customer);
 
         return "QuickBuild";

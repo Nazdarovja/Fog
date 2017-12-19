@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author kasper
+ * @author Stanislav
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
@@ -48,10 +48,12 @@ public class FrontController extends HttpServlet {
 
             request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);
         } catch (FogException ex) {
+            ex.printStackTrace();
             request.setAttribute("error", ex.getMessage());
             String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);
         } catch (Exception ex) {
+            ex.printStackTrace();
             request.setAttribute("error", ex.getMessage());
             String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);

@@ -16,7 +16,13 @@ import java.util.List;
  * @author Mellem
  */
 public class JspUtilTable {
-    
+    /**
+     * Creates a html String table from inquiryList
+     * @param tableTagId
+     * @param inquiryList
+     * @return String html table part
+     * @throws FogException 
+     */
     public static String tableInquiry(String tableTagId, List<Inquiry> inquiryList) throws FogException {
         StringBuilder sb = new StringBuilder();
         
@@ -30,7 +36,13 @@ public class JspUtilTable {
         sb.append("</table>");
         return sb.toString();
     }
-    
+    /**
+     * Creates html table from customerList
+     * @param tableTagId
+     * @param customerList
+     * @return String html table part
+     * @throws FogException 
+     */
     public static String tableCustomer(String tableTagId, List<Customer> customerList) throws FogException {
         StringBuilder sb = new StringBuilder();
         
@@ -45,6 +57,13 @@ public class JspUtilTable {
         return sb.toString();
     }
     
+    /**
+     * TableHead switch that adds Table head to html table string
+     * @param tableTagId
+     * @param objType
+     * @return String html table part
+     * @throws FogException 
+     */
     private static String completeTHead(String tableTagId,String objType) throws FogException{
         StringBuilder sb = new StringBuilder();
         
@@ -81,6 +100,11 @@ public class JspUtilTable {
         return sb.toString();
     } 
     
+    /**
+     * Creates the rows for html table string for inquiry
+     * @param inquiry
+     * @return hmtl table part
+     */
     private static String row(Inquiry inquiry){
         StringBuilder sb = new StringBuilder();
         
@@ -98,6 +122,11 @@ public class JspUtilTable {
         return sb.toString();
     }
 
+    /**
+     * Creates the rows for html table string for customer
+     * @param customer
+     * @return html table part
+     */
     private static String row(Customer customer){
         StringBuilder sb = new StringBuilder();
         
@@ -114,7 +143,13 @@ public class JspUtilTable {
         return sb.toString();
     }
     
-    
+    /**
+     * Creates string html table
+     * @param tableTagId
+     * @param colName
+     * @param colIndex
+     * @return String html table
+     */
     private static String th(String tableTagId, String colName, int colIndex){
         StringBuilder sb = new StringBuilder();
         
@@ -126,6 +161,11 @@ public class JspUtilTable {
         return sb.toString();
     }
     
+    /**
+     * Creates link list from inquiryList as html syntax
+     * @param inquiriesList
+     * @return String with html syntax link list
+     */
     public static String utilPreviousInquiries(List<Inquiry> inquiriesList) {
         StringBuilder res = new StringBuilder();
 
@@ -140,6 +180,12 @@ public class JspUtilTable {
         return res.toString();
     }
 
+    /**
+     * Creates html syntax dropdown menu
+     * @param products
+     * @param roofType
+     * @return String with html dropdown table
+     */
     public static String utilDropDownFlat(List<Product> products, String roofType) {
         StringBuilder res = new StringBuilder();
 
