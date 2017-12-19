@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen 
  */
 public class PDF extends Command {
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen 
  */
 public class CalcShackCladding {
 

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * Set on session: Inquiries, roofMaterialPitched, roofMaterialFlat, Lastpage and Customer. 
  * Return Quickbuild
  * 
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen 
  */
 public class SendInquiry extends Command {
 

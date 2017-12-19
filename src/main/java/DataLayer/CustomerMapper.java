@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
+ * @author Alexander W. Hørsted-Andersen
  */
 public class CustomerMapper {
 
@@ -24,7 +24,7 @@ public class CustomerMapper {
      * @param ipAddress String with ipAddress
      * @return Customer object if exist.
      * @throws LoginException with ipAddress info if not.
-     * @throws Exception
+     * @throws Exception 
      */
     public static Customer login(String email, String password, String ipAddress) throws LoginException, Exception {
         ResultSet rs = null;
