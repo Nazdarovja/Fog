@@ -20,7 +20,7 @@ public class CalcShackCladdingTest {
      * Test of getCladdingForShack method, of class CalcShackCladding.
      */
     @Test
-    public void testGetCladdingForShackFlatRoof() throws Exception {
+    public void testGetCladdingForShackFlatRoof() throws FogException {
         System.out.println("getCladdingForShack");
         int shackLength = 730;
         int shackWidth = 360;
@@ -31,7 +31,7 @@ public class CalcShackCladdingTest {
         assertEquals(expResult, result.quantity);
     }
     @Test
-    public void testGetCladdingForShackPitchedRoofGable() throws Exception {
+    public void testGetCladdingForShackPitchedRoofGable() throws FogException {
         System.out.println("getCladdingForShackPitchedRoofGable");
         int carportWidth = 360;
         int carportHeight = 240;
@@ -44,7 +44,7 @@ public class CalcShackCladdingTest {
     }
 
     @Test
-    public void testGetCladdingForShackPitchedRoofSide() throws Exception {
+    public void testGetCladdingForShackPitchedRoofSide() throws FogException {
         System.out.println("getCladdingForShackPitchedRoofSide");
         int carportWidth = 360;
         int carportHeight = 240;

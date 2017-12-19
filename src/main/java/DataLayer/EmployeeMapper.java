@@ -27,47 +27,32 @@ public class EmployeeMapper {
      * @param ipAddress String
      * @return Employee Objec if found. 
      * @throws LoginException
-     * @throws Exception
+     * @throws FogException
      */
-    public static Employee login(int id, String pwd, String ipAddress) throws LoginException, Exception {
-        ResultSet rs = null;
-        PreparedStatement pstmt = null;
-        Connection conn = null;
-        try {
-            conn = DBConnector.getConnection();
-            String SQL = "SELECT * from Employee WHERE id=? AND password=?";
-            pstmt = conn.prepareStatement(SQL);
+    public static Employee login(int id, String pwd, String ipAddress) throws LoginException, FogException {
+        String SQL = "SELECT * from Employee WHERE id=? AND password=?";
+        try (Connection conn = DBConnector.getConnection();
+               PreparedStatement pstmt = conn.prepareStatement(SQL);) {
             pstmt.setInt(1, id);
             pstmt.setString(2, pwd);
-            rs = pstmt.executeQuery();
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    int empId = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String surname = rs.getString("surname");
+                    String pass = rs.getString("password");
 
-            if (rs.next()) {
-                int empId = rs.getInt("id");
-                String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                String pass = rs.getString("password");
-                
-                Employee emp = new Employee(empId, name, surname, pass);
-                return emp;
-            } else {
-                // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
-                //////////////////////////////////////////////////////////////////////////////////////////////////////
-                throw new LoginException("Login attempt on user with id: " + id + ", pwd: " + pwd + ", IP Address: " + ipAddress);
+                    Employee emp = new Employee(empId, name, surname, pass);
+                    return emp;
+                } else {
+                    // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////
+                    throw new LoginException("Login attempt on user with id: " + id + ", pwd: " + pwd + ", IP Address: " + ipAddress);
+                }
             }
         } 
         catch (SQLException ex) {
             throw new FogException( ex.getMessage() );
         }
-        finally {
-            if (rs != null) {
-                rs.close();
-            } if (pstmt != null) {
-                pstmt.close();
-            } if (conn != null) {
-                conn.close();
-            }
-        }
-
     }
-    
 }

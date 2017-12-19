@@ -6,6 +6,7 @@
 package DataLayer;
 
 import FunctionLayer.Employee;
+import FunctionLayer.FogException;
 import FunctionLayer.LoginException;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -24,7 +25,7 @@ public class EmployeeMapperTest {
 
 
     @Test
-    public void testLogin() throws Exception {
+    public void testLogin() throws FogException, LoginException {
         System.out.println("login");
         int id = 1;
         String pwd = "emp1";

@@ -18,7 +18,7 @@ public class CalcShackTransomTest {
      * Test of getTransomsForShackWidth method, of class CalcShackTransom.
      */
     @Test
-    public void testGetTransomsForShackWidth() throws Exception {
+    public void testGetTransomsForShackWidth() throws FogException {
         System.out.println("getTransomsForShackWidth");
         int shackWidth = 360;
         List<Product> transomList = Calculator.getChosenCategory("løsholt", DataLayer.ProductMapper.getProducts());
@@ -32,7 +32,7 @@ public class CalcShackTransomTest {
      * Test of getTransomsForShackLength method, of class CalcShackTransom.
      */
     @Test
-    public void testGetTransomsForShackLength() throws Exception {
+    public void testGetTransomsForShackLength() throws FogException {
         System.out.println("getTransomsForShackLength");
         int shackLength = 730;
         List<Product> transomList = Calculator.getChosenCategory("løsholt", DataLayer.ProductMapper.getProducts());

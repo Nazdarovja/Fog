@@ -24,7 +24,7 @@ public class Calculator {
      * @throws FogException
      * @throws Exception
      */
-    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException, Exception {
+    public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException {
         BillOfMaterials bom = new BillOfMaterials();
         List<Product> products = ProductMapper.getProducts();
         int length = inquiry.getCarportLength();

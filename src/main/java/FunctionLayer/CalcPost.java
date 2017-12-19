@@ -23,7 +23,7 @@ public class CalcPost {
      * @return OrderLine Object
      * @throws Exception
      */
-    public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) throws Exception {
+    public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) {
         //UNCERTAIN VARIABLES (for product owner to decide)
         int roofFrontBackEaves = 130; // (NO POLES UNDER EAVES) FLATROOF = 1300mm
         int roofSideEaves = 70; // (NO POLES UNDER EAVES) FLATROOF = 700mm

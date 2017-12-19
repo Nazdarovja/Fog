@@ -17,7 +17,7 @@ public class CalculatorTest {
         
     //TODO create test
     @Test
-    public void testGetBillOfMaterials() throws Exception {
+    public void testGetBillOfMaterials() throws FogException {
         System.out.println("getBillOfMaterials");
         Inquiry i = new Inquiry(0, 210, 420, 420, 0, 0, "fladt","CEMBRIT OVENLYSPLADE B7 PVC GLASKLAR 1100X610X1MM" , null, null, null, null, null, null, 0, null);
         BillOfMaterials bom = Calculator.getBillOfMaterials(i);

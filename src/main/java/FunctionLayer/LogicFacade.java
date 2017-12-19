@@ -24,35 +24,35 @@ import org.apache.commons.mail.MultiPartEmail;
 public class LogicFacade {
 
     //USER 
-    public static Customer login(String email, String password, String ipAddress) throws LoginException, Exception {
+    public static Customer login(String email, String password, String ipAddress) throws LoginException, FogException {
         return CustomerMapper.login(email, password, ipAddress);
     }
 
-    public static Customer createCostumer(Customer c) throws FogException, Exception {
+    public static Customer createCostumer(Customer c) throws FogException {
         return CustomerMapper.createCustomer(c);
     }
 
-    public static List<Product> getProducts() throws FogException, Exception {
+    public static List<Product> getProducts() throws FogException {
         return ProductMapper.getProducts();
     }
 
-    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws FogException, Exception {
+    public static BillOfMaterials calculateBillofMaterials(Inquiry inquiry) throws FogException {
         return Calculator.getBillOfMaterials(inquiry);
     }
 
-    public static void SendInquiry(Inquiry inquiry) throws FogException, Exception {
+    public static void SendInquiry(Inquiry inquiry) throws FogException {
             InquiryMapper.registerInitialInquiry(inquiry);
     }
     
-    public static void sendSavedInquiry(Inquiry inquiry) throws FogException, Exception {
+    public static void sendSavedInquiry(Inquiry inquiry) throws FogException {
             InquiryMapper.sendSavedInquiry(inquiry);
     }
 
-    public static List<Inquiry> viewInquiries() throws FogException, Exception {
+    public static List<Inquiry> viewInquiries() throws FogException {
         return InquiryMapper.allInquiries();
     }
 
-    public static List[] viewCustomersAndInquiries() throws FogException, Exception {
+    public static List[] viewCustomersAndInquiries() throws FogException {
         List[] list = new List[2];
 
         list[0] = InquiryMapper.allInquiries();
@@ -61,23 +61,23 @@ public class LogicFacade {
         return list;
     }
 
-    public static Inquiry viewInquiry(int id) throws FogException, Exception {
+    public static Inquiry viewInquiry(int id) throws FogException {
         return InquiryMapper.inquiryById(id);
     }
 
-    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws FogException, Exception {
+    public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws FogException {
         return InquiryMapper.LatestInquiryByCustomer(customerEmail);
     }
 
-    public static List<Customer> viewAllCustomers() throws FogException, Exception {
+    public static List<Customer> viewAllCustomers() throws FogException {
         return CustomerMapper.allCustomers();
     }
 
-    public static Customer viewCustomerByEmail(String email) throws FogException, Exception {
+    public static Customer viewCustomerByEmail(String email) throws FogException {
         return CustomerMapper.customerByEmail(email);
     }
 
-    public static List<Customer> viewCustomersByInquiryStatus(String status) throws FogException, Exception {
+    public static List<Customer> viewCustomersByInquiryStatus(String status) throws FogException {
         switch (status) {
             case "ny":
             case "behandles":
@@ -88,7 +88,7 @@ public class LogicFacade {
         }
     }
 
-    public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException, Exception {
+    public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException {
         return InquiryMapper.getCustomerInquiries(customer);
     }
 
@@ -99,11 +99,11 @@ public class LogicFacade {
         return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
     }
 
-    public static String getRoofMaterials(String roofType) throws FogException, Exception {
+    public static String getRoofMaterials(String roofType) throws FogException {
         return JspUtilTable.utilDropDownFlat(ProductMapper.getProducts(), roofType);
     }
 
-    public static List<Product> getPitchedRoofProducts() throws FogException, Exception {
+    public static List<Product> getPitchedRoofProducts() throws FogException {
         List<Product> products = ProductMapper.getProducts();
         List<Product> res = new ArrayList<>();
 
@@ -115,7 +115,7 @@ public class LogicFacade {
         return res;
     }
 
-    public static List<Product> getFlatRoofProducts() throws FogException, Exception {
+    public static List<Product> getFlatRoofProducts() throws FogException {
         List<Product> products = ProductMapper.getProducts();
         List<Product> res = new ArrayList<>();
 
@@ -140,11 +140,11 @@ public class LogicFacade {
         return null;
     }
 
-    public static Employee login(int id, String pwd, String ipAddress) throws LoginException, Exception {
+    public static Employee login(int id, String pwd, String ipAddress) throws LoginException, FogException {
         return EmployeeMapper.login(id, pwd, ipAddress);
     }
 
-    public static MultiPartEmail generatePDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException {
+    public static MultiPartEmail generatePDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FogException {
         return GeneratePDF.createPDF(customer, inquiry, bom);
     }
 

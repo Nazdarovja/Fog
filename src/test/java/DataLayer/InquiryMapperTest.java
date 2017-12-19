@@ -74,7 +74,7 @@ public class InquiryMapperTest {
 
     //int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String roofMaterial, String angle, String commentCustomer, String commentEmployee, Date period, String status, String email, int id_employee, Timestamp date
     @Test
-    public void testRegisterInitialInquiry() throws Exception {
+    public void testRegisterInitialInquiry() throws FogException {
         System.out.println("registerInitialInquiry");
         Inquiry i = new Inquiry(0, 210, 700, 360, 0, 0, "rejsning", "ROEDE VINGETAGSTEN GL. DANSK FORBRUG: 14,6 STK/M2", "15", "", "", new Date(2017, 11, 21), "ny", "test1@test.dk", 0, null);
         Inquiry result = InquiryMapper.registerInitialInquiry(i);
@@ -83,7 +83,7 @@ public class InquiryMapperTest {
     }
 
     @Test
-    public void testAllInquiries() throws Exception {
+    public void testAllInquiries() throws FogException {
         System.out.println("allInquiries");
         List<Inquiry> inquiries = InquiryMapper.allInquiries();
         assertNotNull(inquiries);
@@ -92,7 +92,7 @@ public class InquiryMapperTest {
     }
 
     @Test
-    public void inquiryById() throws Exception {
+    public void inquiryById() throws FogException {
         System.out.println("inquiryById");
         int id = 1;
         Inquiry inquiry = InquiryMapper.inquiryById(id);
@@ -101,14 +101,14 @@ public class InquiryMapperTest {
     }
 
     @Test(expected = FogException.class)
-    public void inquiryByIdFailException() throws Exception {
+    public void inquiryByIdFailException() throws FogException {
         System.out.println("inquiryById Fail");
         int id = 0;
         Inquiry inquiry = InquiryMapper.inquiryById(id);
     }
 
     @Test
-    public void latestInquiryByCustomer() throws Exception {
+    public void latestInquiryByCustomer() throws FogException {
         System.out.println("latestInquiryByCustomer");
         String email = "test1@test.dk";
         Inquiry inquiry = InquiryMapper.LatestInquiryByCustomer(email);
@@ -116,7 +116,7 @@ public class InquiryMapperTest {
     }
     
     @Test
-    public void getCustomerInquiries() throws Exception {
+    public void getCustomerInquiries() throws FogException {
         System.out.println("allInquiries");
         Customer customer = new Customer("test1@test.dk", null, null, 0, null, 0, null, null);
         List<Inquiry> inquiries = InquiryMapper.getCustomerInquiries(customer);
@@ -125,14 +125,14 @@ public class InquiryMapperTest {
     }
     
     @Test(expected = FogException.class)
-    public void getCustomerInquiriesExceptionFail() throws FogException, Exception  {
+    public void getCustomerInquiriesExceptionFail() throws FogException  {
         System.out.println("customerInquiries Exception");
         Customer customer = new Customer("fail@fail.dk", null, null, 0, null, 0, null, null);
         List<Inquiry> inquiries = InquiryMapper.getCustomerInquiries(customer);
     }
             
     @Test
-    public void testUpdateInquiry() throws Exception {
+    public void testUpdateInquiry() throws FogException {
         System.out.println("update shack size");
         int id = 1, height = 300, length = 300, width = 300, shackLength = 200, shackWidth = 200;
         int lRes = 200, wRes = 200;

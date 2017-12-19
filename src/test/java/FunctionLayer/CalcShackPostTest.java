@@ -23,7 +23,7 @@ public class CalcShackPostTest {
      * Test of getPostsShack method, of class CalcShackPost.
      */
     @Test
-    public void testGetPostsShackSameWidth() throws Exception {
+    public void testGetPostsShackSameWidth() throws FogException {
         System.out.println("getPostsShack - Same Width");
         int carportLength = 730;
         int carportWidth = 360;
@@ -36,7 +36,7 @@ public class CalcShackPostTest {
         assertEquals(expPosts, result.quantity);
     }
     @Test
-    public void testGetPostsShackLesserWidth() throws Exception {
+    public void testGetPostsShackLesserWidth() throws FogException {
         System.out.println("getPostsShack - lasser Width");
         int carportLength = 730;
         int carportWidth = 360;

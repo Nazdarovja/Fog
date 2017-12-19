@@ -6,6 +6,7 @@
 package DataLayer;
 
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginException;
 import java.sql.Connection;
@@ -72,7 +73,7 @@ public class CustomerMapperTest {
     }
 
     @Test
-    public void testLogin() throws Exception {
+    public void testLogin() throws FogException, LoginException {
         String email = "test1@test.dk";
         String password = "Hansen1";
         Customer customer = CustomerMapper.login(email, password, "1111");
@@ -81,14 +82,14 @@ public class CustomerMapperTest {
     }
 
     @Test(expected = LoginException.class)
-    public void testLoginException() throws Exception {
+    public void testLoginException() throws FogException, LoginException {
         String email = "harrypotter@hogwarts.com";
         String password = "sectumsembra";
         Customer customer = LogicFacade.login(email, password, "11111");
     }
 
     @Test
-    public void testGetCity() throws Exception {
+    public void testGetCity() throws FogException {
         System.out.println("getCity");
         int zipcode = 9999;
         String expResult = "Gotham";
@@ -97,7 +98,7 @@ public class CustomerMapperTest {
     }
 
     //@Test
-    public void testCreateCustomer() throws Exception {
+    public void testCreateCustomer() throws FogException {
         System.out.println("createCustomer");
         Customer c = new Customer("batman@robin.dk", "Bruce", "Wayne", 44332211, "Gothamvej 1", 9999, "Catwoman1", "Gotham");
         String expResult = "Wayne";
@@ -106,7 +107,7 @@ public class CustomerMapperTest {
     }
 
     @Test
-    public void testAllCustomers() throws Exception {
+    public void testAllCustomers() throws FogException {
         System.out.println("allCustomers");
         List<Customer> result = CustomerMapper.allCustomers();
         assertNotNull(result);
@@ -114,7 +115,7 @@ public class CustomerMapperTest {
     }
 
     @Test
-    public void testCustomerByEmail() throws Exception {
+    public void testCustomerByEmail() throws FogException {
         System.out.println("customerByEmail");
         String email = "test1@test.dk";
         Customer result = CustomerMapper.customerByEmail(email);

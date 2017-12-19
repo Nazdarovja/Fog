@@ -26,20 +26,16 @@ public class ProductMapper {
      * Get a list from the database with Product objects.
      * @return List of Product
      * @throws FogException
-     * @throws Exception
      */
-    public static List<Product> getProducts() throws FogException, Exception {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+    public static List<Product> getProducts() throws FogException {
+        String SQL = "SELECT * FROM Product;";
 
         if (productList == null) { 
 
-            try {
-                conn = DBConnector.getConnection();
-                String SQL = "SELECT * FROM Product;";
-                pstmt = conn.prepareStatement(SQL);
-                rs = pstmt.executeQuery();
+            try (Connection conn = DBConnector.getConnection();
+                    PreparedStatement pstmt = conn.prepareStatement(SQL);
+                     ResultSet rs = pstmt.executeQuery();) {
+                
                 productList = new ArrayList<>();
                 while (rs.next()) {
                     int id = rs.getInt("id");
@@ -51,27 +47,11 @@ public class ProductMapper {
                     int height = rs.getInt("height");
                     productList.add(new Product(id, name, cat, price, length, width, height));
                 }
-
             } 
             catch ( SQLException ex ) {
                 throw new FogException( ex.getMessage() );
-        }
-            finally {
-                // Always make sure result sets and statements are closed,
-                // and the connection is returned to the pool
-
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
             }
         }
-
         return productList;
     }
 
@@ -81,52 +61,33 @@ public class ProductMapper {
      * @param productName String
      * @return Product
      * @throws FogException
-     * @throws Exception
      */
-    public static Product getSingleProduct(String category, String productName) throws FogException, Exception {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+    public static Product getSingleProduct(String category, String productName) throws FogException {
         Product product = null;
+        String SQL = "SELECT * FROM Product WHERE category=? AND Product.name=?";
 
-        try {
-            conn = DBConnector.getConnection();
-            String SQL = "SELECT * FROM Product WHERE category=? AND Product.name=?";
-            pstmt = conn.prepareStatement(SQL);
+         try (Connection conn = DBConnector.getConnection();
+                    PreparedStatement pstmt = conn.prepareStatement(SQL);) {
             pstmt.setString(1, category);
             pstmt.setString(2, productName);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String cat = rs.getString("category");
-                long price = rs.getLong("price");
-                int length = rs.getInt("length");
-                int width = rs.getInt("width");
-                int height = rs.getInt("height");
-                product = new Product(id, name, cat, price, length, width, height);
-            } else {
-                throw new FogException("Could not find product");
-            }
-        } 
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String cat = rs.getString("category");
+                    long price = rs.getLong("price");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    product = new Product(id, name, cat, price, length, width, height);
+                } else {
+                    throw new FogException("Could not find product");
+                }
+            } 
+         }
         catch ( SQLException ex ) {
                 throw new FogException( ex.getMessage() );
         }
-        finally {
-            // Always make sure result sets and statements are closed,
-            // and the connection is returned to the pool
-
-            if (rs != null) {
-                rs.close();
-            }
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
         return product;
     }
 }

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class calcTrapezeRoofTest {
 
     @Test
-    public void testCalculateAmountOfTrapezeRoof() throws Exception {
+    public void testCalculateAmountOfTrapezeRoof() throws FogException {
         System.out.println("calculateAmountOfTrapezeRoof");
         int length = 5000;
         int width = 1000;

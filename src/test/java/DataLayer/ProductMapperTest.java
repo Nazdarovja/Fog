@@ -5,6 +5,7 @@
  */
 package DataLayer;
 
+import FunctionLayer.FogException;
 import FunctionLayer.Product;
 import java.util.List;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class ProductMapperTest {
     
 
     @Test
-    public void testGetProducts() throws Exception {
+    public void testGetProducts() throws FogException {
         System.out.println("getProducts");
         List<Product> product = ProductMapper.getProducts();
         assertNotNull(product);
@@ -29,7 +30,7 @@ public class ProductMapperTest {
     }
 
     @Test
-    public void testGetSingleProduct() throws Exception {
+    public void testGetSingleProduct() throws FogException {
         System.out.println("getSingleProduct");
         String category = "tagsten";
         String productName = "ROEDE RYGSTEN MODEL VOLSTRUP DANSKTAG- FORBRUG: 3,5 STK/LBM";

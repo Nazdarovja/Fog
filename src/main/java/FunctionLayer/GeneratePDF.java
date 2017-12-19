@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.DataSource;
 import org.apache.commons.mail.*;
 
@@ -45,13 +47,18 @@ public class GeneratePDF {
      * @throws FogException
      * @throws InterruptedException
      */
-    public static MultiPartEmail createPDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FileNotFoundException, IOException, EmailException, FogException, InterruptedException {
+    public static MultiPartEmail createPDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FogException {
 
         //create empty directory for file output
         new File(PATH).mkdirs();
 
         // Creating a PdfDocument object   
-        PdfWriter writer = new PdfWriter(DESTPDF);
+        PdfWriter writer;
+        try {
+            writer = new PdfWriter(DESTPDF);
+        } catch (FileNotFoundException ex) {
+            throw new FogException(ex.getMessage());
+        }
 
         // Creating a PdfDocument object      
         PdfDocument pdf = new PdfDocument(writer);
@@ -193,8 +200,20 @@ public class GeneratePDF {
 
         doc.add(table_bom);
         doc.close();
-        byte[] pdfAttachment = loadFile(DESTPDF);
-        return sendEmail(pdfAttachment);
+        byte[] pdfAttachment;
+        try {
+            pdfAttachment = loadFile(DESTPDF);
+        } catch (IOException ex) {
+            throw new FogException(ex.getMessage());
+        }
+        
+        try {
+            return sendEmail(pdfAttachment);
+        } catch (EmailException ex) {
+            throw new FogException(ex.getMessage());
+        } catch (IOException ex) {
+            throw new FogException(ex.getMessage());
+        }
     }
 
     /**
