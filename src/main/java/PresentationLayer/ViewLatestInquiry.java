@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get Customer from request, use it to get latest Inquiry. Calculate its BillOfMaterials. Set both BillOfMaterials and Inquiry in session.
  * @author Mellem
  */
 public class ViewLatestInquiry extends Command {

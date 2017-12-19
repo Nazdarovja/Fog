@@ -5,9 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- The purpose of UnknownCommand is to...
-
- @author kasper
+ * If the system is unable to find a corresponding command from the Command class hashmap, this class is the default response.
+ *
  */
 public class UnknownCommand extends Command {
 

@@ -15,19 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Gets Customer, Inquiry, roofMaterialPitched & roofMaterialFlat from session.
+ * Set customer email on inquiry, status as "ny" and update corresponding Inquiry on Database. 
+ * Removes above info from session.
+ * Get list of Inquiries for given Customer.
+ * Set on session: Inquiries, roofMaterialPitched, roofMaterialFlat, Lastpage and Customer. 
+ * Return Quickbuild
+ * 
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
 public class SendInquiry extends Command {
 
-    public SendInquiry() {
-    }
-
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession(false);
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
+        Customer customer = (Customer) session.getAttribute("customer");
+        Inquiry inquiry = (Inquiry) session.getAttribute("inquiry");
         String roofMaterialPitched = (String) session.getAttribute("roofMaterialPitched");
         String roofMaterialFlat = (String) session.getAttribute("roofMaterialFlat");
 
@@ -43,11 +46,11 @@ public class SendInquiry extends Command {
         List<Inquiry> inquiriesList = LogicFacade.getCustomerInquiries(customer);
         String inquiries = LogicFacade.utilPreviousInquiries(inquiriesList);
 
-        request.getSession().setAttribute("inquiries", inquiries);
-        request.getSession().setAttribute("roofMaterialPitched", roofMaterialPitched);
-        request.getSession().setAttribute("roofMaterialFlat", roofMaterialFlat);
-        request.getSession().setAttribute("lastpage", "QuickBuild");
-        request.getSession().setAttribute("customer", customer);
+        session.setAttribute("inquiries", inquiries);
+        session.setAttribute("roofMaterialPitched", roofMaterialPitched);
+        session.setAttribute("roofMaterialFlat", roofMaterialFlat);
+        session.setAttribute("lastpage", "QuickBuild");
+        session.setAttribute("customer", customer);
 
         return "QuickBuild";
     }

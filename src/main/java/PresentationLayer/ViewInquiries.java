@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Customer;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
@@ -14,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Get list of all inquiries. Get email, from request and generate table of inquiries corresponding to to the email.
+ * Set inquiry table on request attribute. 
  * @author ML
  */
 public class ViewInquiries extends Command
