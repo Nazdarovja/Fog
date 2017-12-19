@@ -22,13 +22,18 @@ public class EmployeeMapperTest {
             //('Johannes', 'Fog','emp2'),
             //('Frodo', 'Baggings','emp3');
 
+<<<<<<< HEAD
 
     //@Test
+=======
+//TODO test fucker
+    @Test
+>>>>>>> 566e1448bdbfbbe246dbd97c7a504887d9f3b618
     public void testLogin() throws Exception {
         System.out.println("login");
         int id = 1;
         String pwd = "emp1";
-        String ipAddress = "123.123.123.123";
+        String ipAddress = "123123";
         Employee result = EmployeeMapper.login(id, pwd, ipAddress);
         assertNotNull(result);
         assertEquals("Martin",result.getName());

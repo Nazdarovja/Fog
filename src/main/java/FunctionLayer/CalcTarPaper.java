@@ -5,14 +5,19 @@
  */
 package FunctionLayer;
 
-import java.util.List;
-
 /**
  *
  * @author Alexander W. Hørsted-Andersen <awha86@gmail.com>
  */
 public class CalcTarPaper {
 
+    /**
+     * 	 Calculate the amount of TarPaper of a given type, needed to fill corresponding dimensions
+     * @param length int 
+     * @param width int
+     * @param tarPaper Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTarPaperFlatRoof(int length, int width, Product tarPaper) {
 
         double newWidth = tarPaper.getWidth() - 100;  //overlay
@@ -25,6 +30,13 @@ public class CalcTarPaper {
         return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
     }
 
+    /**
+     * Calculate the amount of TarPaper of a given type, needed to fill corresponding dimensions
+     * @param length int
+     * @param width int
+     * @param tarPaper Product
+     * @return OrderLine Object
+     */
     public static OrderLine getTarPaperPitchedRoof(int length, int width, Product tarPaper) {
 
         double newWidth = tarPaper.getWidth() - 100;  //overlay

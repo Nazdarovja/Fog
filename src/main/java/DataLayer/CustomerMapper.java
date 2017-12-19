@@ -16,6 +16,16 @@ import java.util.List;
  */
 public class CustomerMapper {
 
+    /**
+     * Checks if user with given credentials exist in database.
+     *
+     * @param email String with user email
+     * @param password String with user password
+     * @param ipAddress String with ipAddress
+     * @return Customer object if exist.
+     * @throws LoginException with ipAddress info if not.
+     * @throws Exception
+     */
     public static Customer login(String email, String password, String ipAddress) throws LoginException, Exception {
         ResultSet rs = null;
         PreparedStatement pstmt = null;
@@ -29,6 +39,7 @@ public class CustomerMapper {
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
+
                 String mail = rs.getString("email");
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
@@ -61,33 +72,14 @@ public class CustomerMapper {
         }
     }
 
-    public static boolean isCustomerRegistered(Customer c) throws FogException, Exception {
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        Connection conn = null;
-        try {
-            conn = DBConnector.getConnection();
-            String SQL = "SELECT * from Customer WHERE email=?";
-            ps = conn.prepareStatement(SQL);
-            ps.setString(1, c.getEmail());
-            rs = ps.executeQuery();
-
-            return rs.next();
-        } catch (SQLException ex) {
-            throw new FogException(ex.getMessage());
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-    }
-
+    /**
+     * Get corresponding city from database to given zipcode.
+     *
+     * @param zipcode
+     * @return City as String.
+     * @throws FogException
+     * @throws Exception
+     */
     public static String getCity(int zipcode) throws FogException, Exception {
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -118,42 +110,49 @@ public class CustomerMapper {
             }
         }
     }
-
-    // Exception til LoginException??
-     public static Customer createCustomer(Customer c) throws FogException, Exception {
+    
+    /**
+     * Insert a customer in database.
+     * @param c Customer object
+     * @return Customer object
+     * @throws FogException
+     * @throws Exception
+     */
+    public static Customer createCustomer(Customer c) throws FogException, Exception {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            
-            //TODO REMOVE isCustomerRegistered (SQL throws an exception is the right approach)
-            if (!isCustomerRegistered(c)) {
-                con = DBConnector.getConnection();
-                String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                ps = con.prepareStatement(SQL);
-                ps.setString(1, c.getEmail());
-                ps.setString(2, c.getName());
-                ps.setString(3, c.getSurname());
-                ps.setString(4, Integer.toString(c.getPhonenumber()));
-                ps.setString(5, c.getAddress());
-                ps.setString(6, c.getPassword());
-                ps.setString(7, Integer.toString(c.getZipcode()));
-                ps.executeUpdate();
 
-                String email = c.getEmail();
-                String passwd = c.getPassword();
-                String name = c.getName();
-                String surname = c.getSurname();
-                int phonenumber = c.getPhonenumber();
-                String address = c.getAddress();
-                int zipcode = c.getZipcode();
-                String city = getCity(zipcode);
+            con = DBConnector.getConnection();
+            String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(SQL);
+            ps.setString(1, c.getEmail());
+            ps.setString(2, c.getName());
+            ps.setString(3, c.getSurname());
+            ps.setString(4, Integer.toString(c.getPhonenumber()));
+            ps.setString(5, c.getAddress());
+            ps.setString(6, c.getPassword());
+            ps.setString(7, Integer.toString(c.getZipcode()));
+            ps.executeUpdate();
 
-                return new Customer(email, name, surname, phonenumber, address, zipcode, passwd, city);
-            } else {
-                throw new FogException(" Specified email already exists ");
-            }
+            String email = c.getEmail();
+            String passwd = c.getPassword();
+            String name = c.getName();
+            String surname = c.getSurname();
+            int phonenumber = c.getPhonenumber();
+            String address = c.getAddress();
+            int zipcode = c.getZipcode();
+            String city = getCity(zipcode);
+
+            return new Customer(email, name, surname, phonenumber, address, zipcode, passwd, city);
+
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new Exception(ex.getMessage());
+            if (ex.getMessage().contains("Duplicate")) {
+                throw new FogException("Specified email already exists");
+            } else {
+                throw new FogException(ex.getMessage());
+            }
+
         } finally {
             if (ps != null) {
                 ps.close();
@@ -164,6 +163,13 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get list of customer objects with inquiry from database.
+     *
+     * @return list of Customer objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> customersWithInquiry() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -206,6 +212,14 @@ public class CustomerMapper {
 
     }
 
+    /**
+     * Get list of customers from database with inquiries of a given status.
+     *
+     * @param status String ogject
+     * @return List of Customer Objects
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> customersByInquiryStatus(String status) throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -248,6 +262,13 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get lst of all customers from database.
+     *
+     * @return list of Customer Objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Customer> allCustomers() throws FogException, Exception {
         List<Customer> customers = new ArrayList<>();
         Customer c;
@@ -289,6 +310,14 @@ public class CustomerMapper {
         }
     }
 
+    /**
+     * Get customer from database with a given email adress.
+     *
+     * @param email String object
+     * @return Customer Object.
+     * @throws FogException
+     * @throws Exception
+     */
     public static Customer customerByEmail(String email) throws FogException, Exception {
         Customer customer;
         ResultSet rs = null;

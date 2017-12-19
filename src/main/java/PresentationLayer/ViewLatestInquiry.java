@@ -26,8 +26,6 @@ public class ViewLatestInquiry extends Command {
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
         
-        System.out.println(bom.getMaterials().get(0).getProductName());
-        
         request.setAttribute("bom", bom);
         request.setAttribute("inquiry", i);
         

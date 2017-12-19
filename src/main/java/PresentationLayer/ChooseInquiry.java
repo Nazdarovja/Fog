@@ -10,7 +10,6 @@ import FunctionLayer.Customer;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,8 @@ public class ChooseInquiry extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
         HttpSession session = request.getSession();
-        Customer customer = (Customer)session.getAttribute("customer");
+
+        Customer customer = (Customer) session.getAttribute("customer");
         List<Inquiry> inquiries = LogicFacade.getCustomerInquiries(customer);
         int inquiryId = Integer.parseInt(request.getParameter("inquiryId"));
         Inquiry inquiry = LogicFacade.getChosenInquiry(inquiries, inquiryId);
@@ -33,24 +33,17 @@ public class ChooseInquiry extends Command {
         //Set Attributes to the chosen inquiry Attributes.
         //int id, int carportHeight, int carportLength, int carportWidth, int shackWidth, int shackLength, String roofType, String angle, 
         //String commentCustomer, Date period
-        session.setAttribute("height", inquiry.getCarportHeight());
-        session.setAttribute("length", inquiry.getCarportLength());
-        session.setAttribute("width", inquiry.getCarportWidth());
-        session.setAttribute("shackWidth", inquiry.getShackWidth());
-        if(inquiry.getShackWidth() > 0){
+        if (inquiry.getShackWidth() > 0) {
             session.setAttribute("shackCheckbox", "on");
         }
-        session.setAttribute("shackLength", inquiry.getShackLength());
-        session.setAttribute("roofType", inquiry.getRoofType());
-        session.setAttribute("angle", inquiry.getAngle());
-        session.setAttribute("comment", inquiry.getCommentCustomer());
-        if(inquiry.getPeriod() != null) {
-        session.setAttribute("wishedDelivery", inquiry.getPeriod().getYear()+"-"+inquiry.getPeriod().getMonth()+"-"+inquiry.getPeriod().getDate());
+        if (inquiry.getPeriod() != null) {
+            session.setAttribute("wishedDelivery", inquiry.getPeriod().getYear() + "-" + inquiry.getPeriod().getMonth() + "-" + inquiry.getPeriod().getDate());
         }
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
         session.setAttribute("inquiry", inquiry);
-        
+        session.setAttribute("lastpage", "QuickBuild");
+
         return "QuickBuild";
     }
 

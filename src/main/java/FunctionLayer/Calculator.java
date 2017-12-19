@@ -17,6 +17,13 @@ import java.util.List;
  */
 public class Calculator {
 
+    /**
+     * Get Bill of Materials for a given Inquiry Object.
+     * @param inquiry Inquiry object
+     * @return BillOfMaterials Object
+     * @throws FogException
+     * @throws Exception
+     */
     public static BillOfMaterials getBillOfMaterials(Inquiry inquiry) throws FogException, Exception {
         BillOfMaterials bom = new BillOfMaterials();
         List<Product> products = ProductMapper.getProducts();
@@ -97,7 +104,7 @@ public class Calculator {
                 bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
         }
-
+//TODO REMOVE THIS DEBUG :) 
         /////////////////////////////////////////////////////////////////////////////
         //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG /////// MUHAHAHAHAHAHAHHA
         ///////////////////////////////////////////////////////////////////////////
@@ -110,6 +117,12 @@ public class Calculator {
         return bom;
     }
     
+    /**
+     * Get Product from list of Product by its String name
+     * @param productName String
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getChosenProduct(String productName, List<Product> products) {
         Product product = null;
         for (Product p : products) {
@@ -120,6 +133,12 @@ public class Calculator {
         return product;
     }
 
+    /**
+     * get list of Product by given String catergory name 
+     * @param category String
+     * @param products list of Product
+     * @return List of Product object
+     */
     public static List<Product> getChosenCategory(String category, List<Product> products) {
         List<Product> chosenCategoryList = new ArrayList<>();
         for (Product p : products) {
@@ -130,6 +149,12 @@ public class Calculator {
         return chosenCategoryList;
     }
 
+    /**
+     * Calculate the roof width from given width and angle. 
+     * @param carportWidth int
+     * @param angle int
+     * @return roofWidth as double
+     */
     private static double calcRoofWidth(int carportWidth, int angle) {
         double halfWidth = carportWidth / 2;
         double radiantAngle = Math.toRadians(angle);
@@ -138,6 +163,12 @@ public class Calculator {
         return calcHypotenuse(carportWidth, carportHeight);
     }
 
+    /**
+     * Calculate the roof height from given width and angle. 
+     * @param carportWidth int
+     * @param angle int
+     * @return roof height as double
+     */
     public static double calcRoofHeight(int carportWidth, int angle) {
         carportWidth = carportWidth * 10;   //cm to mm
         double halfWidth = carportWidth / 2;
@@ -145,12 +176,24 @@ public class Calculator {
         return halfWidth / Math.cos(radiantAngle);
     }
 
+    /**
+     * * Calculate the size of the roof hypothenus from given dimensions
+     * @param a doubld
+     * @param b double
+     * @return hypothenus as double
+     */
     private static double calcHypotenuse(double a, double b) {
         double aPow = Math.pow(a, 2);
         double bPow = Math.pow(b, 2);
         return Math.sqrt(aPow + bPow);
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param length int
+     * @param products list of Product
+     * @return Product
+     */
     public static Product getCorrectLengthProduct(int length, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

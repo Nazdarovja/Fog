@@ -1,7 +1,7 @@
 package FunctionLayer;
 
 /**
- * The purpose of LoginSampleException is to...
+ * Customized Exception class.
  * @author kasper
  */
 public class FogException extends Exception {

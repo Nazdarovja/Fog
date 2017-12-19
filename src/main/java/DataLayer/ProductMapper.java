@@ -23,12 +23,10 @@ public class ProductMapper {
     private static List<Product> productList;
 
     /**
-     * Recieve a list from the database with Product objects.
-     *
-     * @return List of Product objects form the chosen category
-     * @throws FunctionLayer.FogException
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
+     * Get a list from the database with Product objects.
+     * @return List of Product
+     * @throws FogException
+     * @throws Exception
      */
     public static List<Product> getProducts() throws FogException, Exception {
         Connection conn = null;
@@ -77,6 +75,14 @@ public class ProductMapper {
         return productList;
     }
 
+    /**
+     * Get product from database.
+     * @param category String 
+     * @param productName String
+     * @return Product
+     * @throws FogException
+     * @throws Exception
+     */
     public static Product getSingleProduct(String category, String productName) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;

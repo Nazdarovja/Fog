@@ -18,13 +18,13 @@ public class CalcShackPost {
     /**
      * Takes carport dimensions and shack dimensions as input, and list of poles. 
      * If shack width is less than that of carport, add 2 extra posts, else add 1.
-     * @param carportLength
-     * @param carportWidth
-     * @param height
-     * @param shackLength
-     * @param shackWidth
-     * @param poles
-     * @return 
+     * @param carportLength int
+     * @param carportWidth int
+     * @param height int
+     * @param shackLength int
+     * @param shackWidth int
+     * @param poles list of Product
+     * @return Orderline Object
      */
     public static OrderLine getPostsShack(int carportLength, int carportWidth, int height, int shackLength, int shackWidth, List<Product> poles) {
 
@@ -49,6 +49,12 @@ public class CalcShackPost {
         return new OrderLine(post, post.getLength(), numberOfPost, "stk", "Stolper nedgraves 90 cm. i jord - til skurbrug");
     }
 
+    /**
+     * Support method - Calculate the most correct Product from given dimension.
+     * @param height int 
+     * @param products list of Product
+     * @return Product
+     */
     private static Product getCorrectLengthProduct(int height, List<Product> products) {
         // Sorts list on product.getLength() attribute.
         products.sort(Comparator.comparing(Product::getLength));

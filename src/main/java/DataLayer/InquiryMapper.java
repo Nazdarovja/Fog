@@ -22,6 +22,13 @@ import java.util.List;
  */
 public class InquiryMapper {
 
+    /**
+     * Insert Inquiry object into database.
+     * @param i Inquiry object
+     * @return Inquiry object
+     * @throws FogException
+     * @throws Exception
+     */
     public static Inquiry registerInitialInquiry(Inquiry i) throws FogException, Exception {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -83,6 +90,12 @@ public class InquiryMapper {
         return inquiry;
     }
 
+    /**
+     * Get list of all inquiries from database.
+     * @return List of Inquiry Objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Inquiry> allInquiries() throws FogException, Exception {
         List<Inquiry> inquiries = new ArrayList<>();
         Inquiry i;
@@ -133,6 +146,13 @@ public class InquiryMapper {
 
     }
 
+    /**
+     * Get inquiry with given id from database.
+     * @param id of inquiry as int
+     * @return Inquiry object
+     * @throws FogException
+     * @throws Exception
+     */
     public static Inquiry inquiryById(int id) throws FogException, Exception {
         Inquiry i;
         ResultSet rs = null;
@@ -185,6 +205,13 @@ public class InquiryMapper {
 
     }
 
+    /**
+     * Get a Inquiry from database by given customers email, sorted by (latest) date.
+     * @param customerEmail String
+     * @return Inquiry Object.
+     * @throws FogException
+     * @throws Exception
+     */
     public static Inquiry LatestInquiryByCustomer(String customerEmail) throws FogException, Exception {
         Inquiry i;
         ResultSet rs = null;
@@ -237,6 +264,16 @@ public class InquiryMapper {
     }
 ///// BRUGES IKKE NOGEN STEDER ???? //////
 
+    /**
+     * Update carport size in database, by given parameters.
+     * @param id int
+     * @param height int
+     * @param length int
+     * @param width int
+     * @return Inquiry object.
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Inquiry updateCarportSize(int id, int height, int length, int width) throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -279,6 +316,15 @@ public class InquiryMapper {
     }
 ///// BRUGES IKKE NOGEN STEDER ???? //////
 
+    /**
+     * Update carport shack size in database, by given parameters.
+     * @param id int
+     * @param length int
+     * @param width int
+     * @return Inquiry object.
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Inquiry updateShackSize(int id, int length, int width) throws SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -319,6 +365,23 @@ public class InquiryMapper {
         return inquiry;
     }
 
+    /**
+     * Update inquiry in database by given parameters.
+     * @param id int
+     * @param height int
+     * @param length int
+     * @param width int
+     * @param shackLength int
+     * @param shackWidth int
+     * @param roofType String
+     * @param roofMat String
+     * @param angle String
+     * @param comment String
+     * @param status String
+     * @return Inquiry Object
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Inquiry updateInquiry(int id, int height, int length, int width,
             int shackLength, int shackWidth, String roofType,
             String roofMat, String angle, String comment, String status)
@@ -370,6 +433,13 @@ public class InquiryMapper {
         return inquiry;
     }
 
+    /**
+     * Get list of Inquiries by a given customer.
+     * @param customer Customer object
+     * @return List of Inquiry objects.
+     * @throws FogException
+     * @throws Exception
+     */
     public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException, Exception {
         List<Inquiry> inquiries = new ArrayList<>();
         Inquiry i;
@@ -423,6 +493,13 @@ public class InquiryMapper {
         }
     }
 
+    /**
+     * Update inquiry in database.
+     * @param i Inquiry object.
+     * @throws FogException
+     * @throws SQLException
+     * @throws Exception
+     */
     public static void sendSavedInquiry(Inquiry i) throws FogException, SQLException, Exception {
         Connection conn = null;
         PreparedStatement ps = null;
