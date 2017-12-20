@@ -198,7 +198,7 @@ public class GeneratePDF {
         byte[] pdfAttachment;
         pdfAttachment = loadFile(DESTPDF);
 
-        return sendEmail(pdfAttachment);
+        return sendEmail(customer, pdfAttachment);
     }
 
     /**
@@ -252,7 +252,7 @@ public class GeneratePDF {
      * @return
      * @throws EmailException
      */
-    private static MultiPartEmail sendEmail(byte[] PDF) throws FogException {
+    private static MultiPartEmail sendEmail(Customer customer, byte[] PDF) throws FogException {
 
         // create the mail
         MultiPartEmail email = new MultiPartEmail();
@@ -262,7 +262,7 @@ public class GeneratePDF {
         email.setAuthenticator(new DefaultAuthenticator("fakejohannesfog", "johannesfogpassword1"));
         email.setSSL(true);
         try {
-            email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog"); //TODO .getEmail
+            email.addTo(customer.getEmail(), "Fake Johannes Fog");
             email.setFrom("fakejohannesfog@gmail.com", "Fake Johannes Fog");
             email.setSubject("Ordre fra Fake Johannes Fog");
             email.setMsg("Besked om din ordre her.");
