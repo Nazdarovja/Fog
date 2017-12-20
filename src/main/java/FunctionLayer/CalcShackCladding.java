@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Alexander W. Hørsted-Andersen 
+ * @author Alexander W. Hørsted-Andersen
  */
 public class CalcShackCladding {
 
@@ -19,14 +19,15 @@ public class CalcShackCladding {
     //--------------------     løsholt
     //  --|--   --|--       cladding, inner
     //      --|--           cladding, outer
-
     /**
-     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions
+     * Calculate the amount of Cladding of a given type, needed to fill
+     * corresponding dimensions
+     *
      * @param shackLength int
      * @param shackWidth int
      * @param carportHeight int
      * @param claddingList list of Product
-     * @return OrderLine Object 
+     * @return OrderLine Object
      */
     public static OrderLine getCladdingForShackFlatRoof(int shackLength, int shackWidth, int carportHeight, List<Product> claddingList) {
 
@@ -53,9 +54,10 @@ public class CalcShackCladding {
     }
 
     //gavle / gable / width
-
     /**
-     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions
+     * Calculate the amount of Cladding of a given type, needed to fill
+     * corresponding dimensions
+     *
      * @param carportWidth int
      * @param carportHeight int
      * @param shackWidth int
@@ -72,7 +74,7 @@ public class CalcShackCladding {
         double widthToBeCovered = shackWidth * 2;    //2 sides
         double bufferBetweenCladding = 60;  //mm
 
-        double rooffHeight = Calculator.calcRoofHeight(carportWidth, roofAngle);
+        double rooffHeight = calcRoofHeight(carportWidth, roofAngle);
         int totalHeight = (int) Math.ceil(carportHeight + rooffHeight);
 
         Product cladding = getCorrectLengthProduct(totalHeight, claddingList);
@@ -85,12 +87,13 @@ public class CalcShackCladding {
         return new OrderLine(cladding, cladding.getLength(), result, "stk", "beklædning af gavle 1 på 2");
 
     }
-    
-    //side / length
 
+    //side / length
     /**
-     * Calculate the amount of Cladding of a given type, needed to fill corresponding dimensions.
-     * @param carportWidth int 
+     * Calculate the amount of Cladding of a given type, needed to fill
+     * corresponding dimensions.
+     *
+     * @param carportWidth int
      * @param carportHeight int
      * @param shackLength int
      * @param roofAngle int
@@ -106,7 +109,7 @@ public class CalcShackCladding {
         double lengthToBeCovered = shackLength * 2;  //2 sides
         double bufferBetweenCladding = 60;  //mm
 
-        double rooffHeight = Calculator.calcRoofHeight(carportWidth, roofAngle);
+        double rooffHeight = calcRoofHeight(carportWidth, roofAngle);
         int totalHeight = (int) Math.ceil(carportHeight + rooffHeight);
 
         Product cladding = getCorrectLengthProduct(totalHeight, claddingList);
@@ -122,6 +125,7 @@ public class CalcShackCladding {
 
     /**
      * Support method - Calculate the most correct Product from given dimension.
+     *
      * @param length int
      * @param products list of Product
      * @return Product
@@ -140,5 +144,19 @@ public class CalcShackCladding {
             }
         }
         return null;
+    }
+
+    /**
+     * Calculate the roof height from given width and angle.
+     *
+     * @param carportWidth int
+     * @param angle int
+     * @return roof height as double
+     */
+    private static double calcRoofHeight(int carportWidth, int angle) {
+        carportWidth = carportWidth * 10;   //cm to mm
+        double halfWidth = carportWidth / 2;
+        double radiantAngle = Math.toRadians(angle);
+        return halfWidth / Math.cos(radiantAngle);
     }
 }

@@ -236,6 +236,4 @@ public class SVGFromTop {
             svg.append("<rect x='").append(xValue-8).append("' y='").append(yValue).append("' height='16' width='16' stroke-width='2' stroke='black' fill='#cece9f'/>");
         }
     }
-    public static void main(String[] args) {
-    }
 }

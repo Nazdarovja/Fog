@@ -191,11 +191,13 @@ public class JspUtilTable {
 
         for (Product p : products) {
             if (roofType.equals("rejsning") && (p.getCategory().equals("tagsten") || p.getCategory().equals("tagpap"))) {
-                res.append("<option>" + p.getName())
+                res.append("<option>")
+                        .append(p.getName())
                         .append("</option>");
             }
             if (roofType.equals("fladt") && (p.getCategory().equals("trapeztag") || p.getCategory().equals("tagpap"))) {
-                res.append("<option>" + p.getName())
+                res.append("<option>")
+                        .append(p.getName())
                         .append("</option>");
             }
         }

@@ -5,8 +5,6 @@
  */
 package FunctionLayer;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -26,7 +24,7 @@ public class CalcLath {
         int quantity = 0;
         
         // bredden skal fodres til denne metode fra en anden algoritme metode.
-        Product p = getCorrectLengthProduct(length, products);
+        Product p = Calculator.getCorrectLengthProduct(length, products);
         // this is the length for each row of lath
         // lægtelængden
         //øverste taglægte placeres 30mm fra spidsen af spæret og herefter skal der væres 307mm til næste lægte.
@@ -69,7 +67,7 @@ public class CalcLath {
      */
     public static OrderLine calculateTopLath(int length, int width, List<Product> products) {
         int quantity = 1;
-        Product p = getCorrectLengthProduct(length, products);
+        Product p = Calculator.getCorrectLengthProduct(length, products);
         // varierer længden alt efter længden på carport???? Eller er toplægten 420 cm som standard??
         // 2 toplægter til hver side af taget på carport
         // Længden af toplægten er kortere end normallægterne
@@ -98,7 +96,7 @@ public class CalcLath {
     public static OrderLine calculateDoorZLath(int length, int width, List<Product> products) {
         int quantity = 1;
         
-        Product p = getCorrectLengthProduct(length, products);
+        Product p = Calculator.getCorrectLengthProduct(length, products);
         
         if(length / p.getLength() >= 2)
             quantity *= length / p.getLength();
@@ -115,30 +113,6 @@ public class CalcLath {
         
         // hvis dør, på skur??
         return new OrderLine(p, length, quantity, "stk", "til z på bagside af dær");
-    }
-    
-    /**
-     * Support method - Calculate the most correct Product from given dimension.
-     * @param length int
-     * @param products int
-     * @return Product
-     */
-    private static Product getCorrectLengthProduct(int length, List<Product> products) {
-        // Sorts list on product.getLength() attribute.
-        products.sort(Comparator.comparing(Product::getLength));
-        // We need the list in descending order, so we reverse order it, so we start with the longest length.
-        Collections.reverse(products);
-
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
-            // if the products is longer than product available, the product is set to the largest in stock
-            // else if the product is shorter than the shortest available product, the product is set as the smallest in stock
-            // in regular cases it will chose the appropriate size product for the length
-            if (length / p.getLength() >= 1 || i == products.size() - 1) {
-                return p;
-            }
-        }
-        return null;
     }
     
 }

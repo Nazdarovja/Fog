@@ -10,7 +10,6 @@ import FunctionLayer.Customer;
 import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

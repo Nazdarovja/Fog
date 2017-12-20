@@ -40,6 +40,7 @@ public class LoginEmployee extends Command {
         String email = request.getParameter("email");
         String tableTagId = "inquirytabel";
         String inquiryTable = JspUtilTable.tableInquiry(tableTagId, i);
+        
         if (email != null) request.setAttribute("email", email);
         else request.setAttribute("email", "");
         request.setAttribute("tableTagId", tableTagId);

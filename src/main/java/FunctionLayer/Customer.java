@@ -19,6 +19,14 @@ public class Customer {
     private String name;
     private String surname;
     private int phonenumber;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     private String address;
     private int zipcode;
     private String password; 
@@ -103,14 +111,6 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override

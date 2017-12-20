@@ -19,6 +19,7 @@ public class Calculator {
 
     /**
      * Get Bill of Materials for a given Inquiry Object.
+     *
      * @param inquiry Inquiry object
      * @return BillOfMaterials Object
      * @throws FogException
@@ -29,11 +30,12 @@ public class Calculator {
         int length = inquiry.getCarportLength();
         int width = inquiry.getCarportWidth();
         Product roofMaterial = getChosenProduct(inquiry.getRoofMaterial(), products);
-        if(roofMaterial == null) throw new FogException( "No roof material was found" );
-        
+        if (roofMaterial == null) {
+            throw new FogException("Intet tag materiale fundet!");
+        }
+
         // FLAT ROOF ALGORITHM
         if (inquiry.getRoofType().equals("fladt")) {
-            System.out.println("FLAT");
             //post / stolpe
             bom.addOrderLine(CalcPost.getPostsFlatRoof(length, width, inquiry.getCarportHeight(), getChosenCategory("stolpe", products)));
             //topplate / rem
@@ -66,7 +68,6 @@ public class Calculator {
             }
             // PITCHED ROOF ALHORITHM
         } else {
-            System.out.println("PITCHED");
             //post / stolpe
             bom.addOrderLine(CalcPost.getPostsPitchedRoof(length, width, inquiry.getCarportHeight(), getChosenCategory("stolpe", products)));
             //topplate / rem
@@ -76,10 +77,9 @@ public class Calculator {
             //lath / lægte
             bom.addOrderLine(CalcLath.calculateRegularLath(length, (int) calcRoofWidth(width, Integer.parseInt(inquiry.getAngle())), getChosenCategory("lægte", products)));
             bom.addOrderLine(CalcLath.calculateTopLath(length, width, getChosenCategory("lægte", products)));
-            
-            
+
             //roof material
-            if (roofMaterial.getCategory().equals("tagpap")) {  
+            if (roofMaterial.getCategory().equals("tagpap")) {
                 //tarPaper / tagpap
                 bom.addOrderLine(CalcTarPaper.getTarPaperFlatRoof(length, width, roofMaterial));
             } else {
@@ -103,21 +103,12 @@ public class Calculator {
                 bom.addOrderLine(CalcLath.calculateDoorZLath(length, width, getChosenCategory("beklædning", products)));
             }
         }
-//TODO REMOVE THIS DEBUG :) 
-        /////////////////////////////////////////////////////////////////////////////
-        //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG /////// MUHAHAHAHAHAHAHHA
-        ///////////////////////////////////////////////////////////////////////////
-        bom.getMaterials().forEach((o) -> {
-            System.out.println(o.getQuantity() + " " + o.getProduct().toString());
-        });
-        /////////////////////////////////////////////////////////////////////////////
-        //////// DEBUG DEBUG DEBUG DEBUG /////////// DEBUG DEBUG DEBUG DEBUG ///////
-        ///////////////////////////////////////////////////////////////////////////
         return bom;
     }
-    
+
     /**
      * Get Product from list of Product by its String name
+     *
      * @param productName String
      * @param products list of Product
      * @return Product
@@ -133,7 +124,8 @@ public class Calculator {
     }
 
     /**
-     * get list of Product by given String catergory name 
+     * get list of Product by given String catergory name
+     *
      * @param category String
      * @param products list of Product
      * @return List of Product object
@@ -149,7 +141,8 @@ public class Calculator {
     }
 
     /**
-     * Calculate the roof width from given width and angle. 
+     * Calculate the roof width from given width and angle.
+     *
      * @param carportWidth int
      * @param angle int
      * @return roofWidth as double
@@ -163,20 +156,8 @@ public class Calculator {
     }
 
     /**
-     * Calculate the roof height from given width and angle. 
-     * @param carportWidth int
-     * @param angle int
-     * @return roof height as double
-     */
-    public static double calcRoofHeight(int carportWidth, int angle) {
-        carportWidth = carportWidth * 10;   //cm to mm
-        double halfWidth = carportWidth / 2;
-        double radiantAngle = Math.toRadians(angle);
-        return halfWidth / Math.cos(radiantAngle);
-    }
-
-    /**
      * * Calculate the size of the roof hypothenus from given dimensions
+     *
      * @param a doubld
      * @param b double
      * @return hypothenus as double
@@ -189,6 +170,7 @@ public class Calculator {
 
     /**
      * Support method - Calculate the most correct Product from given dimension.
+     *
      * @param length int
      * @param products list of Product
      * @return Product

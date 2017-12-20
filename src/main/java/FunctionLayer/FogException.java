@@ -2,7 +2,7 @@ package FunctionLayer;
 
 /**
  * Customized Exception class.
- * @author kasper
+ * @author Stanislav
  */
 public class FogException extends Exception {
 

@@ -81,7 +81,7 @@ public class LogicFacade {
             case "behandlet":
                 return CustomerMapper.customersByInquiryStatus(status);
             default:
-                throw new FogException(" unknown inquiry status ");
+                throw new FogException(" Ukendt status på forespørsel ");
         }
     }
 

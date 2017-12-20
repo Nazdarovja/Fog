@@ -17,8 +17,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.activation.DataSource;
 import org.apache.commons.mail.*;
 
@@ -91,9 +89,9 @@ public class GeneratePDF {
         doc.add(table_cus);
         doc.add(new Paragraph("\n"));
 
-        /////////////////////
-        // Creating inquiry info
-        /////////////////////
+        ////////////////////////////
+        // Creating inquiry info //
+        //////////////////////////
         float[] pointColumnWidthsInquiry = {50F, 50F};  //2 wide
         Table table_inquiry = new Table(pointColumnWidthsInquiry);
         table_inquiry.addCell(new Cell().add("Forespørgsel").setBold());
@@ -215,8 +213,6 @@ public class GeneratePDF {
             inputStream = new FileInputStream(sourcePath);
             return readFully(inputStream);
         } catch (FileNotFoundException ex) {
-            throw new FogException(ex.getMessage());
-        } catch (IOException ex) {
             throw new FogException(ex.getMessage());
         } finally {
             if (inputStream != null) {
