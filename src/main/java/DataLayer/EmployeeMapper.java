@@ -48,7 +48,7 @@ public class EmployeeMapper {
                 } else {
                     // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
                     //////////////////////////////////////////////////////////////////////////////////////////////////////
-                    throw new LoginException("Login attempt on user with id: " + id + ", pwd: " + pwd + ", IP Address: " + ipAddress);
+                    throw new LoginException("Forsøg på Login for bruger: " + id + ", adgangskode: " + pwd + ", IP Addresse: " + ipAddress);
                 }
             }
         } 

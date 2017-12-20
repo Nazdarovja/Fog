@@ -172,7 +172,7 @@ public class InquiryMapper {
      * @throws FogException if SQLException or Exception is thrown, it is converted 
      * to this exception and added an appropriate message for the customer in some cases
      */
-    public static Inquiry LatestInquiryByCustomer(String customerEmail) throws FogException {
+    public static Inquiry latestInquiryByCustomer(String customerEmail) throws FogException {
         Inquiry i;
         String SQL = "SELECT * FROM Inquiry WHERE email = ? AND date = ( SELECT MAX(date) FROM Inquiry WHERE email = ? GROUP BY email) ";
 

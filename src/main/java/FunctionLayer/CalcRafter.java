@@ -36,7 +36,7 @@ public class CalcRafter {
         int qty = length / RAFTERSPACEFLAT;
         if (qty % RAFTERSPACEFLAT != 0) qty++;
 
-        if (raft == null) throw new FogException( "no raft found with length: "+RAFTERLENGTHFLAT );
+        if (raft == null) throw new FogException( "Intet spær fundet med længde: "+RAFTERLENGTHFLAT );
         return new OrderLine(raft, length, qty, "stk.", "Spærtræ");
     }
 
@@ -58,7 +58,7 @@ public class CalcRafter {
         int qty = length / RAFTERSPACEPITCHED;
         if (qty % RAFTERSPACEPITCHED != 0) qty++;
         
-        if (raft == null) throw new FogException( "no raft found with length: "+RAFTERLENGTHPITCHED );
+        if (raft == null) throw new FogException( "Intet spær fundet med længde: "+RAFTERLENGTHPITCHED );
         return new OrderLine(raft, length, qty, "stk.", "Spær sæt");
     }
     

@@ -29,7 +29,7 @@ public class ViewInquiry extends Command {
         Inquiry i = LogicFacade.viewLatestInquiryByEmail(customer);
         Inquiry inquiry = LogicFacade.viewInquiry(i.getId());
         BillOfMaterials bom = Calculator.getBillOfMaterials(inquiry);
-        List<Product> flatMat, pitchedMat, neutralMat;
+        List<Product> flatMat, pitchedMat;
 
         flatMat = LogicFacade.getFlatRoofProducts();
         pitchedMat = LogicFacade.getPitchedRoofProducts();

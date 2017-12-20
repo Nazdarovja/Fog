@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import static DataLayer.InquiryMapper.inquiryById;
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Customer;
