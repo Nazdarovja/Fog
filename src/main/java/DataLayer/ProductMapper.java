@@ -83,7 +83,7 @@ public class ProductMapper {
                     int height = rs.getInt("height");
                     product = new Product(id, name, cat, price, length, width, height);
                 } else {
-                    throw new FogException("Could not find product");
+                    throw new FogException("Kunne ikke finde produkt");
                 }
             } 
          }

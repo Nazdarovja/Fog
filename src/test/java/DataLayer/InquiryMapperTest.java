@@ -111,7 +111,7 @@ public class InquiryMapperTest {
     public void latestInquiryByCustomer() throws FogException {
         System.out.println("latestInquiryByCustomer");
         String email = "test1@test.dk";
-        Inquiry inquiry = InquiryMapper.LatestInquiryByCustomer(email);
+        Inquiry inquiry = InquiryMapper.latestInquiryByCustomer(email);
         assertNotNull(inquiry);
     }
     

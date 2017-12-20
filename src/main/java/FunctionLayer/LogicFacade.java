@@ -63,7 +63,7 @@ public class LogicFacade {
     }
 
     public static Inquiry viewLatestInquiryByEmail(String customerEmail) throws FogException {
-        return InquiryMapper.LatestInquiryByCustomer(customerEmail);
+        return InquiryMapper.latestInquiryByCustomer(customerEmail);
     }
 
     public static List<Customer> viewAllCustomers() throws FogException {

@@ -44,13 +44,10 @@ public class CustomerMapper {
                     String pass = rs.getString("password");
                     String city = rs.getString("city");
 
-    //            String city = //methode til at hente fra anden table
                     Customer customer = new Customer(mail, name, surname, phonenumber, address, zipcode, pass, city);
                     return customer;
                 } else {
-                    // TODO INSERT LOG OF FAIL (EMAIL PRESENT IN LOG) login failure
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////
-                    throw new LoginException("Login attempt on user with email: " + email + ", pwd: " + password + ", IP Address: " + ipAddress);
+                    throw new LoginException("Forsøg på Login for bruger med email: " + email + ", adgangskode: " + password + ", IP Addresse: " + ipAddress);
                 }
             }
         } catch (SQLException ex) {
@@ -75,7 +72,7 @@ public class CustomerMapper {
                 if (rs.next()) {
                     return rs.getString(1);
                 } else {
-                    throw new FogException(" no city with specified zipcode ");
+                    throw new FogException(" Ingen by med dette postnummer ");
                 }
             }
         } catch (SQLException ex) {
@@ -116,7 +113,7 @@ public class CustomerMapper {
 
         } catch (SQLException ex) {
             if (ex.getMessage().contains("Duplicate")) {
-                throw new FogException("Specified email already exists");
+                throw new FogException("Denne email adresse eksisterer allerede i systemet.");
             } else {
                 throw new FogException(ex.getMessage());
             }
@@ -255,7 +252,7 @@ public class CustomerMapper {
 
                     return customer;
                 } else {
-                    throw new FogException(" no customer with specified email ");
+                    throw new FogException(" Ingen kunde med fundet med denne email. ");
                 }
             }
         } catch (SQLException ex) {
