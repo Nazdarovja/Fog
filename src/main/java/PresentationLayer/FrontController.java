@@ -52,12 +52,6 @@ public class FrontController extends HttpServlet {
             request.setAttribute("error", ex.getMessage());
             String lastpage = (String) request.getParameter("lastpage");
             request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            request.setAttribute("error", ex.getMessage());
-            String lastpage = (String) request.getParameter("lastpage");
-            request.getRequestDispatcher("/WEB-INF/" + lastpage + ".jsp").forward(request, response);
-
         }
     }
 

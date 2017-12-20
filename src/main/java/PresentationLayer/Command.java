@@ -59,5 +59,5 @@ public abstract class Command {
         return commands.getOrDefault(commandName, new UnknownCommand());
     }
 
-    abstract String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception; // might change this
+    abstract String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException; 
 }

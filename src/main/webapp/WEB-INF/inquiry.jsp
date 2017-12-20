@@ -117,11 +117,11 @@
                     </tr>
                     <tr>
                         <th>Skur længde</th>
-                        <td> <input id="shackLength" type="number" min="100" max="120" class="form-control" name="shackLength" value="<%= i.getShackLength()%>" form="updateinquiry"> </td>
+                        <td> <input id="shackLength" type="number" class="form-control" name="shackLength" value="<%= i.getShackLength()%>" form="updateinquiry"> </td>
                     </tr>
                     <tr>
                         <th>Skur bredde</th>
-                        <td> <input id="shackWidth" type="number" min="100" max="120" class="form-control" name="shackWidth" value="<%= i.getShackWidth()%>" form="updateinquiry"> </td>
+                        <td> <input id="shackWidth" type="number" class="form-control" name="shackWidth" value="<%= i.getShackWidth()%>" form="updateinquiry"> </td>
                     </tr>
                     <tr>
                         <th>Tagtype</th>
