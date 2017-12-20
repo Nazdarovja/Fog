@@ -27,7 +27,7 @@ public class CalcTarPaper {
         double res = rows * columns;
         int result = (int) Math.ceil(res);
 
-        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
+        return new OrderLine(tarPaper, 0, result, "roll", "Tagpap rulle");
     }
 
     /**
@@ -45,7 +45,7 @@ public class CalcTarPaper {
         double columns = length / newLength;
         double res = (rows * columns) *2;
         int result = (int) Math.ceil(res);
-        return new OrderLine(tarPaper, 0, result, "roll", "tarPaper comment text");
+        return new OrderLine(tarPaper, 0, result, "roll", "Tagpap rulle");
     }
 
 
