@@ -25,7 +25,7 @@ public class LoginEmployee extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException {
         int id;
              
         if (request.getParameter("id").equals("")) id = 0;

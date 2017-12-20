@@ -25,7 +25,7 @@ public class Login extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception{
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException{
         Customer customer = null;
         if (request.getParameter("email") != null) {
             String email = (String) request.getParameter("email");

@@ -21,7 +21,7 @@ public class PassToEmpLogin extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, LoginException {
         return "emplogin";
     }
     

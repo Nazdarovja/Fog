@@ -23,7 +23,7 @@ public class SaveInquiry extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
         

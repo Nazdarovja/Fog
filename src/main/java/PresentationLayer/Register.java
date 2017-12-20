@@ -23,7 +23,7 @@ public class Register extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         Customer c = null;
         
         String email = request.getParameter( "email" );

@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         String customer = request.getParameter("customer");
         int id = Integer.parseInt(request.getParameter("id"));
         

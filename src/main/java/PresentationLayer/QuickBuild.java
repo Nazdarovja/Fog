@@ -25,7 +25,7 @@ public class QuickBuild extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession();
 
         String roofMaterialPitched = LogicFacade.getRoofMaterials("rejsning");

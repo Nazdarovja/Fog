@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ViewCustomers extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         List<Customer> cl = LogicFacade.viewAllCustomers();
         String tableTagId = "customertable";
         String customerTable = JspUtilTable.tableCustomer(tableTagId, cl);

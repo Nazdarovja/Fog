@@ -21,7 +21,7 @@ public class ViewInquiries extends Command
 {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         List<Inquiry> i = LogicFacade.viewInquiries();
         String email = request.getParameter("email");
         String tableTagId = "inquirytabel";

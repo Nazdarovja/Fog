@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 public class SendInquiry extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession(false);
         Customer customer = (Customer) session.getAttribute("customer");
         Inquiry inquiry = (Inquiry) session.getAttribute("inquiry");
