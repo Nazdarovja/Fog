@@ -9,13 +9,13 @@ function findInquiryByEmailAndId(cosEmail,inqId) {
     var email = cosEmail;
     var id = inqId;
     
-    window.open("/Fog/FrontController?command=viewinquiry&customer="+email+"&id="+id+"&lastpage=error","nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
+    window.open("/QuickBuild/FrontController?command=viewinquiry&customer="+email+"&id="+id+"&lastpage=error","nameofwindow","directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1600,height=600");
 }
 
 function findInquiriesByEmail(cosEmail) {
     var email = cosEmail;
     
-    window.location.replace("/Fog/FrontController?command=viewinquiries&email="+email);
+    window.location.replace("/QuickBuild/FrontController?command=viewinquiries&email="+email);
 }
 
 function sortTable(idTable, sortIndex) {

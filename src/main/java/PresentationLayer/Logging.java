@@ -24,13 +24,14 @@ public class Logging {
      * @throws FunctionLayer.FogException
     */
     public static void setUp() throws FogException {
-        if(Configuration.getMyLogger().getHandlers().length < 1) { 
+        if(Configuration.getMyLogger().getHandlers().length < 1) {
             Configuration.getMyLogger().addHandler(new ConsoleHandler());
             if(Configuration.PRODUCTION) {
                 try {
                     FileHandler fileHandler = new FileHandler(Configuration.LOGFILEPATH);
                     fileHandler.setFormatter(new SimpleFormatter());
                     Configuration.getMyLogger().addHandler(fileHandler);
+                    fileHandler.close();
                 } catch (IOException | SecurityException ex) {
                     throw new FogException(ex.getMessage());
                 } 

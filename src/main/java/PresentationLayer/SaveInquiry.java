@@ -11,6 +11,7 @@ import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,12 +25,14 @@ public class SaveInquiry extends Command {
     */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        Inquiry inquiry = (Inquiry) request.getSession().getAttribute("inquiry");
+        HttpSession session = request.getSession(false);
+        Customer customer = (Customer) session.getAttribute("customer");
+        Inquiry inquiry = (Inquiry) session.getAttribute("inquiry");
         
         inquiry.setEmail(customer.getEmail());
         inquiry.setStatus("gemt");
         LogicFacade.SendInquiry(inquiry);
+        session.removeAttribute("inquiry");
 
         return "QuickBuild";
     }

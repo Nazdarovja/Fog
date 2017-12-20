@@ -35,7 +35,7 @@ public class Register extends Command {
         String address = request.getParameter( "address" );
         int zipcode = Integer.parseInt(request.getParameter( "zipcode" ));
         c = LogicFacade.createCostumer( new Customer(email, name, surname, phonenumber, address, zipcode, password1, null ));
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         session.setAttribute( "user", c );
         return "QuickBuild";
         

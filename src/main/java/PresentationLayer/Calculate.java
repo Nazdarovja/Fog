@@ -33,7 +33,7 @@ public class Calculate extends Command {
      */
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws FogException{
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("length"));
         int width = Integer.parseInt(request.getParameter("width"));

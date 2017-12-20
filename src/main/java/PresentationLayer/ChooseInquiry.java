@@ -45,8 +45,15 @@ public class ChooseInquiry extends Command {
         }
         BillOfMaterials bom = LogicFacade.calculateBillofMaterials(inquiry);
         inquiry.setBom(bom);
+        
+        //Get the SVG for the chosen lengths, from top and from side
+        StringBuilder top = LogicFacade.getSVGFromSide(inquiry);
+        StringBuilder side = LogicFacade.getSVGFromTop(inquiry);
 
+        
         session.setAttribute("inquiry", inquiry);
+        request.setAttribute("svgTop", top.toString());
+        request.setAttribute("svgSide", side.toString());
 
         return "QuickBuild";
     }

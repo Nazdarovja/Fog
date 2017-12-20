@@ -26,7 +26,7 @@ import org.apache.commons.mail.*;
  */
 public class GeneratePDF {
 
-    final static String PATH = "C:/itextExamples/";
+    final static String PATH = "/var/log/tomcat8/itextExamples/";
     final static String DESTPDF = PATH + "Tilbud på carport.pdf";
     final static String TOPHTML = "Top.html";
     final static String SIDEHTML = "Side.html";
