@@ -37,15 +37,12 @@ public class GeneratePDF {
      * Generates a PDF file, that contains customer, inquiry and bill of
      * materials details. The PDf file is then emailed to the customers email
      * adress.
+     *
      * @param customer Customer Object
      * @param inquiry Inquiry Object
      * @param bom BillOfMaterials Object
      * @return MultiPartEmail Object.
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws EmailException
      * @throws FogException
-     * @throws InterruptedException
      */
     public static MultiPartEmail createPDF(Customer customer, Inquiry inquiry, BillOfMaterials bom) throws FogException {
 
@@ -201,64 +198,65 @@ public class GeneratePDF {
         doc.add(table_bom);
         doc.close();
         byte[] pdfAttachment;
-        try {
-            pdfAttachment = loadFile(DESTPDF);
-        } catch (IOException ex) {
-            throw new FogException(ex.getMessage());
-        }
-        
-        try {
-            return sendEmail(pdfAttachment);
-        } catch (EmailException ex) {
-            throw new FogException(ex.getMessage());
-        } catch (IOException ex) {
-            throw new FogException(ex.getMessage());
-        }
+        pdfAttachment = loadFile(DESTPDF);
+
+        return sendEmail(pdfAttachment);
     }
 
     /**
      * Loads file from given path on harddrive as bytearray
+     *
      * @param sourcePath String
      * @return InputStream
-     * @throws IOException
      */
-    private static byte[] loadFile(String sourcePath) throws IOException {
+    private static byte[] loadFile(String sourcePath) throws FogException {
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(sourcePath);
             return readFully(inputStream);
+        } catch (FileNotFoundException ex) {
+            throw new FogException(ex.getMessage());
+        } catch (IOException ex) {
+            throw new FogException(ex.getMessage());
         } finally {
             if (inputStream != null) {
-                inputStream.close();
+                try {
+                    inputStream.close();
+                } catch (IOException ex) {
+                    throw new FogException(ex.getMessage());
+                }
             }
         }
     }
 
     /**
      * Return bytearryoutputstream from inputstream
+     *
      * @param stream
-     * @throws IOException
      */
-    private static byte[] readFully(InputStream stream) throws IOException {
+    private static byte[] readFully(InputStream stream) throws FogException {
         byte[] buffer = new byte[8192];
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         int bytesRead;
-        while ((bytesRead = stream.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
+        try {
+            while ((bytesRead = stream.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException ex) {
+            throw new FogException(ex.getMessage());
         }
         return baos.toByteArray();
     }
 
     /**
-     * Send the created PDF as email 
+     * Send the created PDF as email
      *
      * @param PDF
      * @return
      * @throws EmailException
-     * @throws IOException
      */
-    private static MultiPartEmail sendEmail(byte[] PDF) throws EmailException, IOException {
+    private static MultiPartEmail sendEmail(byte[] PDF) throws FogException {
 
         // create the mail
         MultiPartEmail email = new MultiPartEmail();
@@ -267,16 +265,20 @@ public class GeneratePDF {
         email.setSmtpPort(465);
         email.setAuthenticator(new DefaultAuthenticator("fakejohannesfog", "johannesfogpassword1"));
         email.setSSL(true);
-        email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog"); //TODO .getEmail
-        email.setFrom("fakejohannesfog@gmail.com", "Fake Johannes Fog");
-        email.setSubject("Ordre fra Fake Johannes Fog");
-        email.setMsg("Besked om din ordre her.");
+        try {
+            email.addTo("fakejohannesfog@gmail.com", "Fake Johannes Fog"); //TODO .getEmail
+            email.setFrom("fakejohannesfog@gmail.com", "Fake Johannes Fog");
+            email.setSubject("Ordre fra Fake Johannes Fog");
+            email.setMsg("Besked om din ordre her.");
 
-        //attach pdf 
-        DataSource source = new ByteArrayDataSource(PDF, "application/pdf");
-        email.attach(source, "Tilpud på carport", "Tilpud på carport");
-        source.getInputStream().close();
-        email.send();
+            //attach pdf 
+            DataSource source = new ByteArrayDataSource(PDF, "application/pdf");
+            email.attach(source, "Tilpud på carport", "Tilpud på carport");
+            source.getInputStream().close();
+            email.send();
+        } catch (EmailException | IOException ex) {
+            throw new FogException(ex.getMessage());
+        }
         return email;
     }
 }

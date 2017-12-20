@@ -25,7 +25,8 @@ public class ProductMapper {
     /**
      * Get a list from the database with Product objects.
      * @return List of Product
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Product> getProducts() throws FogException {
         String SQL = "SELECT * FROM Product;";
@@ -60,7 +61,8 @@ public class ProductMapper {
      * @param category String 
      * @param productName String
      * @return Product
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Product getSingleProduct(String category, String productName) throws FogException {
         Product product = null;

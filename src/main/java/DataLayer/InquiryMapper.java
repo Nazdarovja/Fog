@@ -27,7 +27,8 @@ public class InquiryMapper {
      *
      * @param i Inquiry object
      * @return Inquiry object
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Inquiry registerInitialInquiry(Inquiry i) throws FogException {
         Inquiry inquiry = null;
@@ -80,7 +81,8 @@ public class InquiryMapper {
      * Get list of all inquiries from database.
      *
      * @return List of Inquiry Objects.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Inquiry> allInquiries() throws FogException {
         List<Inquiry> inquiries = new ArrayList<>();
@@ -122,7 +124,8 @@ public class InquiryMapper {
      *
      * @param id of inquiry as int
      * @return Inquiry object
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Inquiry inquiryById(int id) throws FogException {
         Inquiry i;
@@ -166,7 +169,8 @@ public class InquiryMapper {
      *
      * @param customerEmail String
      * @return Inquiry Object.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Inquiry LatestInquiryByCustomer(String customerEmail) throws FogException {
         Inquiry i;
@@ -220,7 +224,8 @@ public class InquiryMapper {
      * @param comment String
      * @param status String
      * @return Inquiry Object
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Inquiry updateInquiry(int id, int height, int length, int width,
             int shackLength, int shackWidth, String roofType,
@@ -264,7 +269,8 @@ public class InquiryMapper {
      *
      * @param customer Customer object
      * @return List of Inquiry objects.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Inquiry> getCustomerInquiries(Customer customer) throws FogException {
         List<Inquiry> inquiries = new ArrayList<>();
@@ -309,7 +315,8 @@ public class InquiryMapper {
      * Update inquiry in database.
      *
      * @param i Inquiry object.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static void sendSavedInquiry(Inquiry i) throws FogException {
         String SQL = "UPDATE Inquiry SET carportHeight = ?, carportLength = ?, carportWidth = ?, shackLength = ?, shackWidth = ?, roofType = ?, roofMaterial = ?, angle = ?, commentEmployee = ?, status = ? WHERE id = ?";

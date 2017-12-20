@@ -24,7 +24,8 @@ public class CustomerMapper {
      * @param ipAddress String with ipAddress
      * @return Customer object if exist.
      * @throws LoginException with ipAddress info if not.
-     * @throws FogException 
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Customer login(String email, String password, String ipAddress) throws LoginException, FogException {
         String SQL = "SELECT * from Customer INNER JOIN Zipcode ON Customer.zipcode = Zipcode.zipcode WHERE email=? AND password=?;";
@@ -62,7 +63,8 @@ public class CustomerMapper {
      *
      * @param zipcode
      * @return City as String.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static String getCity(int zipcode) throws FogException {
         String SQL = "SELECT city from Zipcode WHERE zipcode=?";
@@ -85,7 +87,8 @@ public class CustomerMapper {
      * Insert a customer in database.
      * @param c Customer object
      * @return Customer object
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Customer createCustomer(Customer c) throws FogException {
         String SQL = "INSERT INTO Customer (email, name, surname, phonenumber, address, password, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -125,7 +128,8 @@ public class CustomerMapper {
      * Get list of customer objects with inquiry from database.
      *
      * @return list of Customer objects.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Customer> customersWithInquiry() throws FogException {
         List<Customer> customers = new ArrayList<>();
@@ -157,7 +161,8 @@ public class CustomerMapper {
      *
      * @param status String ogject
      * @return List of Customer Objects
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Customer> customersByInquiryStatus(String status) throws FogException {
         List<Customer> customers = new ArrayList<>();
@@ -191,7 +196,8 @@ public class CustomerMapper {
      * Get lst of all customers from database.
      *
      * @return list of Customer Objects.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static List<Customer> allCustomers() throws FogException {
         List<Customer> customers = new ArrayList<>();
@@ -225,7 +231,8 @@ public class CustomerMapper {
      *
      * @param email String object
      * @return Customer Object.
-     * @throws FogException
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Customer customerByEmail(String email) throws FogException {
         Customer customer;

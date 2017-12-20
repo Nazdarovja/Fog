@@ -9,6 +9,7 @@ import static DataLayer.InquiryMapper.inquiryById;
 import FunctionLayer.BillOfMaterials;
 import FunctionLayer.Calculator;
 import FunctionLayer.Customer;
+import FunctionLayer.FogException;
 import FunctionLayer.Inquiry;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Product;
@@ -27,7 +28,7 @@ public class PDF extends Command {
     * @author Orchi
     */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException{
 
         String customerEmail = request.getParameter("customer");
         Customer cus = LogicFacade.viewCustomerByEmail(customerEmail);

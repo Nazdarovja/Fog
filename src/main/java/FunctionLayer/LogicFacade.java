@@ -11,10 +11,7 @@ import DataLayer.ProductMapper;
 import DataLayer.InquiryMapper;
 import PresentationLayer.JspUtilTable;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
 /**
@@ -95,7 +92,7 @@ public class LogicFacade {
     public static Inquiry updateInquiry(int id, int height, int length, int width,
             int shackLength, int shackWidth, String roofType,
             String roofMat, String angle, String comment, String status)
-            throws FogException, Exception {
+            throws FogException {
         return InquiryMapper.updateInquiry(id, height, length, width, shackLength, shackWidth, roofType, roofMat, angle, comment, status);
     }
 

@@ -21,6 +21,7 @@ public class Logging {
      * which writes to System.err and a handler which writes to a log file on the Ubuntu server.
     *
     * @author Orchi
+     * @throws FunctionLayer.FogException
     */
     public static void setUp() throws FogException {
         if(Configuration.getMyLogger().getHandlers().length < 1) { 

@@ -26,8 +26,9 @@ public class EmployeeMapper {
      * @param pwd String
      * @param ipAddress String
      * @return Employee Objec if found. 
-     * @throws LoginException
-     * @throws FogException
+     * @throws LoginException exception, to log attempts to login with wrong input, also registers ip adress.
+     * @throws FogException if SQLException or Exception is thrown, it is converted 
+     * to this exception and added an appropriate message for the customer in some cases
      */
     public static Employee login(int id, String pwd, String ipAddress) throws LoginException, FogException {
         String SQL = "SELECT * from Employee WHERE id=? AND password=?";

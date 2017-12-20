@@ -27,10 +27,9 @@ public class ChooseInquiry extends Command {
      * @param response
      * @return
      * @throws FogException
-     * @throws Exception 
      */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException {
         HttpSession session = request.getSession(false);
         Customer c = (Customer) session.getAttribute("customer");
        //Get list of all of logged in customer inquiries with the status "gemt"(saved)

@@ -30,10 +30,9 @@ public class Calculate extends Command {
      * @param response
      * @return String "QuickBuild" used by Frontcontroller.
      * @throws FogException
-     * @throws Exception 
      */
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException, Exception {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws FogException{
         HttpSession session = request.getSession();
         int height = Integer.parseInt(request.getParameter("height"));
         int length = Integer.parseInt(request.getParameter("length"));

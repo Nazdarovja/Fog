@@ -18,6 +18,7 @@ public class CalcShackCladdingTest {
 
     /**
      * Test of getCladdingForShack method, of class CalcShackCladding.
+     * @throws FunctionLayer.FogException if connection problems
      */
     @Test
     public void testGetCladdingForShackFlatRoof() throws FogException {

@@ -21,7 +21,6 @@ public class CalcPost {
      * @param height int
      * @param posts list of Product
      * @return OrderLine Object
-     * @throws Exception
      */
     public static OrderLine getPostsFlatRoof(int length, int width, int height, List<Product> posts) {
         //UNCERTAIN VARIABLES (for product owner to decide)
